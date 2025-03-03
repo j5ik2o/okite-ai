@@ -25,6 +25,11 @@ Okite AIプロジェクトにおける包括的なテスト戦略と品質保証
 
 ### テストレベル
 
+以下のテスト関連ドキュメントも参照してください：
+- [ユニットテスト](testing/unit-testing.md)
+- [ベンチマークテスト](testing/benchmark.md)
+
+
 1. [[development/testing/unit-testing|ユニットテスト]]
    - 個々の関数やクラスの動作検証
    - モックやスタブの適切な使用
