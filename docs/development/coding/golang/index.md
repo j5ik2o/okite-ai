@@ -10,11 +10,11 @@
 
 Golangのコーディング規約は以下のモジュールに分かれています：
 
-- [ドキュメンテーションルール](golang/golangdoc.md) - コードドキュメントの書き方
-- [コーディングスタイル](golang/golangstyle.md) - 命名規則、パッケージ構成、エラー処理など
-- [ツール活用](golang/golangtools.md) - 開発ツールの使用方法
-- [コードレビュー](golang/golangreview.md) - レビュー時のチェックポイント
-- [参考文献](golang/golangrefs.md) - 学習リソースと参考資料
+- [ドキュメンテーションルール](golangdoc.md) - コードドキュメントの書き方
+- [コーディングスタイル](golangstyle.md) - 命名規則、パッケージ構成、エラー処理など
+- [ツール活用](golangtools.md) - 開発ツールの使用方法
+- [コードレビュー](golangreview.md) - レビュー時のチェックポイント
+- [参考文献](golangrefs.md) - 学習リソースと参考資料
 
 ## クイックリファレンス
 
