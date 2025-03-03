@@ -1,0 +1,206 @@
+{
+  "main": {
+    "id": "fa5f5304bd0833ff",
+    "type": "split",
+    "children": [
+      {
+        "id": "d6c9975da9123eb7",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "93de988757fde9b0",
+            "type": "leaf",
+            "state": {
+              "type": "empty",
+              "state": {},
+              "icon": "lucide-file",
+              "title": "新規タブ"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "df786ace388a7ac6",
+    "type": "split",
+    "children": [
+      {
+        "id": "17a39d66685bdd44",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "f58edeebdcf60be9",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical",
+                "autoReveal": false
+              },
+              "icon": "lucide-folder-closed",
+              "title": "ファイルエクスプローラ"
+            }
+          },
+          {
+            "id": "09cbcf0807ac66d5",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              },
+              "icon": "lucide-search",
+              "title": "検索"
+            }
+          },
+          {
+            "id": "4dead842129ec07b",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {},
+              "icon": "lucide-bookmark",
+              "title": "ブックマーク"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "236211231468def7",
+    "type": "split",
+    "children": [
+      {
+        "id": "054f44dbddef39cc",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "4bb96628b220c675",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "development/index.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-coming-in",
+              "title": "indexへのバックリンク"
+            }
+          },
+          {
+            "id": "e3cb60bcee8c3c42",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "development/index.md",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "lucide-file",
+              "title": "アクティブでなくなったプラグイン"
+            }
+          },
+          {
+            "id": "b2f3ae71162dfb44",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-tags",
+              "title": "タグ"
+            }
+          },
+          {
+            "id": "20258b2f71cba3bc",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "development/index.md",
+                "followCursor": false,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-list",
+              "title": "indexのアウトライン"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "workspaces:ワークスペースレイアウトを管理": false,
+      "switcher:クイックスイッチャーを開く": false,
+      "graph:グラフビューを開く": false,
+      "canvas:新規キャンバスを作成": false,
+      "templates:テンプレートを挿入": false
+    }
+  },
+  "active": "f58edeebdcf60be9",
+  "lastOpenFiles": [
+    "docs/testing.md",
+    "docs/coding.md",
+    "docs/testing/unit-testing.md",
+    "docs/testing/benchmark.md",
+    "docs/testing",
+    "docs/coding/golang/golangdoc.md",
+    "docs/coding/rust/rustdoc.md",
+    "docs/coding/rust",
+    "docs/coding/golang",
+    "docs/coding/doc_comment.md",
+    "docs/coding",
+    "docs/documentation.md",
+    "docs.md",
+    "docs/development/documentation.md",
+    "docs/version-control.md",
+    "docs/tools.md",
+    "docs/task-management.md",
+    "docs/pull-request.md",
+    "docs/development/testing.md",
+    "docs/development/coding.md",
+    "docs/development.md",
+    "docs/common_rules.md",
+    "docs/development/index.md",
+    "docs/development/testing/index.md",
+    "docs/development/coding/golang/index.md",
+    "_templates/development.md",
+    "_templates/default.md",
+    "docs/ai-agents/engineer-example.md",
+    "_templates/ai_agent.md",
+    "docs/development/coding/rust/rustdoc.md",
+    "docs/ai-agents",
+    "docs/development/coding/scala",
+    "docs/development/coding/golang",
+    "_archive",
+    "_assets",
+    "docs/version-control",
+    "無題のファイル.canvas"
+  ]
+}

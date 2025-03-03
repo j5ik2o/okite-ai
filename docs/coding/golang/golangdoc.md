@@ -1,0 +1,1 @@
+# Golangdocの掟

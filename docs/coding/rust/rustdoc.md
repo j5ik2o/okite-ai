@@ -1,17 +1,15 @@
-# Rustの掟
+# Rustdocの掟
 
-- モジュールは2018方式を採用する
+{extends doc_comment}
 
-## Rustdoc規約
+- 以下のドキュメントに従うこと
+  - https://doc.rust-lang.org/rustdoc/what-is-rustdoc.html
+  - https://doc.rust-jp.rs/rust-by-example-ja/meta/doc.html
+  - https://doc.rust-jp.rs/book-ja/ch14-02-publishing-to-crates-io.html#%E5%BD%B9%E3%81%AB%E7%AB%8B%E3%81%A4%E3%83%89%E3%82%AD%E3%83%A5%E3%83%A1%E3%83%B3%E3%83%86%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3%E3%82%B3%E3%83%A1%E3%83%B3%E3%83%88%E3%82%92%E8%A1%8C%E3%81%86
 
-- rustdocは英語で記述する
-  - rustdocがないものは新規に追加する
-  - 既存のrustdocでも以下のガイドラインに従っていないものは是正する
-  - コードを見れば分かることは書かない（Why/Why notを中心に記載）
+以下、説明は日本だが、rustdoc自体は英語で記述すること
 
-## Rustdoc 書式ガイドライン
-
-### 基本構造
+## 基本構造
 
 ```rust
 /// 簡潔な説明文（1行）
@@ -22,29 +20,30 @@
 /// - 項目 - 説明
 ```
 
-### セクションの種類と順序
+
+## セクションの種類と順序
 
 以下の順序でセクションを記述します（該当する場合のみ）：
 
 1. `# Type Parameters` - ジェネリック型パラメータの説明
 2. `# Arguments` - 関数やメソッドの引数の説明
 3. `# Returns` - 戻り値の説明
-4. `# Panics` - パニックが発生する条件
-5. `# Errors` - 返される可能性のあるエラーの説明
+4. `# Errors` - 返される可能性のあるエラーの説明
+5. `# Panics` - パニックが発生する条件
 6. `# Safety` - unsafe 関数の安全性に関する条件
 7. `# Implementation Notes` - 実装に関する注意点
 8. `# Performance Notes` - パフォーマンスに関する注意点
 9. `# Examples` - 使用例
 
-### 書式ルール
+## 書式ルール
 
 - 各セクション内の項目は必ず `-` を使用して箇条書きにする
 - 項目名と説明の間は ` - `（スペース、ハイフン、スペース）で区切る
 - 型パラメータ、引数、戻り値などは必ずバッククォート（\`）で囲む
 
-### 例
+## 例
 
-#### 基本的な関数
+### 基本的な関数
 
 ```rust
 /// Execute the Prop.
@@ -58,7 +57,7 @@
 /// - `PropResult` - The result of the Prop.
 ```
 
-#### ジェネリック関数
+### ジェネリック関数
 
 ```rust
 /// Generates a Gen that produces values according to specified weights.
@@ -87,7 +86,7 @@
 /// ```
 ```
 
-#### 実装ノートを含む例
+### 実装ノートを含む例
 
 ```rust
 /// Generates a Gen that produces a vector of values using chunk-based processing for better performance.
