@@ -1,13 +1,16 @@
 # Rustdocの掟
 
-{extends doc_comment}
+## 基本原則
 
-## ドキュメント基本方針
-
-- 全てのパブリック要素にはドキュメンテーションコメントを付ける
-- ドキュメントは英語で記述する
-- 関数やメソッドの動作、引数、戻り値を明確に説明する
-- コードの「なぜ」を説明することに重点を置く
+- [共通ルール](../doc_comment.md)に準拠すること
+  - ドキュメンテーションコメントは英語で記述する
+  - 記述がないものは新規に追加する
+  - 既存のものでもガイドラインに従っていないものは是正する
+  - コードを見れば分かることは書かない（Why/Why notを中心に記載）
+- 以下のドキュメントに従うこと
+  - https://doc.rust-lang.org/rustdoc/what-is-rustdoc.html
+  - https://doc.rust-jp.rs/rust-by-example-ja/meta/doc.html
+  - https://doc.rust-jp.rs/book-ja/ch14-02-publishing-to-crates-io.html#役に立つドキュメンテーションコメントを行う
 
 ## ドキュメントスタイル
 
