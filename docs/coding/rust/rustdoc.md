@@ -2,108 +2,213 @@
 
 {extends doc_comment}
 
-- 以下のドキュメントに従うこと
-  - https://doc.rust-lang.org/rustdoc/what-is-rustdoc.html
-  - https://doc.rust-jp.rs/rust-by-example-ja/meta/doc.html
-  - https://doc.rust-jp.rs/book-ja/ch14-02-publishing-to-crates-io.html#%E5%BD%B9%E3%81%AB%E7%AB%8B%E3%81%A4%E3%83%89%E3%82%AD%E3%83%A5%E3%83%A1%E3%83%B3%E3%83%86%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3%E3%82%B3%E3%83%A1%E3%83%B3%E3%83%88%E3%82%92%E8%A1%8C%E3%81%86
+## ドキュメント基本方針
 
-以下、説明は日本だが、rustdoc自体は英語で記述すること
+- 全てのパブリック要素にはドキュメンテーションコメントを付ける
+- ドキュメントは英語で記述する
+- 関数やメソッドの動作、引数、戻り値を明確に説明する
+- コードの「なぜ」を説明することに重点を置く
 
-## 基本構造
+## ドキュメントスタイル
+
+### クレートレベルドキュメント
 
 ```rust
-/// 簡潔な説明文（1行）
-///
-/// 必要に応じて詳細な説明を追加（複数行可）
-///
-/// # セクション名
-/// - 項目 - 説明
+//! A library for safely handling database connections.
+//!
+//! This crate provides a connection pool implementation
+//! with automatic resource cleanup and error handling.
+//! 
+//! # Examples
+//! 
+//! ```
+//! use my_db::Pool;
+//! 
+//! let pool = Pool::new(5)?;
+//! let conn = pool.get()?;
+//! ```
+
 ```
 
-
-## セクションの種類と順序
-
-以下の順序でセクションを記述します（該当する場合のみ）：
-
-1. `# Type Parameters` - ジェネリック型パラメータの説明
-2. `# Arguments` - 関数やメソッドの引数の説明
-3. `# Returns` - 戻り値の説明
-4. `# Errors` - 返される可能性のあるエラーの説明
-5. `# Panics` - パニックが発生する条件
-6. `# Safety` - unsafe 関数の安全性に関する条件
-7. `# Implementation Notes` - 実装に関する注意点
-8. `# Performance Notes` - パフォーマンスに関する注意点
-9. `# Examples` - 使用例
-
-## 書式ルール
-
-- 各セクション内の項目は必ず `-` を使用して箇条書きにする
-- 項目名と説明の間は ` - `（スペース、ハイフン、スペース）で区切る
-- 型パラメータ、引数、戻り値などは必ずバッククォート（\`）で囲む
-
-## 例
-
-### 基本的な関数
+### 構造体とトレイト
 
 ```rust
-/// Execute the Prop.
+/// A connection pool for managing database connections.
 ///
-/// # Arguments
-/// - `max_size` - The maximum size of the generated value.
-/// - `test_cases` - The number of test cases.
-/// - `rng` - The random number generator.
-///
-/// # Returns
-/// - `PropResult` - The result of the Prop.
-```
-
-### ジェネリック関数
-
-```rust
-/// Generates a Gen that produces values according to specified weights.
-///
-/// # Type Parameters
-/// - `B` - The type of value to be generated.
-///
-/// # Arguments
-/// - `values` - An iterator of tuples where the first element is the weight (u32) and
-///             the second element is the value to be generated.
-///
-/// # Returns
-/// - `Gen<B>` - A generator that produces values with probabilities determined by their weights.
-///
-/// # Panics
-/// - Panics if all weights are 0.
-/// - Panics if no values are provided.
+/// The pool maintains a set of active connections and
+/// automatically creates new ones as needed, up to a
+/// specified maximum.
 ///
 /// # Examples
+///
 /// ```
-/// use prop_check_rs::gen::Gens;
-/// let weighted_gen = Gens::frequency_values([
-///     (2, "common"),    // 2/3 probability
-///     (1, "rare"),      // 1/3 probability
-/// ]);
+/// let pool = Pool::new(5)?;
 /// ```
+pub struct Pool {
+    max_size: usize,
+    connections: Vec<Connection>,
+}
+
+/// Represents operations that can be performed on a database.
+///
+/// Implementors must ensure that all operations are atomic
+/// and maintain ACID properties.
+pub trait Database {
+    /// The type of error that can occur during database operations.
+    type Error;
+
+    /// Executes a query and returns the results.
+    ///
+    /// # Arguments
+    ///
+    /// * `query` - The SQL query to execute
+    /// * `params` - Query parameters to bind
+    ///
+    /// # Examples
+    ///
+    /// ```
+    /// let results = db.query("SELECT * FROM users WHERE id = ?", &[1])?;
+    /// ```
+    fn query(&self, query: &str, params: &[&dyn ToSql]) -> Result<Rows, Self::Error>;
+}
 ```
 
-### 実装ノートを含む例
+### エラー型
 
 ```rust
-/// Generates a Gen that produces a vector of values using chunk-based processing for better performance.
+/// Errors that can occur during database operations.
+///
+/// # Examples
+///
+/// ```
+/// match result {
+///     Err(DbError::ConnectionFailed(e)) => log::error!("Connection failed: {}", e),
+///     Err(DbError::QueryFailed(e)) => log::error!("Query failed: {}", e),
+///     Ok(data) => process_data(data),
+/// }
+/// ```
+#[derive(Debug, thiserror::Error)]
+pub enum DbError {
+    /// Failed to establish database connection.
+    #[error("failed to connect to database: {0}")]
+    ConnectionFailed(#[from] std::io::Error),
+
+    /// Query execution failed.
+    #[error("query failed: {0}")]
+    QueryFailed(String),
+}
+```
+
+## 特殊な記法
+
+### リンクとリファレンス
+
+```rust
+/// See [`Pool::new`] for creating a new connection pool.
+/// 
+/// For more details about connection management,
+/// see [the connection module](crate::connection).
+///
+/// The implementation follows the [PostgreSQL protocol].
+///
+/// [PostgreSQL protocol]: https://www.postgresql.org/docs/current/protocol.html
+```
+
+### インラインコード
+
+```rust
+/// The default timeout is [`DEFAULT_TIMEOUT`].
+///
+/// Use `Pool::with_timeout()` to customize the timeout duration.
+/// 
+/// This function returns [`Result<Pool, DbError>`](Result).
+```
+
+### 箇条書きとコードブロック
+
+```rust
+/// Creates a new database connection.
 ///
 /// # Arguments
-/// - `n` - The number of values to generate.
-/// - `chunk_size` - The size of chunks for batch processing.
-/// - `gen` - The Gen used to generate each value.
 ///
-/// # Returns
-/// - `Gen<Vec<B>>` - A generator that produces a vector containing n values.
+/// * `host` - Database host address
+/// * `port` - Database port number
+/// * `credentials` - Authentication credentials
+///
+/// # Security
+///
+/// The following security measures are implemented:
+///
+/// - TLS encryption for all connections
+/// - Automatic credential rotation
+/// - Connection timeouts
+///
+/// # Examples
+///
+/// Basic usage:
+/// ```
+/// let conn = Connection::new("localhost", 5432, credentials)?;
+/// ```
+///
+/// With custom timeout:
+/// ```
+/// let conn = Connection::with_timeout("localhost", 5432, credentials, Duration::from_secs(30))?;
+/// ```
+```
+
+## テストとドキュメントの統合
+
+### ドキュメントテスト
+
+```rust
+/// Adds two numbers together.
+///
+/// # Examples
+///
+/// ```
+/// use my_crate::add;
+///
+/// assert_eq!(add(2, 2), 4);
+/// ```
 ///
 /// # Panics
-/// - Panics if chunk_size is 0.
 ///
-/// # Performance Notes
-/// - Processes values in chunks to reduce memory allocation overhead.
-/// - Automatically adjusts chunk size based on total number of elements.
-/// - More efficient than `list_of_n` for large datasets.
+/// ```should_panic
+/// # use my_crate::add;
+/// // This will panic due to integer overflow
+/// add(i32::MAX, 1);
+/// ```
+pub fn add(a: i32, b: i32) -> i32 {
+    a.checked_add(b).expect("integer overflow")
+}
 ```
+
+### 非表示テスト
+
+```rust
+/// Complex number implementation.
+///
+/// # Examples
+///
+/// ```
+/// # fn main() -> Result<(), Box<dyn std::error::Error>> {
+/// let c = Complex::new(1.0, 2.0);
+/// # Ok(())
+/// # }
+/// ```
+```
+
+## レビュー時の注意点
+
+- ドキュメントが最新の実装を反映しているか
+- 全てのパブリック要素にドキュメントが付いているか
+- 説明が明確で具体的か
+- Examples が実際に動作するか
+- 英語の文法や表現が適切か
+- 安全性に関する注意点が明確に記載されているか
+
+## 参考文献
+
+- [The Rust Documentation Book](https://doc.rust-lang.org/rustdoc/what-is-rustdoc.html)
+- [Rust by Example - Documentation](https://doc.rust-jp.rs/rust-by-example-ja/meta/doc.html)
+- [The Rust Programming Language - Making Useful Documentation Comments](https://doc.rust-jp.rs/book-ja/ch14-02-publishing-to-crates-io.html#役に立つドキュメンテーションコメントを行う)
