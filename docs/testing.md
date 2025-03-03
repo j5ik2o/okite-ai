@@ -62,13 +62,7 @@ Okite AIプロジェクトにおける包括的なテスト戦略と品質保証
    - 自動化テストレポート
 
 ## トラブルシューティング
+
 - テスト実行時の一般的な問題
 - テストの信頼性確保
 - パフォーマンス測定の注意点
-
-## 参考情報
-- [[version-control/index|バージョン管理との連携]]
-- [[pull-request/index|PRレビュープロセス]]
-
-```dataview
-LIST WHERE file.folder = this.file.folder AND file.name != "index"
