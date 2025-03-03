@@ -57,6 +57,7 @@ def userToDto(entity: Entity): EntityDto // 一貫性のない命名
 - 公開APIを先頭に配置し、プライベートメソッドは後方に配置する
 - 関連するメソッドをグループ化する
 - メソッドの長さは30行を超えないようにする
+- case classは継承を防ぐために `final case class` として定義する
 
 ```scala
 class UserService(repository: UserRepository, validator: UserValidator) {
@@ -92,6 +93,7 @@ class UserService(repository: UserRepository, validator: UserValidator) {
 
 - 可能な限りイミュータブルなデータ構造を使用する
 - `var`の使用は避け、`val`を優先する
+- 定数は `final val` で定義して再定義を防ぐ
 - コレクションは不変（immutable）版を使用する
 - 状態変更が必要な場合は、新しいインスタンスを作成する
 
