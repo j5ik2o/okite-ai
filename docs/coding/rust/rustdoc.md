@@ -7,10 +7,18 @@
   - 記述がないものは新規に追加する
   - 既存のものでもガイドラインに従っていないものは是正する
   - コードを見れば分かることは書かない（Why/Why notを中心に記載）
-- 以下のドキュメントに従うこと
-  - https://doc.rust-lang.org/rustdoc/what-is-rustdoc.html
-  - https://doc.rust-jp.rs/rust-by-example-ja/meta/doc.html
-  - https://doc.rust-jp.rs/book-ja/ch14-02-publishing-to-crates-io.html#役に立つドキュメンテーションコメントを行う
+
+## ドキュメント規約
+
+Rustの公式ドキュメントに基づき、以下の規約に従うこと：
+
+- パブリックAPIには必ずドキュメントコメントを付ける
+- ドキュメントテストが失敗しないようにする
+- コードブロックは実際に動作するものを記述する
+- パニックが発生する条件は必ず記載する
+- 安全性に関する制約は明確に記述する
+
+参考：[The Rust Documentation Book](https://doc.rust-lang.org/rustdoc/how-to-write-documentation.html)
 
 ## ドキュメントスタイル
 
@@ -210,8 +218,8 @@ pub fn add(a: i32, b: i32) -> i32 {
 - 英語の文法や表現が適切か
 - 安全性に関する注意点が明確に記載されているか
 
-## 参考文献
+## 関連情報
 
 - [The Rust Documentation Book](https://doc.rust-lang.org/rustdoc/what-is-rustdoc.html)
-- [Rust by Example - Documentation](https://doc.rust-jp.rs/rust-by-example-ja/meta/doc.html)
-- [The Rust Programming Language - Making Useful Documentation Comments](https://doc.rust-jp.rs/book-ja/ch14-02-publishing-to-crates-io.html#役に立つドキュメンテーションコメントを行う)
+- [How to Write Documentation](https://doc.rust-lang.org/rustdoc/how-to-write-documentation.html)
+- [Documentation Tests](https://doc.rust-lang.org/rustdoc/documentation-tests.html)

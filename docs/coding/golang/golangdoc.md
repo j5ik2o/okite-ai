@@ -8,6 +8,18 @@
   - 既存のものでもガイドラインに従っていないものは是正する
   - コードを見れば分かることは書かない（Why/Why notを中心に記載）
 
+## ドキュメント規約
+
+Go言語の公式ドキュメントに基づき、以下の規約に従うこと：
+
+- パッケージコメントは`package`句の直前に記述する
+- エクスポートされた識別子には必ずドキュメントを付ける
+- 最初の文は識別子名で始まる完全な文とする
+- ドキュメンテーションはソースコードの解説ではなく、使用方法の説明とする
+- テストはドキュメントとしても機能する
+
+参考：[Go Doc Comments](https://go.dev/doc/comment)
+
 ## ドキュメントスタイル
 
 ### パッケージドキュメント
@@ -149,8 +161,8 @@ type User struct {}
 - Exampleが実際に動作するか
 - 英語の文法や表現が適切か
 
-## 参考文献
+## 関連情報
 
-- [Godoc: documenting Go code](https://blog.golang.org/godoc)
-- [Go Doc Comments](https://tip.golang.org/doc/comment)
+- [Effective Go - Documentation](https://go.dev/doc/effective_go#commentary)
+- [Go Doc Comments](https://go.dev/doc/comment)
 - [Example tests in Go](https://pkg.go.dev/testing#hdr-Examples)
