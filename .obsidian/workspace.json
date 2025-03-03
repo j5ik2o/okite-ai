@@ -11,10 +11,14 @@
             "id": "93de988757fde9b0",
             "type": "leaf",
             "state": {
-              "type": "empty",
-              "state": {},
+              "type": "markdown",
+              "state": {
+                "file": "docs/pull-request.md",
+                "mode": "source",
+                "source": false
+              },
               "icon": "lucide-file",
-              "title": "新規タブ"
+              "title": "pull-request"
             }
           }
         ]
@@ -163,8 +167,12 @@
       "templates:テンプレートを挿入": false
     }
   },
-  "active": "f58edeebdcf60be9",
+  "active": "93de988757fde9b0",
   "lastOpenFiles": [
+    "docs.md",
+    "docs/ai-agents/engineer-example.md",
+    "_templates/development.md",
+    "docs/development/coding/index.md",
     "docs/testing.md",
     "docs/coding.md",
     "docs/testing/unit-testing.md",
@@ -177,7 +185,6 @@
     "docs/coding/doc_comment.md",
     "docs/coding",
     "docs/documentation.md",
-    "docs.md",
     "docs/development/documentation.md",
     "docs/version-control.md",
     "docs/tools.md",
@@ -190,11 +197,8 @@
     "docs/development/index.md",
     "docs/development/testing/index.md",
     "docs/development/coding/golang/index.md",
-    "_templates/development.md",
     "_templates/default.md",
-    "docs/ai-agents/engineer-example.md",
     "_templates/ai_agent.md",
-    "docs/development/coding/rust/rustdoc.md",
     "docs/ai-agents",
     "docs/development/coding/scala",
     "docs/development/coding/golang",

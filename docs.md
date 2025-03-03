@@ -5,7 +5,7 @@ tags: [index]
 aliases: [home]
 ---
 
-# Okite AI ドキュメント
+# 掟 AI ドキュメント
 
 ## メインコンテンツ
 
