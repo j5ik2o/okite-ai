@@ -1,4 +1,4 @@
-# Okite AI Documentation
+# 掟 AI ドキュメント
 
 このリポジトリは、Okite AIプロジェクトのドキュメントを管理するためのObsidianボルトです。
 
