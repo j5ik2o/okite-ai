@@ -42,6 +42,20 @@ git add .gitmodules <サブディレクトリパス>
 git commit -m "feat: add okite-ai documentation as submodule"
 ```
 
+#### 具体的な使用例
+
+例えば、`github.com/j5ik2o/hoge` リポジトリに、このナレッジベースを共通ドキュメントとして `./common` ディレクトリに追加する場合：
+
+```bash
+# j5ik2o/hoge リポジトリのルートディレクトリで実行
+git submodule add https://github.com/j5ik2o/okite-ai.git ./common
+
+# 変更をコミット
+git add .gitmodules ./common
+git commit -m "feat: add okite-ai knowledge base as common documentation"
+git push origin main
+```
+
 この操作により、以下のファイルが作成または更新されます：
 - `.gitmodules`: サブモジュールの設定情報を保存するファイル
 - サブモジュールのディレクトリ: 指定したパスにサブモジュールのコンテンツが配置される
