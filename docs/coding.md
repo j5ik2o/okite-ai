@@ -27,3 +27,23 @@
 - 単一責任の原則を守る
 - 依存関係を最小限に抑える
 - テスト容易性を考慮した設計を行う
+
+## 言語固有の規約
+
+各プログラミング言語固有のコーディング規約とドキュメンテーションルールは以下を参照してください：
+
+### Golang
+- [Golangコーディング規約](coding/golang.md)
+- [Golangドキュメンテーションルール](coding/golang/golangdoc.md)
+
+### Rust
+- [Rustコーディング規約](coding/rust.md)
+- [Rustドキュメンテーションルール](coding/rust/rustdoc.md)
+
+### Scala
+- [Scalaコーディング規約](coding/scala.md)
+- [Scalaドキュメンテーションルール](coding/scala/scaladoc.md)
+
+### TypeScript
+- [TypeScriptコーディング規約](coding/typescript.md)
+- [TypeScriptドキュメンテーションルール](coding/typescript/tsdoc.md)
