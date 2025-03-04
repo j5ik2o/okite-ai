@@ -1,5 +1,4 @@
 ---
-title: 掟ドキュメント構造規約description: 掟プロジェクトのドキュメント構造とファイル配置の規約
 tags: [meta, structure, guidelines]
 aliases: [meta-rules, structure-rules]
 ---
@@ -44,6 +43,7 @@ aliases: [meta-rules, structure-rules]
    ```
 
 #### 推奨パターン
+
 1. モジュールがサブファイルを持つ場合
    ```
    ✅ ${dir_name}.md          # モジュールインデックス
@@ -59,6 +59,7 @@ aliases: [meta-rules, structure-rules]
 ### メタデータ要件
 
 各Markdownファイルには以下のフロントマターを含める：
+
 ```yaml
 ---
 description: ドキュメントの説明
