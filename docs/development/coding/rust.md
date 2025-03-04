@@ -1,3 +1,12 @@
+---
+title: Rustの掟
+description: Rustのコーディング規約と開発ガイドライン
+created: 2024-03-04
+updated: 2024-03-04
+tags: [rust, coding, guidelines]
+aliases: [rust-rules, rust-guidelines]
+---
+
 # Rustの掟
 
 ## 基本原則
