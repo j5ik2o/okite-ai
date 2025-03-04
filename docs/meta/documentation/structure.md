@@ -1,4 +1,5 @@
 ---
+description: 掟プロジェクトのドキュメント構造に関する規約と編成ルール
 tags: [meta, structure, guidelines]
 aliases: [meta-rules, structure-rules]
 ---
@@ -20,7 +21,7 @@ aliases: [meta-rules, structure-rules]
    - 上記いずれも配置禁止
 
 2. Rust2018方式のモジュール構造に準拠
-   ```
+   ```text
    docs.md                    # トップレベルモジュールインデックス
    docs/                      # トップレベルモジュールディレクトリ
      coding.md               # サブモジュールインデックス
@@ -32,27 +33,28 @@ aliases: [meta-rules, structure-rules]
 ### 命名規則
 
 #### 禁止パターン
+
 1. ディレクトリ内にindex.mdを配置
-   ```
+   ```text
    ❌ ${dir_name}/index.md
    ```
 
 2. ディレクトリ名と同名のmdファイルをディレクトリ内に配置
-   ```
+   ```text
    ❌ ${dir_name}/${dir_name}.md
    ```
 
 #### 推奨パターン
 
 1. モジュールがサブファイルを持つ場合
-   ```
+   ```text
    ✅ ${dir_name}.md          # モジュールインデックス
    ✅ ${dir_name}/            # モジュールディレクトリ
       └── ${file_name}.md    # サブモジュールファイル
    ```
 
 2. モジュールが単独の場合
-   ```
+   ```text
    ✅ ${file_name}.md        # 単独のモジュールファイル
    ```
 
@@ -66,4 +68,4 @@ description: ドキュメントの説明
 tags: [関連タグ]
 aliases: [別名]
 ---
-``` 
+```
