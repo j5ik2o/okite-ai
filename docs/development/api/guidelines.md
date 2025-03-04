@@ -1,17 +1,17 @@
 ---
-description: API設計とドキュメント作成の共通ガイドライン
-tags: [api, documentation, guidelines]
-aliases: [api-guidelines, api-documentation]
+description: API設計とドキュメント作成のガイドライン
+tags: [api, development, guidelines]
+aliases: [api-guidelines]
 ---
 
 # API設計・ドキュメント作成ガイドライン
 
 ## 概要
 
-このドキュメントは、APIの設計とドキュメント作成に関する共通のガイドラインを定義します。
+このドキュメントは、APIの設計とドキュメント作成に関するガイドラインを定義します。
 各APIタイプ（REST、gRPC、GraphQL）に特化したガイドラインは、それぞれのサブドキュメントを参照してください。
 
-## 共通設計原則
+## API設計原則
 
 ### 一貫性
 
@@ -125,6 +125,6 @@ aliases: [api-guidelines, api-documentation]
 
 ## 各API仕様書
 
-- [REST API](api/rest.md)
-- [gRPC API](api/grpc.md)
-- [GraphQL API](api/graphql.md) 
+- [REST API](types/rest.md)
+- [gRPC API](types/grpc.md)
+- [GraphQL API](types/graphql.md) 

@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "docs.md",
+                "file": "docs/version-control.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "docs"
+              "title": "version-control"
             }
           }
         ]
@@ -169,7 +169,24 @@
   },
   "active": "93de988757fde9b0",
   "lastOpenFiles": [
+    "docs/development/api/types/rest.md",
+    "docs/development/api/types/grpc.md",
+    "docs/development/api/types/graphql.md",
+    "docs/development/api/guidelines.md",
+    "docs/development/api/types",
+    "docs/development/api",
     "docs/meta/documentation/api.md",
+    "docs/api/types/grpc.md",
+    "docs/api/types/rest.md",
+    "docs/api/types/graphql.md",
+    "docs/api/types",
+    "docs/api/guidelines.md",
+    "docs/api",
+    "docs/version-control.md",
+    "docs/development/coding.md",
+    "docs/meta/documentation/structure.md",
+    "docs/meta.md",
+    "docs.md",
     "docs/meta/documentation/api/graphql.md",
     "docs/meta/documentation/api/grpc.md",
     "docs/meta/documentation/api/rest.md",
@@ -181,30 +198,13 @@
     "docs/ai-agents/guidelines.md",
     "docs/ai-agents/ai-code-agent.md",
     "docs/meta/document.md",
-    "docs/meta.md",
-    "docs/meta/documentation/structure.md",
     "docs/meta/documentation/document_structure.md",
     "docs/meta/documentation/guidelines.md",
     "docs/meta/documentation",
-    "docs/meta/documentation.md",
-    "docs/development/testing/unit-testing.md",
-    "docs/development/testing/benchmark.md",
     "docs/development/testing",
-    "docs/testing/unit-testing.md",
-    "docs/testing/benchmark.md",
     "docs/testing",
-    "docs/development/unit-testing.md",
-    "docs/development/benchmark.md",
-    "docs/development/testing.md",
-    "docs/pull-request.md",
-    "docs/development/pull-request.md",
-    "docs/development.md",
     "docs/development/document",
     "docs/development/coding/typescript",
-    "docs/development/coding/scala",
-    "docs/development/coding/rust",
-    "docs/development/coding/golang",
-    "docs/development/coding",
     "無題のファイル.canvas"
   ]
 }
