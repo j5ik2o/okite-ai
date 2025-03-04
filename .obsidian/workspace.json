@@ -169,6 +169,8 @@
   },
   "active": "93de988757fde9b0",
   "lastOpenFiles": [
+    "docs/meta/structure.md",
+    "docs/meta/rules.md",
     "docs/development/api/types/rest.md",
     "docs/development/api/types/grpc.md",
     "docs/development/api/types/graphql.md",
@@ -198,8 +200,6 @@
     "docs/ai-agents/guidelines.md",
     "docs/ai-agents/ai-code-agent.md",
     "docs/meta/document.md",
-    "docs/meta/documentation/document_structure.md",
-    "docs/meta/documentation/guidelines.md",
     "docs/meta/documentation",
     "docs/development/testing",
     "docs/testing",
