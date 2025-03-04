@@ -1,3 +1,12 @@
+---
+title: Golangの掟
+description: Golangのコーディング規約と開発ガイドライン
+created: 2024-03-04
+updated: 2024-03-04
+tags: [golang, coding, guidelines]
+aliases: [golang-rules, go-guidelines]
+---
+
 # Golangの掟
 
 ## 基本原則
