@@ -1,8 +1,5 @@
 ---
-title: ドキュメントの掟
 description: 開発ドキュメントの作成と管理に関する規約
-created: 2024-03-04
-updated: 2024-03-04
 tags: [development, documentation, guidelines]
 aliases: [dev-doc-guidelines]
 ---

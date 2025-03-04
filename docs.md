@@ -1,8 +1,5 @@
 ---
-title: プロジェクトドキュメント
 description: プロジェクト全体のドキュメント構成とナビゲーション
-created: 2024-03-04
-updated: 2024-03-04
 tags: [index, documentation]
 aliases: [doc-index, documentation-index]
 ---

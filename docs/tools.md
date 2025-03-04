@@ -1,3 +1,7 @@
+---
+tags: [tools, rules]
+aliases: [tools-rules]
+---
 # ツールの掟
 
 ## 1. 基本ツール構成

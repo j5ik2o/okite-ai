@@ -1,8 +1,5 @@
 ---
-title: 掟ドキュメント構造規約
-description: 掟プロジェクトのドキュメント構造とファイル配置の規約
-created: 2024-03-04
-updated: 2024-03-04
+title: 掟ドキュメント構造規約description: 掟プロジェクトのドキュメント構造とファイル配置の規約
 tags: [meta, structure, guidelines]
 aliases: [meta-rules, structure-rules]
 ---

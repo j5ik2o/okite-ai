@@ -1,8 +1,5 @@
 ---
-title: コーディングの掟
 description: プロジェクトのコーディング規約と基本原則
-created: 2024-03-04
-updated: 2024-03-04
 tags: [coding, guidelines, standards]
 aliases: [coding-standards, coding-guidelines]
 ---

@@ -1,6 +1,4 @@
 ---
-created: 2025-03-03
-updated: 2025-03-03
 tags: [development, testing, unit-test]
 aliases: [unit-test-rules]
 ---

@@ -1,8 +1,5 @@
 ---
-title: 掟ドキュメントのメタルール
 description: 掟プロジェクトのドキュメント自体に関するルールと規約
-created: 2024-03-04
-updated: 2024-03-04
 tags: [meta, rules, documentation]
 aliases: [meta-rules, documentation-rules]
 ---

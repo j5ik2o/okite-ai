@@ -1,8 +1,5 @@
 ---
-title: ソフトウェアドキュメント作成ガイドライン
 description: ソフトウェア開発におけるドキュメント作成の規約とベストプラクティス
-created: 2024-03-04
-updated: 2024-03-04
 tags: [documentation, guidelines, best-practices]
 aliases: [doc-guidelines, documentation-best-practices]
 ---

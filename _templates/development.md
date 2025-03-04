@@ -1,6 +1,4 @@
 ---
-created: {{date}}
-updated: {{date}}
 tags: [development]
 aliases: []
 ---

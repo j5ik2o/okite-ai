@@ -169,6 +169,7 @@
   },
   "active": "93de988757fde9b0",
   "lastOpenFiles": [
+    "docs/ai-agents/ai-code-agent.md",
     "docs/meta/document.md",
     "docs/meta.md",
     "docs/meta/documentation/structure.md",
@@ -198,7 +199,6 @@
     "docs/development/coding/typescript/tsreview.md",
     "docs/development/coding/typescript/tsrefs.md",
     "docs/development/coding/typescript/tsdoc.md",
-    "docs/development/coding/scala/scalastyle.md",
     "docs/development/coding/typescript",
     "docs/development/coding/scala",
     "docs/development/coding/rust",

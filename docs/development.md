@@ -1,5 +1,4 @@
 ---
-title: 開発の掟
 description: プロジェクトの開発プロセスと規約の全体像
 tags: [development, process, guidelines]
 aliases: [dev-guidelines, development-rules]

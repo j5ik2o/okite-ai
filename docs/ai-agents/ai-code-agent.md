@@ -1,6 +1,4 @@
 ---
-created: 2025-03-03
-updated: 2025-03-03
 tags: [ai-agent, example, engineering]
 aliases: [engineer-bot]
 ---
