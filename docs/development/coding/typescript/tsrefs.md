@@ -1,3 +1,9 @@
+---
+description: 掟プロジェクトにおけるTypeScript開発に関する参考文献とリソースのリスト
+tags: [development, typescript, references]
+aliases: [typescript-refs]
+---
+
 # TypeScript参考文献
 
 ## 公式ドキュメント

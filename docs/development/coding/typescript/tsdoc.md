@@ -1,3 +1,9 @@
+---
+description: 掟プロジェクトにおけるTypeScriptコードのドキュメント作成規約とベストプラクティス
+tags: [development, typescript, documentation]
+aliases: [typescript-doc]
+---
+
 # TSDocの掟
 
 ## 基本原則

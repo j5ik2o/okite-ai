@@ -1,3 +1,9 @@
+---
+description: 掟プロジェクトにおけるTypeScriptコードのスタイルガイドと規約
+tags: [development, typescript, style]
+aliases: [typescript-style]
+---
+
 # TypeScriptコーディングスタイル
 
 ## 基本原則

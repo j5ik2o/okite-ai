@@ -1,3 +1,9 @@
+---
+description: 掟プロジェクトにおけるTypeScript開発で使用する必須およびオプショナルツールの説明と設定方法
+tags: [development, typescript, tools]
+aliases: [typescript-tools]
+---
+
 # TypeScriptツール活用
 
 ## 開発環境

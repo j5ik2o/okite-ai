@@ -1,3 +1,9 @@
+---
+description: 掟プロジェクトにおけるTypeScriptコードのレビュー基準とベストプラクティス
+tags: [development, typescript, review]
+aliases: [typescript-review]
+---
+
 # TypeScriptコードレビュー
 
 ## 基本原則
