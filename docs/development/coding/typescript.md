@@ -1,8 +1,6 @@
 ---
 title: TypeScriptの掟
 description: TypeScriptのコーディング規約と開発ガイドライン
-created: 2024-03-04
-updated: 2024-03-04
 tags: [typescript, coding, guidelines]
 aliases: [typescript-rules, ts-guidelines]
 ---

@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "docs/pull-request.md",
+                "file": "docs.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "pull-request"
+              "title": "docs"
             }
           }
         ]
@@ -169,6 +169,24 @@
   },
   "active": "93de988757fde9b0",
   "lastOpenFiles": [
+    "docs/meta/document.md",
+    "docs/meta.md",
+    "docs/meta/documentation/structure.md",
+    "docs/meta/documentation/document_structure.md",
+    "docs/meta/documentation/guidelines.md",
+    "docs/meta/documentation",
+    "docs/meta/documentation.md",
+    "docs/development/testing/unit-testing.md",
+    "docs/development/testing/benchmark.md",
+    "docs/development/testing",
+    "docs/testing/unit-testing.md",
+    "docs/testing/benchmark.md",
+    "docs/testing",
+    "docs/development/unit-testing.md",
+    "docs/development/benchmark.md",
+    "docs/development/testing.md",
+    "docs/pull-request.md",
+    "docs/development/pull-request.md",
     "docs/development.md",
     "docs/development/document.md",
     "docs/development/document",
@@ -181,30 +199,12 @@
     "docs/development/coding/typescript/tsrefs.md",
     "docs/development/coding/typescript/tsdoc.md",
     "docs/development/coding/scala/scalastyle.md",
-    "docs/development/coding/scala/scalareview.md",
-    "docs/development/coding/scala/scaladoc.md",
-    "docs/development/coding/rust/rusttools.md",
-    "docs/development/coding/rust/ruststyle.md",
-    "docs/development/coding/rust/rustreview.md",
-    "docs/development/coding/rust/rustrefs.md",
-    "docs/development/coding/rust/rustdoc.md",
-    "docs/development/coding/golang/golangrefs.md",
-    "docs/development/coding/golang/golangtools.md",
-    "docs/development/coding/golang/golangstyle.md",
-    "docs/development/coding/golang/golangmake.md",
-    "docs/development/coding/golang/golangreview.md",
-    "docs/development/coding/golang/golangdoc.md",
-    "docs/development/coding/typescript.md",
     "docs/development/coding/typescript",
-    "docs/development/coding/scala.md",
     "docs/development/coding/scala",
     "docs/development/coding/rust",
     "docs/development/coding/golang",
     "docs/development/coding",
     "docs/development",
-    "docs/meta",
-    "docs/documentation",
-    "docs/coding/typescript",
     "無題のファイル.canvas"
   ]
 }

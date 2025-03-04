@@ -1,8 +1,6 @@
 ---
 title: Scalaの掟
 description: Scalaのコーディング規約と開発ガイドライン
-created: 2024-03-04
-updated: 2024-03-04
 tags: [scala, coding, guidelines]
 aliases: [scala-rules, scala-guidelines]
 ---
