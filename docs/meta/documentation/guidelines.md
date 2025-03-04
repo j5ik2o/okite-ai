@@ -34,9 +34,10 @@ aliases: [doc-guidelines, documentation-best-practices]
 
 各種APIドキュメントの詳細なガイドラインは以下を参照してください：
 
-- [REST APIドキュメント](api/rest.md)
-- [gRPC APIドキュメント](api/grpc.md)
-- [GraphQL APIドキュメント](api/graphql.md)
+- [API共通ガイドライン](api.md)
+  - [REST APIドキュメント](api/rest.md)
+  - [gRPC APIドキュメント](api/grpc.md)
+  - [GraphQL APIドキュメント](api/graphql.md)
 
 共通の要件：
 
