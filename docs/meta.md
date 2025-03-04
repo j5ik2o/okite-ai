@@ -23,6 +23,12 @@ aliases: [meta-rules, documentation-rules]
 
 ## ドキュメント作成のルール
 
+- [ドキュメント作成ルール](meta/document.md) - 掟ドキュメント作成の基本ルールと規約
+  - メタデータ要件
+  - 構造と形式
+  - 文書作成規則
+  - 更新プロセス
+
 - [ドキュメント作成ガイドライン](meta/documentation/guidelines.md) - ドキュメント作成の規約とベストプラクティス
   - 基本原則
   - ドキュメントの種類と要件
