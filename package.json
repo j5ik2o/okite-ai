@@ -1,0 +1,14 @@
+{
+  "name": "okite-ai",
+  "version": "1.0.0",
+  "description": "AIと共に作る掟プロジェクト",
+  "scripts": {
+    "lint:md": "markdownlint \"docs/**/*.md\"",
+    "fix:md": "markdownlint --fix \"docs/**/*.md\"",
+    "check:md:links": "./scripts/check-md-links.sh",
+    "check:md:structure": "./scripts/check-md-structure.sh"
+  },
+  "devDependencies": {
+    "markdownlint-cli": "^0.39.0"
+  }
+} 
