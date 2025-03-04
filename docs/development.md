@@ -28,16 +28,15 @@ aliases: [dev-guidelines, development-rules]
 ### ドキュメント
 
 - [ドキュメント規約](development/document.md) - 開発ドキュメントの作成規約
-  - [API仕様書](development/document/api.md)
-  - [設計ドキュメント](development/document/design.md)
-  - [運用ドキュメント](development/document/operation.md)
+  - API仕様書
+  - 設計ドキュメント
+  - 運用ドキュメント
 
 ### テスト
 
 - [テスト規約](development/testing.md) - テストコードの作成規約
-  - [単体テスト](development/testing/unit.md)
-  - [統合テスト](development/testing/integration.md)
-  - [E2Eテスト](development/testing/e2e.md)
+  - [ユニットテスト](development/testing/unit-testing.md) - ユニットテストの作成と実行
+  - [ベンチマーク](development/testing/benchmark.md) - パフォーマンステストの作成と実行
 
 ### レビュー
 
