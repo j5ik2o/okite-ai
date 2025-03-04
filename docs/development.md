@@ -39,6 +39,10 @@ aliases: [dev-guidelines, development-rules]
   - [統合テスト](development/testing/integration.md)
   - [E2Eテスト](development/testing/e2e.md)
 
+### レビュー
+
+- [プルリクエスト規約](development/pull-request.md) - PRの作成とレビューのガイドライン
+
 ## 開発フロー
 
 1. 要件定義・設計
