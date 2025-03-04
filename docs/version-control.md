@@ -1,4 +1,5 @@
 ---
+description: 掟プロジェクトのバージョン管理に関するルールと規約
 tags: [version-control, rules]
 aliases: [version-control-rules]
 ---

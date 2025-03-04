@@ -1,4 +1,5 @@
 ---
+description: 掟プロジェクトで使用するツールとその管理に関するルール
 tags: [tools, rules]
 aliases: [tools-rules]
 ---

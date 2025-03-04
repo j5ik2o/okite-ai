@@ -92,12 +92,12 @@ ${PROJECT_ROOT}/docs/operation/
 
 1. 同一ディレクトリ内
    ```markdown
-   [コーディング規約](coding-guidelines.md)
+   [基本ルール](rules.md)
    ```
 
 2. 異なるディレクトリ
    ```markdown
-   [API認証](/docs/development/api/authentication.md)
+   [コーディング規約](/docs/development/coding.md)
    ```
 
 ### インデックスファイル

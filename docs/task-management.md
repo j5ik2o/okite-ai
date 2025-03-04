@@ -1,4 +1,5 @@
 ---
+description: 掟プロジェクトのタスク管理に関するルールと規約
 tags: [task-management, rules]
 aliases: [task-management-rules]
 ---
