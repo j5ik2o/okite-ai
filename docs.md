@@ -16,7 +16,9 @@ aliases: [doc-index, documentation-index]
 
 ## メタドキュメント
 
-- [ドキュメント構造規約](meta/document_structure.md) - 掟プロジェクトのドキュメント構造規約
+- [掟ドキュメントのメタルール](meta.md) - 掟ドキュメント自体のルールと規約
+  - [ドキュメント構造規約](meta/documentation/structure.md) - ドキュメントの構造とファイル配置のルール
+  - [ドキュメント作成ガイドライン](meta/documentation/guidelines.md) - ドキュメント作成の規約とベストプラクティス
 
 ## ドキュメント構成
 
