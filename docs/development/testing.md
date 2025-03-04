@@ -30,7 +30,7 @@ Okite AIプロジェクトにおける包括的なテスト戦略と品質保証
 - [ベンチマークテスト](testing/benchmark.md)
 
 
-1. [[development/testing/unit-testing|ユニットテスト]]
+1. [ユニットテスト](testing/unit-testing.md)
    - 個々の関数やクラスの動作検証
    - モックやスタブの適切な使用
    - テストカバレッジの維持
@@ -40,7 +40,7 @@ Okite AIプロジェクトにおける包括的なテスト戦略と品質保証
    - 外部システムとの結合テスト
    - エンドツーエンドシナリオ
 
-3. [[development/testing/benchmark|ベンチマークテスト]]
+3. [ベンチマークテスト](testing/benchmark.md)
    - パフォーマンス指標の測定
    - 負荷テスト
    - スケーラビリティ検証
