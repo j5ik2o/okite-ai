@@ -25,9 +25,6 @@ aliases: [meta-rules, documentation-rules]
   - 構造と形式
   - 文書作成規則
   - 更新プロセス
-
-- [ドキュメント作成ガイドライン](meta/documentation/guidelines.md) - ドキュメント作成の規約とベストプラクティス
-  - 基本原則
   - ドキュメントの種類と要件
   - コメント記述規則
   - レビュー基準

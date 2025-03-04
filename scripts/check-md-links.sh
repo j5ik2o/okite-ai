@@ -54,6 +54,9 @@ check_links() {
         # リンクからアンカー部分を除去
         link="${link%#*}"
         
+        # 外部リンク（http(s)で始まる）はスキップ
+        [[ "$link" =~ ^https?:// ]] && continue
+        
         # .mdで終わらないリンクはスキップ（外部リンクなど）
         [[ "$link" != *.md ]] && continue
         
