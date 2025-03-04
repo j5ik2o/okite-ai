@@ -1,49 +1,67 @@
 ---
-created: 2025-03-03
-updated: 2025-03-03
-tags: [index]
-aliases: [home]
+title: ドキュメント構造規約
+description: プロジェクトのドキュメント構造とファイル配置規則
+created: 2024-03-04
+updated: 2024-03-04
+tags: [documentation, structure, guidelines]
+aliases: [doc-structure, documentation-rules]
 ---
-
-# 掟 AI ドキュメント
-
-## メインコンテンツ
-
-### 開発プロセス
-
-- [[development|開発の掟]]
-  - [[coding|コーディングの掟]]
-  - [[testing|テストの掟]]
-  - [[documentation|ドキュメント管理の掟]]
-
-### プロジェクト管理
-
-- [[task-management|タスク管理の掟]]
-- [[version-control|バージョン管理の掟]]
-- [[pull-request|PRレビューの掟]]
-
-### ツール
-
-- [[tools|開発ツールの掟]]
 
 ## このドキュメントの書き方
 
-- index.mdは使用禁止。${dir}/index.mdを配置することも禁止
-- Rust2018方式のモジュールと同じ形式
+### 基本規則
+
+1. `index.md`の使用は禁止
+   - 単独の`index.md`
+   - ディレクトリ内の`${dir}/index.md`
+   - 上記いずれも配置禁止
+
+2. Rust2018方式のモジュール構造に準拠
+   ```
+   docs.md                    # トップレベルモジュールインデックス
+   docs/                      # トップレベルモジュールディレクトリ
+     coding.md               # サブモジュールインデックス
+     coding/                # サブモジュールディレクトリ
+       doc_comment.md       # サブモジュールファイル
+     testing.md            # 単独のサブモジュール（ディレクトリなし）
+   ```
+
+### 命名規則
+
+#### 禁止パターン
+1. ディレクトリ内にindex.mdを配置
+   ```
+   ❌ ${dir_name}/index.md
+   ```
+
+2. ディレクトリ名と同名のmdファイルをディレクトリ内に配置
+   ```
+   ❌ ${dir_name}/${dir_name}.md
+   ```
+
+#### 推奨パターン
+1. モジュールがサブファイルを持つ場合
+   ```
+   ✅ ${dir_name}.md          # モジュールインデックス
+   ✅ ${dir_name}/            # モジュールディレクトリ
+      └── ${file_name}.md    # サブモジュールファイル
+   ```
+
+2. モジュールが単独の場合
+   ```
+   ✅ ${file_name}.md        # 単独のモジュールファイル
+   ```
+
+### メタデータ要件
+
+各Markdownファイルには以下のフロントマターを含める：
+```yaml
+---
+title: ドキュメントタイトル
+description: ドキュメントの説明
+created: 作成日
+updated: 更新日
+tags: [関連タグ]
+aliases: [別名]
+---
 ```
-docs.md # モジュールインデックス
-docs/ # モジュールディレクトリ（ファイルを持つ場合）
-  coding.md # サブモジュールインデックス
-  coding/ # サブモジュールディレクトリ
-    doc_comment.md サブサブモジュールインデックス
-  testing.md # モジュールインデックス（ファイルを持たない場合）
-```
-- 悪い例
-  - 例1: ${dir_name}/index.md
-  - 例2: ${dir_name}/${dir_name}.md
-- 良い例
-  - 例1: モジュール内にファイルを持つ場合
-    - ${dir_name}.md
-    - ${dir_name}/${file_name}.md
-  - 例2: モジュール内にファイルを持たない場合
-    - ${file_name}.md
