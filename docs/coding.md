@@ -35,6 +35,10 @@
 ### Golang
 - [Golangコーディング規約](coding/golang.md)
 - [Golangドキュメンテーションルール](coding/golang/golangdoc.md)
+- [Golangコーディングスタイル](coding/golang/golangstyle.md)
+- [Golangツール活用](coding/golang/golangtools.md)
+- [Golangコードレビュー](coding/golang/golangreview.md)
+- [Golang参考文献](coding/golang/golangrefs.md)
 
 ### Rust
 - [Rustコーディング規約](coding/rust.md)
@@ -47,3 +51,7 @@
 ### TypeScript
 - [TypeScriptコーディング規約](coding/typescript.md)
 - [TypeScriptドキュメンテーションルール](coding/typescript/tsdoc.md)
+
+## 共通ドキュメント
+
+- [ドキュメントコメント規約](coding/doc_comment.md) - 言語共通のドキュメントコメント規約
