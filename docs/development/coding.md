@@ -33,25 +33,25 @@
 各プログラミング言語固有のコーディング規約とドキュメンテーションルールは以下を参照してください：
 
 ### Golang
-- [Golangコーディング規約](golang/index.md)
-- [Golangドキュメンテーションルール](golang/golangdoc.md)
-- [Golangコーディングスタイル](golang/golangstyle.md)
-- [Golangツール活用](golang/golangtools.md)
-- [Golangコードレビュー](golang/golangreview.md)
-- [Golang参考文献](golang/golangrefs.md)
+- [Golangコーディング規約](../docs/coding/golang.md)
+- [Golangドキュメンテーションルール](../docs/coding/golang/golangdoc.md)
+- [Golangコーディングスタイル](../docs/coding/golang/golangstyle.md)
+- [Golangツール活用](../docs/coding/golang/golangtools.md)
+- [Golangコードレビュー](../docs/coding/golang/golangreview.md)
+- [Golang参考文献](../docs/coding/golang/golangrefs.md)
 
 ### Rust
-- [Rustコーディング規約](rust/index.md)
-- [Rustドキュメンテーションルール](rust/rustdoc.md)
+- [Rustコーディング規約](../docs/coding/rust.md)
+- [Rustドキュメンテーションルール](../docs/coding/rust/rustdoc.md)
 
 ### Scala
-- [Scalaコーディング規約](scala/index.md)
-- [Scalaドキュメンテーションルール](scala/scaladoc.md)
+- [Scalaコーディング規約](../docs/coding/scala.md)
+- [Scalaドキュメンテーションルール](../docs/coding/scala/scaladoc.md)
 
 ### TypeScript
-- [TypeScriptコーディング規約](typescript/index.md)
-- [TypeScriptドキュメンテーションルール](typescript/tsdoc.md)
+- [TypeScriptコーディング規約](../docs/coding/typescript.md)
+- [TypeScriptドキュメンテーションルール](../docs/coding/typescript/tsdoc.md)
 
 ## 共通ドキュメント
 
-- [ドキュメントコメント規約](doc_comment.md) - 言語共通のドキュメントコメント規約
+- [ドキュメントコメント規約](../docs/coding/doc_comment.md) - 言語共通のドキュメントコメント規約 
