@@ -1,3 +1,9 @@
+---
+description: 掟プロジェクトのベンチマークテストの実施方法と原則に関するガイドライン
+tags: [development, testing, benchmark]
+aliases: [benchmark-rules]
+---
+
 # ベンチマークの掟
 
 ## 基本原則

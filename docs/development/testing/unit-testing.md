@@ -1,4 +1,5 @@
 ---
+description: 掟プロジェクトにおけるユニットテストの作成と実装に関する標準的なガイドライン
 tags: [development, testing, unit-test]
 aliases: [unit-test-rules]
 ---

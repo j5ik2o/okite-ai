@@ -1,4 +1,5 @@
 ---
+description: 掟プロジェクトのテスト戦略と品質保証アプローチに関する包括的な説明
 tags: [development, testing, index]
 aliases: [test-strategy]
 ---
