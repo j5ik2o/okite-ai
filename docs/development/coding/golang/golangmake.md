@@ -1,3 +1,9 @@
+---
+description: 掟プロジェクトにおけるGolangプロジェクトのMakefileの活用方法と設定例
+tags: [development, golang, make, build]
+aliases: [golang-make]
+---
+
 # Golang プロジェクトにおける Makefile の活用
 
 ## Makefile の役割

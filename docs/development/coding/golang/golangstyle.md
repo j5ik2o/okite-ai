@@ -1,3 +1,9 @@
+---
+description: 掟プロジェクトにおけるGolangコードのスタイルガイドと規約
+tags: [development, golang, style]
+aliases: [golang-style]
+---
+
 # Golangコーディングスタイル
 
 ## パッケージ構成

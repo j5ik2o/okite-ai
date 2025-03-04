@@ -1,3 +1,9 @@
+---
+description: 掟プロジェクトにおけるGolangコードのレビュー基準とベストプラクティス
+tags: [development, golang, review]
+aliases: [golang-review]
+---
+
 # Golangコードレビュー
 
 ## レビュー時の注意点

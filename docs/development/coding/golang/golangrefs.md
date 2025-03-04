@@ -1,3 +1,9 @@
+---
+description: 掟プロジェクトにおけるGolang開発に関する参考文献とリソースのリスト
+tags: [development, golang, references]
+aliases: [golang-refs]
+---
+
 # Golang参考文献
 
 ## 公式ドキュメント

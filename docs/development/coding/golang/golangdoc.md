@@ -1,3 +1,9 @@
+---
+description: 掟プロジェクトにおけるGolangコードのドキュメント作成規約とベストプラクティス
+tags: [development, golang, documentation]
+aliases: [golang-doc]
+---
+
 # Golangdocの掟
 
 ## 基本原則

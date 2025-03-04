@@ -1,3 +1,9 @@
+---
+description: 掟プロジェクトにおけるGolang開発で使用する必須およびオプショナルツールの説明と設定方法
+tags: [development, golang, tools]
+aliases: [golang-tools]
+---
+
 # Golangツール活用
 
 ## 必須ツール
