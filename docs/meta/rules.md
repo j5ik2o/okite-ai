@@ -89,7 +89,13 @@ version: ドキュメントバージョン（任意）
    - 詳細な変更点2
    ```
 
-2. コミット単位
+2. コミット前の確認
+   - `npm run fix:md`を実行してMarkdownの形式を整える
+   - `npm run lint:md`でlintエラーがないことを確認
+   - `npm run check:md:links`でリンクの有効性を確認
+   - `npm run check:md:structure`でドキュメント構造を確認
+
+3. コミット単位
    - 論理的なまとまりごと
    - 複数ファイルの整合性を維持
    - リンク切れを発生させない
