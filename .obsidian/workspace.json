@@ -169,6 +169,8 @@
   },
   "active": "93de988757fde9b0",
   "lastOpenFiles": [
+    "_templates/_templates",
+    "docs/meta/_templates",
     "docs/meta/structure.md",
     "docs/meta/rules.md",
     "docs/development/api/types/rest.md",
@@ -199,12 +201,10 @@
     "docs/ai-agents/interaction.md",
     "docs/ai-agents/guidelines.md",
     "docs/ai-agents/ai-code-agent.md",
-    "docs/meta/document.md",
     "docs/meta/documentation",
     "docs/development/testing",
     "docs/testing",
     "docs/development/document",
-    "docs/development/coding/typescript",
     "無題のファイル.canvas"
   ]
 }
