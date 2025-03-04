@@ -16,26 +16,27 @@ aliases: [doc-structure, documentation-structure]
 ### トップレベル構成
 
 ```text
-docs/
-  ├── meta/           # メタドキュメント
-  ├── development/    # 開発関連ドキュメント
-  ├── operation/      # 運用関連ドキュメント
-  └── management/     # プロジェクト管理ドキュメント
+${PROJECT_ROOT}/
+  ├── docs/          # プロジェクトドキュメント
+  │   ├── meta/           # メタドキュメント
+  │   ├── development/    # 開発関連ドキュメント
+  │   ├── operation/      # 運用関連ドキュメント
+  │   └── management/     # プロジェクト管理ドキュメント
+  └── _templates/    # Obsidianテンプレート
 ```
 
 ### メタドキュメント
 
 ```text
-meta/
+${PROJECT_ROOT}/docs/meta/
   ├── rules.md        # 基本ルール
-  ├── structure.md    # 構造定義
-  └── _templates/     # ドキュメントテンプレート
+  └── structure.md    # 構造定義
 ```
 
 ### 開発ドキュメント
 
 ```text
-development/
+${PROJECT_ROOT}/docs/development/
   ├── api/           # API関連
   ├── coding/        # コーディング規約
   ├── testing/       # テスト関連
@@ -45,7 +46,7 @@ development/
 ### 運用ドキュメント
 
 ```text
-operation/
+${PROJECT_ROOT}/docs/operation/
   ├── monitoring/    # 監視関連
   ├── backup/        # バックアップ関連
   └── security/      # セキュリティ関連
