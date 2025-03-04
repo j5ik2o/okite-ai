@@ -41,6 +41,7 @@ aliases: [api-guidelines]
 ### エラー処理
 
 - エラーレスポンス形式
+
   ```json
   {
     "code": "INVALID_PARAMETER",
@@ -98,6 +99,7 @@ aliases: [api-guidelines]
 ### 使用例
 
 - 基本的な使用例
+
   ```bash
   # リクエスト例
   curl -X POST \
@@ -127,4 +129,4 @@ aliases: [api-guidelines]
 
 - [REST API](types/rest.md)
 - [gRPC API](types/grpc.md)
-- [GraphQL API](types/graphql.md) 
+- [GraphQL API](types/graphql.md)

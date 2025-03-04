@@ -216,4 +216,4 @@ aliases: [ai-best-practices]
 - [AIエージェントの基本ガイドライン](guidelines.md)
 - [AIエージェントとの対話プロトコル](interaction.md)
 - [AIエージェントの機能と制限](capabilities.md)
-- [トラブルシューティングガイド](troubleshooting.md) 
+- [トラブルシューティングガイド](troubleshooting.md)

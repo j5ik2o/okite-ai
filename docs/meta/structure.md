@@ -57,18 +57,21 @@ ${PROJECT_ROOT}/docs/operation/
 ### 基本ルール
 
 1. 全て小文字を使用
+
    ```text
    ✅ coding-guidelines.md
    ❌ Coding-Guidelines.md
    ```
 
 2. 複数単語はハイフンで接続
+
    ```text
    ✅ api-authentication.md
    ❌ api_authentication.md
    ```
 
 3. 言語やツール名は接頭辞として使用
+
    ```text
    ✅ scala-coding-guidelines.md
    ✅ docker-deployment.md
@@ -77,11 +80,13 @@ ${PROJECT_ROOT}/docs/operation/
 ### 禁止パターン
 
 1. スペースを含むファイル名
+
    ```text
    ❌ coding guidelines.md
    ```
 
 2. 特殊文字の使用
+
    ```text
    ❌ coding_guidelines(v1).md
    ```
@@ -91,11 +96,13 @@ ${PROJECT_ROOT}/docs/operation/
 ### リンク形式
 
 1. 同一ディレクトリ内
+
    ```markdown
    [基本ルール](rules.md)
    ```
 
 2. 異なるディレクトリ
+
    ```markdown
    [コーディング規約](/docs/development/coding.md)
    ```
@@ -103,6 +110,7 @@ ${PROJECT_ROOT}/docs/operation/
 ### インデックスファイル
 
 1. 各ディレクトリのルートに配置
+
    ```text
    development/
      ├── README.md    # 開発ドキュメントの概要

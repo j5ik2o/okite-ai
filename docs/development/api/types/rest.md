@@ -17,6 +17,7 @@ aliases: [rest-api-guidelines]
 1. リソース指向
    - 名詞を使用し、動詞は避ける
    - 複数形を使用する
+
    ```
    ✅ /api/v1/users
    ❌ /api/v1/getUser
@@ -24,6 +25,7 @@ aliases: [rest-api-guidelines]
 
 2. 階層構造
    - 関連リソースは階層的に表現
+
    ```
    /api/v1/users/{userId}/posts
    /api/v1/users/{userId}/posts/{postId}/comments
@@ -86,6 +88,7 @@ aliases: [rest-api-guidelines]
 ## バージョニング
 
 - URIベースのバージョニング
+
   ```
   /api/v1/resources
   /api/v2/resources
@@ -110,4 +113,4 @@ aliases: [rest-api-guidelines]
 - OpenAPI (Swagger) の使用
 - エンドポイントの詳細な説明
 - リクエスト/レスポンスの例示
-- エラーケースの説明 
+- エラーケースの説明

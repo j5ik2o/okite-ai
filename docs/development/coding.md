@@ -54,6 +54,7 @@ aliases: [coding-standards, coding-guidelines]
 各プログラミング言語固有のコーディング規約とドキュメンテーションルールは以下を参照してください：
 
 ### Golang
+
 - [Golangコーディング規約](coding/golang.md) - 基本的なコーディング規約
 - [Golangドキュメンテーションルール](coding/golang/golangdoc.md) - ドキュメント作成ガイド
 - [Golangコーディングスタイル](coding/golang/golangstyle.md) - 推奨されるコーディングスタイル
@@ -62,14 +63,17 @@ aliases: [coding-standards, coding-guidelines]
 - [Golang参考文献](coding/golang/golangrefs.md) - 推奨される学習リソース
 
 ### Rust
+
 - [Rustコーディング規約](coding/rust.md) - Rust固有の規約とベストプラクティス
 - [Rustドキュメンテーションルール](coding/rust/rustdoc.md) - Rustdocの活用方法
 
 ### Scala
+
 - [Scalaコーディング規約](coding/scala.md) - Scala固有の規約とパターン
 - [Scalaドキュメンテーションルール](coding/scala/scaladoc.md) - Scaladocの書き方
 
 ### TypeScript
+
 - [TypeScriptコーディング規約](coding/typescript.md) - TypeScript固有の規約と型の使用方法
 - [TypeScriptドキュメンテーションルール](coding/typescript/tsdoc.md) - TSDocの活用ガイド
 

@@ -64,4 +64,4 @@ service ExampleService {
 
 - メソッド仕様の記述
 - 型定義の説明
-- 例示の提供 
+- 例示の提供

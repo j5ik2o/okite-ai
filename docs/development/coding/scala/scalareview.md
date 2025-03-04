@@ -442,6 +442,7 @@ def findUser(id: UserId): Option[User] = {
 
 // 悪いフィードバック例
 例外を使わないでください。
+
 ```
 
 ### 優先順位付け

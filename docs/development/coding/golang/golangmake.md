@@ -31,25 +31,25 @@ all: test build
 
 # ビルドターゲット
 build:
-	$(GO) build -o $(BINARY_NAME) -v ./...
+ $(GO) build -o $(BINARY_NAME) -v ./...
 
 # テストターゲット
 test:
-	$(GOTEST) -v ./...
+ $(GOTEST) -v ./...
 
 # 静的解析
 vet:
-	$(GOVET) ./...
+ $(GOVET) ./...
 
 # クリーンアップ
 clean:
-	$(GO) clean
-	rm -f $(BINARY_NAME)
-	rm -f $(BINARY_UNIX)
+ $(GO) clean
+ rm -f $(BINARY_NAME)
+ rm -f $(BINARY_UNIX)
 
 # 依存関係のインストール
 deps:
-	$(GO) mod download
+ $(GO) mod download
 
 # PHONYターゲットの宣言（ファイル名と競合しないため）
 .PHONY: all build test vet clean deps
@@ -73,46 +73,46 @@ GOLINT=golangci-lint
 
 # ヘルプメッセージ
 help:
-	@echo "利用可能なコマンド:"
-	@echo "  make build        - アプリケーションをビルド"
-	@echo "  make test         - テストを実行"
-	@echo "  make lint         - リンターを実行"
-	@echo "  make fmt          - コードをフォーマット"
-	@echo "  make clean        - ビルド成果物を削除"
-	@echo "  make docker       - Dockerイメージをビルド"
-	@echo "  make run          - アプリケーションを実行"
+ @echo "利用可能なコマンド:"
+ @echo "  make build        - アプリケーションをビルド"
+ @echo "  make test         - テストを実行"
+ @echo "  make lint         - リンターを実行"
+ @echo "  make fmt          - コードをフォーマット"
+ @echo "  make clean        - ビルド成果物を削除"
+ @echo "  make docker       - Dockerイメージをビルド"
+ @echo "  make run          - アプリケーションを実行"
 
 # ビルドディレクトリの作成
 $(BUILD_DIR):
-	mkdir -p $(BUILD_DIR)
+ mkdir -p $(BUILD_DIR)
 
 # ビルドターゲット
 build: $(BUILD_DIR)
-	CGO_ENABLED=0 $(GO) build -ldflags="-s -w -X main.Version=$(VERSION)" -o $(BUILD_DIR)/$(BINARY_NAME) ./cmd/$(BINARY_NAME)
+ CGO_ENABLED=0 $(GO) build -ldflags="-s -w -X main.Version=$(VERSION)" -o $(BUILD_DIR)/$(BINARY_NAME) ./cmd/$(BINARY_NAME)
 
 # テストターゲット
 test:
-	$(GOTEST) -race -cover ./...
+ $(GOTEST) -race -cover ./...
 
 # コードフォーマット
 fmt:
-	$(GOFMT) ./...
+ $(GOFMT) ./...
 
 # 静的解析
 lint:
-	$(GOLINT) run
+ $(GOLINT) run
 
 # クリーンアップ
 clean:
-	rm -rf $(BUILD_DIR)
+ rm -rf $(BUILD_DIR)
 
 # Dockerイメージのビルド
 docker:
-	docker build -t $(BINARY_NAME):$(VERSION) .
+ docker build -t $(BINARY_NAME):$(VERSION) .
 
 # アプリケーションの実行
 run: build
-	./$(BUILD_DIR)/$(BINARY_NAME)
+ ./$(BUILD_DIR)/$(BINARY_NAME)
 
 # PHONYターゲットの宣言
 .PHONY: help build test fmt lint clean docker run

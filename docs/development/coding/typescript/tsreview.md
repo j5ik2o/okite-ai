@@ -643,6 +643,7 @@ function processUser(userData: UserData): void {
 
 // 悪いフィードバック例
 any型を使わないでください。
+
 ```
 
 ### 優先順位付け
