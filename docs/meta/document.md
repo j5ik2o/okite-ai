@@ -19,10 +19,7 @@ aliases: [meta-document-rules]
 
 ```yaml
 ---
-title: ドキュメントタイトル
 description: ドキュメントの説明
-created: 作成日（YYYY-MM-DD）
-updated: 更新日（YYYY-MM-DD）
 tags: [関連タグ]
 aliases: [別名]
 ---

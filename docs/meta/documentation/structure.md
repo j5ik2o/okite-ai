@@ -61,10 +61,7 @@ aliases: [meta-rules, structure-rules]
 各Markdownファイルには以下のフロントマターを含める：
 ```yaml
 ---
-title: ドキュメントタイトル
 description: ドキュメントの説明
-created: 作成日
-updated: 更新日
 tags: [関連タグ]
 aliases: [別名]
 ---
