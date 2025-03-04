@@ -7,8 +7,6 @@ tags: [golang, coding, guidelines]
 aliases: [golang-rules, go-guidelines]
 ---
 
-# Golangの掟
-
 ## 基本原則
 
 - [Effective Go](https://golang.org/doc/effective_go)に従う

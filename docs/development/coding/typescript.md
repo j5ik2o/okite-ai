@@ -5,8 +5,6 @@ tags: [typescript, coding, guidelines]
 aliases: [typescript-rules, ts-guidelines]
 ---
 
-# TypeScriptの掟
-
 ## 基本原則
 
 - TypeScriptの公式スタイルガイドに従う

@@ -5,8 +5,6 @@ tags: [rust, coding, guidelines]
 aliases: [rust-rules, rust-guidelines]
 ---
 
-# Rustの掟
-
 ## 基本原則
 
 - [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)に従う

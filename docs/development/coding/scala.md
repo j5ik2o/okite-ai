@@ -5,8 +5,6 @@ tags: [scala, coding, guidelines]
 aliases: [scala-rules, scala-guidelines]
 ---
 
-# Scalaの掟
-
 ## 基本原則
 
 - [Scala Style Guide](https://docs.scala-lang.org/style/)に従う
