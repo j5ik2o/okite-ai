@@ -29,7 +29,7 @@ docs/
 meta/
   ├── rules.md        # 基本ルール
   ├── structure.md    # 構造定義
-  └── templates/      # ドキュメントテンプレート
+  └── _templates/     # ドキュメントテンプレート
 ```
 
 ### 開発ドキュメント
