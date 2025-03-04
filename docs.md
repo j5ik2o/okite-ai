@@ -1,67 +1,33 @@
 ---
-title: ドキュメント構造規約
-description: プロジェクトのドキュメント構造とファイル配置規則
+title: プロジェクトドキュメント
+description: プロジェクト全体のドキュメント構成とナビゲーション
 created: 2024-03-04
 updated: 2024-03-04
-tags: [documentation, structure, guidelines]
-aliases: [doc-structure, documentation-rules]
+tags: [index, documentation]
+aliases: [doc-index, documentation-index]
 ---
 
-## このドキュメントの書き方
+# プロジェクトドキュメント
 
-### 基本規則
+## 概要
 
-1. `index.md`の使用は禁止
-   - 単独の`index.md`
-   - ディレクトリ内の`${dir}/index.md`
-   - 上記いずれも配置禁止
+このドキュメントは、プロジェクト全体のドキュメント構成を示すインデックスです。
+各セクションの詳細は、対応するリンク先を参照してください。
 
-2. Rust2018方式のモジュール構造に準拠
-   ```
-   docs.md                    # トップレベルモジュールインデックス
-   docs/                      # トップレベルモジュールディレクトリ
-     coding.md               # サブモジュールインデックス
-     coding/                # サブモジュールディレクトリ
-       doc_comment.md       # サブモジュールファイル
-     testing.md            # 単独のサブモジュール（ディレクトリなし）
-   ```
+## ドキュメント構成
 
-### 命名規則
+### 開発プロセス
 
-#### 禁止パターン
-1. ディレクトリ内にindex.mdを配置
-   ```
-   ❌ ${dir_name}/index.md
-   ```
+- [コーディング規約](coding.md) - コーディングスタイルと規約
+- [テスト規約](testing.md) - テスト方針と実装ガイド
+- [ドキュメント規約](documentation/rules.md) - ドキュメント作成と管理のルール
 
-2. ディレクトリ名と同名のmdファイルをディレクトリ内に配置
-   ```
-   ❌ ${dir_name}/${dir_name}.md
-   ```
+### プロジェクト管理
 
-#### 推奨パターン
-1. モジュールがサブファイルを持つ場合
-   ```
-   ✅ ${dir_name}.md          # モジュールインデックス
-   ✅ ${dir_name}/            # モジュールディレクトリ
-      └── ${file_name}.md    # サブモジュールファイル
-   ```
+- [タスク管理](task-management.md) - タスクの追跡と管理
+- [バージョン管理](version-control.md) - Gitの使用方法とブランチ戦略
+- [PRレビュー](pull-request.md) - プルリクエストの作成とレビュー
 
-2. モジュールが単独の場合
-   ```
-   ✅ ${file_name}.md        # 単独のモジュールファイル
-   ```
+### 開発ツール
 
-### メタデータ要件
-
-各Markdownファイルには以下のフロントマターを含める：
-```yaml
----
-title: ドキュメントタイトル
-description: ドキュメントの説明
-created: 作成日
-updated: 更新日
-tags: [関連タグ]
-aliases: [別名]
----
-```
+- [ツール一覧](tools.md) - 使用する開発ツールとその設定
