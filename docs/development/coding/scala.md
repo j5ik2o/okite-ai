@@ -1,9 +1,10 @@
 ---
-title: Scalaの掟
 description: Scalaのコーディング規約と開発ガイドライン
 tags: [scala, coding, guidelines]
 aliases: [scala-rules, scala-guidelines]
 ---
+
+# Scalaの掟
 
 ## 基本原則
 

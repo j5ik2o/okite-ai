@@ -1,9 +1,10 @@
 ---
-title: Rustの掟
 description: Rustのコーディング規約と開発ガイドライン
 tags: [rust, coding, guidelines]
 aliases: [rust-rules, rust-guidelines]
 ---
+
+# Rustの掟
 
 ## 基本原則
 

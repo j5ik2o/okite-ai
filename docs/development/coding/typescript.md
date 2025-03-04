@@ -1,9 +1,10 @@
 ---
-title: TypeScriptの掟
 description: TypeScriptのコーディング規約と開発ガイドライン
 tags: [typescript, coding, guidelines]
 aliases: [typescript-rules, ts-guidelines]
 ---
+
+# TypeScriptの掟
 
 ## 基本原則
 

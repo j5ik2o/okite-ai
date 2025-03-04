@@ -34,6 +34,7 @@ aliases: [doc-comment-rules]
 ### オプション項目
 
 1. 使用例
+
    ```rust
    /// # Example
    /// ```
