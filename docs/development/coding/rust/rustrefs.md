@@ -15,7 +15,7 @@
 - [The Cargo Book](https://doc.rust-lang.org/cargo/) - Cargoの使用方法
 - [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/) - Rustライブラリ設計のベストプラクティス
 - [The Embedded Rust Book](https://docs.rust-embedded.org/book/) - 組み込み開発のためのRust
-- [The Rust FFI Guide](https://michael-f-bryan.github.io/rust-ffi-guide/) - 他言語とのインターフェース
+- [The Rust FFI Guide](https://michael-f-bryan.github.io/rust-ffi-guide/) - 他言語とのインタフェース
 
 ## 学習リソース
 
@@ -77,7 +77,7 @@
 - [tokio](https://tokio.rs/) - 非同期ランタイム
 - [actix-web](https://actix.rs/) - Webフレームワーク
 - [rocket](https://rocket.rs/) - Webフレームワーク
-- [diesel](https://diesel.rs/) - ORMとクエリビルダー
+- [diesel](https://diesel.rs/) - O/Rマッパとクエリビルダー
 - [clap](https://clap.rs/) - コマンドライン引数パーサー
 - [rayon](https://github.com/rayon-rs/rayon) - データ並列ライブラリ
 

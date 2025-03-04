@@ -9,7 +9,7 @@ aliases: [tools-rules]
 
 ### 必須ツール（すべての環境に初期インストール）
 
-- git: バージョン管理
+- Git: バージョン管理
 - gh (GitHub CLI): GitHub操作
 - docker: コンテナ管理
 - make: ビルド自動化
@@ -44,7 +44,7 @@ aliases: [tools-rules]
 ## 3. ツールインストール階層
 
 1. システムレベル
-   - git, gh, docker, make
+   - Git, gh, docker, make
 
 2. ツールバージョン管理
    - mise

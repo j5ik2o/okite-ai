@@ -8,7 +8,7 @@ aliases: [version-control-rules]
 
 ## コミットメッセージのルール
 
-- git commitのメッセージは英語で書き、Conventional Commitsの規約に従う
+- Git commitのメッセージは英語で書き、Conventional Commitsの規約に従う
   - 例: `fix:`, `feat:`, `docs:`, `style:`, `refactor:`, `test:`, `chore:`
   - コミットメッセージは変更内容を明確に説明する
   - プレフィックスは変更の種類を正確に反映する
@@ -23,7 +23,7 @@ aliases: [version-control-rules]
 
 ### サブモジュールとは
 
-Gitサブモジュールは、あるGitリポジトリ内に別のGitリポジトリを含める機能です。これにより、複数のプロジェクト間で共通のコードやドキュメントを共有することができます。
+Gitサブモジュールは、あるGitリポジトリ内に別のGitリポジトリを含める機能です。これにより、複数のプロジェクト間で共通のコードやドキュメントを共有できます。
 
 ### サブモジュールを追加する
 

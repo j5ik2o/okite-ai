@@ -17,7 +17,7 @@ aliases: [typescript-style]
 
 ### 基本ルール
 
-- クラス名、インターフェース名、型名はパスカルケース
+- クラス名、インタフェース名、型名はパスカルケース
   - 例: `UserService`, `HttpClient`, `ApiResponse`
 - 変数名、関数名、メソッド名、プロパティ名はキャメルケース
   - 例: `userData`, `fetchUserData`, `isValid`
@@ -28,7 +28,7 @@ aliases: [typescript-style]
 
 ### 特殊なケース
 
-- インターフェース名に`I`プレフィックスは付けない
+- インタフェース名に`I`プレフィックスは付けない
   - 良い例: `UserRepository` (× `IUserRepository`)
 - タイプエイリアスには`Type`サフィックスを付ける
   - 例: `UserDataType`, `ApiResponseType`
@@ -72,7 +72,7 @@ type UserResponse = { // 'Type'サフィックスがない
 
 ### ファイル編成
 
-- 1ファイルにつき1つの主要な概念（クラス、インターフェースなど）を基本とする
+- 1ファイルにつき1つの主要な概念（クラス、インタフェースなど）を基本とする
 - ファイル名は内容を反映したものにする
 - インポートは以下の順序でグループ化する:
   1. 外部ライブラリ
@@ -130,7 +130,7 @@ export * from './user-list.component';
 
 - `any`型の使用は可能な限り避ける
 - 明示的な型注釈よりも型推論を優先する
-- 複雑な型には型エイリアスやインターフェースを使用する
+- 複雑な型には型エイリアスやインタフェースを使用する
 - union型とintersection型を適切に活用する
 - ジェネリクスは意味のある制約を付ける
 
@@ -230,7 +230,7 @@ async function getUser(
 ### 非同期処理
 
 - 可能な限り`async/await`を使用する
-- Promiseチェーンは適切に例外処理を行う
+- Promiseチェインは適切に例外処理を行う
 - 複数の非同期処理は`Promise.all`や`Promise.race`を活用する
 - 非同期関数は戻り値の型を明確にする
 
@@ -356,7 +356,7 @@ async function processUserData(userId: string): Promise<ProcessedData> {
 - クラスは単一責任の原則に従う
 - プロパティは適切にカプセル化する
 - 継承よりもコンポジションを優先する
-- インターフェースを使用して契約を定義する
+- インタフェースを使用して契約を定義する
 - 抽象クラスは共通の実装を提供する場合に使用する
 
 ```typescript

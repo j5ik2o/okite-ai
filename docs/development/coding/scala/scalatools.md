@@ -308,7 +308,7 @@ class CalculatorSpec extends AnyFlatSpec with Matchers {
 
 ### Specs2
 
-もう一つの人気のあるテストフレームワークです。
+もう1つの人気のあるテストフレームワークです。
 
 ```scala
 // build.sbtでの依存関係

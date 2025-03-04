@@ -6,9 +6,20 @@
     "lint:md": "markdownlint \"docs/**/*.md\"",
     "fix:md": "markdownlint --fix \"docs/**/*.md\"",
     "check:md:links": "./scripts/check-md-links.sh",
-    "check:md:structure": "./scripts/check-md-structure.sh"
+    "check:md:structure": "./scripts/check-md-structure.sh",
+    "lint:text": "textlint \"docs/**/*.md\"",
+    "fix:text": "textlint --fix \"docs/**/*.md\"",
+    "fix:all": "npm run fix:md && npm run fix:text"
   },
   "devDependencies": {
-    "markdownlint-cli": "^0.39.0"
+    "markdownlint-cli": "^0.39.0",
+    "textlint": "^13.4.1",
+    "textlint-rule-ja-hiragana-keishikimeishi": "^1.1.0",
+    "textlint-rule-ja-no-mixed-period": "^2.1.1",
+    "textlint-rule-ja-no-redundant-expression": "^4.0.1",
+    "textlint-rule-ja-no-weak-phrase": "^2.0.0",
+    "textlint-rule-max-kanji-continuous-len": "^1.1.1",
+    "textlint-rule-preset-ja-technical-writing": "^9.0.0",
+    "textlint-rule-spellcheck-tech-word": "^5.0.0"
   }
 } 

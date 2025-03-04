@@ -33,7 +33,7 @@ aliases: [dev-doc-guidelines]
    - 技術選定の理由
 
 2. データモデル設計
-   - ERD（Entity Relationship Diagram）
+   - ERD（エンティティ Relationship Diagram）
    - データフローの説明
    - スキーマ定義
 
@@ -65,7 +65,7 @@ aliases: [dev-doc-guidelines]
 
 2. レビュープロセス
    - ドキュメントのレビュー基準
-   - レビューアの役割と責任
+   - レビュアの役割と責任
    - フィードバックの反映手順
 
 ### メンテナンス
