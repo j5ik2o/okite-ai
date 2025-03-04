@@ -1,3 +1,12 @@
+---
+title: プルリクエストの掟
+description: プルリクエストの作成とレビューに関する規約とガイドライン
+created: 2024-03-04
+updated: 2024-03-04
+tags: [development, pull-request, review]
+aliases: [pr-guidelines]
+---
+
 # プルリクエストの掟
 
 ## プルリクエスト作成前の準備
