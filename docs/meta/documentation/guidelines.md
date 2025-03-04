@@ -32,9 +32,18 @@ aliases: [doc-guidelines, documentation-best-practices]
 
 ### APIドキュメント
 
-- パラメータの型と制約を明記
-- 戻り値の形式を説明
-- エラーケースと対処方法を記載
+各種APIドキュメントの詳細なガイドラインは以下を参照してください：
+
+- [REST APIドキュメント](api/rest.md)
+- [gRPC APIドキュメント](api/grpc.md)
+- [GraphQL APIドキュメント](api/graphql.md)
+
+共通の要件：
+
+- APIの目的と概要を明記
+- バージョニング方針を説明
+- 認証・認可の方法を記載
+- エラーハンドリングを詳述
 - 使用例を含める
 
 ### 設計ドキュメント
