@@ -169,6 +169,7 @@
   },
   "active": "93de988757fde9b0",
   "lastOpenFiles": [
+    "scripts/check-md-structure.sh",
     "scripts/check-md-links.sh",
     "scripts",
     "_templates/_templates",
@@ -204,7 +205,6 @@
     "docs/ai-agents/guidelines.md",
     "docs/ai-agents/ai-code-agent.md",
     "docs/meta/documentation",
-    "docs/development/testing",
     "無題のファイル.canvas"
   ]
 }
