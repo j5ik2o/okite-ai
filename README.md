@@ -5,11 +5,12 @@
 ## 構造
 
 - `docs/` - メインドキュメント
+  - `ai-agents/` - AIエージェント関連ドキュメント
   - `development/` - 開発関連ドキュメント
-  - `pull-request/` - プルリクエスト関連
-  - `task-management/` - タスク管理
-  - `tools/` - ツール関連
-  - `version-control/` - バージョン管理
+    - `api/` - API関連ドキュメント
+    - `coding/` - コーディング関連ドキュメント
+    - `testing/` - テスト関連ドキュメント
+  - `meta/` - メタ情報関連ドキュメント
 - `_templates/` - ドキュメントテンプレート
 - `_assets/` - 画像やPDF等のリソース
 - `_archive/` - アーカイブされたドキュメント
