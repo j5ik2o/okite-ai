@@ -22,12 +22,10 @@ aliases: [meta-rules, documentation-rules]
 description: ドキュメントの説明（必須）
 tags: [関連タグ]（必須）
 aliases: [別名]（必須）
-author: 作成者名（任意）
-created_at: 作成日（任意）
-updated_at: 更新日（任意）
-version: ドキュメントバージョン（任意）
 ---
 ```
+
+> **注意**: 以前は `author`, `created_at`, `updated_at`, `version` などの追加フィールドが許可されていましたが、メタデータの一貫性を確保するため、現在は上記の3つのフィールドのみを使用してください。
 
 ### タグ規則
 
