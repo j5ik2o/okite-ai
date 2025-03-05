@@ -4,7 +4,7 @@ tags: [ai, guidelines, best-practices, index]
 aliases: [ai-guidelines-index]
 ---
 
-# AIエージェントの掟
+# AIエージェントの基本原則
 
 ## 概要
 
