@@ -10,7 +10,8 @@
     "check:md:structure": "./scripts/check-md-structure.sh",
     "lint:text": "textlint \"docs/**/*.md\"",
     "fix:text": "textlint --fix \"docs/**/*.md\"",
-    "fix:all": "npm run fix:md && npm run fix:text"
+    "fix:all": "npm run fix:md && npm run fix:text",
+    "lint:all": "npm run lint:md && npm run check:md:links && npm run check:md:frontmatter && npm run check:md:structure && npm run lint:text"
   },
   "devDependencies": {
     "markdownlint": "^0.37.4",
