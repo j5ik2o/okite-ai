@@ -1,10 +1,12 @@
 ---
 description: バージョン管理に関するルールと規約
+ruleId: VERSION-CTRL-01HSABCDEF3456789GHIJKLMNO
 tags:
   - version-control
   - rules
 aliases:
   - version-control-rules
+globs: ["**/*.ts", "**/*.js", "**/*.go", "**/*.rs", "**/*.scala", "**/*.java", "**/*.py", "**/*.sh"]
 ---
 
 # バージョン管理の掟
