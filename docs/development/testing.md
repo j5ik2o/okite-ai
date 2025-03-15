@@ -1,5 +1,5 @@
 ---
-description: 掟プロジェクトのテスト戦略と品質保証アプローチに関する包括的な説明
+description: テスト戦略と品質保証アプローチに関する包括的な説明
 tags: [development, testing, index]
 aliases: [test-strategy]
 ---
@@ -8,7 +8,7 @@ aliases: [test-strategy]
 
 ## 概要
 
-Okite AIプロジェクトにおける包括的なテスト戦略と品質保証アプローチについて説明します。
+包括的なテスト戦略と品質保証アプローチについて説明します。
 
 ## 目的
 

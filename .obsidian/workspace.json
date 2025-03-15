@@ -20,8 +20,21 @@
               "icon": "lucide-file",
               "title": "version-control"
             }
+          },
+          {
+            "id": "5fe325d8135c9f9f",
+            "type": "leaf",
+            "state": {
+              "type": "release-notes",
+              "state": {
+                "currentVersion": "1.8.9"
+              },
+              "icon": "lucide-book-up",
+              "title": "Release Notes 1.8.9"
+            }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -167,7 +180,7 @@
       "templates:テンプレートを挿入": false
     }
   },
-  "active": "93de988757fde9b0",
+  "active": "5fe325d8135c9f9f",
   "lastOpenFiles": [
     "node_modules/textlint-rule-no-doubled-conjunctive-particle-ga/node_modules/kuromoji/test/resource/minimum-dic/unk.def",
     "node_modules/textlint-rule-no-doubled-conjunctive-particle-ga/node_modules/kuromoji/test/resource/minimum-dic/minimum.csv",
