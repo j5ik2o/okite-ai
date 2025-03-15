@@ -24,5 +24,9 @@
     "textlint-rule-max-kanji-continuous-len": "^1.1.1",
     "textlint-rule-preset-ja-technical-writing": "^9.0.0",
     "textlint-rule-spellcheck-tech-word": "^5.0.0"
+  },
+  "dependencies": {
+    "glob": "^11.0.1",
+    "ulid": "^2.3.0"
   }
 }

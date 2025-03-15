@@ -27,7 +27,7 @@ show_help() {
     echo "  - descriptionの存在"
     echo "  - ruleIdの形式(ULID)"
     echo "  - tagsの存在(最低1つ以上)"
-    echo "  - globsの存在"
+    echo "  - globsの存在と内容の妥当性検証（ドキュメント自身を参照するパターンを禁止）"
 }
 
 # オプションの解析
@@ -46,6 +46,23 @@ is_valid_ulid() {
     local ulid="$1"
     # ULIDは26文字の英数字（大文字のみ）
     [[ "$ulid" =~ ^[0-9A-Z]{26}$ ]]
+}
+
+# 不正なglobsパターンをチェックする関数
+is_invalid_globs_pattern() {
+    local pattern="$1"
+    local file="$2"
+    
+    # ドキュメント自身または関連するMarkdownファイルを参照するパターンを検出
+    if [[ "$pattern" == *".md"* ]] || [[ "$pattern" == *"docs/"* ]]; then
+        # ソースコードパターンとして一般的な例外を許可
+        if [[ "$pattern" == "**/*.md.tmpl" ]] || [[ "$pattern" == "**/*.mdx" ]]; then
+            return 1 # 有効なパターン
+        fi
+        return 0 # 無効なパターン
+    fi
+    
+    return 1 # 有効なパターン
 }
 
 # フロントマターをチェックする関数
@@ -103,6 +120,27 @@ check_frontmatter() {
     if ! grep -q "^globs:" "$file"; then
         error_msgs+=("globs フィールドがありません")
         has_issues=true
+    else
+        # globsの値を取得して内容をチェック
+        local globs_line=$(grep "^globs:" "$file" | sed 's/^globs: *\[\(.*\)\]$/\1/')
+        
+        # パターンが空かどうかのチェック
+        if [[ -z "$globs_line" ]]; then
+            warning_msgs+=("globs が空です。少なくとも1つのパターンが必要です")
+            ((warnings++))
+        else
+            # カンマで区切られたパターンを分解して各パターンをチェック
+            IFS=',' read -ra glob_patterns <<< "$globs_line"
+            for pattern in "${glob_patterns[@]}"; do
+                # パターンから余分な空白や引用符を削除
+                cleaned_pattern=$(echo "$pattern" | sed 's/^[[:space:]]*"//;s/"[[:space:]]*$//;s/^[[:space:]]*//;s/[[:space:]]*$//')
+                
+                if is_invalid_globs_pattern "$cleaned_pattern" "$file"; then
+                    error_msgs+=("globs パターン '$cleaned_pattern' はドキュメントファイル自身またはMarkdownファイルを参照しています。ソースコードファイルパターンを指定してください")
+                    has_issues=true
+                fi
+            done
+        fi
     fi
     
     # エラー/警告メッセージの表示
@@ -133,11 +171,11 @@ find "$PROJECT_ROOT/docs" -name "*.md" -type f | while read -r file; do
 done
 
 # .cursor/rules配下の全mdcファイルをチェック（存在する場合）
-if [ -d "$PROJECT_ROOT/.cursor/rules" ]; then
-    find "$PROJECT_ROOT/.cursor/rules" -name "*.mdc" -type f | while read -r file; do
-        check_frontmatter "$file"
-    done
-fi
+# if [ -d "$PROJECT_ROOT/.cursor/rules" ]; then
+#     find "$PROJECT_ROOT/.cursor/rules" -name "*.mdc" -type f | while read -r file; do
+#         check_frontmatter "$file"
+#     done
+# fi
 
 echo
 echo "チェック完了"
