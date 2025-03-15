@@ -1,3 +1,11 @@
+---
+description: エラーハンドリングの基本原則と実装ガイドライン
+ruleId: DEV-ERROR-01HS1NU8YFVH5KRTD5R5J19ZQP
+tags: [development, error-handling, guidelines]
+aliases: [error-guidelines]
+globs: ["**/*.go", "**/*.rs", "**/*.scala", "**/*.java", "**/*.ts", "**/*.js"]
+---
+
 # エラーハンドリングのルール
 
 ## 基本原則

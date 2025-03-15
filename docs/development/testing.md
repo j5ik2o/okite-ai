@@ -1,7 +1,9 @@
 ---
 description: テスト戦略と品質保証アプローチに関する包括的な説明
+ruleId: DEV-TEST-01HS1NT8Z2Y1VKWMDPXS5FBCQF
 tags: [development, testing, index]
 aliases: [test-strategy]
+globs: ["**/*_test.go", "**/*.test.ts", "**/*.test.js", "**/*.spec.ts", "**/test/**/*", "**/tests/**/*"]
 ---
 
 # テスト戦略

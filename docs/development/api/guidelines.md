@@ -1,7 +1,9 @@
 ---
 description: API設計とドキュメント作成のガイドライン
+ruleId: DEV-API-01HS1NTMRYN73EZ9CJNFW0F3WE
 tags: [api, development, guidelines]
 aliases: [api-guidelines]
+globs: ["**/api/**/*", "**/controllers/**/*", "**/routes/**/*", "**/*.proto", "**/graphql/**/*", "**/schema.graphql"]
 ---
 
 # API設計・ドキュメント作成ガイドライン

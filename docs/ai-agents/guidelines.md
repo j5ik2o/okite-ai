@@ -1,7 +1,9 @@
 ---
 description: AIコードエージェントの基本ガイドラインと利用規約
+ruleId: AI-GUIDE-01HS1O02MBWP2FMJFXHFNW9V5V
 tags: [ai, guidelines, best-practices]
 aliases: [ai-guidelines]
+globs: ["**/*.ts", "**/*.js", "**/*.py", "**/*.go", "**/*.rs", "**/*.scala", "**/*.java"]
 ---
 
 # AIコードエージェントガイドライン

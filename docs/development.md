@@ -1,7 +1,9 @@
 ---
 description: プロジェクトの開発プロセスと規約の全体像
+ruleId: DEV-MAIN-01HS1NSVWNZ6C2K22QZPTK02AE
 tags: [development, process, guidelines]
 aliases: [dev-guidelines, development-rules]
+globs: ["**/*"]
 ---
 
 # 開発の掟

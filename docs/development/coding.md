@@ -1,7 +1,9 @@
 ---
 description: プロジェクトのコーディング規約と基本原則
+ruleId: DEV-CODING-01HS1NTX3D9P2WYCME32QXQNM6
 tags: [coding, guidelines, standards]
 aliases: [coding-standards, coding-guidelines]
+globs: ["**/*.go", "**/*.rs", "**/*.scala", "**/*.ts", "**/*.tsx", "**/*.js", "**/*.jsx"]
 ---
 
 # コーディングの掟
