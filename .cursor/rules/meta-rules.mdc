@@ -1,0 +1,19 @@
+---
+description: 掟ドキュメントのルール
+ruleId: META-RULES-01JPBS5F2DJ170WCT0SKSWZ166
+tags: [meta, rules, documentation]
+aliases: [meta-rules, documentation-rules]
+globs: ["**/*.md", "**/*.mdc"]
+---
+
+# 掟ドキュメントのルール
+
+## 概要
+
+このドキュメントは、掟プロジェクトのドキュメント自体に関するメタレベルのルールと規約を定義します。
+ドキュメントの構造、作成方法、管理方法などの基本原則を示します。
+
+## ルール群
+
+- [掟ドキュメントの構造定義](meta-rules-structure.mdc) 
+- [掟ドキュメントの基本ルール](meta-rules-basic.mdc)

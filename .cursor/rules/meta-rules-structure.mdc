@@ -1,0 +1,88 @@
+---
+description: 掟ドキュメントの構造定義
+ruleId: META-STRUCTURE-01JPBRY7BHTJ625M42600MC54N
+tags: [meta, documentation, structure]
+aliases: [doc-structure, documentation-structure]
+globs: ["**/*.md", "**/*.mdc"] 
+---
+
+# 掟ドキュメントの構造定義
+
+## 概要
+
+このドキュメントは、掟プロジェクトのドキュメント構造と編成に関するルールを定義します。  
+ドキュメントの階層構造、ファイル配置、相互参照の方針を規定し、可読性・保守性・拡張性を高めることを目的とします。
+
+## ディレクトリ構造
+
+### ディレクトリ・ファイル配置ルール
+
+Rust2018モジュールと同じディレクトリとファイルの配置を厳守します。
+
+```text
+${PROJECT_ROOT}/
+  ├── module-a/
+  │   ├── module-b.md
+  │   ├── module-c.md
+  │   └── module-c/ 
+  │      ├── module-d.md
+  │      └── module-e.md 
+  └── module-a.md
+```
+
+- mdファイルは単一でもモジュールを形成する  
+- module-a.md が大きくなり過ぎたら、以下のように分割していく  
+  - module-a.md # インデックスファイル。別名親モジュール
+  - module-a/module-b.md # 具体的なコンテンツ。別名子モジュール 
+  - module-a/module-c.md # 具体的なコンテンツ。子モジュール  
+- 親モジュールはできる限り目次や概要的な役割とし、詳細は子モジュールに委譲すること
+- 子モジュールはさらに子モジュールを保持できる。フラクタル構造
+- ディレクトリとファイルの配置パターンとしては以下は厳禁
+  - `${モジュール名}/index.md`  
+  - `${モジュール名}/mods.md`  
+  - `${モジュール名}/README.md`  
+  - `${モジュール名}/${モジュール名}.md`
+
+## ファイル命名規則
+
+### 基本ルール
+
+1. **全て小文字を使用する**  
+   ```text
+   ✅ coding-guidelines.md
+   ❌ Coding-Guidelines.md
+   ```
+1. **複数単語はハイフン(-)で接続する**  
+   ```text
+   ✅ api-authentication.md
+   ❌ api_authentication.md
+   ```
+1. **言語やツール名は接頭辞として使用する**  
+   ```text
+   ✅ scala-coding-guidelines.md
+   ✅ docker-deployment.md
+   ```
+
+### 禁止パターン
+
+1. **スペースを含むファイル名**  
+   ```text
+   ❌ coding guidelines.md
+   ```
+1. **特殊文字の使用**  
+   ```text
+   ❌ coding_guidelines(v1).md
+   ```
+
+## 相互参照ルール
+
+### リンク形式
+
+1. **同一ディレクトリ内のリンク**
+   ```markdown
+   [基本ルール](rules.md)
+   ```
+1. **異なるディレクトリへのリンク**
+   ```markdown
+   [コーディング規約](/docs/development/coding.md)
+   ```
