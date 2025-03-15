@@ -1,7 +1,10 @@
 ---
-description: 掟プロジェクトのバージョン管理に関するルールと規約
-tags: [version-control, rules]
-aliases: [version-control-rules]
+description: バージョン管理に関するルールと規約
+tags:
+  - version-control
+  - rules
+aliases:
+  - version-control-rules
 ---
 
 # バージョン管理の掟

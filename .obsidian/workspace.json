@@ -13,28 +13,15 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "docs/version-control.md",
-                "mode": "source",
-                "source": false
+                "file": "docs/development/coding/typescript/tsdoc.md",
+                "mode": "preview",
+                "source": true
               },
               "icon": "lucide-file",
-              "title": "version-control"
-            }
-          },
-          {
-            "id": "5fe325d8135c9f9f",
-            "type": "leaf",
-            "state": {
-              "type": "release-notes",
-              "state": {
-                "currentVersion": "1.8.9"
-              },
-              "icon": "lucide-book-up",
-              "title": "Release Notes 1.8.9"
+              "title": "tsdoc"
             }
           }
-        ],
-        "currentTab": 1
+        ]
       }
     ],
     "direction": "vertical"
@@ -180,8 +167,14 @@
       "templates:テンプレートを挿入": false
     }
   },
-  "active": "5fe325d8135c9f9f",
+  "active": "93de988757fde9b0",
   "lastOpenFiles": [
+    "docs/development/coding/golang/golangdoc.md",
+    "docs/ai-agents/ai-code-agent.md",
+    "docs/ai-agents.md",
+    "docs/meta/rules.md",
+    "docs/meta/structure.md",
+    "docs/version-control.md",
     "node_modules/textlint-rule-no-doubled-conjunctive-particle-ga/node_modules/kuromoji/test/resource/minimum-dic/unk.def",
     "node_modules/textlint-rule-no-doubled-conjunctive-particle-ga/node_modules/kuromoji/test/resource/minimum-dic/minimum.csv",
     "node_modules/textlint-rule-no-doubled-conjunctive-particle-ga/node_modules/kuromoji/test/resource/minimum-dic/matrix.def",
@@ -192,7 +185,6 @@
     "node_modules/textlint-rule-no-doubled-conjunctive-particle-ga/node_modules/kuromoji/test/util/ByteBuffer.js",
     "node_modules/textlint-rule-no-doubled-conjunctive-particle-ga/node_modules/kuromoji/test/resource/minimum-dic",
     "node_modules/textlint-rule-no-doubled-conjunctive-particle-ga/node_modules/kuromoji/test/loader/DictionaryLoaderTest.js",
-    "node_modules/textlint-rule-no-doubled-conjunctive-particle-ga/node_modules/kuromoji/test/dict/builder",
     "node_modules/textlint-rule-max-ten/node_modules/kuromoji/README.md",
     "node_modules/textlint-rule-max-ten/node_modules/kuromoji/NOTICE.md",
     "node_modules/textlint-rule-max-ten/node_modules/kuromoji/CHANGELOG.md",
@@ -213,11 +205,6 @@
     "node_modules/textlint-rule-ja-no-weak-phrase/node_modules/morpheme-match/README.md",
     "node_modules/textlint-rule-ja-no-weak-phrase/node_modules/morpheme-match/CHANGELOG.md",
     "node_modules/textlint-rule-ja-no-redundant-expression/node_modules/morpheme-match/README.md",
-    "node_modules/textlint-rule-ja-no-weak-phrase/node_modules/kuromojin/README.md",
-    "node_modules/textlint-rule-ja-no-redundant-expression/node_modules/morpheme-match/CHANGELOG.md",
-    "node_modules/textlint-rule-ja-no-redundant-expression/node_modules/morpheme-match-all/README.md",
-    "node_modules/textlint-rule-ja-no-redundant-expression/node_modules/morpheme-match-all/CHANGELOG.md",
-    "node_modules/textlint-rule-ja-no-redundant-expression/node_modules/kuromoji/README.md",
     "無題のファイル.canvas"
   ]
 }
