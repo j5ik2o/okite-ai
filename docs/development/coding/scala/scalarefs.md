@@ -1,3 +1,12 @@
+---
+description: scalarefsに関するドキュメント
+ruleId: 01JPCVXFXMSB49CGE8EWG55KAG
+tags: ["development","coding","scala"]
+globs: ["**/*.scala"]
+aliases: ["scala-references", "scala-resources"]
+---
+
+
 # Scala参考文献
 
 ## 公式ドキュメント
@@ -157,7 +166,7 @@
 1. [Advanced Scala with Cats](https://underscore.io/books/advanced-scala/)で高度な関数型プログラミングを学ぶ
 2. [ZIO](https://zio.dev/)や[http4s](https://http4s.org/)などの純粋関数型ライブラリを学ぶ
 3. [Scala High Performance Programming](https://www.packtpub.com/product/scala-high-performance-programming/9781786466044)でパフォーマンス最適化を学ぶ
-4. オープンソースプロジェクトに貢献する
+4. オープンソースプロジェクトに貢献する。
 
 ## Scala 3 (Dotty)
 

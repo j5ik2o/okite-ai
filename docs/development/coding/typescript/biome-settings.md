@@ -1,6 +1,15 @@
+---
+description: biome settingsに関するドキュメント
+ruleId: 01JPCVXFXK935Q9X97VBPFP9T9
+tags: ["development","coding","typescript"]
+globs: ["**/*.ts", "**/*.tsx", "**/*.js", "**/*.jsx"]
+aliases: ["biome-config", "typescript-linting"]
+---
+
+
 # Biomeの設定
 
-TypeScriptコードの品質を保つためのBiome設定例：
+TypeScriptコードの品質を保つためのBiome設定例：。
 
 ```json
 {

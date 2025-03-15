@@ -1,8 +1,11 @@
 ---
+globs: ["**/*.ts", "**/*.tsx", "**/*.js", "**/*.jsx", "**/*.go", "**/*.rs", "**/*.scala"]
+ruleId: 01JPCVXFXRA1QD2V1BTRRZ4S2X
 description: gRPC APIドキュメントの作成ガイドライン
 tags: [api, grpc, documentation]
 aliases: [grpc-api-guidelines]
 ---
+
 
 # gRPC APIドキュメント作成ガイドライン
 
@@ -15,53 +18,53 @@ aliases: [grpc-api-guidelines]
 ### メッセージ定義
 
 ```protobuf
-message Request {
-  string id = 1;  // リクエストの一意識別子
-  // ... 他のフィールド
+message Request {。
+  string id = 1;  // リクエストの一意識別子。
+  // ... 他のフィールド。
 }
 ```
 
-- フィールド番号の管理方法
-- 型の選択基準
-- コメントの記述方法
+- フィールド番号の管理方法。
+- 型の選択基準。
+- コメントの記述方法。
 
 ### サービス定義
 
 ```protobuf
-service ExampleService {
-  rpc GetData(Request) returns (Response);
-  rpc StreamData(Request) returns (stream Response);
+service ExampleService {。
+  rpc GetData(Request) returns (Response);。
+  rpc StreamData(Request) returns (stream Response);。
 }
 ```
 
-- RPCメソッドの命名規則
-- ストリーミングの使用基準
-- エラー処理の方針
+- RPCメソッドの命名規則。
+- ストリーミングの使用基準。
+- エラー処理の方針。
 
 ## インタフェース設計
 
 ### メソッド設計
 
-- 単項RPC vs ストリーミングRPC
-- バッチ処理の設計
-- タイムアウト設定
+- 単項RPC vs ストリーミングRPC。
+- バッチ処理の設計。
+- タイムアウト設定。
 
 ### エラー処理
 
-- gRPCステータスコードの使用
-- エラーメッセージの形式
-- リトライ戦略
+- gRPCステータスコードの使用。
+- エラーメッセージの形式。
+- リトライ戦略。
 
 ## ドキュメント生成
 
 ### ツール利用
 
-- protoc-gen-docの設定
-- CI/CDでの自動生成
-- バージョン管理
+- protoc-gen-docの設定。
+- CI/CDでの自動生成。
+- バージョン管理。
 
 ### API参照
 
-- メソッド仕様の記述
-- 型定義の説明
-- 例示の提供
+- メソッド仕様の記述。
+- 型定義の説明。
+- 例示の提供。

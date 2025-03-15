@@ -1,10 +1,11 @@
 ---
 description: AIエージェントに関する基本原則とガイドラインの概要
-ruleId: AI-AGENTS-01HS1NJGP6T3S6NKJBAP7FJNZ6
+ruleId: 01JPCVXFXA9ZN7YZY0QTMGYQ96
 tags: [ai, index]
 aliases: [ai-index]
 globs: ["**/*.ts", "**/*.js", "**/*.py", "**/*.ipynb"]
 ---
+
 
 # AIエージェント
 

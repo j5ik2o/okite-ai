@@ -1,3 +1,12 @@
+---
+description: rustrefsに関するドキュメント
+ruleId: 01JPCVXFXNN1EG2JXGY2JNS9W7
+tags: ["development","coding","rust"]
+globs: ["**/*.rs"]
+aliases: ["rust-references", "rust-resources"]
+---
+
+
 # Rust参考文献
 
 ## 公式ドキュメント
@@ -130,7 +139,7 @@
 1. [Rustonomicon](https://doc.rust-lang.org/nomicon/)でunsafe Rustを学ぶ
 2. [The Little Book of Rust Macros](https://danielkeep.github.io/tlborm/book/index.html)でマクロを理解
 3. [Rust Performance Book](https://nnethercote.github.io/perf-book/)でパフォーマンス最適化を学ぶ
-4. オープンソースプロジェクトに貢献する
+4. オープンソースプロジェクトに貢献する。
 
 ## 関連情報
 

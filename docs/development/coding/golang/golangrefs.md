@@ -1,8 +1,11 @@
 ---
+globs: ["**/*.go"]
+ruleId: 01JPCVXFXPSVPEPV85MYK6S6BJ
 description: 掟プロジェクトにおけるGolang開発に関する参考文献とリソースのリスト
 tags: [development, golang, references]
 aliases: [golang-refs]
 ---
+
 
 # Golang参考文献
 
@@ -19,9 +22,9 @@ aliases: [golang-refs]
 
 ## 書籍
 
-- "The Go Programming Language" by Alan A. A. Donovan and Brian W. Kernighan
-- "Go in Action" by William Kennedy
-- "Concurrency in Go" by Katherine Cox-Buday
+- "The Go Programming Language" by Alan A. A. Donovan and Brian W. Kernighan。
+- "Go in Action" by William Kennedy。
+- "Concurrency in Go" by Katherine Cox-Buday。
 
 ## オンラインリソース
 

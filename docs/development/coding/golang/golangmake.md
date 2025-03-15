@@ -1,121 +1,124 @@
 ---
+globs: ["**/*.go"]
+ruleId: 01JPCVXFXQE37KA9PN3XB4M9YQ
 description: 掟プロジェクトにおけるGolangプロジェクトのMakefileの活用方法と設定例
 tags: [development, golang, make, build]
 aliases: [golang-make]
 ---
 
+
 # Golang プロジェクトにおける Makefile の活用
 
 ## Makefile の役割
 
-Golang プロジェクトにおいて Makefile は以下の理由からベストプラクティスとして広く採用されています：
+Golang プロジェクトにおいて Makefile は以下の理由からベストプラクティスとして広く採用されています：。
 
-- **コマンドの標準化**: 複雑なビルドコマンドを簡潔な `make` コマンドに集約
-- **再現性の確保**: 開発環境に依存しない一貫したビルドプロセスを実現
-- **自動化**: テスト、ビルド、デプロイなどの作業を自動化
-- **依存関係の管理**: ビルドステップ間の依存関係を明示的に定義
-- **ドキュメント化**: プロジェクトで使用可能なコマンドを自己文書化
+- **コマンドの標準化**: 複雑なビルドコマンドを簡潔な `make` コマンドに集約。
+- **再現性の確保**: 開発環境に依存しない一貫したビルドプロセスを実現。
+- **自動化**: テスト、ビルド、デプロイなどの作業を自動化。
+- **依存関係の管理**: ビルドステップ間の依存関係を明示的に定義。
+- **ドキュメント化**: プロジェクトで使用可能なコマンドを自己文書化。
 
 ## 基本的な Makefile の構造
 
 ```makefile
 # 変数定義
-BINARY_NAME=myapp
-GO=go
-GOTEST=$(GO) test
-GOVET=$(GO) vet
-BINARY_UNIX=$(BINARY_NAME)_unix
+BINARY_NAME=myapp。
+GO=go。
+GOTEST=$(GO) test。
+GOVET=$(GO) vet。
+BINARY_UNIX=$(BINARY_NAME)_unix。
 
 # デフォルトターゲット
-all: test build
+all: test build。
 
 # ビルドターゲット
-build:
+build:。
  $(GO) build -o $(BINARY_NAME) -v ./...
 
 # テストターゲット
-test:
+test:。
  $(GOTEST) -v ./...
 
 # 静的解析
-vet:
+vet:。
  $(GOVET) ./...
 
 # クリーンアップ
-clean:
- $(GO) clean
- rm -f $(BINARY_NAME)
- rm -f $(BINARY_UNIX)
+clean:。
+ $(GO) clean。
+ rm -f $(BINARY_NAME)。
+ rm -f $(BINARY_UNIX)。
 
 # 依存関係のインストール
-deps:
- $(GO) mod download
+deps:。
+ $(GO) mod download。
 
 # PHONYターゲットの宣言（ファイル名と競合しないため）
-.PHONY: all build test vet clean deps
+.PHONY: all build test vet clean deps。
 ```
 
 ## 高度な Makefile の例
 
 ```makefile
 # 変数定義
-BINARY_NAME=myapp
-VERSION=1.0.0
-BUILD_DIR=build
-GO=go
-GOTEST=$(GO) test
-GOVET=$(GO) vet
-GOFMT=$(GO) fmt
-GOLINT=golangci-lint
+BINARY_NAME=myapp。
+VERSION=1.0.0。
+BUILD_DIR=build。
+GO=go。
+GOTEST=$(GO) test。
+GOVET=$(GO) vet。
+GOFMT=$(GO) fmt。
+GOLINT=golangci-lint。
 
 # デフォルトターゲット
-.DEFAULT_GOAL := help
+.DEFAULT_GOAL := help。
 
 # ヘルプメッセージ
-help:
+help:。
  @echo "利用可能なコマンド:"
- @echo "  make build        - アプリケーションをビルド"
- @echo "  make test         - テストを実行"
- @echo "  make lint         - リンターを実行"
- @echo "  make fmt          - コードをフォーマット"
- @echo "  make clean        - ビルド成果物を削除"
- @echo "  make docker       - Dockerイメージをビルド"
- @echo "  make run          - アプリケーションを実行"
+ @echo "  make build        - アプリケーションをビルド"。
+ @echo "  make test         - テストする"。
+ @echo "  make lint         - リンターする"。
+ @echo "  make fmt          - コードをフォーマット"。
+ @echo "  make clean        - ビルド成果物を削除"。
+ @echo "  make docker       - Dockerイメージをビルド"。
+ @echo "  make run          - アプリケーションする"。
 
 # ビルドディレクトリの作成
-$(BUILD_DIR):
- mkdir -p $(BUILD_DIR)
+$(BUILD_DIR):。
+ mkdir -p $(BUILD_DIR)。
 
 # ビルドターゲット
-build: $(BUILD_DIR)
- CGO_ENABLED=0 $(GO) build -ldflags="-s -w -X main.Version=$(VERSION)" -o $(BUILD_DIR)/$(BINARY_NAME) ./cmd/$(BINARY_NAME)
+build: $(BUILD_DIR)。
+ CGO_ENABLED=0 $(GO) build -ldflags="-s -w -X main.Version=$(VERSION)" -o $(BUILD_DIR)/$(BINARY_NAME) ./cmd/$(BINARY_NAME)。
 
 # テストターゲット
-test:
+test:。
  $(GOTEST) -race -cover ./...
 
 # コードフォーマット
-fmt:
+fmt:。
  $(GOFMT) ./...
 
 # 静的解析
-lint:
- $(GOLINT) run
+lint:。
+ $(GOLINT) run。
 
 # クリーンアップ
-clean:
- rm -rf $(BUILD_DIR)
+clean:。
+ rm -rf $(BUILD_DIR)。
 
 # Dockerイメージのビルド
-docker:
+docker:。
  docker build -t $(BINARY_NAME):$(VERSION) .
 
 # アプリケーションの実行
-run: build
- ./$(BUILD_DIR)/$(BINARY_NAME)
+run: build。
+ ./$(BUILD_DIR)/$(BINARY_NAME)。
 
 # PHONYターゲットの宣言
-.PHONY: help build test fmt lint clean docker run
+.PHONY: help build test fmt lint clean docker run。
 ```
 
 ## Makefile のベストプラクティス
@@ -130,25 +133,25 @@ run: build
 
 ## 一般的なターゲット
 
-| ターゲット | 説明 |
-|------------|------|
-| `build`    | アプリケーションのビルド |
-| `test`     | テストの実行 |
-| `lint`     | 静的解析の実行 |
-| `fmt`      | コードフォーマット |
-| `clean`    | ビルド成果物の削除 |
-| `deps`     | 依存関係のインストール |
-| `run`      | アプリケーションの実行 |
-| `docker`   | Dockerイメージのビルド |
-| `release`  | リリースビルドの作成 |
+| ターゲット | 説明 |。
+|------------|------|。
+| `build`    | アプリケーションのビルド |。
+| `test`     | テストの実行 |。
+| `lint`     | 静的解析の実行 |。
+| `fmt`      | コードフォーマット |。
+| `clean`    | ビルド成果物の削除 |。
+| `deps`     | 依存関係のインストール |。
+| `run`      | アプリケーションの実行 |。
+| `docker`   | Dockerイメージのビルド |。
+| `release`  | リリースビルドの作成 |。
 
 ## CI/CD との統合
 
-Makefileは継続的インテグレーション/継続的デプロイメント（CI/CD）パイプラインとの統合に最適です：
+Makefileは継続的インテグレーション/継続的デプロイメント（CI/CD）パイプラインとの統合に最適です：。
 
 ```yaml
 # .github/workflows/go.yml の例
-name: Go
+name: Go。
 
 on:
   push:
@@ -160,18 +163,18 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
-    - name: Set up Go
+    - uses: actions/checkout@v2。
+    - name: Set up Go。
       uses: actions/setup-go@v2
       with:
         go-version: 1.17
-    - name: Install dependencies
+    - name: Install dependencies。
       run: make deps
-    - name: Lint
+    - name: Lint。
       run: make lint
-    - name: Test
+    - name: Test。
       run: make test
-    - name: Build
+    - name: Build。
       run: make build
 ```
 

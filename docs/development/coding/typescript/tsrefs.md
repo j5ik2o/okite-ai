@@ -1,8 +1,11 @@
 ---
+globs: ["**/*.ts", "**/*.tsx", "**/*.js", "**/*.jsx"]
+ruleId: 01JPCVXFXJWWN785S5JG7T1772
 description: 掟プロジェクトにおけるTypeScript開発に関する参考文献とリソースのリスト
 tags: [development, typescript, references]
 aliases: [typescript-refs]
 ---
+
 
 # TypeScript参考文献
 
@@ -158,7 +161,7 @@ aliases: [typescript-refs]
 1. [TypeScript Compiler API](https://github.com/Microsoft/TypeScript/wiki/Using-the-Compiler-API)を学ぶ
 2. [TypeScript Design Patterns](https://refactoring.guru/design-patterns/typescript)を理解する
 3. [TypeScript Performance](https://github.com/microsoft/TypeScript/wiki/Performance)で最適化を学ぶ
-4. オープンソースプロジェクトに貢献する
+4. オープンソースプロジェクトに貢献する。
 
 ## TypeScript 5.0以降の新機能
 
