@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "docs/development/coding/typescript/tsdoc.md",
+                "file": "docs/tools.md",
                 "mode": "preview",
                 "source": true
               },
               "icon": "lucide-file",
-              "title": "tsdoc"
+              "title": "tools"
             }
           }
         ]
@@ -169,6 +169,8 @@
   },
   "active": "93de988757fde9b0",
   "lastOpenFiles": [
+    "docs/task-management.md",
+    "docs/development/coding/typescript/tsdoc.md",
     "docs/development/coding/golang/golangdoc.md",
     "docs/ai-agents/ai-code-agent.md",
     "docs/ai-agents.md",
@@ -203,8 +205,6 @@
     "node_modules/textlint-rule-ja-no-weak-phrase/node_modules/morpheme-match-all/CHANGELOG.md",
     "node_modules/textlint-rule-ja-no-weak-phrase/node_modules/kuromoji/CHANGELOG.md",
     "node_modules/textlint-rule-ja-no-weak-phrase/node_modules/morpheme-match/README.md",
-    "node_modules/textlint-rule-ja-no-weak-phrase/node_modules/morpheme-match/CHANGELOG.md",
-    "node_modules/textlint-rule-ja-no-redundant-expression/node_modules/morpheme-match/README.md",
     "無題のファイル.canvas"
   ]
 }
