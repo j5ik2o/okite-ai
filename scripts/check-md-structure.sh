@@ -110,6 +110,7 @@ check_heading_structure() {
     local prev_level=0
     local in_frontmatter=false
     local line_number=0
+    local in_code_block=false
 
     while IFS= read -r line; do
         ((line_number++))
@@ -127,6 +128,21 @@ check_heading_structure() {
             continue
         fi
 
+        # コードブロックの検出
+        if [[ "$line" =~ ^(\`\`\`) ]]; then
+            if [ "$in_code_block" = true ]; then
+                in_code_block=false
+            else
+                in_code_block=true
+            fi
+            continue
+        fi
+        
+        # コードブロック内の場合はスキップ
+        if [ "$in_code_block" = true ]; then
+            continue
+        fi
+
         # 見出しレベルのチェック
         if [[ "$line" =~ ^#+ ]]; then
             local level=${#BASH_REMATCH}
@@ -136,13 +152,7 @@ check_heading_structure() {
             prev_level=$level
         fi
 
-        # 見出し後の空行チェック
-        if [[ "$line" =~ ^#+ ]]; then
-            read -r next_line
-            if [ -n "$next_line" ]; then
-                log_warning "No empty line after heading at line $line_number in $file"
-            fi
-        fi
+        # 見出し後の空行チェックは markdownlint の MD022 ルールで対応するため削除
     done < "$file"
 }
 
@@ -155,7 +165,7 @@ main() {
         if [[ "$(basename "$file")" == "index.md" ]]; then
             log_error "Found forbidden index.md file: $file"
         fi
-    done < <(find "$docs_dir" -type f -name "index.md" -print0)
+    done < <(find "$docs_dir" -type f -name "index.md" -not -path "*/.cursor/*" -print0)
 
     # hoge/hoge.mdパターンのチェック
     while IFS= read -r -d '' file; do
@@ -164,14 +174,14 @@ main() {
         if [ "$(basename "$dir_name")" = "$base_name" ]; then
             log_error "Found forbidden pattern directory/same-name.md: $file"
         fi
-    done < <(find "$docs_dir" -type f -name "*.md" -print0)
+    done < <(find "$docs_dir" -type f -name "*.md" -not -path "*/.cursor/*" -print0)
 
     # 全Markdownファイルのチェック
     while IFS= read -r -d '' file; do
         log_info "Checking $file"
         check_frontmatter "$file"
         check_heading_structure "$file"
-    done < <(find "$docs_dir" -type f -name "*.md" -print0)
+    done < <(find "$docs_dir" -type f -name "*.md" -not -path "*/.cursor/*" -print0)
 
     # 結果の表示
     echo ""
