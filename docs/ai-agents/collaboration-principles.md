@@ -1,7 +1,9 @@
 ---
 description: AIエージェントとの効果的な協働のための基本原則とガイドライン
+ruleId: AI-COLLAB-01HS1NKT4FHDY0JA8BE8XZBN75
 tags: [ai, guidelines, best-practices, index]
 aliases: [ai-guidelines-index]
+globs: ["docs/ai-agents/collaboration-principles.md"]
 ---
 
 # AIエージェントの基本原則
@@ -104,4 +106,4 @@ AIエージェントの活用に関する詳細な情報は、以下のドキュ
 
 - [開発プロセス](../development.md)
 - [タスク管理](../task-management.md)
-- [ツール一覧](../tools.md)
+- [ツール一覧](../development/tools.md)

@@ -1,7 +1,9 @@
 ---
 description: AIエージェントに関する基本原則とガイドラインの概要
+ruleId: AI-AGENTS-01HS1NJGP6T3S6NKJBAP7FJNZ6
 tags: [ai, index]
 aliases: [ai-index]
+globs: ["docs/ai-agents.md", "docs/ai-agents/*.md"]
 ---
 
 # AIエージェント
