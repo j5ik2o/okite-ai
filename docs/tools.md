@@ -36,7 +36,7 @@ aliases: [tools-rules]
 ### Go開発環境
 
 - **必須ツール**
-	- go
+  - go
 
 ### TypeScript開発環境
 

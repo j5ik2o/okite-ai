@@ -1,6 +1,6 @@
-## TypeScript設定
+# TypeScript設定
 
-### tsconfig.json
+## tsconfig.json
 
 TypeScriptを使用して型安全性を確保するための設定例：
 

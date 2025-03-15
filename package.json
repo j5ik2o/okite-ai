@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "description": "AIと共に作る掟プロジェクト",
   "scripts": {
-    "lint:md": "markdownlint \"docs/**/*.md\"",
-    "fix:md": "markdownlint --fix \"docs/**/*.md\"",
+    "lint:md": "npx markdownlint \"docs/**/*.md\"",
+    "fix:md": "npx markdownlint --fix \"docs/**/*.md\"",
     "check:md:links": "./scripts/check-md-links.sh",
     "check:md:structure": "./scripts/check-md-structure.sh",
     "lint:text": "textlint \"docs/**/*.md\"",
@@ -12,6 +12,7 @@
     "fix:all": "npm run fix:md && npm run fix:text"
   },
   "devDependencies": {
+    "markdownlint": "^0.37.4",
     "markdownlint-cli": "^0.39.0",
     "textlint": "^13.4.1",
     "textlint-rule-ja-hiragana-keishikimeishi": "^1.1.0",
@@ -22,4 +23,4 @@
     "textlint-rule-preset-ja-technical-writing": "^9.0.0",
     "textlint-rule-spellcheck-tech-word": "^5.0.0"
   }
-} 
+}
