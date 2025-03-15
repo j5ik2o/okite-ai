@@ -5,5 +5,6 @@
   "useMarkdownLinks": false,
   "showUnsupportedFiles": true,
   "attachmentFolderPath": "_assets",
-  "showInlineTitle": false
+  "showInlineTitle": false,
+  "vimMode": true
 }

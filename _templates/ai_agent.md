@@ -1,6 +1,5 @@
 ---
-created: {{date}}
-updated: {{date}}
+description: 
 tags: [ai-agent, personality]
 aliases: []
 ---

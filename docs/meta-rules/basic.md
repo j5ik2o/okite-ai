@@ -1,6 +1,6 @@
 ---
 description: ドキュメント作成に関する基本ルール
-ruleId: META-RULES-01JPBN8MMS2GDBH8HBK78E6F24
+ruleId: META-BASIC-01JPBN8MMS2GDBH8HBK78E6F24
 tags: [meta, documentation, rules]
 aliases: [meta-rules, documentation-rules]
 globs: ["**/*.md", "**/*.mdc"] 

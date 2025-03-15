@@ -1,7 +1,9 @@
 ---
 description: 掟プロジェクトのドキュメント自体に関するルールと規約
+ruleId: META-RULES-01JPBS5F2DJ170WCT0SKSWZ166
 tags: [meta, rules, documentation]
 aliases: [meta-rules, documentation-rules]
+globs: ["**/*.md", "**/*.mdc"]
 ---
 
 # 掟ドキュメントのメタルール
@@ -13,14 +15,14 @@ aliases: [meta-rules, documentation-rules]
 
 ## ドキュメントの基本構造
 
-- [ドキュメント構造規約](meta/structure.md) - ドキュメントの構造とファイル配置のルール
+- [ドキュメント構造規約](meta-rules/structure.md) - ドキュメントの構造とファイル配置のルール
   - ディレクトリ構造
   - ファイル命名規則
   - メタデータ要件
 
 ## ドキュメント作成のルール
 
-- [ドキュメント作成ルール](meta/rules.md) - 掟ドキュメント作成の基本ルールと規約
+- [ドキュメント作成ルール](meta-rules/basic.md) - 掟ドキュメント作成の基本ルールと規約
   - メタデータ要件
   - 構造と形式
   - 文書作成規則

@@ -1,4 +1,5 @@
 .idea/
 .vscode/
+.qodo/
 .obsidian/
 node_modules/ 

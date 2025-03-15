@@ -1,7 +1,9 @@
 ---
-description: 掟プロジェクトのドキュメント構造と編成ルール
+description: ドキュメント構造と編成ルール
+ruleId: META-STRUCTURE-01JPBRY7BHTJ625M42600MC54N
 tags: [meta, documentation, structure]
 aliases: [doc-structure, documentation-structure]
+globs: ["**/*.md", "**/*.mdc"] 
 ---
 
 # 掟ドキュメント構造定義
