@@ -11,7 +11,6 @@ PROJECT_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 
 # エラーカウンター
 errors=0
-warnings=0
 
 # ヘルプメッセージ
 show_help() {
@@ -80,12 +79,6 @@ check_links() {
             ((errors++))
         fi
     done <<< "$links"
-    
-    # フロントマターのチェック
-    if ! grep -q "^---$" "$file" || ! grep -q "^description:" "$file"; then
-        echo -e "${YELLOW}!${NC} $file: フロントマターが不完全です（descriptionが必要）"
-        ((warnings++))
-    fi
 }
 
 echo "Markdownリンクをチェックしています..."
@@ -99,7 +92,6 @@ done
 echo
 echo "チェック完了"
 echo -e "エラー: ${RED}$errors${NC}"
-echo -e "警告: ${YELLOW}$warnings${NC}"
 
 # エラーがある場合は非ゼロの終了コードを返す
 [ "$errors" -gt 0 ] && exit 1
