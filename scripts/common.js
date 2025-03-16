@@ -50,6 +50,11 @@ function generateRuleIdFromPath(filePath, content) {
   // ファイル名を取得し、拡張子を除去
   const fileName = require('path').basename(filePath, '.md');
   
+  // ファイル名が既に有効なruleId形式かチェック
+  if (isValidRuleId(fileName)) {
+    return fileName; // ファイル名をそのままruleIdとして使用
+  }
+  
   // ファイル名からプレフィックスを抽出（最初のハイフンまで、またはファイル名全体）
   let prefix = fileName;
   const hyphenIndex = fileName.indexOf('-');

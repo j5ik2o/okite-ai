@@ -181,15 +181,6 @@ async function main() {
       await checkFrontmatter(file);
     }
     
-    // .cursor/rules配下の全mdcファイルをチェック（存在する場合）
-    const mdcPath = `${projectRoot}/.cursor/rules`;
-    if (fs.existsSync(mdcPath)) {
-      const mdcFiles = await glob(`${mdcPath}/**/*.mdc`);
-      for (const file of mdcFiles) {
-        await checkFrontmatter(file);
-      }
-    }
-    
     console.log('');
     console.log('チェック完了');
     console.log(`エラー: ${colors.red}${errors}${colors.reset}`);
