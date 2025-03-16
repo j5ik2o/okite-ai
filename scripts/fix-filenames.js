@@ -10,7 +10,7 @@ const { promisify } = require('util');
 const readFileAsync = promisify(fs.readFile);
 const renameAsync = promisify(fs.rename);
 const { glob } = require('glob');
-const { extractFrontmatter } = require('./check-md-common');
+const { extractFrontmatter } = require('./common');
 
 // 色の定義
 const colors = {

@@ -2,14 +2,8 @@
 
 const fs = require('fs');
 const path = require('path');
-const { ulid } = require('ulid');
 const glob = require('glob');
-
-// ULIDを生成する関数
-function generateId(filePath) {
-  // ULID形式: 26文字の英数字（Base32）
-  return ulid();
-}
+const { isValidRuleId, generateRuleIdFromPath } = require('./common');
 
 // ファイルパスに基づいてglobs属性を生成
 function generateGlobs(filePath) {
@@ -61,7 +55,7 @@ function updateFrontmatter(filePath) {
     // フロントマターのテンプレート
     const frontmatterTemplate = `---
 description: ${description}
-ruleId: ${generateId(filePath)}
+ruleId: ${generateRuleIdFromPath(filePath, content)}
 tags: ${generateTags(filePath)}
 globs: ${generateGlobs(filePath)}
 ---
@@ -95,7 +89,7 @@ globs: ${generateGlobs(filePath)}
           updatedFrontmatter = updatedFrontmatter.replace('---\n', `---\ndescription: ${description}\n`);
         }
         if (!hasRuleId) {
-          updatedFrontmatter = updatedFrontmatter.replace('---\n', `---\nruleId: ${generateId(filePath)}\n`);
+          updatedFrontmatter = updatedFrontmatter.replace('---\n', `---\nruleId: ${generateRuleIdFromPath(filePath, content)}\n`);
         }
         if (!hasTags) {
           updatedFrontmatter = updatedFrontmatter.replace('---\n', `---\ntags: ${generateTags(filePath)}\n`);

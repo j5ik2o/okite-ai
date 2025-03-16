@@ -4,7 +4,7 @@ const fs = require('fs');
 const path = require('path');
 const { promisify } = require('util');
 const readFileAsync = promisify(fs.readFile);
-const { isValidRuleId, extractFrontmatter } = require('./check-md-common');
+const { isValidRuleId, extractFrontmatter } = require('./common');
 
 // 色の定義
 const colors = {

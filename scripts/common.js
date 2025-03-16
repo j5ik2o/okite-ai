@@ -1,8 +1,8 @@
 /**
- * 掟ドキュメントの検証に関する共通関数を提供するモジュール
+ * 掟ドキュメント関連の共通ユーティリティ関数を提供するモジュール
  */
 
-const { isValid: isValidULID } = require('ulidx');
+const { ulid, isValid: isValidULID } = require('ulidx');
 
 /**
  * ruleIdの形式をチェックする関数
@@ -22,6 +22,51 @@ function isValidRuleId(ruleId) {
   // ULIDの部分が有効かチェック
   const ulidPart = match[1];
   return isValidULID(ulidPart.toUpperCase());
+}
+
+/**
+ * 指定されたプレフィックスでルールIDを生成する関数
+ * @param {string} prefix - ルールIDの接頭辞
+ * @returns {string} - 生成されたルールID (prefix-ULID形式)
+ */
+function generateRuleId(prefix) {
+  // 接頭辞を小文字に変換
+  const normalizedPrefix = prefix.toLowerCase();
+  
+  // ULIDを生成（小文字）
+  const id = ulid().toLowerCase();
+  
+  // ルールIDを生成
+  return `${normalizedPrefix}-${id}`;
+}
+
+/**
+ * ファイルパスからプレフィックスを抽出してルールIDを生成する関数
+ * @param {string} filePath - ファイルパス
+ * @param {string} [content] - ファイルの内容（既存のruleIdをチェックするため、オプション）
+ * @returns {string} - 生成されたルールID
+ */
+function generateRuleIdFromPath(filePath, content) {
+  // ファイル名を取得し、拡張子を除去
+  const fileName = require('path').basename(filePath, '.md');
+  
+  // ファイル名からプレフィックスを抽出（最初のハイフンまで、またはファイル名全体）
+  let prefix = fileName;
+  const hyphenIndex = fileName.indexOf('-');
+  if (hyphenIndex > 0) {
+    prefix = fileName.substring(0, hyphenIndex);
+  }
+  
+  // 既存のruleIdをチェック（contentが提供されている場合）
+  if (content) {
+    const ruleIdMatch = content.match(/ruleId:\s*([^\n]+)/);
+    if (ruleIdMatch && isValidRuleId(ruleIdMatch[1].trim())) {
+      return ruleIdMatch[1].trim(); // 既存の有効なruleIdを使用
+    }
+  }
+  
+  // 新しいruleIdを生成
+  return generateRuleId(prefix);
 }
 
 /**
@@ -84,6 +129,8 @@ function extractFrontmatter(content) {
 // エクスポート
 module.exports = {
   isValidRuleId,
+  generateRuleId,
+  generateRuleIdFromPath,
   isInvalidGlobsPattern,
   extractFrontmatter
 }; 

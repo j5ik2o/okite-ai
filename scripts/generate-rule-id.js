@@ -11,7 +11,7 @@
  *   => ddd-01jpf07spf9d1wwnkcj4vyvt6h
  */
 
-const { ulid } = require('ulidx');
+const { generateRuleId } = require('./common');
 
 // コマンドライン引数を取得
 const args = process.argv.slice(2);
@@ -45,12 +45,9 @@ if (args.length < 1) {
   process.exit(1);
 }
 
-// 接頭辞を取得して小文字に変換
-const prefix = args[0].toLowerCase();
-
-// ULIDを生成
-const id = ulid().toLowerCase();
+// 接頭辞を取得
+const prefix = args[0];
 
 // ルールIDを生成して出力
-const ruleId = `${prefix}-${id}`;
+const ruleId = generateRuleId(prefix);
 console.log(ruleId); 
