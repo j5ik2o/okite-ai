@@ -70,12 +70,45 @@ function logInfo(message) {
 function extractLinks(content) {
   const links = [];
   
+  // コードブロックの範囲を特定
+  const codeBlocks = [];
+  const codeBlockRegex = /```[\s\S]*?```/g;
+  let codeMatch;
+  while ((codeMatch = codeBlockRegex.exec(content)) !== null) {
+    codeBlocks.push({
+      start: codeMatch.index,
+      end: codeMatch.index + codeMatch[0].length
+    });
+  }
+  
   // 内部リンク [テキスト](リンク) 形式
   const markdownLinkRegex = /\[([^\]]+)\]\(([^)]+)\)/g;
   let match;
   while ((match = markdownLinkRegex.exec(content)) !== null) {
     const linkText = match[1];
     const linkUrl = match[2];
+    
+    // このリンクがコードブロック内にあるかチェック
+    const isInCodeBlock = codeBlocks.some(block => 
+      match.index >= block.start && match.index < block.end
+    );
+    
+    // コードブロック内のリンクはスキップ
+    if (isInCodeBlock) {
+      continue;
+    }
+    
+    // 例示用の特殊リンクをスキップ
+    if (
+      linkUrl.includes('画像のパス') || 
+      linkUrl.includes('crate::') || 
+      linkUrl.includes('capacity:') || 
+      linkUrl.includes('seq:') ||
+      linkUrl.includes('Result') && linkText.includes('Result<')
+    ) {
+      continue;
+    }
+    
     links.push({
       type: 'markdown',
       text: linkText,
@@ -89,6 +122,17 @@ function extractLinks(content) {
   while ((match = mdcLinkRegex.exec(content)) !== null) {
     const linkText = match[1];
     const linkUrl = match[2];
+    
+    // このリンクがコードブロック内にあるかチェック
+    const isInCodeBlock = codeBlocks.some(block => 
+      match.index >= block.start && match.index < block.end
+    );
+    
+    // コードブロック内のリンクはスキップ
+    if (isInCodeBlock) {
+      continue;
+    }
+    
     links.push({
       type: 'mdc',
       text: linkText,
@@ -107,6 +151,22 @@ async function fileExists(filePath) {
     return true;
   } catch (err) {
     return false;
+  }
+}
+
+// ファイルから最初の見出しを抽出する関数
+async function extractFirstHeading(filePath) {
+  try {
+    const content = await readFileAsync(filePath, 'utf8');
+    // 正規表現でMarkdownの一番最初の見出し(# で始まる行)を抽出
+    const headingMatch = content.match(/^#\s+(.*?)$/m);
+    if (headingMatch && headingMatch[1]) {
+      return headingMatch[1].trim();
+    }
+    return null;
+  } catch (err) {
+    logError(`${filePath} から見出しを抽出中にエラーが発生しました: ${err.message}`);
+    return null;
   }
 }
 
@@ -154,18 +214,41 @@ async function checkLinks(filePath, mdFiles) {
       if (!url.startsWith('#')) {  // アンカーリンクはスキップ
         // 相対パスを解決
         const targetPath = path.resolve(fileDir, url);
+        let actualTargetPath = targetPath;
         
         // ファイルが存在するかチェック
         if (await fileExists(targetPath)) {
           logInfo(`有効な相対パスリンク: ${url}`);
+          
+          // ファイルの最初の見出しを取得して、リンクテキストと比較
+          const firstHeading = await extractFirstHeading(targetPath);
+          if (firstHeading && text !== firstHeading) {
+            logError(`${filePath} 内のリンクテキストが対象ファイルの見出しと一致しません: "${text}" vs "${firstHeading}" (ファイル: ${url})`);
+          }
         } else {
           // mdへの参照で.mdが省略されている場合をチェック
           if (!url.endsWith('.md') && !url.endsWith('.mdc')) {
             const mdTargetPath = `${targetPath}.md`;
             const mdcTargetPath = `${targetPath}.mdc`;
             
-            if (await fileExists(mdTargetPath) || await fileExists(mdcTargetPath)) {
+            if (await fileExists(mdTargetPath)) {
               logInfo(`有効な相対パスリンク(拡張子省略): ${url}`);
+              actualTargetPath = mdTargetPath;
+              
+              // ファイルの最初の見出しを取得して、リンクテキストと比較
+              const firstHeading = await extractFirstHeading(mdTargetPath);
+              if (firstHeading && text !== firstHeading) {
+                logError(`${filePath} 内のリンクテキストが対象ファイルの見出しと一致しません: "${text}" vs "${firstHeading}" (ファイル: ${url})`);
+              }
+            } else if (await fileExists(mdcTargetPath)) {
+              logInfo(`有効な相対パスリンク(拡張子省略): ${url}`);
+              actualTargetPath = mdcTargetPath;
+              
+              // ファイルの最初の見出しを取得して、リンクテキストと比較
+              const firstHeading = await extractFirstHeading(mdcTargetPath);
+              if (firstHeading && text !== firstHeading) {
+                logError(`${filePath} 内のリンクテキストが対象ファイルの見出しと一致しません: "${text}" vs "${firstHeading}" (ファイル: ${url})`);
+              }
             } else {
               logError(`${filePath} 内の無効な相対パスリンク: ${url} (リンクテキスト: ${text})`);
             }
