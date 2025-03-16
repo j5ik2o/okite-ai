@@ -52,7 +52,7 @@ async function checkFrontmatter(filePath) {
       } else {
         // ruleIdの形式をチェック - 接頭辞を必須とする
         if (!isValidRuleId(frontmatter.ruleId)) {
-          errorMsgs.push(`ruleId ${frontmatter.ruleId} は有効な形式ではありません。接頭辞-ulid形式で接頭辞および全体が小文字である必要があります`);
+          errorMsgs.push('ruleIdの形式が不正です。接頭辞-ulid形式で、接頭辞および全体が小文字である必要があります');
           hasIssues = true;
         }
       }
@@ -123,6 +123,27 @@ async function main() {
     console.error(`${colors.red}エラー:${colors.reset} ${err.message}`);
     process.exit(1);
   }
+}
+
+// ヘルプメッセージを表示
+function showHelp() {
+  console.log('使用方法: node check-single-file.js <ファイルパス> [オプション]');
+  console.log();
+  console.log('オプション:');
+  console.log('  -h, --help    このヘルプメッセージを表示');
+  console.log('  -v, --verbose 詳細な出力を表示');
+  console.log();
+  console.log('説明:');
+  console.log('  指定されたMarkdownファイルのフロントマターをチェックします。');
+  console.log('  必須フィールド: description, ruleId, tags, globs');
+  console.log('  - descriptionの存在');
+  console.log('  - ruleIdの形式(接頭辞-ulid)、接頭辞および全体が小文字であること');
+  console.log('  - tagsの存在(最低1つ以上)');
+  console.log('  - globsの存在と内容の妥当性検証（禁止パターンの有無）');
+  console.log();
+  console.log('例:');
+  console.log('  node check-single-file.js docs/meta-rules.md');
+  console.log('  node check-single-file.js docs/meta-rules.md -v');
 }
 
 // スクリプト実行

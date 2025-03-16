@@ -1,3 +1,12 @@
+---
+description: ドメイン駆動設計のルール
+ruleId: ddd-01jpf07spf9d1wwnkcj4vyvt6h
+tags:
+  - 開発
+  - DDD
+globs:
+  - "**/ddd/**"
+---
 
 # ドメイン駆動設計のルール
 

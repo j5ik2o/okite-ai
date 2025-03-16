@@ -12,7 +12,8 @@ const { ulid, isValid: isValidULID } = require('ulidx');
 function isValidRuleId(ruleId) {
   // 接頭辞-ulid形式（例: meta-01jpbn8mms2gdbh8hbk78e6f24）
   // 接頭辞は必須、小文字のみ許可
-  const regex = /^[a-z0-9]+-([0-9a-z]{26})$/;
+  // 接頭辞部分にはハイフンを含むことが可能
+  const regex = /^[a-z0-9][a-z0-9-]*-([0-9a-z]{26})$/;
   const match = ruleId.match(regex);
   
   if (!match) {

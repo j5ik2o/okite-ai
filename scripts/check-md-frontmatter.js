@@ -26,26 +26,31 @@ if (args.includes('-v') || args.includes('--verbose')) {
   verbose = true;
 }
 if (args.includes('-h') || args.includes('--help')) {
-  showHelp();
-  process.exit(0);
-}
+  console.log(`
+使用方法: node check-md-frontmatter.js [options]
 
-// ヘルプメッセージを表示する関数
-function showHelp() {
-  console.log('使用方法: node check-md-frontmatter.js [オプション]');
-  console.log();
-  console.log('オプション:');
-  console.log('  -h, --help    このヘルプメッセージを表示');
-  console.log('  -v, --verbose 詳細な出力を表示');
-  console.log();
-  console.log('説明:');
-  console.log('  Markdownファイルのフロントマターをチェックします。');
-  console.log('  必須フィールド: description, ruleId, tags, globs');
-  console.log('  - フロントマターの順序: description, ruleId, tags, aliases, globs の順であること');
-  console.log('  - descriptionの存在');
-  console.log('  - ruleIdの形式(接頭辞-ulid)、接頭辞は必須、すべて小文字であること');
-  console.log('  - tagsの存在(最低1つ以上)');
-  console.log('  - globsの存在と内容の妥当性検証（ドキュメント自身を参照するパターンを禁止）');
+オプション:
+  -h, --help    このヘルプメッセージを表示
+  -v, --verbose 詳細な出力を表示
+
+説明:
+  このスクリプトはMarkdownファイルのフロントマターをチェックします。
+  以下のルールに従って検証を行います:
+  
+  1. 各Markdownファイルは以下の必須フィールドを含むフロントマターが必要:
+     - description: ドキュメントの説明
+     - ruleId: 接頭辞-ulid形式、接頭辞は必須、すべて小文字であること
+     - tags: 少なくとも1つのタグ
+     - globs: 少なくとも1つのglobパターン
+  
+  2. フィールドの順序は以下である必要があります:
+     - description
+     - ruleId
+     - tags
+     - globs
+     - (その他のフィールド)
+`);
+  process.exit(0);
 }
 
 // フロントマターをチェックする関数
