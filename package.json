@@ -19,9 +19,14 @@
     "lint:text": "textlint \"docs/**/*.md\"",
     "fix:text": "textlint --fix \"docs/**/*.md\"",
     "fix:all": "npm run fix:md && npm run fix:text && npm run fix:frontmatter:order && npm run fix:rule-ids && npm run fix:filenames",
-    "lint:all": "npm run lint:md && npm run check:md:links && npm run check:md:frontmatter && npm run check:md:structure && npm run lint:text"
+    "lint:all": "npm run lint:md && npm run check:md:links && npm run check:md:frontmatter && npm run check:md:structure && npm run lint:text",
+    "tsc:check": "tsc --noEmit",
+    "ts-fix-md-links": "npx ts-node scripts/fix-md-links.ts",
+    "ts-check-md-links": "npx ts-node scripts/check-md-links.ts"
   },
   "devDependencies": {
+    "@types/node": "^22.13.10",
+    "gray-matter": "^4.0.3",
     "markdownlint": "^0.37.4",
     "markdownlint-cli": "^0.39.0",
     "textlint": "^13.4.1",
@@ -31,7 +36,9 @@
     "textlint-rule-ja-no-weak-phrase": "^2.0.0",
     "textlint-rule-max-kanji-continuous-len": "^1.1.1",
     "textlint-rule-preset-ja-technical-writing": "^9.0.0",
-    "textlint-rule-spellcheck-tech-word": "^5.0.0"
+    "textlint-rule-spellcheck-tech-word": "^5.0.0",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.8.2"
   },
   "dependencies": {
     "glob": "^11.0.1",
