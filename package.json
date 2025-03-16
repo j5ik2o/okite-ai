@@ -8,10 +8,17 @@
     "check:md:links": "./scripts/check-md-links.js",
     "check:md:frontmatter": "node ./scripts/check-md-frontmatter.js",
     "check:md:structure": "node ./scripts/check-md-structure.js",
+    "check:md:single": "node ./scripts/check-single-file.js",
     "generate:rule-id": "node ./scripts/generate-rule-id.js",
+    "fix:filenames": "node ./scripts/fix-filenames.js",
+    "fix:frontmatter:order": "node ./scripts/fix-frontmatter-order.js",
+    "fix:frontmatter:ulid": "node ./scripts/fix-frontmatter-ulid.js",
+    "fix:frontmatter": "node ./scripts/fix-frontmatter.js",
+    "fix:rule-ids": "node ./scripts/fix-rule-ids.js",
+    "fix:text-style": "node ./scripts/fix-text-style.js",
     "lint:text": "textlint \"docs/**/*.md\"",
     "fix:text": "textlint --fix \"docs/**/*.md\"",
-    "fix:all": "npm run fix:md && npm run fix:text",
+    "fix:all": "npm run fix:md && npm run fix:text && npm run fix:frontmatter:order && npm run fix:rule-ids && npm run fix:filenames",
     "lint:all": "npm run lint:md && npm run check:md:links && npm run check:md:frontmatter && npm run check:md:structure && npm run lint:text"
   },
   "devDependencies": {
