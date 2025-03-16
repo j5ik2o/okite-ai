@@ -4,17 +4,21 @@
     "type": "split",
     "children": [
       {
-        "id": "d6c9975da9123eb7",
+        "id": "dba258d0904cd29b",
         "type": "tabs",
         "children": [
           {
-            "id": "93de988757fde9b0",
+            "id": "cd3fff5f19f6e488",
             "type": "leaf",
             "state": {
-              "type": "empty",
-              "state": {},
+              "type": "markdown",
+              "state": {
+                "file": "docs/development/error-handling-01jpcvxfxca2m945xeb4tjn959.md",
+                "mode": "source",
+                "source": false
+              },
               "icon": "lucide-file",
-              "title": "新規タブ"
+              "title": "error-handling-01jpcvxfxca2m945xeb4tjn959"
             }
           }
         ]
@@ -163,8 +167,15 @@
       "templates:テンプレートを挿入": false
     }
   },
-  "active": "f58edeebdcf60be9",
+  "active": "cd3fff5f19f6e488",
   "lastOpenFiles": [
+    "dist/scripts/update-readme-structure.js",
+    "dist/scripts/update-readme-structure.js.map",
+    "scripts/update-readme-structure.ts",
+    "docs/version-control-01jpcvxfx55p8nwtffy3fxgd3b.md",
+    "ai-agents.md",
+    "docs.md",
+    "docs/tools.md",
     "dist/scripts/generate-rule-id.js.map",
     "dist/scripts/generate-rule-id.js",
     "dist/scripts/fix-rule-ids.js.map",
@@ -173,9 +184,6 @@
     "dist/scripts/fix-md-links.js",
     "dist/scripts/fix-frontmatter.js.map",
     "dist/scripts/fix-frontmatter.js",
-    "dist/scripts/fix-frontmatter-ulid.js.map",
-    "dist/scripts/fix-frontmatter-ulid.js",
-    "dist/scripts/fix-frontmatter-order.js.map",
     "node_modules/ts-node/README.md",
     "node_modules/ts-node/dist-raw/README.md",
     "node_modules/ts-node/dist-raw/NODE-LICENSE.md",
@@ -197,10 +205,6 @@
     "node_modules/@tsconfig/node14/README.md",
     "node_modules/@tsconfig/node16/README.md",
     "node_modules/@tsconfig/node12/README.md",
-    "node_modules/@tsconfig/node10/README.md",
-    "node_modules/typescript/SECURITY.md",
-    "node_modules/typescript/README.md",
-    "node_modules/v8-compile-cache-lib/README.md",
     "無題のファイル.canvas"
   ]
 }

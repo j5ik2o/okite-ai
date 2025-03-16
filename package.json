@@ -22,6 +22,7 @@
     "lint:all": "npm run build && npm run lint:md && npm run check:md:links && npm run check:md:frontmatter && npm run check:md:structure && npm run lint:text",
     "tsc:check": "tsc --noEmit",
     "fix:md-links": "node ./dist/scripts/fix-md-links.js",
+    "update:readme:structure": "npm run build && node ./dist/scripts/update-readme-structure.js",
     "dev": "tsc --watch"
   },
   "devDependencies": {
