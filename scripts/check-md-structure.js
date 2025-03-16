@@ -177,7 +177,7 @@ async function checkDirectoryStructure(docsDir) {
         if (possibleParentFiles.length > 0) {
           logDebug(`Found parent module file with prefix: ${possibleParentFiles[0]}`);
         } else {
-          logWarning(`Module directory ${dirName} exists but parent module file ${parentModule} or ${dirName}-*.md not found`);
+          logError(`Module directory ${dirName} exists but parent module file ${parentModule} or ${dirName}-*.md not found. Rust2018モジュール形式ではディレクトリに対応する親モジュールファイルが必須です。`);
         }
       }
     }
@@ -213,7 +213,7 @@ async function checkDirectoryStructure(docsDir) {
           if (possibleSubmoduleFiles.length > 0) {
             logDebug(`Found submodule file with prefix: ${possibleSubmoduleFiles[0]}`);
           } else {
-            logWarning(`Submodule directory ${subDirName} exists in ${dir} but parent submodule file ${submoduleFile} or ${subDirName}-*.md not found`);
+            logError(`Submodule directory ${subDirName} exists in ${dir} but parent submodule file ${submoduleFile} or ${subDirName}-*.md not found. Rust2018モジュール形式ではディレクトリに対応する親モジュールファイルが必須です。`);
           }
         }
       }

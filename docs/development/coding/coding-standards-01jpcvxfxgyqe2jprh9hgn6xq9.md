@@ -1,6 +1,6 @@
 ---
 description: コーディング規約
-ruleId: coding-01jpcvxfxgyqe2jprh9hgn6xq9
+ruleId: coding-standards-01jpcvxfxgyqe2jprh9hgn6xq9
 tags: ["development","coding"]
 aliases: ["coding-standards", "code-style-guide"]
 globs: ["**/*.ts", "**/*.tsx", "**/*.js", "**/*.jsx", "**/*.go", "**/*.rs", "**/*.scala"]

@@ -63,7 +63,7 @@ async function main() {
           fixedCount++;
         } else {
           // 既に一致している場合
-          console.log(`${colors.green}一致:${colors.reset} ${file} はすでにruleIdと一致しています。`);
+          // console.log(`${colors.green}一致:${colors.reset} ${file} はすでにruleIdと一致しています。`);
         }
       } catch (err) {
         console.error(`${colors.red}エラー:${colors.reset} ${file} の処理中にエラーが発生しました: ${err.message}`);

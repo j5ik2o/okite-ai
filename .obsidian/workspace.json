@@ -165,6 +165,11 @@
   },
   "active": "f58edeebdcf60be9",
   "lastOpenFiles": [
+    "docs/development/coding/coding-standards-01jpcvxfxgyqe2jprh9hgn6xq9.md",
+    "docs/development/coding/coding-01jpcvxfxgyqe2jprh9hgn6xq9.md",
+    "docs/development/ddd/domain-model-first-01jpcvxfxf9jafj03jk1zks31v.md",
+    "scripts/fix-frontmatter-order.js",
+    "docs/development/pull-request-01jpcvxfxbfm6z9tc89zm9c37d.md",
     "docs/development/ddd-01jpf07spf9d1wwnkcj4vyvt6h.md",
     "docs/development/ddd/clean-architecture-01jpcvxfxd87red8vvv00mjyy3.md",
     "docs/development/ddd/testing-01jpcvxfxe99ev6x7f60xvbk8v.md",
@@ -174,7 +179,6 @@
     "docs/version-control-01jpcvxfx55p8nwtffy3fxgd3b.md",
     "docs/development/null-handling-01jpcvxfxbfm6z9tc89zm9c37e.md",
     "docs/development/error-handling-01jpcvxfxca2m945xeb4tjn959.md",
-    "docs/development/coding/coding-standards-01jpcvxfxgyqe2jprh9hgn6xq9.md",
     "docs/development/clean-architecture-01jpcvxfxd87red8vvv00mjyy3.md",
     "docs/development/coding/doc-comment-01jpcvxfxgyqe2jprh9hgn6xq8.md",
     "docs/ai-agents-01jpcvxfxa9zn7yzy0qtmgyq96.md",
@@ -188,9 +192,6 @@
     "docs/development/coding/rust/rustrefs-01jpcvxfxnn1eg2jxgy2jns9w7.md",
     "docs/development/coding/rust/rustreview-01jpcvxfxnn1eg2jxgy2jns9w6.md",
     "docs/development/coding/rust/ruststyle-01jpcvxfxnn1eg2jxgy2jns9w5.md",
-    "docs/development/coding/rust/rusttools-01jpcvxfxnn1eg2jxgy2jns9w4.md",
-    "docs/development/coding/scala/scaladoc-01jpcvxfxmsb49cge8ewg55kah.md",
-    "docs/development/coding/scala/scalarefs-01jpcvxfxmsb49cge8ewg55kag.md",
     "scripts/fix-filenames.js",
     "scripts/fix-rule-ids.js",
     "scripts/check-md-common.js",
@@ -200,7 +201,6 @@
     "node_modules/layerr/LICENSE",
     "node_modules/layerr/dist/types.js",
     "node_modules/layerr/dist/types.d.ts",
-    "node_modules/layerr/dist/tools.js",
     "無題のファイル.canvas"
   ]
 }
