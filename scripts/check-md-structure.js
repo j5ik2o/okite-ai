@@ -108,7 +108,7 @@ async function checkFileNaming(docsDir) {
     // 2. プレフィックス-ruleId形式の場合（[prefix]-[ULID]）
     const ruleIdMatch = baseName.match(/^([a-z0-9-]+-)([0-9a-zA-Z]{26})$/);
     if (!isValidRuleId(baseName) && !ruleIdMatch) {
-      logWarning(`File might not follow the naming convention \${prefix}-\${ruleId}.md or \${ruleId}.md: ${file}`);
+      logError(`File must follow the naming convention \${prefix}-\${ruleId}.md or \${ruleId}.md: ${file}`);
     }
     
     // ファイル名とフロントマターのruleIdが一致しているかチェック
