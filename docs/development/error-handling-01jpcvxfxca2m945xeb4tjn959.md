@@ -1,6 +1,6 @@
 ---
 description: エラーハンドリングの基本原則と実装ガイドライン
-ruleId: error-01jpcvxfxca2m945xeb4tjn959
+ruleId: error-handling-01jpcvxfxca2m945xeb4tjn959
 tags: [development, error-handling, guidelines]
 aliases: [error-guidelines]
 globs: ["**/*.go", "**/*.rs", "**/*.scala", "**/*.java", "**/*.ts", "**/*.js"]

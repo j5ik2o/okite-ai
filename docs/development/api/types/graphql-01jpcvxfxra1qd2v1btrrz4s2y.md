@@ -1,9 +1,9 @@
 ---
-globs: ["**/*.ts", "**/*.tsx", "**/*.js", "**/*.jsx", "**/*.go", "**/*.rs", "**/*.scala"]
 ruleId: graphql-01jpcvxfxra1qd2v1btrrz4s2y
 description: GraphQL APIドキュメントの作成ガイドライン
 tags: [api, graphql, documentation]
 aliases: [graphql-api-guidelines]
+globs: ["**/*.ts", "**/*.tsx", "**/*.js", "**/*.jsx", "**/*.go", "**/*.rs", "**/*.scala"]
 ---
 
 

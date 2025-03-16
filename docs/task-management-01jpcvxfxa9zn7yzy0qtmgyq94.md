@@ -1,9 +1,9 @@
 ---
 description: 掟プロジェクトのタスク管理に関するルールと規約
 ruleId: task-management-01jpcvxfxa9zn7yzy0qtmgyq94
-globs: ["**/*.ts", "**/*.tsx", "**/*.js", "**/*.jsx"]
 tags: [task-management, rules]
 aliases: [task-management-rules]
+globs: ["**/*.ts", "**/*.tsx", "**/*.js", "**/*.jsx"]
 ---
 
 

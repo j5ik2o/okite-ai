@@ -1,6 +1,6 @@
 ---
 description: バージョン管理に関するルールと規約
-ruleId: version-01jpcvxfx55p8nwtffy3fxgd3b
+ruleId: version-control-01jpcvxfx55p8nwtffy3fxgd3b
 tags: [version-control, rules]
 aliases: [version-control-rules]
 globs: ["**/*.ts", "**/*.js", "**/*.go", "**/*.rs", "**/*.scala", "**/*.java", "**/*.py", "**/*.sh"]

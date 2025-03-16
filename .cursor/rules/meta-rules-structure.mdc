@@ -1,9 +1,7 @@
 ---
 description: 掟ドキュメントの構造定義
-ruleId: META-STRUCTURE-01JPBRY7BHTJ625M42600MC54N
-tags: [meta, documentation, structure]
-aliases: [doc-structure, documentation-structure]
-globs: ["**/*.md", "**/*.mdc"] 
+globs: **/*.md, **/*.mdc
+alwaysApply: true
 ---
 
 # 掟ドキュメントの構造定義
@@ -45,44 +43,9 @@ ${PROJECT_ROOT}/
 
 ## ファイル命名規則
 
-### 基本ルール
+ファイル名は以下のように必ず[ルールID](mdc:meta-rules-basic-rule-id.mdc)を指定してください。
 
-1. **全て小文字を使用する**  
-   ```text
-   ✅ coding-guidelines.md
-   ❌ Coding-Guidelines.md
-   ```
-1. **複数単語はハイフン(-)で接続する**  
-   ```text
-   ✅ api-authentication.md
-   ❌ api_authentication.md
-   ```
-1. **言語やツール名は接頭辞として使用する**  
-   ```text
-   ✅ scala-coding-guidelines.md
-   ✅ docker-deployment.md
-   ```
+${ruleId}.md
 
-### 禁止パターン
 
-1. **スペースを含むファイル名**  
-   ```text
-   ❌ coding guidelines.md
-   ```
-1. **特殊文字の使用**  
-   ```text
-   ❌ coding_guidelines(v1).md
-   ```
 
-## 相互参照ルール
-
-### リンク形式
-
-1. **同一ディレクトリ内のリンク**
-   ```markdown
-   [基本ルール](rules.md)
-   ```
-1. **異なるディレクトリへのリンク**
-   ```markdown
-   [コーディング規約](/docs/development/coding.md)
-   ```

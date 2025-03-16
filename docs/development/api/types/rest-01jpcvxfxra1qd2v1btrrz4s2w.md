@@ -1,9 +1,9 @@
 ---
-globs: ["**/*.ts", "**/*.tsx", "**/*.js", "**/*.jsx", "**/*.go", "**/*.rs", "**/*.scala"]
 ruleId: rest-01jpcvxfxra1qd2v1btrrz4s2w
 description: 掟プロジェクトにおけるREST APIの設計と実装に関するガイドライン
 tags: [development, api, rest]
 aliases: [rest-api-guidelines]
+globs: ["**/*.ts", "**/*.tsx", "**/*.js", "**/*.jsx", "**/*.go", "**/*.rs", "**/*.scala"]
 ---
 
 

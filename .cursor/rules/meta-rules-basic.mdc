@@ -1,9 +1,7 @@
 ---
 description: 掟ドキュメントの基本ルール
-ruleId: META-BASIC-01JPBN8MMS2GDBH8HBK78E6F24
-tags: [meta, documentation, rules]
-aliases: [meta-rules, documentation-rules]
-globs: ["**/*.md", "**/*.mdc"] 
+globs: ["**/*.md", "**/*.mdc"]
+alwaysApply: true
 ---
 
 # 掟ドキュメントの基本ルール
@@ -30,11 +28,7 @@ globs: [パターン]（必須）
 
 #### ルールID (ruleId) の付与方法
 
-- **ULID** を用いて生成する（例: `01H02RQG3MBK4G2AHHJ47EN210`）  
-- カテゴリを示す接頭辞を付ける（例: `META-RULES-01H02RQG3M...`）と内容の判別が容易。  
-  - 本ドキュメントの場合のように `META-RULES-01JPBN8MMS2GDBH8HBK78E6F24` として一意に指定する  
-- ULID はツール（Node.js の `ulid` パッケージ、Rust の `ulid-cli` など）で自動生成可能。  
-- 人間にとって覚えづらい場合は、`aliases:` でわかりやすい別名を設定し、チーム内参照時に活用する。
+[ルールIDの定義](meta-rule-rule-id.mdc)を参照。
 
 ### タグ規則
 
@@ -58,7 +52,7 @@ npm run lint:md
 
 1. **メッセージ形式**
 
-[Conventional Commits](https://www.conventionalcommits.org/ja/v1.0.0/)に従ってください。
+[Conventional Commits](mdc:https:/www.conventionalcommits.org/ja/v1.0.0)に従ってください。
 
 1. **コミット前の確認**
    - `npm run fix:md` を実行して Markdown の形式を整える

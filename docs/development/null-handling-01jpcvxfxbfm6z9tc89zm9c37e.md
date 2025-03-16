@@ -1,6 +1,6 @@
 ---
 description: null handlingに関するドキュメント
-ruleId: null-01jpcvxfxbfm6z9tc89zm9c37e
+ruleId: null-handling-01jpcvxfxbfm6z9tc89zm9c37e
 tags: ["development"]
 globs: ["**/*.ts", "**/*.tsx", "**/*.js", "**/*.jsx", "**/*.go", "**/*.rs", "**/*.scala"]
 aliases: ["null-handling", "option-pattern"]

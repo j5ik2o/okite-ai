@@ -1,9 +1,9 @@
 ---
-globs: ["**/*.ts", "**/*.tsx", "**/*.js", "**/*.jsx", "**/*.go", "**/*.rs", "**/*.scala"]
 ruleId: capabilities-01jpcvxfxs0zr4jqmx1jn4f9rh
 description: AIコードエージェントの機能、制限、および利用可能なツール
 tags: [ai, capabilities, limitations]
 aliases: [ai-capabilities]
+globs: ["**/*.ts", "**/*.tsx", "**/*.js", "**/*.jsx", "**/*.go", "**/*.rs", "**/*.scala"]
 ---
 
 

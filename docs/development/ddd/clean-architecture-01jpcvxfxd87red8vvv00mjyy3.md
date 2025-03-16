@@ -1,6 +1,6 @@
 ---
-description: clean architectureに関するドキュメント
-ruleId: clean-01jpcvxfxd87red8vvv00mjyy3
+description: Clean Architectureに関するドキュメント
+ruleId: clean-architecture-01jpcvxfxd87red8vvv00mjyy3
 tags: ["development"]
 globs: ["**/*.ts", "**/*.tsx", "**/*.js", "**/*.jsx", "**/*.go", "**/*.rs", "**/*.scala"]
 aliases: ["clean-architecture", "architecture-patterns"]

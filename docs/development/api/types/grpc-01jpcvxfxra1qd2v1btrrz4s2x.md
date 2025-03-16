@@ -1,9 +1,9 @@
 ---
-globs: ["**/*.ts", "**/*.tsx", "**/*.js", "**/*.jsx", "**/*.go", "**/*.rs", "**/*.scala"]
 ruleId: grpc-01jpcvxfxra1qd2v1btrrz4s2x
 description: gRPC APIドキュメントの作成ガイドライン
 tags: [api, grpc, documentation]
 aliases: [grpc-api-guidelines]
+globs: ["**/*.ts", "**/*.tsx", "**/*.js", "**/*.jsx", "**/*.go", "**/*.rs", "**/*.scala"]
 ---
 
 

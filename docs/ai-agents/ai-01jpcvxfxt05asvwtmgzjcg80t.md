@@ -1,9 +1,9 @@
 ---
-globs: ["**/*.ts", "**/*.tsx", "**/*.js", "**/*.jsx", "**/*.go", "**/*.rs", "**/*.scala"]
 ruleId: ai-01jpcvxfxt05asvwtmgzjcg80t
 description: AIコードエージェントのパーソナリティと行動規範の定義
 tags: [ai-agent, example, engineering]
 aliases: [engineer-bot]
+globs: ["**/*.ts", "**/*.tsx", "**/*.js", "**/*.jsx", "**/*.go", "**/*.rs", "**/*.scala"]
 ---
 
 

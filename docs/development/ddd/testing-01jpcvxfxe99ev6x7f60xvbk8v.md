@@ -2,12 +2,11 @@
 description: testingに関するドキュメント
 ruleId: testing-01jpcvxfxe99ev6x7f60xvbk8v
 tags: ["development","layered-architecure"]
-globs: ["**/*.ts", "**/*.tsx", "**/*.js", "**/*.jsx", "**/*.go", "**/*.rs", "**/*.scala"]
 aliases: ["testing-strategy", "test-levels"]
+globs: ["**/*.ts", "**/*.tsx", "**/*.js", "**/*.jsx", "**/*.go", "**/*.rs", "**/*.scala"]
 ---
 
-
-# テスト戦略
+# レイヤーを考慮したテスト戦略
 
 ## テストレベル
 

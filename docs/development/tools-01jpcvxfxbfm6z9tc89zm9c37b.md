@@ -1,9 +1,9 @@
 ---
-globs: ["**/*.ts", "**/*.tsx", "**/*.js", "**/*.jsx", "**/*.go", "**/*.rs", "**/*.scala"]
 ruleId: tools-01jpcvxfxbfm6z9tc89zm9c37b
 description: 掟プロジェクトで使用するツールとその管理に関するルール
 tags: [tools, rules]
 aliases: [tools-rules]
+globs: ["**/*.ts", "**/*.tsx", "**/*.js", "**/*.jsx", "**/*.go", "**/*.rs", "**/*.scala"]
 ---
 
 # ツールの掟

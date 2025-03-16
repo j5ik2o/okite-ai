@@ -1,9 +1,9 @@
 ---
-globs: ["**/*.ts", "**/*.tsx", "**/*.js", "**/*.jsx", "**/*.go", "**/*.rs", "**/*.scala"]
-tags: ["development","ddd"]
-ruleId: domain-01jpcvxfxe99ev6x7f60xvbk8w
 description: ドメインモデルのビルディングブロック
+ruleId: domain-building-blocks-01jpcvxfxe99ev6x7f60xvbk8w
+tags: ["development","ddd"]
 aliases: ["domain-modeling", "ddd-building-blocks"]
+globs: ["**/*.ts", "**/*.tsx", "**/*.js", "**/*.jsx", "**/*.go", "**/*.rs", "**/*.scala"]
 ---
 
 # ドメインモデルのビルディングブロック

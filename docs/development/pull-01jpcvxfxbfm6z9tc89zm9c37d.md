@@ -1,9 +1,9 @@
 ---
-globs: ["**/*.ts", "**/*.tsx", "**/*.js", "**/*.jsx", "**/*.go", "**/*.rs", "**/*.scala"]
-ruleId: pull-01jpcvxfxbfm6z9tc89zm9c37d
+ruleId: pull-request-01jpcvxfxbfm6z9tc89zm9c37d
 description: プルリクエストの作成とレビューに関する規約とガイドライン
 tags: [development, pull-request, review]
 aliases: [pr-guidelines]
+globs: ["**/*.ts", "**/*.tsx", "**/*.js", "**/*.jsx", "**/*.go", "**/*.rs", "**/*.scala"]
 ---
 
 
