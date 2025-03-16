@@ -6,8 +6,9 @@
     "lint:md": "npx markdownlint \"docs/**/*.md\"",
     "fix:md": "npx markdownlint --fix \"docs/**/*.md\"",
     "check:md:links": "./scripts/check-md-links.sh",
-    "check:md:frontmatter": "./scripts/check-md-frontmatter.sh",
-    "check:md:structure": "./scripts/check-md-structure.sh",
+    "check:md:frontmatter": "node ./scripts/check-md-frontmatter.js",
+    "check:md:structure": "node ./scripts/check-md-structure.js",
+    "generate:rule-id": "node ./scripts/generate-rule-id.js",
     "lint:text": "textlint \"docs/**/*.md\"",
     "fix:text": "textlint --fix \"docs/**/*.md\"",
     "fix:all": "npm run fix:md && npm run fix:text",
@@ -27,6 +28,6 @@
   },
   "dependencies": {
     "glob": "^11.0.1",
-    "ulid": "^2.3.0"
+    "ulidx": "^2.4.1"
   }
 }
