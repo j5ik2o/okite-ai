@@ -4,11 +4,11 @@
  * ルールID生成ユーティリティ
  * 
  * 使い方:
- *   node generate-rule-id.js PREFIX
+ *   node generate-rule-id.js prefix
  * 
  * 例:
- *   node generate-rule-id.js META
- *   => META-01H1NJ5NMGDXBFK97340PJMG8E
+ *   node generate-rule-id.js ddd
+ *   => ddd-01jpf07spf9d1wwnkcj4vyvt6h
  */
 
 const { ulid } = require('ulidx');
@@ -18,18 +18,18 @@ const args = process.argv.slice(2);
 
 // ヘルプメッセージを表示する関数
 function showHelp() {
-  console.log('使用方法: node generate-rule-id.js PREFIX');
+  console.log('使用方法: node generate-rule-id.js prefix');
   console.log();
   console.log('説明:');
   console.log('  掟ドキュメントのルールIDを生成します。');
-  console.log('  PREFIX-ULIDの形式でルールIDが生成されます。');
+  console.log('  prefix-ulidの形式でルールIDが生成されます。');
   console.log();
   console.log('引数:');
-  console.log('  PREFIX    接頭辞（必須）');
+  console.log('  prefix    接頭辞（必須）');
   console.log();
   console.log('例:');
-  console.log('  node generate-rule-id.js META');
-  console.log('  => META-01H1NJ5NMGDXBFK97340PJMG8E');
+  console.log('  node generate-rule-id.js ddd');
+  console.log('  => ddd-01jpf07spf9d1wwnkcj4vyvt6h');
 }
 
 // ヘルプオプションのチェック
@@ -45,11 +45,11 @@ if (args.length < 1) {
   process.exit(1);
 }
 
-// 接頭辞を取得して大文字に変換
-const prefix = args[0].toUpperCase();
+// 接頭辞を取得して小文字に変換
+const prefix = args[0].toLowerCase();
 
 // ULIDを生成
-const id = ulid();
+const id = ulid().toLowerCase();
 
 // ルールIDを生成して出力
 const ruleId = `${prefix}-${id}`;

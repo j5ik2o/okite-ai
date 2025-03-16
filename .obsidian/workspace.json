@@ -165,6 +165,7 @@
   },
   "active": "f58edeebdcf60be9",
   "lastOpenFiles": [
+    "docs/development/ddd-01jpf07spf9d1wwnkcj4vyvt6h.md",
     "docs/development/ddd/clean-architecture-01jpcvxfxd87red8vvv00mjyy3.md",
     "docs/development/ddd/testing-01jpcvxfxe99ev6x7f60xvbk8v.md",
     "docs/development/ddd/domain-model-first01jpcvxfxf9jafj03jk1zks31v.md",
@@ -190,7 +191,6 @@
     "docs/development/coding/rust/rusttools-01jpcvxfxnn1eg2jxgy2jns9w4.md",
     "docs/development/coding/scala/scaladoc-01jpcvxfxmsb49cge8ewg55kah.md",
     "docs/development/coding/scala/scalarefs-01jpcvxfxmsb49cge8ewg55kag.md",
-    "docs/development/coding/scala/scalareview-01jpcvxfxmsb49cge8ewg55kaf.md",
     "scripts/fix-filenames.js",
     "scripts/fix-rule-ids.js",
     "scripts/check-md-common.js",
