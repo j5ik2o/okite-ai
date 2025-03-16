@@ -41,6 +41,7 @@ function showHelp() {
   console.log('説明:');
   console.log('  Markdownファイルのフロントマターをチェックします。');
   console.log('  必須フィールド: description, ruleId, tags, globs');
+  console.log('  - フロントマターの順序: description, ruleId, tags, aliases, globs の順であること');
   console.log('  - descriptionの存在');
   console.log('  - ruleIdの形式(接頭辞-ulid)、接頭辞は必須、大文字小文字は区別しない');
   console.log('  - tagsの存在(最低1つ以上)');
@@ -60,6 +61,41 @@ async function checkFrontmatter(filePath) {
       errorMsgs.push('フロントマターがありません');
       hasIssues = true;
     } else {
+      // フロントマターの順序をチェック
+      const expectedOrder = ['description', 'ruleId', 'tags', 'aliases', 'globs'];
+      const frontmatterText = content.match(/^---\s*\n([\s\S]*?)\n---\s*\n/)[1];
+      const frontmatterLines = frontmatterText.split('\n').filter(line => line.trim() !== '');
+      const actualOrder = [];
+      
+      // 実際のフロントマターから順序を抽出
+      frontmatterLines.forEach(line => {
+        const colonIndex = line.indexOf(':');
+        if (colonIndex !== -1) {
+          const key = line.slice(0, colonIndex).trim();
+          if (expectedOrder.includes(key) && !actualOrder.includes(key)) {
+            actualOrder.push(key);
+          }
+        }
+      });
+      
+      // 順序が正しいかチェック
+      let orderCorrect = true;
+      let lastIndex = -1;
+      
+      for (const key of actualOrder) {
+        const currentIndex = expectedOrder.indexOf(key);
+        if (currentIndex <= lastIndex) {
+          orderCorrect = false;
+          break;
+        }
+        lastIndex = currentIndex;
+      }
+      
+      if (!orderCorrect) {
+        errorMsgs.push(`フロントマターの順序が正しくありません。期待される順序: ${expectedOrder.join(', ')}, 実際: ${actualOrder.join(', ')}`);
+        hasIssues = true;
+      }
+      
       // description フィールドのチェック
       if (!frontmatter.description) {
         errorMsgs.push('description フィールドがありません');
