@@ -5,7 +5,7 @@
   "scripts": {
     "lint:md": "npx markdownlint \"docs/**/*.md\"",
     "fix:md": "npx markdownlint --fix \"docs/**/*.md\"",
-    "check:md:links": "./scripts/check-md-links.sh",
+    "check:md:links": "./scripts/check-md-links.js",
     "check:md:frontmatter": "node ./scripts/check-md-frontmatter.js",
     "check:md:structure": "node ./scripts/check-md-structure.js",
     "generate:rule-id": "node ./scripts/generate-rule-id.js",
