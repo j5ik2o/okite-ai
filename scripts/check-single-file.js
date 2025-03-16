@@ -4,8 +4,7 @@ const fs = require('fs');
 const path = require('path');
 const { promisify } = require('util');
 const readFileAsync = promisify(fs.readFile);
-const { glob } = require('glob');
-const { isValidRuleId, isInvalidGlobsPattern, extractFrontmatter } = require('./check-md-common');
+const { isValidRuleId, extractFrontmatter } = require('./check-md-common');
 
 // 色の定義
 const colors = {
@@ -20,32 +19,12 @@ let errors = 0;
 let warnings = 0;
 
 // コマンドライン引数の解析
-let verbose = false;
 const args = process.argv.slice(2);
-if (args.includes('-v') || args.includes('--verbose')) {
-  verbose = true;
+if (args.length === 0) {
+  console.error('ファイルパスを指定してください');
+  process.exit(1);
 }
-if (args.includes('-h') || args.includes('--help')) {
-  showHelp();
-  process.exit(0);
-}
-
-// ヘルプメッセージを表示する関数
-function showHelp() {
-  console.log('使用方法: node check-md-frontmatter.js [オプション]');
-  console.log();
-  console.log('オプション:');
-  console.log('  -h, --help    このヘルプメッセージを表示');
-  console.log('  -v, --verbose 詳細な出力を表示');
-  console.log();
-  console.log('説明:');
-  console.log('  Markdownファイルのフロントマターをチェックします。');
-  console.log('  必須フィールド: description, ruleId, tags, globs');
-  console.log('  - descriptionの存在');
-  console.log('  - ruleIdの形式(接頭辞-ulid)、接頭辞は必須、大文字小文字は区別しない');
-  console.log('  - tagsの存在(最低1つ以上)');
-  console.log('  - globsの存在と内容の妥当性検証（ドキュメント自身を参照するパターンを禁止）');
-}
+const filePath = args[0];
 
 // フロントマターをチェックする関数
 async function checkFrontmatter(filePath) {
@@ -73,7 +52,7 @@ async function checkFrontmatter(filePath) {
       } else {
         // ruleIdの形式をチェック - 接頭辞を必須とする
         if (!isValidRuleId(frontmatter.ruleId)) {
-          errorMsgs.push(`ruleId ${frontmatter.ruleId} は有効な形式ではありません。接頭辞-ulid形式で接頭辞は必須です（大文字小文字は区別しません）`);
+          errorMsgs.push(`ruleId ${frontmatter.ruleId} は有効な形式ではありません。接頭辞-ULID形式で接頭辞は必須です`);
           hasIssues = true;
         }
       }
@@ -95,14 +74,6 @@ async function checkFrontmatter(filePath) {
         if (frontmatter.globs.length === 0) {
           warningMsgs.push('globs が空です。少なくとも1つのパターンが必要です');
           warnings++;
-        } else {
-          // 各globsパターンをチェック
-          for (const pattern of frontmatter.globs) {
-            if (isInvalidGlobsPattern(pattern)) {
-              errorMsgs.push(`globs パターン '${pattern}' はドキュメントファイル自身またはMarkdownファイルを参照しています。ソースコードファイルパターンを指定してください`);
-              hasIssues = true;
-            }
-          }
         }
       }
     }
@@ -121,7 +92,7 @@ async function checkFrontmatter(filePath) {
       }
       
       console.log('');
-    } else if (verbose) {
+    } else {
       console.log(`${colors.green}✓${colors.reset} ${filePath}: フロントマターは有効です`);
     }
     
@@ -137,22 +108,7 @@ async function main() {
     console.log('Markdownファイルのフロントマターをチェックしています...');
     console.log('');
     
-    const projectRoot = path.resolve(__dirname, '..');
-    
-    // docs配下の全Markdownファイルをチェック
-    const mdFiles = await glob(`${projectRoot}/docs/**/*.md`);
-    for (const file of mdFiles) {
-      await checkFrontmatter(file);
-    }
-    
-    // .cursor/rules配下の全mdcファイルをチェック（存在する場合）
-    const mdcPath = `${projectRoot}/.cursor/rules`;
-    if (fs.existsSync(mdcPath)) {
-      const mdcFiles = await glob(`${mdcPath}/**/*.mdc`);
-      for (const file of mdcFiles) {
-        await checkFrontmatter(file);
-      }
-    }
+    await checkFrontmatter(filePath);
     
     console.log('');
     console.log('チェック完了');

@@ -4,9 +4,9 @@ const fs = require('fs');
 const path = require('path');
 const { promisify } = require('util');
 const { glob } = require('glob');
-const { isValid: isValidULID } = require('ulidx');
 const readFileAsync = promisify(fs.readFile);
 const statAsync = promisify(fs.stat);
+const { isValidRuleId, extractFrontmatter } = require('./check-md-common');
 
 // 色の定義
 const colors = {
@@ -66,22 +66,6 @@ function logDebug(message) {
   }
 }
 
-// ruleIdの形式をチェックする関数
-function isValidRuleId(ruleId) {
-  // 接頭辞付きのULIDの場合（例: META-01JPBN8MMS2GDBH8HBK78E6F24）
-  // 接頭辞を必須とする
-  const regex = /^[A-Z0-9]+-([0-9A-Z]{26})$/;
-  const match = ruleId.match(regex);
-  
-  if (!match) {
-    return false;
-  }
-  
-  // ULIDの部分が有効かチェック
-  const ulidPart = match[1];
-  return isValidULID(ulidPart);
-}
-
 // 禁止されたファイル・ディレクトリパターンをチェックする関数
 async function checkForbiddenPatterns(docsDir) {
   logInfo('禁止パターンのチェック中...');
@@ -121,6 +105,20 @@ async function checkFileNaming(docsDir) {
     // ルールIDかどうかをチェック（フォーマットはメタルールで定義）
     if (!isValidRuleId(baseName)) {
       logWarning(`File might not follow the naming convention \${ruleId}.md: ${file}`);
+    }
+    
+    // ファイル名とフロントマターのruleIdが一致しているかチェック
+    try {
+      const content = await readFileAsync(file, 'utf8');
+      const frontmatter = extractFrontmatter(content);
+      
+      if (frontmatter && frontmatter.ruleId) {
+        if (baseName.toLowerCase() !== frontmatter.ruleId.toLowerCase()) {
+          logError(`File name (${baseName}) does not match ruleId in frontmatter (${frontmatter.ruleId}): ${file}`);
+        }
+      }
+    } catch (err) {
+      logError(`Error reading file ${file}: ${err.message}`);
     }
   }
 }
