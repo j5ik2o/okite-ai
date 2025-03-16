@@ -56,11 +56,6 @@ function logError(message: string): void {
   errors++;
 }
 
-function logWarning(message: string): void {
-  console.log(`${colors.yellow}Warning:${colors.reset} ${message}`);
-  warnings++;
-}
-
 function logInfo(message: string): void {
   if (verbose) {
     console.log(`${colors.green}Info:${colors.reset} ${message}`);
@@ -179,7 +174,7 @@ async function extractFirstHeading(filePath: string): Promise<string | null> {
 }
 
 // リンクをチェックする関数
-async function checkLinks(filePath: string, mdFiles: string[]): Promise<void> {
+async function checkLinks(filePath: string): Promise<void> {
   try {
     logInfo(`ファイルのリンクをチェック中: ${filePath}`);
     
@@ -222,7 +217,6 @@ async function checkLinks(filePath: string, mdFiles: string[]): Promise<void> {
       if (!url.startsWith('#')) {  // アンカーリンクはスキップ
         // 相対パスを解決
         const targetPath = path.resolve(fileDir, url);
-        let actualTargetPath = targetPath;
         
         // ファイルが存在するかチェック
         if (await fileExists(targetPath)) {
@@ -241,7 +235,6 @@ async function checkLinks(filePath: string, mdFiles: string[]): Promise<void> {
             
             if (await fileExists(mdTargetPath)) {
               logInfo(`有効な相対パスリンク(拡張子省略): ${url}`);
-              actualTargetPath = mdTargetPath;
               
               // ファイルの最初の見出しを取得して、リンクテキストと比較
               const firstHeading = await extractFirstHeading(mdTargetPath);
@@ -250,7 +243,6 @@ async function checkLinks(filePath: string, mdFiles: string[]): Promise<void> {
               }
             } else if (await fileExists(mdcTargetPath)) {
               logInfo(`有効な相対パスリンク(拡張子省略): ${url}`);
-              actualTargetPath = mdcTargetPath;
               
               // ファイルの最初の見出しを取得して、リンクテキストと比較
               const firstHeading = await extractFirstHeading(mdcTargetPath);
@@ -284,7 +276,7 @@ async function main(): Promise<void> {
     
     // 各ファイルのリンクをチェック
     for (const file of mdFiles) {
-      await checkLinks(file, mdFiles);
+      await checkLinks(file);
     }
     
     console.log('');

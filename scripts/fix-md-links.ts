@@ -133,10 +133,10 @@ function findCorrectPath(linkPath: string, baseFilePath: string): string | null 
   
   // ディレクトリ階層の問題を修正
   // 例: development/coding/golang.md → development/coding/golang-01*.md
-  const baseDirRelativeToDocsDir = path.relative(
-    DOCS_DIR,
-    path.dirname(baseFilePath)
-  );
+  // const baseDirRelativeToDocsDir = path.relative(
+  //   DOCS_DIR,
+  //   path.dirname(baseFilePath)
+  // );
   
   // リンクを分解
   const linkDirectories = parsedPath.dir.split('/').filter(part => part !== '');

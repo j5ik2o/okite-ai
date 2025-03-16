@@ -1,17 +1,18 @@
-#!/usr/bin/env node
+#!/usr/bin/env ts-node
 
 /**
  * フロントマターの順序を修正するスクリプト
  * 期待される順序: description, ruleId, tags, aliases, globs
  */
 
-const fs = require('fs');
-const path = require('path');
-const { promisify } = require('util');
+import * as fs from 'fs';
+import * as path from 'path';
+import { promisify } from 'util';
+import { glob } from 'glob';
+import { extractFrontmatter } from './common';
+
 const readFileAsync = promisify(fs.readFile);
 const writeFileAsync = promisify(fs.writeFile);
-const { glob } = require('glob');
-const { extractFrontmatter } = require('./common');
 
 // 色の定義
 const colors = {
@@ -29,7 +30,7 @@ const expectedOrder = ['description', 'ruleId', 'tags', 'aliases', 'globs'];
  * @param {string} content - ファイルの内容
  * @returns {string|null} - 修正後の内容、または修正できない場合はnull
  */
-function fixFrontmatterOrder(content) {
+function fixFrontmatterOrder(content: string): string | null {
   const frontmatterRegex = /^---\s*\n([\s\S]*?)\n---\s*\n/;
   const match = content.match(frontmatterRegex);
   
@@ -39,10 +40,11 @@ function fixFrontmatterOrder(content) {
   
   const frontmatterText = match[1];
   const frontmatterLines = frontmatterText.split('\n').filter(line => line.trim() !== '');
-  const frontmatterMap = {};
-  const otherLines = [];
   
-  // フロントマターの各行を解析
+  // フロントマターのキーと値を抽出
+  const frontmatterMap = new Map<string, string>();
+  const otherLines: string[] = [];
+  
   frontmatterLines.forEach(line => {
     const colonIndex = line.indexOf(':');
     if (colonIndex === -1) {
@@ -54,35 +56,37 @@ function fixFrontmatterOrder(content) {
     const value = line.slice(colonIndex).trim();
     
     if (expectedOrder.includes(key)) {
-      frontmatterMap[key] = value;
+      frontmatterMap.set(key, value);
     } else {
       otherLines.push(line);
     }
   });
   
-  // 期待される順序に並べ替え
+  // 期待される順序でフロントマターを再構築
   let newFrontmatterText = '';
   
-  expectedOrder.forEach(key => {
-    if (frontmatterMap[key]) {
-      newFrontmatterText += `${key}${frontmatterMap[key]}\n`;
+  // 期待される順序のフィールドを追加
+  for (const key of expectedOrder) {
+    if (frontmatterMap.has(key)) {
+      newFrontmatterText += `${key}${frontmatterMap.get(key)}\n`;
     }
-  });
-  
-  // その他の行を追加
-  if (otherLines.length > 0) {
-    newFrontmatterText += `${otherLines.join('\n')}\n`;
   }
   
-  // 新しいフロントマターで置き換え
-  return content.replace(frontmatterRegex, `---\n${newFrontmatterText}---\n\n`);
+  // その他のフィールドを追加
+  if (otherLines.length > 0) {
+    newFrontmatterText += otherLines.join('\n') + '\n';
+  }
+  
+  // 修正したフロントマターでコンテンツを置き換え
+  const newContent = content.replace(frontmatterRegex, `---\n${newFrontmatterText}---\n\n`);
+  
+  return newContent;
 }
 
 // メイン処理
-async function main() {
+async function main(): Promise<void> {
   try {
     console.log('フロントマターの順序を修正します...');
-    console.log('期待される順序: ' + expectedOrder.join(', '));
     console.log('');
     
     const projectRoot = path.resolve(__dirname, '..');
@@ -97,15 +101,23 @@ async function main() {
         const frontmatter = extractFrontmatter(content);
         
         if (!frontmatter) {
-          console.log(`${colors.yellow}警告:${colors.reset} ${file} にフロントマターがありません。スキップします。`);
+          console.log(`${colors.yellow}スキップ:${colors.reset} ${file} (フロントマターがありません)`);
           skippedCount++;
           continue;
         }
         
-        // フロントマターの順序をチェック
-        const frontmatterText = content.match(/^---\s*\n([\s\S]*?)\n---\s*\n/)[1];
+        // フロントマターの順序が正しいかチェック
+        const frontmatterMatch = content.match(/^---\s*\n([\s\S]*?)\n---\s*\n/);
+        
+        if (!frontmatterMatch) {
+          console.log(`${colors.yellow}スキップ:${colors.reset} ${file} (フロントマターの形式が不正です)`);
+          skippedCount++;
+          continue;
+        }
+        
+        const frontmatterText = frontmatterMatch[1];
         const frontmatterLines = frontmatterText.split('\n').filter(line => line.trim() !== '');
-        const actualOrder = [];
+        const actualOrder: string[] = [];
         
         // 実際のフロントマターから順序を抽出
         frontmatterLines.forEach(line => {
@@ -132,34 +144,33 @@ async function main() {
         }
         
         if (!orderCorrect) {
-          // 順序が正しくない場合、修正
+          // フロントマターの順序を修正
           const fixedContent = fixFrontmatterOrder(content);
           
-          if (fixedContent) {
+          if (fixedContent && fixedContent !== content) {
             await writeFileAsync(file, fixedContent, 'utf8');
-            console.log(`${colors.green}修正:${colors.reset} ${file} のフロントマター順序を修正しました。`);
-            console.log(`  修正前: ${actualOrder.join(', ')}`);
-            console.log(`  修正後: ${expectedOrder.filter(key => frontmatter[key]).join(', ')}`);
+            console.log(`${colors.green}修正:${colors.reset} ${file}`);
             fixedCount++;
           } else {
-            console.log(`${colors.red}エラー:${colors.reset} ${file} のフロントマター修正に失敗しました。`);
+            console.log(`${colors.yellow}スキップ:${colors.reset} ${file} (修正できませんでした)`);
             skippedCount++;
           }
         } else {
-          // 既に正しい順序の場合
-          console.log(`${colors.green}一致:${colors.reset} ${file} のフロントマターは既に正しい順序です。`);
+          console.log(`${colors.green}OK:${colors.reset} ${file} (既に順序が正しいです)`);
+          skippedCount++;
         }
       } catch (err) {
-        console.error(`${colors.red}エラー:${colors.reset} ${file} の処理中にエラーが発生しました: ${err.message}`);
-        skippedCount++;
+        console.error(`${colors.red}エラー:${colors.reset} ${file} の処理中にエラーが発生しました: ${err instanceof Error ? err.message : String(err)}`);
       }
     }
     
     console.log('');
-    console.log(`処理完了: ${fixedCount} ファイルのフロントマター順序を修正しました。${skippedCount} ファイルをスキップしました。`);
+    console.log('処理完了');
+    console.log(`修正したファイル: ${fixedCount}`);
+    console.log(`スキップしたファイル: ${skippedCount}`);
     
   } catch (err) {
-    console.error(`${colors.red}エラー:${colors.reset} ${err.message}`);
+    console.error(`${colors.red}エラー:${colors.reset} ${err instanceof Error ? err.message : String(err)}`);
     process.exit(1);
   }
 }

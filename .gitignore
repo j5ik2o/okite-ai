@@ -4,3 +4,4 @@
 .obsidian/
 node_modules/ 
 .obsidian/workspace-mobile.json
+dist/

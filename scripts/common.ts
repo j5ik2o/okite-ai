@@ -1,15 +1,18 @@
+#!/usr/bin/env ts-node
+
 /**
  * 掟ドキュメント関連の共通ユーティリティ関数を提供するモジュール
  */
 
-const { ulid, isValid: isValidULID } = require('ulidx');
+import { ulid, isValid as isValidULID } from 'ulidx';
+import * as path from 'path';
 
 /**
  * ruleIdの形式をチェックする関数
  * @param {string} ruleId - 検証するruleId
  * @returns {boolean} - ruleIdが有効な形式ならtrue、そうでなければfalse
  */
-function isValidRuleId(ruleId) {
+export function isValidRuleId(ruleId: string): boolean {
   // 接頭辞-ulid形式（例: meta-01jpbn8mms2gdbh8hbk78e6f24）
   // 接頭辞は必須、小文字のみ許可
   // 接頭辞部分にはハイフンを含むことが可能
@@ -30,7 +33,7 @@ function isValidRuleId(ruleId) {
  * @param {string} prefix - ルールIDの接頭辞
  * @returns {string} - 生成されたルールID (prefix-ULID形式)
  */
-function generateRuleId(prefix) {
+export function generateRuleId(prefix: string): string {
   // 接頭辞を小文字に変換
   const normalizedPrefix = prefix.toLowerCase();
   
@@ -47,9 +50,9 @@ function generateRuleId(prefix) {
  * @param {string} [content] - ファイルの内容（既存のruleIdをチェックするため、オプション）
  * @returns {string} - 生成されたルールID
  */
-function generateRuleIdFromPath(filePath, content) {
+export function generateRuleIdFromPath(filePath: string, content?: string): string {
   // ファイル名を取得し、拡張子を除去
-  const fileName = require('path').basename(filePath, '.md');
+  const fileName = path.basename(filePath, '.md');
   
   // ファイル名が既に有効なruleId形式かチェック
   if (isValidRuleId(fileName)) {
@@ -80,7 +83,7 @@ function generateRuleIdFromPath(filePath, content) {
  * @param {string} pattern - 検証するglobsパターン
  * @returns {boolean} - パターンが無効ならtrue、有効ならfalse
  */
-function isInvalidGlobsPattern(pattern) {
+export function isInvalidGlobsPattern(pattern: string): boolean {
   // ドキュメント自身または関連するMarkdownファイルを参照するパターンを検出
   if (pattern.includes('.md') || pattern.includes('docs/')) {
     // ソースコードパターンとして一般的な例外を許可
@@ -94,11 +97,23 @@ function isInvalidGlobsPattern(pattern) {
 }
 
 /**
+ * フロントマター形式の定義
+ */
+export interface Frontmatter {
+  description?: string;
+  ruleId?: string;
+  tags?: string[];
+  aliases?: string[];
+  globs?: string[];
+  [key: string]: string | string[] | undefined;
+}
+
+/**
  * フロントマターを抽出する関数
  * @param {string} content - Markdownファイルの内容
  * @returns {object|null} - 抽出されたフロントマターオブジェクト、または抽出できない場合はnull
  */
-function extractFrontmatter(content) {
+export function extractFrontmatter(content: string): Frontmatter | null {
   const frontmatterRegex = /^---\s*\n([\s\S]*?)\n---\s*\n/;
   const match = content.match(frontmatterRegex);
   
@@ -107,7 +122,7 @@ function extractFrontmatter(content) {
   }
   
   const frontmatterText = match[1];
-  const frontmatter = {};
+  const frontmatter: Frontmatter = {};
   
   // YAMLの簡易パーサー
   frontmatterText.split('\n').forEach(line => {
@@ -117,7 +132,7 @@ function extractFrontmatter(content) {
     if (colonIndex === -1) return;
     
     const key = line.slice(0, colonIndex).trim();
-    let value = line.slice(colonIndex + 1).trim();
+    let value: string | string[] = line.slice(colonIndex + 1).trim();
     
     // 配列形式（[item1, item2]）を解析
     if (value.startsWith('[') && value.endsWith(']')) {
@@ -130,13 +145,4 @@ function extractFrontmatter(content) {
   });
   
   return frontmatter;
-}
-
-// エクスポート
-module.exports = {
-  isValidRuleId,
-  generateRuleId,
-  generateRuleIdFromPath,
-  isInvalidGlobsPattern,
-  extractFrontmatter
-}; 
+} 

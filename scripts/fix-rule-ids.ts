@@ -1,24 +1,32 @@
-#!/usr/bin/env node
+#!/usr/bin/env ts-node
 
 /**
  * ruleIdの形式を修正するスクリプト
  * 大文字を小文字に変換する
  */
 
-const fs = require('fs');
-const path = require('path');
-const matter = require('gray-matter');
-const { isValidRuleId } = require('./common');
+import * as fs from 'fs';
+import * as path from 'path';
+import matter from 'gray-matter';
+import { isValidRuleId } from './common';
 
 const DOCS_DIR = path.join(__dirname, '..', 'docs');
+
+// 色の定義
+const colors = {
+  red: '\x1b[31m',
+  green: '\x1b[32m',
+  yellow: '\x1b[33m',
+  reset: '\x1b[0m'
+};
 
 /**
  * ディレクトリ内のMarkdownファイルを再帰的に探索
  * @param {string} dir - 探索するディレクトリ
  * @returns {string[]} - Markdownファイルのパスリスト
  */
-function findMarkdownFiles(dir) {
-  const results = [];
+function findMarkdownFiles(dir: string): string[] {
+  const results: string[] = [];
   const files = fs.readdirSync(dir);
   
   for (const file of files) {
@@ -43,7 +51,7 @@ function findMarkdownFiles(dir) {
  * @param {string} filePath - Markdownファイルのパス
  * @returns {boolean} - 修正があったかどうか
  */
-function fixRuleId(filePath) {
+function fixRuleId(filePath: string): boolean {
   try {
     const content = fs.readFileSync(filePath, 'utf8');
     const { data, content: mdContent } = matter(content);
@@ -61,15 +69,15 @@ function fixRuleId(filePath) {
       if (currentRuleId !== fixedRuleId) {
         data.ruleId = fixedRuleId;
         modified = true;
-        console.log(`[修正] ${filePath}: ruleId ${currentRuleId} -> ${fixedRuleId}`);
+        console.log(`${colors.green}[修正]${colors.reset} ${filePath}: ruleId ${currentRuleId} -> ${fixedRuleId}`);
       }
       
       // 修正後のフロントマターが有効かチェック
       if (!isValidRuleId(data.ruleId)) {
-        console.warn(`[警告] ${filePath}: 修正後のruleId ${data.ruleId} が有効な形式ではありません`);
+        console.warn(`${colors.yellow}[警告]${colors.reset} ${filePath}: 修正後のruleId ${data.ruleId} が有効な形式ではありません`);
       }
     } else {
-      console.warn(`[警告] ${filePath}: ruleIdがありません`);
+      console.warn(`${colors.yellow}[警告]${colors.reset} ${filePath}: ruleIdがありません`);
     }
     
     // 修正があった場合、ファイルに書き戻す
@@ -81,7 +89,7 @@ function fixRuleId(filePath) {
     
     return false;
   } catch (error) {
-    console.error(`[エラー] ${filePath} の処理中にエラーが発生しました:`, error);
+    console.error(`${colors.red}[エラー]${colors.reset} ${filePath} の処理中にエラーが発生しました:`, error instanceof Error ? error.message : String(error));
     return false;
   }
 }
@@ -89,7 +97,7 @@ function fixRuleId(filePath) {
 /**
  * メイン処理
  */
-function main() {
+function main(): void {
   console.log('ruleIdの修正を開始します...');
   
   const mdFiles = findMarkdownFiles(DOCS_DIR);

@@ -1,24 +1,24 @@
-#!/usr/bin/env node
+#!/usr/bin/env ts-node
 
 /**
  * ルールID生成ユーティリティ
  * 
  * 使い方:
- *   node generate-rule-id.js prefix
+ *   ts-node generate-rule-id.ts prefix
  * 
  * 例:
- *   node generate-rule-id.js ddd
+ *   ts-node generate-rule-id.ts ddd
  *   => ddd-01jpf07spf9d1wwnkcj4vyvt6h
  */
 
-const { generateRuleId } = require('./common');
+import { generateRuleId } from './common';
 
 // コマンドライン引数を取得
 const args = process.argv.slice(2);
 
 // ヘルプメッセージを表示する関数
-function showHelp() {
-  console.log('使用方法: node generate-rule-id.js prefix');
+function showHelp(): void {
+  console.log('使用方法: ts-node generate-rule-id.ts prefix');
   console.log();
   console.log('説明:');
   console.log('  掟ドキュメントのルールIDを生成します。');
@@ -28,7 +28,7 @@ function showHelp() {
   console.log('  prefix    接頭辞（必須）');
   console.log();
   console.log('例:');
-  console.log('  node generate-rule-id.js ddd');
+  console.log('  ts-node generate-rule-id.ts ddd');
   console.log('  => ddd-01jpf07spf9d1wwnkcj4vyvt6h');
 }
 

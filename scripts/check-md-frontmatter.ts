@@ -1,11 +1,13 @@
-#!/usr/bin/env node
+#!/usr/bin/env ts-node
 
-const fs = require('fs');
-const path = require('path');
-const { promisify } = require('util');
+import * as fs from 'fs';
+import * as path from 'path';
+import { promisify } from 'util';
+import { glob } from 'glob';
+import matter from 'gray-matter';
+import { isValidRuleId, isInvalidGlobsPattern } from './common';
+
 const readFileAsync = promisify(fs.readFile);
-const { glob } = require('glob');
-const { isValidRuleId, isInvalidGlobsPattern, extractFrontmatter } = require('./common');
 
 // 色の定義
 const colors = {
@@ -53,92 +55,112 @@ if (args.includes('-h') || args.includes('--help')) {
   process.exit(0);
 }
 
+interface Frontmatter {
+  description?: string;
+  ruleId?: string;
+  tags?: string[];
+  aliases?: string[];
+  globs?: string[];
+  [key: string]: any;
+}
+
 // フロントマターをチェックする関数
-async function checkFrontmatter(filePath) {
+async function checkFrontmatter(filePath: string): Promise<void> {
   try {
     const content = await readFileAsync(filePath, 'utf8');
-    const frontmatter = extractFrontmatter(content);
-    let hasIssues = false;
-    const errorMsgs = [];
-    const warningMsgs = [];
+    const { data: frontmatter } = matter(content);
     
-    if (!frontmatter) {
+    let hasIssues = false;
+    const errorMsgs: string[] = [];
+    const warningMsgs: string[] = [];
+    
+    // フロントマターの存在チェック
+    const hasFrontmatter = content.startsWith('---') && content.includes('---\n');
+    
+    if (!hasFrontmatter) {
       errorMsgs.push('フロントマターがありません');
       hasIssues = true;
     } else {
       // フロントマターの順序をチェック
       const expectedOrder = ['description', 'ruleId', 'tags', 'aliases', 'globs'];
-      const frontmatterText = content.match(/^---\s*\n([\s\S]*?)\n---\s*\n/)[1];
-      const frontmatterLines = frontmatterText.split('\n').filter(line => line.trim() !== '');
-      const actualOrder = [];
+      const frontmatterMatch = content.match(/^---\s*\n([\s\S]*?)\n---\s*\n/);
       
-      // 実際のフロントマターから順序を抽出
-      frontmatterLines.forEach(line => {
-        const colonIndex = line.indexOf(':');
-        if (colonIndex !== -1) {
-          const key = line.slice(0, colonIndex).trim();
-          if (expectedOrder.includes(key) && !actualOrder.includes(key)) {
-            actualOrder.push(key);
+      if (frontmatterMatch) {
+        const frontmatterText = frontmatterMatch[1];
+        const frontmatterLines = frontmatterText.split('\n').filter(line => line.trim() !== '');
+        const actualOrder: string[] = [];
+        
+        // 実際のフロントマターから順序を抽出
+        frontmatterLines.forEach(line => {
+          const colonIndex = line.indexOf(':');
+          if (colonIndex !== -1) {
+            const key = line.slice(0, colonIndex).trim();
+            if (expectedOrder.includes(key) && !actualOrder.includes(key)) {
+              actualOrder.push(key);
+            }
           }
+        });
+        
+        // 順序が正しいかチェック
+        let orderCorrect = true;
+        let lastIndex = -1;
+        
+        for (const key of actualOrder) {
+          const currentIndex = expectedOrder.indexOf(key);
+          if (currentIndex <= lastIndex) {
+            orderCorrect = false;
+            break;
+          }
+          lastIndex = currentIndex;
         }
-      });
-      
-      // 順序が正しいかチェック
-      let orderCorrect = true;
-      let lastIndex = -1;
-      
-      for (const key of actualOrder) {
-        const currentIndex = expectedOrder.indexOf(key);
-        if (currentIndex <= lastIndex) {
-          orderCorrect = false;
-          break;
+        
+        if (!orderCorrect) {
+          errorMsgs.push(`フロントマターの順序が正しくありません。期待される順序: ${expectedOrder.join(', ')}, 実際: ${actualOrder.join(', ')}`);
+          hasIssues = true;
         }
-        lastIndex = currentIndex;
       }
       
-      if (!orderCorrect) {
-        errorMsgs.push(`フロントマターの順序が正しくありません。期待される順序: ${expectedOrder.join(', ')}, 実際: ${actualOrder.join(', ')}`);
-        hasIssues = true;
-      }
+      // TypeScriptのための型アサーション
+      const typedFrontmatter = frontmatter as Frontmatter;
       
       // description フィールドのチェック
-      if (!frontmatter.description) {
+      if (!typedFrontmatter.description) {
         errorMsgs.push('description フィールドがありません');
         hasIssues = true;
       }
       
       // ruleId フィールドのチェック
-      if (!frontmatter.ruleId) {
+      if (!typedFrontmatter.ruleId) {
         errorMsgs.push('ruleId フィールドがありません');
         hasIssues = true;
       } else {
         // ruleIdの形式をチェック - 接頭辞を必須とする
-        if (!isValidRuleId(frontmatter.ruleId)) {
-          errorMsgs.push(`ruleId ${frontmatter.ruleId} は有効な形式ではありません。接頭辞-ulid形式で接頭辞および全体が小文字である必要があります`);
+        if (!isValidRuleId(typedFrontmatter.ruleId)) {
+          errorMsgs.push(`ruleId ${typedFrontmatter.ruleId} は有効な形式ではありません。接頭辞-ulid形式で接頭辞および全体が小文字である必要があります`);
           hasIssues = true;
         }
       }
       
       // tags フィールドのチェック
-      if (!frontmatter.tags) {
+      if (!typedFrontmatter.tags) {
         errorMsgs.push('tags フィールドがありません');
         hasIssues = true;
-      } else if (Array.isArray(frontmatter.tags) && frontmatter.tags.length === 0) {
+      } else if (Array.isArray(typedFrontmatter.tags) && typedFrontmatter.tags.length === 0) {
         warningMsgs.push('tags が空です。最低1つのタグが必要です');
         warnings++;
       }
       
       // globs フィールドのチェック
-      if (!frontmatter.globs) {
+      if (!typedFrontmatter.globs) {
         errorMsgs.push('globs フィールドがありません');
         hasIssues = true;
-      } else if (Array.isArray(frontmatter.globs)) {
-        if (frontmatter.globs.length === 0) {
+      } else if (Array.isArray(typedFrontmatter.globs)) {
+        if (typedFrontmatter.globs.length === 0) {
           warningMsgs.push('globs が空です。少なくとも1つのパターンが必要です');
           warnings++;
         } else {
           // 各globsパターンをチェック
-          for (const pattern of frontmatter.globs) {
+          for (const pattern of typedFrontmatter.globs) {
             if (isInvalidGlobsPattern(pattern)) {
               errorMsgs.push(`globs パターン '${pattern}' はドキュメントファイル自身またはMarkdownファイルを参照しています。ソースコードファイルパターンを指定してください`);
               hasIssues = true;
@@ -167,13 +189,13 @@ async function checkFrontmatter(filePath) {
     }
     
   } catch (err) {
-    console.error(`${colors.red}エラー:${colors.reset} ${filePath} の読み込み中にエラーが発生しました: ${err.message}`);
+    console.error(`${colors.red}エラー:${colors.reset} ${filePath} の読み込み中にエラーが発生しました: ${err instanceof Error ? err.message : String(err)}`);
     errors++;
   }
 }
 
 // メイン処理
-async function main() {
+async function main(): Promise<void> {
   try {
     console.log('Markdownファイルのフロントマターをチェックしています...');
     console.log('');
@@ -196,7 +218,7 @@ async function main() {
       process.exit(1);
     }
   } catch (err) {
-    console.error(`${colors.red}エラー:${colors.reset} ${err.message}`);
+    console.error(`${colors.red}エラー:${colors.reset} ${err instanceof Error ? err.message : String(err)}`);
     process.exit(1);
   }
 }
