@@ -96,15 +96,19 @@ async function checkForbiddenPatterns(docsDir) {
 async function checkFileNaming(docsDir) {
   logInfo('ファイル命名規則のチェック中...');
   
-  // ${ruleId}.md パターンのチェック
+  // ${ruleId}.md または ${prefix}-${ruleId}.md パターンのチェック
   // ULIDフォーマットは01ARZ3NDEKTSV4RRFFQ69G5FAVなので長さ26の英数字
   const allMdFiles = await glob(`${docsDir}/**/*.md`, { ignore: ['**/.cursor/**', '**/.git/**'] });
   
   for (const file of allMdFiles) {
     const baseName = path.basename(file, '.md');
     // ルールIDかどうかをチェック（フォーマットはメタルールで定義）
-    if (!isValidRuleId(baseName)) {
-      logWarning(`File might not follow the naming convention \${ruleId}.md: ${file}`);
+    
+    // 1. 完全なruleId形式の場合
+    // 2. プレフィックス-ruleId形式の場合（[prefix]-[ULID]）
+    const ruleIdMatch = baseName.match(/^([a-z0-9-]+-)([0-9a-zA-Z]{26})$/);
+    if (!isValidRuleId(baseName) && !ruleIdMatch) {
+      logWarning(`File might not follow the naming convention \${prefix}-\${ruleId}.md or \${ruleId}.md: ${file}`);
     }
     
     // ファイル名とフロントマターのruleIdが一致しているかチェック
@@ -161,12 +165,20 @@ async function checkDirectoryStructure(docsDir) {
       moduleDirectories.push(dirName);
       
       // 親モジュールファイル（同名のmdファイル）が存在するか確認
+      // 1. 完全一致（dirName.md）をチェック
+      // 2. プレフィックス一致（dirName-*.md）をチェック
       const parentModule = path.join(docsDir, `${dirName}.md`);
       try {
         await statAsync(parentModule);
         logDebug(`Found parent module file: ${parentModule}`);
       } catch (err) {
-        logWarning(`Module directory ${dirName} exists but parent module file ${parentModule} not found`);
+        // 完全一致するファイルがない場合、プレフィックスが一致するファイルを探す
+        const possibleParentFiles = await glob(`${docsDir}/${dirName}-*.md`);
+        if (possibleParentFiles.length > 0) {
+          logDebug(`Found parent module file with prefix: ${possibleParentFiles[0]}`);
+        } else {
+          logWarning(`Module directory ${dirName} exists but parent module file ${parentModule} or ${dirName}-*.md not found`);
+        }
       }
     }
   }
@@ -196,7 +208,13 @@ async function checkDirectoryStructure(docsDir) {
           await statAsync(submoduleFile);
           logDebug(`Found submodule file: ${submoduleFile}`);
         } catch (err) {
-          logWarning(`Submodule directory ${subDirName} exists in ${dir} but parent submodule file ${submoduleFile} not found`);
+          // 完全一致するファイルがない場合、プレフィックスが一致するファイルを探す
+          const possibleSubmoduleFiles = await glob(`${docsDir}/${dir}/${subDirName}-*.md`);
+          if (possibleSubmoduleFiles.length > 0) {
+            logDebug(`Found submodule file with prefix: ${possibleSubmoduleFiles[0]}`);
+          } else {
+            logWarning(`Submodule directory ${subDirName} exists in ${dir} but parent submodule file ${submoduleFile} or ${subDirName}-*.md not found`);
+          }
         }
       }
     }
