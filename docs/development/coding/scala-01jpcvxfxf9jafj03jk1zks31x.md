@@ -1,11 +1,10 @@
 ---
-globs: ["**/*.ts", "**/*.tsx", "**/*.js", "**/*.jsx", "**/*.go", "**/*.rs", "**/*.scala"]
-ruleId: scala-01jpcvxfxf9jafj03jk1zks31x
 description: Scalaのコーディング規約と開発ガイドライン
+ruleId: scala-01jpcvxfxf9jafj03jk1zks31x
 tags: [scala, coding, guidelines]
 aliases: [scala-rules, scala-guidelines]
+globs: ["**/*.ts", "**/*.tsx", "**/*.js", "**/*.jsx", "**/*.go", "**/*.rs", "**/*.scala"]
 ---
-
 
 # Scalaの掟
 

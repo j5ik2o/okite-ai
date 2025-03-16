@@ -1,11 +1,10 @@
 ---
-globs: ["**/*.ts", "**/*.tsx", "**/*.js", "**/*.jsx", "**/*.go", "**/*.rs", "**/*.scala"]
-ruleId: golang-01jpcvxfxgyqe2jprh9hgn6xq7
 description: Golangのコーディング規約と開発ガイドライン
+ruleId: golang-01jpcvxfxgyqe2jprh9hgn6xq7
 tags: [golang, coding, guidelines]
 aliases: [golang-rules, go-guidelines]
+globs: ["**/*.ts", "**/*.tsx", "**/*.js", "**/*.jsx", "**/*.go", "**/*.rs", "**/*.scala"]
 ---
-
 
 # Golangの掟
 

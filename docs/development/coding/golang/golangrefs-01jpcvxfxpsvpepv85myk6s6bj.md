@@ -1,11 +1,10 @@
 ---
-globs: ["**/*.go"]
-ruleId: golangrefs-01jpcvxfxpsvpepv85myk6s6bj
 description: 掟プロジェクトにおけるGolang開発に関する参考文献とリソースのリスト
+ruleId: golangrefs-01jpcvxfxpsvpepv85myk6s6bj
 tags: [development, golang, references]
 aliases: [golang-refs]
+globs: ["**/*.go"]
 ---
-
 
 # Golang参考文献
 

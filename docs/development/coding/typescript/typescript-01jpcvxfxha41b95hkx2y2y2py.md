@@ -2,10 +2,9 @@
 description: typescript developmentに関するドキュメント
 ruleId: typescript-01jpcvxfxha41b95hkx2y2y2py
 tags: ["development","coding","typescript"]
-globs: ["**/*.ts", "**/*.tsx", "**/*.js", "**/*.jsx"]
 aliases: ["typescript-guidelines", "ts-best-practices"]
+globs: ["**/*.ts", "**/*.tsx", "**/*.js", "**/*.jsx"]
 ---
-
 
 # TypeScript開発ガイドライン
 

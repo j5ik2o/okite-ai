@@ -1,11 +1,10 @@
 ---
-globs: ["**/*.go"]
-ruleId: golangtools-01jpcvxfxpsvpepv85myk6s6bf
 description: 掟プロジェクトにおけるGolang開発で使用する必須およびオプショナルツールの説明と設定方法
+ruleId: golangtools-01jpcvxfxpsvpepv85myk6s6bf
 tags: [development, golang, tools]
 aliases: [golang-tools]
+globs: ["**/*.go"]
 ---
-
 
 # Golangツール活用
 

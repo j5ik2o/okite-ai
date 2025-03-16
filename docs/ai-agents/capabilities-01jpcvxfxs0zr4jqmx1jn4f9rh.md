@@ -1,11 +1,10 @@
 ---
-ruleId: capabilities-01jpcvxfxs0zr4jqmx1jn4f9rh
 description: AIコードエージェントの機能、制限、および利用可能なツール
+ruleId: capabilities-01jpcvxfxs0zr4jqmx1jn4f9rh
 tags: [ai, capabilities, limitations]
 aliases: [ai-capabilities]
 globs: ["**/*.ts", "**/*.tsx", "**/*.js", "**/*.jsx", "**/*.go", "**/*.rs", "**/*.scala"]
 ---
-
 
 # AIエージェントの機能と制限
 

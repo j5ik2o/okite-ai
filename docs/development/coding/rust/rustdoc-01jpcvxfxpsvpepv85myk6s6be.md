@@ -2,10 +2,9 @@
 description: rustdocに関するドキュメント
 ruleId: rustdoc-01jpcvxfxpsvpepv85myk6s6be
 tags: ["development","coding","rust"]
-globs: ["**/*.rs"]
 aliases: ["rust-documentation", "rustdoc-guidelines"]
+globs: ["**/*.rs"]
 ---
-
 
 # Rustdocの掟
 

@@ -2,10 +2,9 @@
 description: scalareviewに関するドキュメント
 ruleId: scalareview-01jpcvxfxmsb49cge8ewg55kaf
 tags: ["development","coding","scala"]
-globs: ["**/*.scala"]
 aliases: ["scala-code-review", "scala-review-guidelines"]
+globs: ["**/*.scala"]
 ---
-
 
 # Scalaコードレビュー
 

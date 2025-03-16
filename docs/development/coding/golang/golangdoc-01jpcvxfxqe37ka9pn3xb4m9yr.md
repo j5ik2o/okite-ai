@@ -1,11 +1,10 @@
 ---
-globs: ["**/*.go"]
-ruleId: golangdoc-01jpcvxfxqe37ka9pn3xb4m9yr
 description: 掟プロジェクトにおけるGolangコードのドキュメント作成規約とベストプラクティス
+ruleId: golangdoc-01jpcvxfxqe37ka9pn3xb4m9yr
 tags: [development, golang, documentation]
 aliases: [golang-doc]
+globs: ["**/*.go"]
 ---
-
 
 # Golangdocの掟
 

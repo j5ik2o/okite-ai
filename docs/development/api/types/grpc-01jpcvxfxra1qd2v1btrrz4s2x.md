@@ -1,11 +1,10 @@
 ---
-ruleId: grpc-01jpcvxfxra1qd2v1btrrz4s2x
 description: gRPC APIドキュメントの作成ガイドライン
+ruleId: grpc-01jpcvxfxra1qd2v1btrrz4s2x
 tags: [api, grpc, documentation]
 aliases: [grpc-api-guidelines]
 globs: ["**/*.ts", "**/*.tsx", "**/*.js", "**/*.jsx", "**/*.go", "**/*.rs", "**/*.scala"]
 ---
-
 
 # gRPC APIドキュメント作成ガイドライン
 

@@ -1,11 +1,10 @@
 ---
-globs: ["**/*.ts", "**/*.tsx", "**/*.js", "**/*.jsx"]
-ruleId: tsreview-01jpcvxfxjwwn785s5jg7t1771
 description: 掟プロジェクトにおけるTypeScriptコードのレビュー基準とベストプラクティス
+ruleId: tsreview-01jpcvxfxjwwn785s5jg7t1771
 tags: [development, typescript, review]
 aliases: [typescript-review]
+globs: ["**/*.ts", "**/*.tsx", "**/*.js", "**/*.jsx"]
 ---
-
 
 # TypeScriptコードレビュー
 

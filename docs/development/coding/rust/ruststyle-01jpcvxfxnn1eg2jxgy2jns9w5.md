@@ -2,10 +2,9 @@
 description: ruststyleに関するドキュメント
 ruleId: ruststyle-01jpcvxfxnn1eg2jxgy2jns9w5
 tags: ["development","coding","rust"]
-globs: ["**/*.rs"]
 aliases: ["rust-style-guide", "rust-coding-conventions"]
+globs: ["**/*.rs"]
 ---
-
 
 # Rustコーディングスタイル
 

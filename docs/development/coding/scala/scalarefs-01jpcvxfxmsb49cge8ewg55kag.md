@@ -2,10 +2,9 @@
 description: scalarefsに関するドキュメント
 ruleId: scalarefs-01jpcvxfxmsb49cge8ewg55kag
 tags: ["development","coding","scala"]
-globs: ["**/*.scala"]
 aliases: ["scala-references", "scala-resources"]
+globs: ["**/*.scala"]
 ---
-
 
 # Scala参考文献
 

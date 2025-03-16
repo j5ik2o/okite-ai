@@ -1,11 +1,10 @@
 ---
-globs: ["**/*.go"]
-ruleId: golangreview-01jpcvxfxpsvpepv85myk6s6bh
 description: 掟プロジェクトにおけるGolangコードのレビュー基準とベストプラクティス
+ruleId: golangreview-01jpcvxfxpsvpepv85myk6s6bh
 tags: [development, golang, review]
 aliases: [golang-review]
+globs: ["**/*.go"]
 ---
-
 
 # Golangコードレビュー
 

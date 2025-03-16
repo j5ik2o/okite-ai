@@ -1,11 +1,10 @@
 ---
-ruleId: troubleshooting-01jpcvxfxra1qd2v1btrrz4s2z
 description: AIコードエージェントの問題解決とトラブルシューティングガイド
+ruleId: troubleshooting-01jpcvxfxra1qd2v1btrrz4s2z
 tags: [ai, troubleshooting, debugging]
 aliases: [ai-troubleshooting]
 globs: ["**/*.ts", "**/*.tsx", "**/*.js", "**/*.jsx", "**/*.go", "**/*.rs", "**/*.scala"]
 ---
-
 
 # AIエージェントのトラブルシューティング
 

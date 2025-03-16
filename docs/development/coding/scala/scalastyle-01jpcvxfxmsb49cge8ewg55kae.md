@@ -2,10 +2,9 @@
 description: scalastyleに関するドキュメント
 ruleId: scalastyle-01jpcvxfxmsb49cge8ewg55kae
 tags: ["development","coding","scala"]
-globs: ["**/*.scala"]
 aliases: ["scala-style-guide", "scala-coding-conventions"]
+globs: ["**/*.scala"]
 ---
-
 
 # Scalaコーディングスタイル
 

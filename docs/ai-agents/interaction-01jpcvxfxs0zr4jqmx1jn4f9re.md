@@ -1,11 +1,10 @@
 ---
-ruleId: interaction-01jpcvxfxs0zr4jqmx1jn4f9re
 description: AIコードエージェントとの効果的な対話方法とプロトコル
+ruleId: interaction-01jpcvxfxs0zr4jqmx1jn4f9re
 tags: [ai, interaction, communication]
 aliases: [ai-interaction]
 globs: ["**/*.ts", "**/*.tsx", "**/*.js", "**/*.jsx", "**/*.go", "**/*.rs", "**/*.scala"]
 ---
-
 
 # AIエージェントとの対話プロトコル
 

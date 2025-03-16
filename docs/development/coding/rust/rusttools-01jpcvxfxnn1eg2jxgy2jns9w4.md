@@ -2,10 +2,9 @@
 description: rusttoolsに関するドキュメント
 ruleId: rusttools-01jpcvxfxnn1eg2jxgy2jns9w4
 tags: ["development","coding","rust"]
-globs: ["**/*.rs"]
 aliases: ["rust-tools", "rust-ecosystem"]
+globs: ["**/*.rs"]
 ---
-
 
 # Rustツール活用
 

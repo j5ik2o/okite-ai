@@ -2,10 +2,9 @@
 description: rustreviewに関するドキュメント
 ruleId: rustreview-01jpcvxfxnn1eg2jxgy2jns9w6
 tags: ["development","coding","rust"]
-globs: ["**/*.rs"]
 aliases: ["rust-code-review", "rust-review-guidelines"]
+globs: ["**/*.rs"]
 ---
-
 
 # Rustコードレビュー
 

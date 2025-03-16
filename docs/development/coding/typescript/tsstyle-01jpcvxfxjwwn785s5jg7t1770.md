@@ -1,11 +1,10 @@
 ---
-globs: ["**/*.ts", "**/*.tsx", "**/*.js", "**/*.jsx"]
-ruleId: tsstyle-01jpcvxfxjwwn785s5jg7t1770
 description: 掟プロジェクトにおけるTypeScriptコードのスタイルガイドと規約
+ruleId: tsstyle-01jpcvxfxjwwn785s5jg7t1770
 tags: [development, typescript, style]
 aliases: [typescript-style]
+globs: ["**/*.ts", "**/*.tsx", "**/*.js", "**/*.jsx"]
 ---
-
 
 # TypeScriptコーディングスタイル
 

@@ -1,11 +1,10 @@
 ---
-globs: ["**/*.ts", "**/*.tsx", "**/*.js", "**/*.jsx", "**/*.go", "**/*.rs", "**/*.scala"]
-ruleId: rust-01jpcvxfxf9jafj03jk1zks31y
 description: Rustのコーディング規約と開発ガイドライン
+ruleId: rust-01jpcvxfxf9jafj03jk1zks31y
 tags: [rust, coding, guidelines]
 aliases: [rust-rules, rust-guidelines]
+globs: ["**/*.ts", "**/*.tsx", "**/*.js", "**/*.jsx", "**/*.go", "**/*.rs", "**/*.scala"]
 ---
-
 
 # Rustの掟
 

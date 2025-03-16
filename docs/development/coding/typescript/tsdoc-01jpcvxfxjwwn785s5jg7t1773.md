@@ -1,11 +1,10 @@
 ---
-globs: ["**/*.ts", "**/*.tsx", "**/*.js", "**/*.jsx"]
-ruleId: tsdoc-01jpcvxfxjwwn785s5jg7t1773
 description: 掟プロジェクトにおけるTypeScriptコードのドキュメント作成規約とベストプラクティス
+ruleId: tsdoc-01jpcvxfxjwwn785s5jg7t1773
 tags: [development, typescript, documentation]
 aliases: [typescript-doc]
+globs: ["**/*.ts", "**/*.tsx", "**/*.js", "**/*.jsx"]
 ---
-
 
 # TSDocの掟
 

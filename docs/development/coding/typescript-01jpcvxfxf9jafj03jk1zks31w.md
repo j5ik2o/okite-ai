@@ -1,11 +1,10 @@
 ---
-globs: ["**/*.ts", "**/*.tsx", "**/*.js", "**/*.jsx", "**/*.go", "**/*.rs", "**/*.scala"]
-ruleId: typescript-01jpcvxfxf9jafj03jk1zks31w
 description: TypeScriptのコーディング規約と開発ガイドライン
+ruleId: typescript-01jpcvxfxf9jafj03jk1zks31w
 tags: [typescript, coding, guidelines]
 aliases: [typescript-rules, ts-guidelines]
+globs: ["**/*.ts", "**/*.tsx", "**/*.js", "**/*.jsx", "**/*.go", "**/*.rs", "**/*.scala"]
 ---
-
 
 # TypeScriptの掟
 

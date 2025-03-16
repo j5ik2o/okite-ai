@@ -1,11 +1,10 @@
 ---
-globs: ["**/*.go"]
-ruleId: golangmake-01jpcvxfxqe37ka9pn3xb4m9yq
 description: 掟プロジェクトにおけるGolangプロジェクトのMakefileの活用方法と設定例
+ruleId: golangmake-01jpcvxfxqe37ka9pn3xb4m9yq
 tags: [development, golang, make, build]
 aliases: [golang-make]
+globs: ["**/*.go"]
 ---
-
 
 # Golang プロジェクトにおける Makefile の活用
 

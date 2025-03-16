@@ -1,11 +1,10 @@
 ---
-globs: ["**/*.ts", "**/*.tsx", "**/*.js", "**/*.jsx", "**/*.go", "**/*.rs", "**/*.scala"]
-ruleId: unit-01jpcvxfxd87red8vvv00mjyy4
 description: 掟プロジェクトにおけるユニットテストの作成と実装に関する標準的なガイドライン
+ruleId: unit-01jpcvxfxd87red8vvv00mjyy4
 tags: [development, testing, unit-test]
 aliases: [unit-test-rules]
+globs: ["**/*.ts", "**/*.tsx", "**/*.js", "**/*.jsx", "**/*.go", "**/*.rs", "**/*.scala"]
 ---
-
 
 # ユニットテストの掟
 

@@ -2,10 +2,9 @@
 description: gas developmentに関するドキュメント
 ruleId: gas-01jpcvxfxk935q9x97vbpfp9t8
 tags: ["development","coding","typescript"]
-globs: ["**/*.ts", "**/*.tsx", "**/*.js", "**/*.jsx"]
 aliases: ["gas-guidelines", "google-apps-script"]
+globs: ["**/*.ts", "**/*.tsx", "**/*.js", "**/*.jsx"]
 ---
-
 
 # Google Apps Script (GAS) 開発ガイドライン
 

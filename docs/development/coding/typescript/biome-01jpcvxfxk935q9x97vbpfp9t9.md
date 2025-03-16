@@ -2,10 +2,9 @@
 description: biome settingsに関するドキュメント
 ruleId: biome-01jpcvxfxk935q9x97vbpfp9t9
 tags: ["development","coding","typescript"]
-globs: ["**/*.ts", "**/*.tsx", "**/*.js", "**/*.jsx"]
 aliases: ["biome-config", "typescript-linting"]
+globs: ["**/*.ts", "**/*.tsx", "**/*.js", "**/*.jsx"]
 ---
-
 
 # Biomeの設定
 

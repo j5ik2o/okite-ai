@@ -2,10 +2,9 @@
 description: rustrefsに関するドキュメント
 ruleId: rustrefs-01jpcvxfxnn1eg2jxgy2jns9w7
 tags: ["development","coding","rust"]
-globs: ["**/*.rs"]
 aliases: ["rust-references", "rust-resources"]
+globs: ["**/*.rs"]
 ---
-
 
 # Rust参考文献
 

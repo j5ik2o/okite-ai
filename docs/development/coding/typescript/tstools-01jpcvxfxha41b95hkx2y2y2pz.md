@@ -1,11 +1,10 @@
 ---
-globs: ["**/*.ts", "**/*.tsx", "**/*.js", "**/*.jsx"]
-ruleId: tstools-01jpcvxfxha41b95hkx2y2y2pz
 description: 掟プロジェクトにおけるTypeScript開発で使用する必須およびオプショナルツールの説明と設定方法
+ruleId: tstools-01jpcvxfxha41b95hkx2y2y2pz
 tags: [development, typescript, tools]
 aliases: [typescript-tools]
+globs: ["**/*.ts", "**/*.tsx", "**/*.js", "**/*.jsx"]
 ---
-
 
 # TypeScriptツール活用
 

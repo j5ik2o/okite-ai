@@ -1,11 +1,10 @@
 ---
-globs: ["**/*.ts", "**/*.tsx", "**/*.js", "**/*.jsx", "**/*.go", "**/*.rs", "**/*.scala"]
-ruleId: doc-comment-01jpcvxfxgyqe2jprh9hgn6xq8
 description: 掟プロジェクトにおけるドキュメンテーションコメントの作成規約と原則
+ruleId: doc-comment-01jpcvxfxgyqe2jprh9hgn6xq8
 tags: [development, coding, documentation]
 aliases: [doc-comment-rules]
+globs: ["**/*.ts", "**/*.tsx", "**/*.js", "**/*.jsx", "**/*.go", "**/*.rs", "**/*.scala"]
 ---
-
 
 # ドキュメントコメントの掟
 

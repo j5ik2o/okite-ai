@@ -1,11 +1,10 @@
 ---
-globs: ["**/*.ts", "**/*.tsx", "**/*.js", "**/*.jsx"]
-ruleId: tsrefs-01jpcvxfxjwwn785s5jg7t1772
 description: 掟プロジェクトにおけるTypeScript開発に関する参考文献とリソースのリスト
+ruleId: tsrefs-01jpcvxfxjwwn785s5jg7t1772
 tags: [development, typescript, references]
 aliases: [typescript-refs]
+globs: ["**/*.ts", "**/*.tsx", "**/*.js", "**/*.jsx"]
 ---
-
 
 # TypeScript参考文献
 

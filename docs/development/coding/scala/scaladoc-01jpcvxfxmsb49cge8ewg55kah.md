@@ -2,10 +2,9 @@
 description: scaladocに関するドキュメント
 ruleId: scaladoc-01jpcvxfxmsb49cge8ewg55kah
 tags: ["development","coding","scala"]
-globs: ["**/*.scala"]
 aliases: ["scala-documentation", "scaladoc-guidelines"]
+globs: ["**/*.scala"]
 ---
-
 
 # Scaladocの掟
 

@@ -1,11 +1,10 @@
 ---
-globs: ["**/*.ts", "**/*.tsx", "**/*.js", "**/*.jsx", "**/*.go", "**/*.rs", "**/*.scala"]
-ruleId: benchmark-01jpcvxfxe99ev6x7f60xvbk8t
 description: 掟プロジェクトのベンチマークテストの実施方法と原則に関するガイドライン
+ruleId: benchmark-01jpcvxfxe99ev6x7f60xvbk8t
 tags: [development, testing, benchmark]
 aliases: [benchmark-rules]
+globs: ["**/*.ts", "**/*.tsx", "**/*.js", "**/*.jsx", "**/*.go", "**/*.rs", "**/*.scala"]
 ---
-
 
 # ベンチマークの掟
 

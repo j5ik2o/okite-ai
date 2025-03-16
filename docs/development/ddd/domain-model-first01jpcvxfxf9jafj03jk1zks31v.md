@@ -2,8 +2,8 @@
 description: ドメインモデルファーストに関するドキュメント
 ruleId: domain-model-first-01jpcvxfxf9jafj03jk1zks31v
 tags: ["development","ddd"]
-globs: ["**/*.ts", "**/*.tsx", "**/*.js", "**/*.jsx", "**/*.go", "**/*.rs", "**/*.scala"]
 aliases: ["domain-model-process", "ddd-development-process"]
+globs: ["**/*.ts", "**/*.tsx", "**/*.js", "**/*.jsx", "**/*.go", "**/*.rs", "**/*.scala"]
 ---
 
 # ドメインモデル中心の開発手順

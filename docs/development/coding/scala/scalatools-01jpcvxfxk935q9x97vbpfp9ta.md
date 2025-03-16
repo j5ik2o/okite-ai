@@ -2,10 +2,9 @@
 description: scalatoolsに関するドキュメント
 ruleId: scalatools-01jpcvxfxk935q9x97vbpfp9ta
 tags: ["development","coding","scala"]
-globs: ["**/*.scala"]
 aliases: ["scala-tools", "scala-ecosystem"]
+globs: ["**/*.scala"]
 ---
-
 
 # Scalaツール活用
 

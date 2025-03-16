@@ -1,11 +1,10 @@
 ---
-globs: ["**/*.go"]
-ruleId: golangstyle-01jpcvxfxpsvpepv85myk6s6bg
 description: 掟プロジェクトにおけるGolangコードのスタイルガイドと規約
+ruleId: golangstyle-01jpcvxfxpsvpepv85myk6s6bg
 tags: [development, golang, style]
 aliases: [golang-style]
+globs: ["**/*.go"]
 ---
-
 
 # Golangコーディングスタイル
 

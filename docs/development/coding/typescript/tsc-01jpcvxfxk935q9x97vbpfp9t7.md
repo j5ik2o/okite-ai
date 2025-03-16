@@ -2,10 +2,9 @@
 description: tsc settingsに関するドキュメント
 ruleId: tsc-01jpcvxfxk935q9x97vbpfp9t7
 tags: ["development","coding","typescript"]
-globs: ["**/*.ts", "**/*.tsx", "**/*.js", "**/*.jsx"]
 aliases: ["typescript-config", "tsconfig"]
+globs: ["**/*.ts", "**/*.tsx", "**/*.js", "**/*.jsx"]
 ---
-
 
 # TypeScript設定
 

@@ -1,11 +1,10 @@
 ---
-ruleId: best-practices-01jpcvxfxs0zr4jqmx1jn4f9rj
 description: AIコードエージェントを効果的に活用するためのベストプラクティス
+ruleId: best-practices-01jpcvxfxs0zr4jqmx1jn4f9rj
 tags: [ai, best-practices, guidelines]
 aliases: [ai-best-practices]
 globs: ["**/*.ts", "**/*.tsx", "**/*.js", "**/*.jsx", "**/*.go", "**/*.rs", "**/*.scala"]
 ---
-
 
 # AIエージェント活用のベストプラクティス
 
