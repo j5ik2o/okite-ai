@@ -43,7 +43,7 @@ function showHelp() {
   console.log('  必須フィールド: description, ruleId, tags, globs');
   console.log('  - フロントマターの順序: description, ruleId, tags, aliases, globs の順であること');
   console.log('  - descriptionの存在');
-  console.log('  - ruleIdの形式(接頭辞-ulid)、接頭辞は必須、大文字小文字は区別しない');
+  console.log('  - ruleIdの形式(接頭辞-ulid)、接頭辞は必須、すべて小文字であること');
   console.log('  - tagsの存在(最低1つ以上)');
   console.log('  - globsの存在と内容の妥当性検証（ドキュメント自身を参照するパターンを禁止）');
 }
@@ -109,7 +109,7 @@ async function checkFrontmatter(filePath) {
       } else {
         // ruleIdの形式をチェック - 接頭辞を必須とする
         if (!isValidRuleId(frontmatter.ruleId)) {
-          errorMsgs.push(`ruleId ${frontmatter.ruleId} は有効な形式ではありません。接頭辞-ulid形式で接頭辞は必須です（大文字小文字は区別しません）`);
+          errorMsgs.push(`ruleId ${frontmatter.ruleId} は有効な形式ではありません。接頭辞-ulid形式で接頭辞および全体が小文字である必要があります`);
           hasIssues = true;
         }
       }

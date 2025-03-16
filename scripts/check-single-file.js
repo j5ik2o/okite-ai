@@ -52,7 +52,7 @@ async function checkFrontmatter(filePath) {
       } else {
         // ruleIdの形式をチェック - 接頭辞を必須とする
         if (!isValidRuleId(frontmatter.ruleId)) {
-          errorMsgs.push(`ruleId ${frontmatter.ruleId} は有効な形式ではありません。接頭辞-ULID形式で接頭辞は必須です`);
+          errorMsgs.push(`ruleId ${frontmatter.ruleId} は有効な形式ではありません。接頭辞-ulid形式で接頭辞および全体が小文字である必要があります`);
           hasIssues = true;
         }
       }
