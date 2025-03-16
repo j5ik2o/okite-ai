@@ -1,9 +1,20 @@
 ---
 description: AIコードエージェントとの効果的な対話方法とプロトコル
 ruleId: interaction-01jpcvxfxs0zr4jqmx1jn4f9re
-tags: [ai, interaction, communication]
-aliases: [ai-interaction]
-globs: ["**/*.ts", "**/*.tsx", "**/*.js", "**/*.jsx", "**/*.go", "**/*.rs", "**/*.scala"]
+tags:
+  - ai
+  - interaction
+  - communication
+aliases:
+  - ai-interaction
+globs:
+  - '**/*.ts'
+  - '**/*.tsx'
+  - '**/*.js'
+  - '**/*.jsx'
+  - '**/*.go'
+  - '**/*.rs'
+  - '**/*.scala'
 ---
 
 # AIエージェントとの対話プロトコル
@@ -136,7 +147,7 @@ globs: ["**/*.ts", "**/*.tsx", "**/*.js", "**/*.jsx", "**/*.go", "**/*.rs", "**/
 
 ## 関連情報
 
-- [AIエージェントの基本ガイドライン](guidelines.md)
-- [AIエージェントの機能と制限](capabilities.md)
-- [AIエージェント活用のベストプラクティス](best-practices.md)
-- [トラブルシューティングガイド](troubleshooting.md)
+- [API設計・ドキュメント作成ガイドライン](../development/api/guidelines-01jpcvxfxqe37ka9pn3xb4m9ys.md)
+- [AIエージェントの機能と制限](capabilities-01jpcvxfxs0zr4jqmx1jn4f9rh.md)
+- [AIエージェント活用のベストプラクティス](best-practices-01jpcvxfxs0zr4jqmx1jn4f9rj.md)
+- [AIエージェントのトラブルシューティング](troubleshooting-01jpcvxfxra1qd2v1btrrz4s2z.md)

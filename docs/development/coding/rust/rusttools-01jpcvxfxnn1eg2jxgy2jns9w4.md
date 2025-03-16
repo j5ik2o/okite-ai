@@ -1,9 +1,15 @@
 ---
 description: rusttoolsに関するドキュメント
 ruleId: rusttools-01jpcvxfxnn1eg2jxgy2jns9w4
-tags: ["development","coding","rust"]
-aliases: ["rust-tools", "rust-ecosystem"]
-globs: ["**/*.rs"]
+tags:
+  - development
+  - coding
+  - rust
+aliases:
+  - rust-tools
+  - rust-ecosystem
+globs:
+  - '**/*.rs'
 ---
 
 # Rustツール活用
@@ -231,7 +237,7 @@ cargo doc --open。
 cargo doc --document-private-items。
 ```
 
-詳細な使用方法は[Rustdocの掟](rustdoc.md)を参照してください。
+詳細な使用方法は[Rustdocの掟](rustdoc-01jpcvxfxpsvpepv85myk6s6be.md)を参照してください。
 
 ### mdbook
 

@@ -1,9 +1,17 @@
 ---
 description: 掟プロジェクトにおけるTypeScriptコードのレビュー基準とベストプラクティス
 ruleId: tsreview-01jpcvxfxjwwn785s5jg7t1771
-tags: [development, typescript, review]
-aliases: [typescript-review]
-globs: ["**/*.ts", "**/*.tsx", "**/*.js", "**/*.jsx"]
+tags:
+  - development
+  - typescript
+  - review
+aliases:
+  - typescript-review
+globs:
+  - '**/*.ts'
+  - '**/*.tsx'
+  - '**/*.js'
+  - '**/*.jsx'
 ---
 
 # TypeScriptコードレビュー
@@ -664,6 +672,6 @@ any型を使わないでください。
 ## 関連情報
 
 - [TypeScript公式ドキュメント](https://www.typescriptlang.org/docs/)
-- [TypeScriptドキュメンテーションルール](tsdoc.md)
-- [TypeScriptコーディングスタイル](tsstyle.md)
-- [TypeScriptツール活用](tstools.md)
+- [TSDocの掟](tsdoc-01jpcvxfxjwwn785s5jg7t1773.md)
+- [TypeScriptコーディングスタイル](tsstyle-01jpcvxfxjwwn785s5jg7t1770.md)
+- [TypeScriptツール活用](tstools-01jpcvxfxha41b95hkx2y2y2pz.md)

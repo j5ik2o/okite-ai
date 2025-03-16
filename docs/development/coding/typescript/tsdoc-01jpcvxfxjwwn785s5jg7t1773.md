@@ -1,16 +1,24 @@
 ---
 description: 掟プロジェクトにおけるTypeScriptコードのドキュメント作成規約とベストプラクティス
 ruleId: tsdoc-01jpcvxfxjwwn785s5jg7t1773
-tags: [development, typescript, documentation]
-aliases: [typescript-doc]
-globs: ["**/*.ts", "**/*.tsx", "**/*.js", "**/*.jsx"]
+tags:
+  - development
+  - typescript
+  - documentation
+aliases:
+  - typescript-doc
+globs:
+  - '**/*.ts'
+  - '**/*.tsx'
+  - '**/*.js'
+  - '**/*.jsx'
 ---
 
 # TSDocの掟
 
 ## 基本原則
 
-- [共通ルール](../doc_comment.md)に準拠すること
+- [ドキュメントコメントの掟](../doc-comment-01jpcvxfxgyqe2jprh9hgn6xq8.md)に準拠すること
   - ドキュメントコメントは英語で記述する。
   - 記述がないものは新規に追加する。
   - 既存のものでもガイドラインに従っていないものは是正する。

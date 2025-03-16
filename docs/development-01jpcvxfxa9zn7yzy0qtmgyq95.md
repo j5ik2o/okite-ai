@@ -1,9 +1,15 @@
 ---
 description: プロジェクトの開発プロセスと規約の全体像
 ruleId: development-01jpcvxfxa9zn7yzy0qtmgyq95
-tags: [development, process, guidelines]
-aliases: [dev-guidelines, development-rules]
-globs: ["**/*"]
+tags:
+  - development
+  - process
+  - guidelines
+aliases:
+  - dev-guidelines
+  - development-rules
+globs:
+  - '**/*'
 ---
 
 
@@ -18,29 +24,29 @@ globs: ["**/*"]
 
 ### コーディング
 
-- [コーディング規約](development/coding.md) - 言語共通のコーディング規約
-  - [Golang](development/coding/golang.md) - Go言語固有の規約
-  - [Rust](development/coding/rust.md) - Rust言語固有の規約
-  - [Scala](development/coding/scala.md) - Scala言語固有の規約
-  - [TypeScript](development/coding/typescript.md) - TypeScript固有の規約
-  - [ドキュメントコメント](development/coding/doc_comment.md) - コードコメントの書き方
+- [コーディングの掟](development/coding-01jpcvxfxca2m945xeb4tjn95b.md) - 言語共通のコーディング規約
+  - [Golangの掟](development/coding/golang-01jpcvxfxgyqe2jprh9hgn6xq7.md) - Go言語固有の規約
+  - [Rustの掟](development/coding/rust-01jpcvxfxf9jafj03jk1zks31y.md) - Rust言語固有の規約
+  - [Scalaの掟](development/coding/scala-01jpcvxfxf9jafj03jk1zks31x.md) - Scala言語固有の規約
+  - [TypeScriptの掟](development/coding/typescript-01jpcvxfxf9jafj03jk1zks31w.md) - TypeScript固有の規約
+  - [ドキュメントコメントの掟](development/coding/doc-comment-01jpcvxfxgyqe2jprh9hgn6xq8.md) - コードコメントの書き方
 
 ### ドキュメント
 
-- [ドキュメント規約](development/document.md) - 開発ドキュメントの作成規約
+- [ドキュメント規約](development/document-01jpfcn4mphghcm0jaj3wy7b7j.md) - 開発ドキュメントの作成規約
   - API仕様書。
   - 設計ドキュメント。
   - 運用ドキュメント。
 
 ### テスト
 
-- [テスト規約](development/testing.md) - テストコードの作成規約
-  - [ユニットテスト](development/testing/unit-testing.md) - ユニットテストの作成と実行
-  - [ベンチマーク](development/testing/benchmark.md) - パフォーマンステストの作成と実行
+- [テスト戦略](development/testing-01jpcvxfxbfm6z9tc89zm9c37c.md) - テストコードの作成規約
+  - [ユニットテスト](development/testing/unit-testing-01jpfcdnrsxk3j5vqvjgqp2f6t.md) - ユニットテストの作成と実行
+  - [ベンチマークの掟](development/testing/benchmark-01jpcvxfxe99ev6x7f60xvbk8t.md) - パフォーマンステストの作成と実行
 
 ### レビュー
 
-- [プルリクエスト規約](development/pull-request.md) - PRの作成とレビューのガイドライン
+- [プルリクエストの掟](development/pull-request-01jpcvxfxbfm6z9tc89zm9c37d.md) - PRの作成とレビューのガイドライン
 
 ## 開発フロー
 

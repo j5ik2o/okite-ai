@@ -1,9 +1,15 @@
 ---
 description: scalarefsに関するドキュメント
 ruleId: scalarefs-01jpcvxfxmsb49cge8ewg55kag
-tags: ["development","coding","scala"]
-aliases: ["scala-references", "scala-resources"]
-globs: ["**/*.scala"]
+tags:
+  - development
+  - coding
+  - scala
+aliases:
+  - scala-references
+  - scala-resources
+globs:
+  - '**/*.scala'
 ---
 
 # Scala参考文献
@@ -176,7 +182,7 @@ globs: ["**/*.scala"]
 
 ## 関連情報
 
-- [Scalaドキュメンテーションルール](scaladoc.md)
-- [Scalaコーディングスタイル](scalastyle.md)
-- [Scalaツール活用](scalatools.md)
-- [Scalaコードレビュー](scalareview.md)
+- [Scaladocの掟](scaladoc-01jpcvxfxmsb49cge8ewg55kah.md)
+- [Scalaコーディングスタイル](scalastyle-01jpcvxfxmsb49cge8ewg55kae.md)
+- [Scalaツール活用](scalatools-01jpcvxfxk935q9x97vbpfp9ta.md)
+- [Scalaコードレビュー](scalareview-01jpcvxfxmsb49cge8ewg55kaf.md)

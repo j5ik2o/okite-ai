@@ -1,16 +1,22 @@
 ---
 description: scaladocに関するドキュメント
 ruleId: scaladoc-01jpcvxfxmsb49cge8ewg55kah
-tags: ["development","coding","scala"]
-aliases: ["scala-documentation", "scaladoc-guidelines"]
-globs: ["**/*.scala"]
+tags:
+  - development
+  - coding
+  - scala
+aliases:
+  - scala-documentation
+  - scaladoc-guidelines
+globs:
+  - '**/*.scala'
 ---
 
 # Scaladocの掟
 
 ## 基本原則
 
-- [共通ルール](../doc_comment.md)に準拠すること
+- [ドキュメントコメントの掟](../doc-comment-01jpcvxfxgyqe2jprh9hgn6xq8.md)に準拠すること
   - ドキュメントコメントは英語で記述する。
   - 記述がないものは新規に追加する。
   - 既存のものでもガイドラインに従っていないものは是正する。

@@ -1,9 +1,15 @@
 ---
 description: scalatoolsに関するドキュメント
 ruleId: scalatools-01jpcvxfxk935q9x97vbpfp9ta
-tags: ["development","coding","scala"]
-aliases: ["scala-tools", "scala-ecosystem"]
-globs: ["**/*.scala"]
+tags:
+  - development
+  - coding
+  - scala
+aliases:
+  - scala-tools
+  - scala-ecosystem
+globs:
+  - '**/*.scala'
 ---
 
 # Scalaツール活用
@@ -566,5 +572,5 @@ sbt dependencyUpdates。
 - [sbt リファレンスマニュアル](https://www.scala-sbt.org/1.x/docs/)
 - [Scalafmt ドキュメント](https://scalameta.org/scalafmt/)
 - [Scalafix ドキュメント](https://scalacenter.github.io/scalafix/)
-- [Scalaドキュメンテーションルール](scaladoc.md)
-- [Scalaコーディングスタイル](scalastyle.md)
+- [Scaladocの掟](scaladoc-01jpcvxfxmsb49cge8ewg55kah.md)
+- [Scalaコーディングスタイル](scalastyle-01jpcvxfxmsb49cge8ewg55kae.md)

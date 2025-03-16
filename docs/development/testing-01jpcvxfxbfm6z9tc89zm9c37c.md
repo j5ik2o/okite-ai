@@ -1,9 +1,19 @@
 ---
 description: テスト戦略と品質保証アプローチに関する包括的な説明
 ruleId: testing-01jpcvxfxbfm6z9tc89zm9c37c
-tags: [development, testing, index]
-aliases: [test-strategy]
-globs: ["**/*_test.go", "**/*.test.ts", "**/*.test.js", "**/*.spec.ts", "**/test/**/*", "**/tests/**/*"]
+tags:
+  - development
+  - testing
+  - index
+aliases:
+  - test-strategy
+globs:
+  - '**/*_test.go'
+  - '**/*.test.ts'
+  - '**/*.test.js'
+  - '**/*.spec.ts'
+  - '**/test/**/*'
+  - '**/tests/**/*'
 ---
 
 
@@ -32,10 +42,10 @@ globs: ["**/*_test.go", "**/*.test.ts", "**/*.test.js", "**/*.spec.ts", "**/test
 
 以下のテスト関連ドキュメントも参照してください：。
 
-- [ユニットテスト](testing/unit-testing.md)
-- [ベンチマークテスト](testing/benchmark.md)
+- [ユニットテスト](testing/unit-testing-01jpfcdnrsxk3j5vqvjgqp2f6t.md)
+- [ベンチマークの掟](testing/benchmark-01jpcvxfxe99ev6x7f60xvbk8t.md)
 
-1. [ユニットテスト](testing/unit-testing.md)
+1. [ユニットテスト](testing/unit-testing-01jpfcdnrsxk3j5vqvjgqp2f6t.md)
    - 個々の関数やクラスの動作検証。
    - モックやスタブの適切な使用。
    - テストカバレッジの維持。
@@ -45,7 +55,7 @@ globs: ["**/*_test.go", "**/*.test.ts", "**/*.test.js", "**/*.spec.ts", "**/test
    - 外部システムとの結合テスト。
    - エンドツーエンドシナリオ。
 
-3. [ベンチマークテスト](testing/benchmark.md)
+3. [ベンチマークの掟](testing/benchmark-01jpcvxfxe99ev6x7f60xvbk8t.md)
    - パフォーマンス指標の測定。
    - 負荷テスト。
    - スケーラビリティ検証。

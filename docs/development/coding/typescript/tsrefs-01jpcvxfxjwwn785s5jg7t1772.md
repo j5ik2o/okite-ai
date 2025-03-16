@@ -1,9 +1,17 @@
 ---
 description: 掟プロジェクトにおけるTypeScript開発に関する参考文献とリソースのリスト
 ruleId: tsrefs-01jpcvxfxjwwn785s5jg7t1772
-tags: [development, typescript, references]
-aliases: [typescript-refs]
-globs: ["**/*.ts", "**/*.tsx", "**/*.js", "**/*.jsx"]
+tags:
+  - development
+  - typescript
+  - references
+aliases:
+  - typescript-refs
+globs:
+  - '**/*.ts'
+  - '**/*.tsx'
+  - '**/*.js'
+  - '**/*.jsx'
 ---
 
 # TypeScript参考文献
@@ -171,7 +179,7 @@ globs: ["**/*.ts", "**/*.tsx", "**/*.js", "**/*.jsx"]
 
 ## 関連情報
 
-- [TypeScriptドキュメンテーションルール](tsdoc.md)
-- [TypeScriptコーディングスタイル](tsstyle.md)
-- [TypeScriptツール活用](tstools.md)
-- [TypeScriptコードレビュー](tsreview.md)
+- [TSDocの掟](tsdoc-01jpcvxfxjwwn785s5jg7t1773.md)
+- [TypeScriptコーディングスタイル](tsstyle-01jpcvxfxjwwn785s5jg7t1770.md)
+- [TypeScriptツール活用](tstools-01jpcvxfxha41b95hkx2y2y2pz.md)
+- [TypeScriptコードレビュー](tsreview-01jpcvxfxjwwn785s5jg7t1771.md)

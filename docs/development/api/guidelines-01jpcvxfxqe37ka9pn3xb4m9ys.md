@@ -1,9 +1,19 @@
 ---
 description: API設計とドキュメント作成のガイドライン
 ruleId: guidelines-01jpcvxfxqe37ka9pn3xb4m9ys
-tags: [api, development, guidelines]
-aliases: [api-guidelines]
-globs: ["**/api/**/*", "**/controllers/**/*", "**/routes/**/*", "**/*.proto", "**/graphql/**/*", "**/schema.graphql"]
+tags:
+  - api
+  - development
+  - guidelines
+aliases:
+  - api-guidelines
+globs:
+  - '**/api/**/*'
+  - '**/controllers/**/*'
+  - '**/routes/**/*'
+  - '**/*.proto'
+  - '**/graphql/**/*'
+  - '**/schema.graphql'
 ---
 
 
@@ -130,6 +140,6 @@ globs: ["**/api/**/*", "**/controllers/**/*", "**/routes/**/*", "**/*.proto", "*
 
 ## 各API仕様書
 
-- [REST API](types/rest.md)
-- [gRPC API](types/grpc.md)
-- [GraphQL API](types/graphql.md)
+- [REST APIの掟](types/rest-01jpcvxfxra1qd2v1btrrz4s2w.md)
+- [gRPC APIドキュメント作成ガイドライン](types/grpc-01jpcvxfxra1qd2v1btrrz4s2x.md)
+- [GraphQL APIドキュメント作成ガイドライン](types/graphql-01jpcvxfxra1qd2v1btrrz4s2y.md)

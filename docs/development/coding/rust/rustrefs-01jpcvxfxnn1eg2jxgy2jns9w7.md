@@ -1,9 +1,15 @@
 ---
 description: rustrefsに関するドキュメント
 ruleId: rustrefs-01jpcvxfxnn1eg2jxgy2jns9w7
-tags: ["development","coding","rust"]
-aliases: ["rust-references", "rust-resources"]
-globs: ["**/*.rs"]
+tags:
+  - development
+  - coding
+  - rust
+aliases:
+  - rust-references
+  - rust-resources
+globs:
+  - '**/*.rs'
 ---
 
 # Rust参考文献
@@ -142,7 +148,7 @@ globs: ["**/*.rs"]
 
 ## 関連情報
 
-- [Rustdocの掟](rustdoc.md)
-- [Rustコーディングスタイル](ruststyle.md)
-- [Rustツール活用](rusttools.md)
-- [Rustコードレビュー](rustreview.md)
+- [Rustdocの掟](rustdoc-01jpcvxfxpsvpepv85myk6s6be.md)
+- [Rustコーディングスタイル](ruststyle-01jpcvxfxnn1eg2jxgy2jns9w5.md)
+- [Rustツール活用](rusttools-01jpcvxfxnn1eg2jxgy2jns9w4.md)
+- [Rustコードレビュー](rustreview-01jpcvxfxnn1eg2jxgy2jns9w6.md)

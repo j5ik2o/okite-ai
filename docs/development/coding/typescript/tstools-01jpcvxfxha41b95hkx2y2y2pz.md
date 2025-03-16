@@ -1,9 +1,17 @@
 ---
 description: 掟プロジェクトにおけるTypeScript開発で使用する必須およびオプショナルツールの説明と設定方法
 ruleId: tstools-01jpcvxfxha41b95hkx2y2y2pz
-tags: [development, typescript, tools]
-aliases: [typescript-tools]
-globs: ["**/*.ts", "**/*.tsx", "**/*.js", "**/*.jsx"]
+tags:
+  - development
+  - typescript
+  - tools
+aliases:
+  - typescript-tools
+globs:
+  - '**/*.ts'
+  - '**/*.tsx'
+  - '**/*.js'
+  - '**/*.jsx'
 ---
 
 # TypeScriptツール活用
@@ -674,6 +682,6 @@ vue create my-app。
 ## 関連情報
 
 - [TypeScript公式ドキュメント](https://www.typescriptlang.org/docs/)
-- [TypeScriptドキュメンテーションルール](tsdoc.md)
-- [TypeScriptコーディングスタイル](tsstyle.md)
-- [TypeScriptコードレビュー](tsreview.md)
+- [TSDocの掟](tsdoc-01jpcvxfxjwwn785s5jg7t1773.md)
+- [TypeScriptコーディングスタイル](tsstyle-01jpcvxfxjwwn785s5jg7t1770.md)
+- [TypeScriptコードレビュー](tsreview-01jpcvxfxjwwn785s5jg7t1771.md)

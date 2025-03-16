@@ -1,9 +1,15 @@
 ---
 description: ruststyleに関するドキュメント
 ruleId: ruststyle-01jpcvxfxnn1eg2jxgy2jns9w5
-tags: ["development","coding","rust"]
-aliases: ["rust-style-guide", "rust-coding-conventions"]
-globs: ["**/*.rs"]
+tags:
+  - development
+  - coding
+  - rust
+aliases:
+  - rust-style-guide
+  - rust-coding-conventions
+globs:
+  - '**/*.rs'
 ---
 
 # Rustコーディングスタイル
@@ -298,7 +304,7 @@ fn test_database_connection() {。
 - コードの「なぜ」を説明するコメントを書く。
 - 複雑なアルゴリズムには説明を追加する。
 - TODOコメントには理由と参照を含める。
-- ドキュメントコメントは[Rustdocの掟](rustdoc.md)に従う
+- ドキュメントコメントは[Rustdocの掟](rustdoc-01jpcvxfxpsvpepv85myk6s6be.md)に従う
 
 ```rust
 // 良いコメント例。

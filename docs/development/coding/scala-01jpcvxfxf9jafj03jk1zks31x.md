@@ -1,9 +1,21 @@
 ---
 description: Scalaのコーディング規約と開発ガイドライン
 ruleId: scala-01jpcvxfxf9jafj03jk1zks31x
-tags: [scala, coding, guidelines]
-aliases: [scala-rules, scala-guidelines]
-globs: ["**/*.ts", "**/*.tsx", "**/*.js", "**/*.jsx", "**/*.go", "**/*.rs", "**/*.scala"]
+tags:
+  - scala
+  - coding
+  - guidelines
+aliases:
+  - scala-rules
+  - scala-guidelines
+globs:
+  - '**/*.ts'
+  - '**/*.tsx'
+  - '**/*.js'
+  - '**/*.jsx'
+  - '**/*.go'
+  - '**/*.rs'
+  - '**/*.scala'
 ---
 
 # Scalaの掟
@@ -19,11 +31,11 @@ globs: ["**/*.ts", "**/*.tsx", "**/*.js", "**/*.jsx", "**/*.go", "**/*.rs", "**/
 
 Scalaのコーディング規約は以下のモジュールに分かれています：。
 
-- [ドキュメンテーションルール](scala/scaladoc.md) - コードドキュメントの書き方
-- [コーディングスタイル](scala/scalastyle.md) - 命名規則、コード構造、関数型プログラミングなど
-- [ツール活用](scala/scalatools.md) - 開発ツールの使用方法
-- [コードレビュー](scala/scalareview.md) - レビュー時のチェックポイント
-- [参考文献](scala/scalarefs.md) - 学習リソースと参考資料
+- [Scaladocの掟](scala/scaladoc-01jpcvxfxmsb49cge8ewg55kah.md) - コードドキュメントの書き方
+- [Scalaコーディングスタイル](scala/scalastyle-01jpcvxfxmsb49cge8ewg55kae.md) - 命名規則、コード構造、関数型プログラミングなど
+- [Scalaツール活用](scala/scalatools-01jpcvxfxk935q9x97vbpfp9ta.md) - 開発ツールの使用方法
+- [Scalaコードレビュー](scala/scalareview-01jpcvxfxmsb49cge8ewg55kaf.md) - レビュー時のチェックポイント
+- [Scala参考文献](scala/scalarefs-01jpcvxfxmsb49cge8ewg55kag.md) - 学習リソースと参考資料
 
 ## クイックリファレンス
 

@@ -5,7 +5,7 @@ tags:
   - 開発
   - API
 globs:
-  - "**/api/**"
+  - '**/api/**'
 ---
 
 # API開発規約
@@ -14,4 +14,4 @@ globs:
 
 ## 目次
 
-- [API設計原則](api/guidelines-01jpcvxfxqe37ka9pn3xb4m9ys.md) - APIの設計原則とガイドライン 
+- [API設計・ドキュメント作成ガイドライン](api/guidelines-01jpcvxfxqe37ka9pn3xb4m9ys.md) - APIの設計原則とガイドライン 

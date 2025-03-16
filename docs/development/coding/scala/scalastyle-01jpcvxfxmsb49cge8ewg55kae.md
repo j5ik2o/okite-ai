@@ -1,9 +1,15 @@
 ---
 description: scalastyleに関するドキュメント
 ruleId: scalastyle-01jpcvxfxmsb49cge8ewg55kae
-tags: ["development","coding","scala"]
-aliases: ["scala-style-guide", "scala-coding-conventions"]
-globs: ["**/*.scala"]
+tags:
+  - development
+  - coding
+  - scala
+aliases:
+  - scala-style-guide
+  - scala-coding-conventions
+globs:
+  - '**/*.scala'
 ---
 
 # Scalaコーディングスタイル
@@ -345,7 +351,7 @@ libraryDependencies ++= Seq(。
 - 公開APIには適切なScaladocを付ける。
 - 複雑なアルゴリズムや非自明なコードには説明を追加する。
 - サンプルコードを提供する。
-- 詳細は[Scalaドキュメンテーションルール](scaladoc.md)を参照
+- 詳細は[Scaladocの掟](scaladoc-01jpcvxfxmsb49cge8ewg55kah.md)を参照
 
 ```scala
 /**
@@ -369,5 +375,5 @@ class UserService(。
 
 - [Scala Style Guide](https://docs.scala-lang.org/style/)
 - [Effective Scala](https://twitter.github.io/effectivescala/)
-- [Scalaドキュメンテーションルール](scaladoc.md)
-- [Scalaツール活用](scalatools.md)
+- [Scaladocの掟](scaladoc-01jpcvxfxmsb49cge8ewg55kah.md)
+- [Scalaツール活用](scalatools-01jpcvxfxk935q9x97vbpfp9ta.md)

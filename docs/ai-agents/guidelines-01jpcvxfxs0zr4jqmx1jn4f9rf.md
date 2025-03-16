@@ -1,9 +1,20 @@
 ---
 description: AIコードエージェントの基本ガイドラインと利用規約
 ruleId: guidelines-01jpcvxfxs0zr4jqmx1jn4f9rf
-tags: [ai, guidelines, best-practices]
-aliases: [ai-guidelines]
-globs: ["**/*.ts", "**/*.js", "**/*.py", "**/*.go", "**/*.rs", "**/*.scala", "**/*.java"]
+tags:
+  - ai
+  - guidelines
+  - best-practices
+aliases:
+  - ai-guidelines
+globs:
+  - '**/*.ts'
+  - '**/*.js'
+  - '**/*.py'
+  - '**/*.go'
+  - '**/*.rs'
+  - '**/*.scala'
+  - '**/*.java'
 ---
 
 
@@ -131,7 +142,7 @@ globs: ["**/*.ts", "**/*.js", "**/*.py", "**/*.go", "**/*.rs", "**/*.scala", "**
 
 ## 関連情報
 
-- [AIエージェントとの対話プロトコル](interaction.md)
-- [AIエージェントの機能と制限](capabilities.md)
-- [AIエージェント活用のベストプラクティス](best-practices.md)
-- [トラブルシューティングガイド](troubleshooting.md)
+- [AIエージェントとの対話プロトコル](interaction-01jpcvxfxs0zr4jqmx1jn4f9re.md)
+- [AIエージェントの機能と制限](capabilities-01jpcvxfxs0zr4jqmx1jn4f9rh.md)
+- [AIエージェント活用のベストプラクティス](best-practices-01jpcvxfxs0zr4jqmx1jn4f9rj.md)
+- [AIエージェントのトラブルシューティング](troubleshooting-01jpcvxfxra1qd2v1btrrz4s2z.md)

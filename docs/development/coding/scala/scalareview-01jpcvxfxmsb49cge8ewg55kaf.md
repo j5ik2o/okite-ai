@@ -1,9 +1,15 @@
 ---
 description: scalareviewに関するドキュメント
 ruleId: scalareview-01jpcvxfxmsb49cge8ewg55kaf
-tags: ["development","coding","scala"]
-aliases: ["scala-code-review", "scala-review-guidelines"]
-globs: ["**/*.scala"]
+tags:
+  - development
+  - coding
+  - scala
+aliases:
+  - scala-code-review
+  - scala-review-guidelines
+globs:
+  - '**/*.scala'
 ---
 
 # Scalaコードレビュー
@@ -281,7 +287,7 @@ def fetch(url: String): Future[Response] = {
 - [ ] パブリックAPIには適切なScaladocがあるか。
 - [ ] ドキュメントには例が含まれているか。
 - [ ] 複雑な処理や非自明な動作は説明されているか。
-- [ ] ドキュメントは[Scalaドキュメンテーションルール](scaladoc.md)に従っているか
+- [ ] ドキュメントは[Scaladocの掟](scaladoc-01jpcvxfxmsb49cge8ewg55kah.md)に従っているか
 
 ```scala
 /**
@@ -470,6 +476,6 @@ def findUser(id: UserId): Option[User] = {
 
 - [Scala Style Guide](https://docs.scala-lang.org/style/)
 - [Effective Scala](https://twitter.github.io/effectivescala/)
-- [Scalaドキュメンテーションルール](scaladoc.md)
-- [Scalaコーディングスタイル](scalastyle.md)
-- [Scalaツール活用](scalatools.md)
+- [Scaladocの掟](scaladoc-01jpcvxfxmsb49cge8ewg55kah.md)
+- [Scalaコーディングスタイル](scalastyle-01jpcvxfxmsb49cge8ewg55kae.md)
+- [Scalaツール活用](scalatools-01jpcvxfxk935q9x97vbpfp9ta.md)

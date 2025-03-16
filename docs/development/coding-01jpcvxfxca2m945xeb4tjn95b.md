@@ -1,9 +1,21 @@
 ---
 description: プロジェクトのコーディング規約と基本原則
 ruleId: coding-01jpcvxfxca2m945xeb4tjn95b
-tags: [coding, guidelines, standards]
-aliases: [coding-standards, coding-guidelines]
-globs: ["**/*.go", "**/*.rs", "**/*.scala", "**/*.ts", "**/*.tsx", "**/*.js", "**/*.jsx"]
+tags:
+  - coding
+  - guidelines
+  - standards
+aliases:
+  - coding-standards
+  - coding-guidelines
+globs:
+  - '**/*.go'
+  - '**/*.rs'
+  - '**/*.scala'
+  - '**/*.ts'
+  - '**/*.tsx'
+  - '**/*.js'
+  - '**/*.jsx'
 ---
 
 
@@ -58,28 +70,28 @@ globs: ["**/*.go", "**/*.rs", "**/*.scala", "**/*.ts", "**/*.tsx", "**/*.js", "*
 
 ### Golang
 
-- [Golangコーディング規約](coding/golang.md) - 基本的なコーディング規約
-- [Golangドキュメンテーションルール](coding/golang/golangdoc.md) - ドキュメント作成ガイド
-- [Golangコーディングスタイル](coding/golang/golangstyle.md) - 推奨されるコーディングスタイル
-- [Golangツール活用](coding/golang/golangtools.md) - 開発ツールの使用方法
-- [Golangコードレビュー](coding/golang/golangreview.md) - レビュー時のチェックポイント
-- [Golang参考文献](coding/golang/golangrefs.md) - 推奨される学習リソース
+- [Golangの掟](coding/golang-01jpcvxfxgyqe2jprh9hgn6xq7.md) - 基本的なコーディング規約
+- [Golangdocの掟](coding/golang/golangdoc-01jpcvxfxqe37ka9pn3xb4m9yr.md) - ドキュメント作成ガイド
+- [Golangコーディングスタイル](coding/golang/golangstyle-01jpcvxfxpsvpepv85myk6s6bg.md) - 推奨されるコーディングスタイル
+- [Golangツール活用](coding/golang/golangtools-01jpcvxfxpsvpepv85myk6s6bf.md) - 開発ツールの使用方法
+- [Golangコードレビュー](coding/golang/golangreview-01jpcvxfxpsvpepv85myk6s6bh.md) - レビュー時のチェックポイント
+- [Golang参考文献](coding/golang/golangrefs-01jpcvxfxpsvpepv85myk6s6bj.md) - 推奨される学習リソース
 
 ### Rust
 
-- [Rustコーディング規約](coding/rust.md) - Rust固有の規約とベストプラクティス
-- [Rustドキュメンテーションルール](coding/rust/rustdoc.md) - Rustdocの活用方法
+- [Rustの掟](coding/rust-01jpcvxfxf9jafj03jk1zks31y.md) - Rust固有の規約とベストプラクティス
+- [Rustdocの掟](coding/rust/rustdoc-01jpcvxfxpsvpepv85myk6s6be.md) - Rustdocの活用方法
 
 ### Scala
 
-- [Scalaコーディング規約](coding/scala.md) - Scala固有の規約とパターン
-- [Scalaドキュメンテーションルール](coding/scala/scaladoc.md) - Scaladocの書き方
+- [Scalaの掟](coding/scala-01jpcvxfxf9jafj03jk1zks31x.md) - Scala固有の規約とパターン
+- [Scaladocの掟](coding/scala/scaladoc-01jpcvxfxmsb49cge8ewg55kah.md) - Scaladocの書き方
 
 ### TypeScript
 
-- [TypeScriptコーディング規約](coding/typescript.md) - TypeScript固有の規約と型の使用方法
-- [TypeScriptドキュメンテーションルール](coding/typescript/tsdoc.md) - TSDocの活用ガイド
+- [TypeScriptの掟](coding/typescript-01jpcvxfxf9jafj03jk1zks31w.md) - TypeScript固有の規約と型の使用方法
+- [TSDocの掟](coding/typescript/tsdoc-01jpcvxfxjwwn785s5jg7t1773.md) - TSDocの活用ガイド
 
 ## 共通ドキュメント
 
-- [ドキュメントコメント規約](coding/doc_comment.md) - 言語共通のドキュメントコメント規約
+- [ドキュメントコメントの掟](coding/doc-comment-01jpcvxfxgyqe2jprh9hgn6xq8.md) - 言語共通のドキュメントコメント規約

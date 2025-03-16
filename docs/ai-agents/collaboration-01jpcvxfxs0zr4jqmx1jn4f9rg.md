@@ -1,9 +1,19 @@
 ---
 description: AIエージェントとの効果的な協働のための基本原則とガイドライン
 ruleId: collaboration-01jpcvxfxs0zr4jqmx1jn4f9rg
-tags: [ai, guidelines, best-practices, index]
-aliases: [ai-guidelines-index]
-globs: ["**/*.ts", "**/*.js", "**/*.jsx", "**/*.tsx", "**/*.py"]
+tags:
+  - ai
+  - guidelines
+  - best-practices
+  - index
+aliases:
+  - ai-guidelines-index
+globs:
+  - '**/*.ts'
+  - '**/*.js'
+  - '**/*.jsx'
+  - '**/*.tsx'
+  - '**/*.py'
 ---
 
 
@@ -97,14 +107,14 @@ globs: ["**/*.ts", "**/*.js", "**/*.jsx", "**/*.tsx", "**/*.py"]
 
 AIエージェントの活用に関する詳細な情報は、以下のドキュメントを参照してください：。
 
-- [基本ガイドライン](guidelines.md) - AIエージェントの利用に関する基本的な規約
-- [機能と制限](capabilities.md) - 利用可能な機能と制限事項の詳細
-- [対話プロトコル](interaction.md) - 効果的な対話方法とプロトコル
-- [ベストプラクティス](best-practices.md) - 効果的な活用のためのプラクティス集
-- [トラブルシューティング](troubleshooting.md) - 問題解決のガイドライン
+- [API設計・ドキュメント作成ガイドライン](../development/api/guidelines-01jpcvxfxqe37ka9pn3xb4m9ys.md) - AIエージェントの利用に関する基本的な規約
+- [AIエージェントの機能と制限](capabilities-01jpcvxfxs0zr4jqmx1jn4f9rh.md) - 利用可能な機能と制限事項の詳細
+- [AIエージェントとの対話プロトコル](interaction-01jpcvxfxs0zr4jqmx1jn4f9re.md) - 効果的な対話方法とプロトコル
+- [AIエージェント活用のベストプラクティス](best-practices-01jpcvxfxs0zr4jqmx1jn4f9rj.md) - 効果的な活用のためのプラクティス集
+- [AIエージェントのトラブルシューティング](troubleshooting-01jpcvxfxra1qd2v1btrrz4s2z.md) - 問題解決のガイドライン
 
 ## 関連情報
 
-- [開発プロセス](../development.md)
-- [タスク管理](../task-management.md)
-- [ツール一覧](../development/tools.md)
+- [開発の掟](../development-01jpcvxfxa9zn7yzy0qtmgyq95.md)
+- [タスク管理の掟](../task-management-01jpcvxfxa9zn7yzy0qtmgyq94.md)
+- [ツールの掟](../development/tools-01jpcvxfxbfm6z9tc89zm9c37b.md)

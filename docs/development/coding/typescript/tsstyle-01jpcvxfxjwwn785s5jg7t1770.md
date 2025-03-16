@@ -1,9 +1,17 @@
 ---
 description: 掟プロジェクトにおけるTypeScriptコードのスタイルガイドと規約
 ruleId: tsstyle-01jpcvxfxjwwn785s5jg7t1770
-tags: [development, typescript, style]
-aliases: [typescript-style]
-globs: ["**/*.ts", "**/*.tsx", "**/*.js", "**/*.jsx"]
+tags:
+  - development
+  - typescript
+  - style
+aliases:
+  - typescript-style
+globs:
+  - '**/*.ts'
+  - '**/*.tsx'
+  - '**/*.js'
+  - '**/*.jsx'
 ---
 
 # TypeScriptコーディングスタイル
@@ -671,6 +679,6 @@ import _ from 'lodash'; // 全体をインポート。
 ## 関連情報
 
 - [TypeScript公式ドキュメント](https://www.typescriptlang.org/docs/)
-- [TypeScriptドキュメンテーションルール](tsdoc.md)
-- [TypeScriptツール活用](tstools.md)
-- [TypeScriptコードレビュー](tsreview.md)
+- [TSDocの掟](tsdoc-01jpcvxfxjwwn785s5jg7t1773.md)
+- [TypeScriptツール活用](tstools-01jpcvxfxha41b95hkx2y2y2pz.md)
+- [TypeScriptコードレビュー](tsreview-01jpcvxfxjwwn785s5jg7t1771.md)

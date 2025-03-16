@@ -1,9 +1,21 @@
 ---
 description: Rustのコーディング規約と開発ガイドライン
 ruleId: rust-01jpcvxfxf9jafj03jk1zks31y
-tags: [rust, coding, guidelines]
-aliases: [rust-rules, rust-guidelines]
-globs: ["**/*.ts", "**/*.tsx", "**/*.js", "**/*.jsx", "**/*.go", "**/*.rs", "**/*.scala"]
+tags:
+  - rust
+  - coding
+  - guidelines
+aliases:
+  - rust-rules
+  - rust-guidelines
+globs:
+  - '**/*.ts'
+  - '**/*.tsx'
+  - '**/*.js'
+  - '**/*.jsx'
+  - '**/*.go'
+  - '**/*.rs'
+  - '**/*.scala'
 ---
 
 # Rustの掟
@@ -18,11 +30,11 @@ globs: ["**/*.ts", "**/*.tsx", "**/*.js", "**/*.jsx", "**/*.go", "**/*.rs", "**/
 
 Rustのコーディング規約は以下のモジュールに分かれています：。
 
-- [ドキュメンテーションルール](rust/rustdoc.md) - コードドキュメントの書き方
-- [コーディングスタイル](rust/ruststyle.md) - 命名規則、コード構造、エラー処理など
-- [ツール活用](rust/rusttools.md) - 開発ツールの使用方法
-- [コードレビュー](rust/rustreview.md) - レビュー時のチェックポイント
-- [参考文献](rust/rustrefs.md) - 学習リソースと参考資料
+- [Rustdocの掟](rust/rustdoc-01jpcvxfxpsvpepv85myk6s6be.md) - コードドキュメントの書き方
+- [Rustコーディングスタイル](rust/ruststyle-01jpcvxfxnn1eg2jxgy2jns9w5.md) - 命名規則、コード構造、エラー処理など
+- [Rustツール活用](rust/rusttools-01jpcvxfxnn1eg2jxgy2jns9w4.md) - 開発ツールの使用方法
+- [Rustコードレビュー](rust/rustreview-01jpcvxfxnn1eg2jxgy2jns9w6.md) - レビュー時のチェックポイント
+- [Rust参考文献](rust/rustrefs-01jpcvxfxnn1eg2jxgy2jns9w7.md) - 学習リソースと参考資料
 
 ## クイックリファレンス
 

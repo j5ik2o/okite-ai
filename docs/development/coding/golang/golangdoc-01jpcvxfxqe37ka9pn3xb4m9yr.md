@@ -1,16 +1,21 @@
 ---
 description: 掟プロジェクトにおけるGolangコードのドキュメント作成規約とベストプラクティス
 ruleId: golangdoc-01jpcvxfxqe37ka9pn3xb4m9yr
-tags: [development, golang, documentation]
-aliases: [golang-doc]
-globs: ["**/*.go"]
+tags:
+  - development
+  - golang
+  - documentation
+aliases:
+  - golang-doc
+globs:
+  - '**/*.go'
 ---
 
 # Golangdocの掟
 
 ## 基本原則
 
-- [共通ルール](../doc_comment.md)に準拠すること
+- [ドキュメントコメントの掟](../doc-comment-01jpcvxfxgyqe2jprh9hgn6xq8.md)に準拠すること
   - ドキュメントコメントは英語で記述する。
   - 記述がないものは新規に追加する。
   - 既存のものでもガイドラインに従っていないものは是正する。

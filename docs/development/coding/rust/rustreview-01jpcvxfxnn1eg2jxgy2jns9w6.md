@@ -1,9 +1,15 @@
 ---
 description: rustreviewに関するドキュメント
 ruleId: rustreview-01jpcvxfxnn1eg2jxgy2jns9w6
-tags: ["development","coding","rust"]
-aliases: ["rust-code-review", "rust-review-guidelines"]
-globs: ["**/*.rs"]
+tags:
+  - development
+  - coding
+  - rust
+aliases:
+  - rust-code-review
+  - rust-review-guidelines
+globs:
+  - '**/*.rs'
 ---
 
 # Rustコードレビュー
@@ -269,7 +275,7 @@ mod tests {。
 - [ ] パブリックAPIには適切なドキュメントがあるか。
 - [ ] ドキュメントには例が含まれているか。
 - [ ] 複雑な処理や非自明な動作は説明されているか。
-- [ ] ドキュメントは[Rustdocの掟](rustdoc.md)に従っているか
+- [ ] ドキュメントは[Rustdocの掟](rustdoc-01jpcvxfxpsvpepv85myk6s6be.md)に従っているか
 
 ```rust
 /// 2つの数値を安全に加算します。
@@ -409,6 +415,6 @@ unwrap を使わないでください。
 ## 関連情報
 
 - [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)
-- [Rustdocの掟](rustdoc.md)
-- [Rustコーディングスタイル](ruststyle.md)
-- [Rustツール活用](rusttools.md)
+- [Rustdocの掟](rustdoc-01jpcvxfxpsvpepv85myk6s6be.md)
+- [Rustコーディングスタイル](ruststyle-01jpcvxfxnn1eg2jxgy2jns9w5.md)
+- [Rustツール活用](rusttools-01jpcvxfxnn1eg2jxgy2jns9w4.md)
