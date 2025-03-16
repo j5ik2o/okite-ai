@@ -68,9 +68,9 @@ function logDebug(message) {
 
 // ruleIdの形式をチェックする関数
 function isValidRuleId(ruleId) {
-  // 接頭辞付きのULIDの場合（例: META-RULES-01JPBN8MMS2GDBH8HBK78E6F24）
+  // 接頭辞付きのULIDの場合（例: META-01JPBN8MMS2GDBH8HBK78E6F24）
   // 接頭辞を必須とする
-  const regex = /^[A-Z0-9]+-[A-Z0-9]+-([0-9A-Z]{26})$/;
+  const regex = /^[A-Z0-9]+-([0-9A-Z]{26})$/;
   const match = ruleId.match(regex);
   
   if (!match) {
