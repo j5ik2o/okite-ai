@@ -47,7 +47,17 @@
     "typescript": "^5.8.2"
   },
   "dependencies": {
+    "@langchain/anthropic": "^0.3.15",
+    "@langchain/community": "^0.3.35",
+    "@langchain/core": "^0.3.42",
+    "@langchain/ollama": "^0.2.0",
+    "@langchain/openai": "^0.4.4",
+    "dotenv": "^16.4.7",
     "glob": "^11.0.1",
+    "hnswlib-node": "^3.0.0",
+    "langchain": "^0.3.19",
+    "multi-llm-ts": "^2.16.0",
+    "ollama": "^0.5.14",
     "ulidx": "^2.4.1"
   }
 }

@@ -5,3 +5,5 @@
 node_modules/ 
 .obsidian/workspace-mobile.json
 dist/
+.env
+vector-store/
