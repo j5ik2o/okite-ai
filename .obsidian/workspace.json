@@ -169,6 +169,8 @@
   },
   "active": "cd3fff5f19f6e488",
   "lastOpenFiles": [
+    "README.md.tpl",
+    "README copy.md",
     "dist/scripts/update-readme-structure.js",
     "dist/scripts/update-readme-structure.js.map",
     "scripts/update-readme-structure.ts",
@@ -183,7 +185,6 @@
     "dist/scripts/fix-md-links.js.map",
     "dist/scripts/fix-md-links.js",
     "dist/scripts/fix-frontmatter.js.map",
-    "dist/scripts/fix-frontmatter.js",
     "node_modules/ts-node/README.md",
     "node_modules/ts-node/dist-raw/README.md",
     "node_modules/ts-node/dist-raw/NODE-LICENSE.md",
@@ -204,7 +205,6 @@
     "node_modules/@jridgewell/sourcemap-codec/README.md",
     "node_modules/@tsconfig/node14/README.md",
     "node_modules/@tsconfig/node16/README.md",
-    "node_modules/@tsconfig/node12/README.md",
     "無題のファイル.canvas"
   ]
 }

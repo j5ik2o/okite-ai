@@ -20,14 +20,16 @@ Rust2018モジュールと同じディレクトリとファイルの配置を厳
 ```text
 ${PROJECT_ROOT}/
   ├── module-a/
-  │   ├── module-b.md
-  │   ├── module-c.md
+  │   ├── module-b-${id}.md
+  │   ├── module-c-${id}.md
   │   └── module-c/ 
-  │      ├── module-d.md
-  │      └── module-e.md 
-  └── module-a.md
+  │      ├── module-d-${id}.md
+  │      └── module-e-${id}.md 
+  └── module-a-${id}.md
 ```
 
+- 識別子である${id}の仕様については[ルールIDの定義](meta-rules-basic-rule-id.mdc)を参照すること
+  - 実際にはファイル名に${id}が付与されているが、この仕様を理解する上では一旦${id}を無視して読んでよい
 - mdファイルは単一でもモジュールを形成する  
 - module-a.md が大きくなり過ぎたら、以下のように分割していく  
   - module-a.md # インデックスファイル。別名親モジュール

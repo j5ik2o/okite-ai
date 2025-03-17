@@ -22,7 +22,7 @@ function showHelp(): void {
   console.log();
   console.log('説明:');
   console.log('  掟ドキュメントのルールIDを生成します。');
-  console.log('  prefix-ulidの形式でルールIDが生成されます。');
+  console.log('  prefix-idの形式でルールIDが生成されます。');
   console.log();
   console.log('引数:');
   console.log('  prefix    接頭辞（必須）');

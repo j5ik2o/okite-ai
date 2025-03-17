@@ -41,7 +41,7 @@ if (args.includes('-h') || args.includes('--help')) {
   
   1. 各Markdownファイルは以下の必須フィールドを含むフロントマターが必要:
      - description: ドキュメントの説明
-     - ruleId: 接頭辞-ulid形式、接頭辞は必須、すべて小文字であること
+     - ruleId: 接頭辞-id形式、接頭辞は必須、すべて小文字であること
      - tags: 少なくとも1つのタグ
      - globs: 少なくとも1つのglobパターン
   
