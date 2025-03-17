@@ -8,6 +8,20 @@ import { ulid, isValid as isValidULID } from 'ulidx';
 import * as path from 'path';
 
 /**
+ * 状態としてありえない状況を表すエラークラス
+ * エラーハンドリングのルールに基づき、回復不能・致命的状況で使用する
+ */
+export class IllegalStateError extends Error {
+  constructor(message: string) {
+    super(message);
+    this.name = 'IllegalStateError';
+    
+    // Errorオブジェクトのプロトタイプチェーンを正しく設定
+    Object.setPrototypeOf(this, IllegalStateError.prototype);
+  }
+}
+
+/**
  * ruleIdの形式をチェックする関数
  * @param {string} ruleId - 検証するruleId
  * @returns {boolean} - ruleIdが有効な形式ならtrue、そうでなければfalse

@@ -41,38 +41,40 @@ globs: ["**/*.go", "**/*.rs", "**/*.scala", "**/*.java", "**/*.ts", "**/*.js"]
    - ワークフロー状態の遷移エラー。
    - 依存サービスからの回復可能なエラー。
 
-## 回復不能・例外的状況
+## 回復不能・致命的状況
 
-プログラムの実行を継続できない場合は、例外やパニックを使用します。
+プログラムの実行を継続できない、回復不能・致命的な状況では、キャッチしない例外やパニックを使用します。
 
 ### 引数としてありえない状況
 
-| 言語 | 対応方法 |。
-|------|----------|。
-| Java/Scala | `IllegalArgumentException` |。
-| Rust/Go | `panic` |。
-| TypeScript | `IllegalArgumentError` |。
+| 言語 | 対応方法 |
+|------|----------|
+| Java/Scala | `IllegalArgumentException` |
+| Rust | `panic!` |
+| Go | `panic` |
+| TypeScript | `IllegalArgumentError` (型がなければ作る) |
 
 ### 状態としてありえない状況
 
-| 言語 | 対応方法 |。
-|------|----------|。
-| Java/Scala | `IllegalStateException` |。
-| Rust/Go | `panic` |。
-| TypeScript | `IllegalStateError` |。
+| 言語 | 対応方法 |
+|------|----------|
+| Java/Scala | `IllegalStateException` |
+| Rust | `panic!` |
+| Go | `panic` |
+| TypeScript | `IllegalStateError` (型がなければ作る) |
 
 ### 本来発生しない箇所（到達不可コード）
 
-| 言語 | 対応方法 |。
-|------|----------|。
-| Java/Scala | `AssertionError` |。
-| Rust | `panic`または`unreachable!()` |。
-| Go | `panic` |。
-| TypeScript | `AssertionError` |。
+| 言語 | 対応方法 |
+|------|----------|
+| Java/Scala | `AssertionError` |
+| Rust | `panic`または`unreachable!()` |
+| Go | `panic` |
+| TypeScript | `AssertionError` (型がなければ作る) |
 
 ## エラーハンドリングの設計指針
 
-エラーハンドリングの設計時には、以下の質問に答えてください：。
+エラーハンドリングの設計時には、以下の質問に答えてください：
 
 1. **このエラーは回復可能か？**。
    - はい → `Either`/`Result`型を使用。

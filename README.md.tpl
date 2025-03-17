@@ -4,7 +4,7 @@
 
 ## 構造
 
-<DIR_STRUCTURE/>
+${DIR_STRUCTURE}
 
 ## 使い方
 
