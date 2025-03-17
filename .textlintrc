@@ -1,33 +1,41 @@
 {
   "rules": {
-    "preset-ja-technical-writing": {
-      "no-exclamation-question-mark": false,
-      "sentence-length": {
-        "max": 120
-      },
-      "max-comma": {
-        "max": 3
-      },
-      "max-ten": {
-        "max": 3
-      },
-      "max-kanji-continuous-len": {
-        "max": 6
-      },
-      "arabic-kanji-numbers": true,
-      "no-doubled-joshi": {
-        "min_interval": 1
-      }
+    "no-exclamation-question-mark": false,
+    "sentence-length": {
+      "max": 120
     },
-    "spellcheck-tech-word": true,
-    "ja-no-mixed-period": {
-      "periodMark": "。"
+    "max-comma": {
+      "max": 3
     },
-    "ja-no-weak-phrase": true,
-    "ja-no-redundant-expression": true,
-    "ja-hiragana-keishikimeishi": true,
+    "max-ten": {
+      "max": 3
+    },
     "max-kanji-continuous-len": {
       "max": 6
-    }
+    },
+    "no-doubled-joshi": {
+      "min_interval": 1
+    },
+    "ja-no-mixed-period": {
+      "periodMark": "。",
+      "allowPeriodMarks": ["：", ":", ")", "）", "】", "]", "？", "?", "*"],
+      "allowEOF": true,
+      "forceAppendPeriod": false,
+      "ignorePhrases": [
+        "/^\\|.+\\|$/m",
+        "/^.+[：:]$/m",
+        "/^.+[：:].+$/m",
+        "/^\\d+\\.\\s+.+$/m",
+        "/^\\*\\s+.+$/m",
+        "/^-\\s+.+$/m",
+        "/^\\d+\\.\\s+\\*\\*.+\\*\\*[？?]$/m",
+        "/^.+[：:]\\s*$/m",
+        "/^.+\\*\\*.*\\*\\*$/m"
+      ]
+    },
+    "spellcheck-tech-word": true,
+    "ja-no-weak-phrase": true,
+    "ja-no-redundant-expression": true,
+    "ja-hiragana-keishikimeishi": true
   }
 } 
