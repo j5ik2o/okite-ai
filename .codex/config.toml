@@ -1,0 +1,15 @@
+model = "gpt-5.2-codex"
+model_reasoning_effort = "xhigh"
+hide_agent_reasoning = true
+network_access = true
+
+[features]
+rmcp_client=true
+web_search_request=true
+skills=true
+unified_exec = true
+
+[mcp_servers.serena]
+command = "uvx"
+args = ["--from", "git+https://github.com/oraios/serena", "serena", "start-mcp-server", "--context", "codex", "--project", ".", "--enable-web-dashboard", "false"]
+startup_timeout_sec = 30.0
