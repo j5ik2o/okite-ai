@@ -29,3 +29,7 @@ mkdir -p "${ROOT_DIR}/.codex/prompts"
 for f in "${OKITE_ROOT}/.codex/prompts"/kiro-*.md; do
   ln -sf "$f" "${ROOT_DIR}/.codex/prompts/"
 done
+
+# .kiro
+mkdir -p "${ROOT_DIR}/.kiro"
+ln -sf "${OKITE_ROOT}/.kiro/settings" "${ROOT_DIR}/.kiro/"
