@@ -23,16 +23,17 @@ AIは一般的なベストプラクティスに従った「教科書的に正し
 - **同じドメイン**：認証周りで作業するなら、他の認証コードを見つける
 - **同じパターン**：APIエンドポイントを追加するなら、他のエンドポイントを見つける
 
-検索戦略：
+検索戦略（例)：
+
 ```
 # 類似のクラス/モジュールを検索
 Glob: **/*Repository*.{ts,py,go,rs}
-Glob: **/*Service*.{ts,py,go,rs}
+Glob: **/*UseCase*.{ts,py,go,rs}
 Glob: **/*Controller*.{ts,py,go,rs}
 
 # 類似のパターンを検索
 Grep: "class.*Repository"
-Grep: "interface.*Service"
+Grep: "interface.*UseCase"
 ```
 
 ### ステップ2：プロジェクトパターンの抽出
