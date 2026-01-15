@@ -1,156 +1,168 @@
-# Pattern Checklist by Code Type
+# コードタイプ別パターンチェックリスト
 
-Detailed checklists for analyzing existing patterns before implementing new code.
+新しいコードを実装する前に既存パターンを分析するための詳細チェックリスト。
 
-## Classes and Modules
+## クラスとモジュール
 
-### Structural Patterns
-- [ ] Interface/Protocol defined separately?
-- [ ] Abstract base class used?
-- [ ] Direct concrete class only?
-- [ ] Mixin/Trait composition?
-- [ ] Functional module pattern?
+### 構造パターン
+- [ ] インターフェース/プロトコルが別途定義されているか？
+- [ ] 抽象基底クラスを使用しているか？
+- [ ] 具象クラスのみか？
+- [ ] Mixin/Traitの合成か？
+- [ ] 関数型モジュールパターンか？
 
-### Naming Conventions
-- [ ] Class name prefix (e.g., `Base*`, `Abstract*`)
-- [ ] Class name suffix (e.g., `*Service`, `*Repository`, `*Handler`)
-- [ ] File name matches class name?
-- [ ] File name casing (PascalCase, snake_case, kebab-case)
-- [ ] Method naming (camelCase, snake_case)
-- [ ] Private member prefix (`_`, `#`, none)
+### 命名規約
+- [ ] クラス名のプレフィックス（例：`Base*`、`Abstract*`）
+- [ ] クラス名のサフィックス（例：`*Service`、`*Repository`、`*Handler`）
+- [ ] ファイル名がクラス名と一致しているか？
+- [ ] ファイル名のケーシング（PascalCase、snake_case、kebab-case）
+- [ ] メソッド命名（camelCase、snake_case）
+- [ ] プライベートメンバーのプレフィックス（`_`、`#`、なし）
 
-### Dependency Injection
-- [ ] Constructor injection
-- [ ] Property injection
-- [ ] Method injection
-- [ ] DI container/framework used
-- [ ] Manual wiring
-- [ ] Factory pattern
+### 依存性注入
+- [ ] コンストラクタインジェクション
+- [ ] プロパティインジェクション
+- [ ] メソッドインジェクション
+- [ ] DIコンテナ/フレームワーク使用
+- [ ] 手動ワイヤリング
+- [ ] Factoryパターン
 
-## Functions
+## 関数
 
-### Function Patterns
-- [ ] Pure functions preferred?
-- [ ] Async/await or callbacks?
-- [ ] Promise chains?
-- [ ] Error return values vs exceptions?
-- [ ] Guard clauses style?
+### 関数パターン
+- [ ] 純粋関数が好まれているか？
+- [ ] async/awaitかコールバックか？
+- [ ] Promiseチェーンか？
+- [ ] エラー戻り値か例外か？
+- [ ] ガード節のスタイルは？
 
-### Parameter Patterns
-- [ ] Options object for multiple params?
-- [ ] Destructuring in signature?
-- [ ] Default values approach
-- [ ] Required vs optional order
+### パラメータパターン
+- [ ] 複数パラメータにオプションオブジェクト？
+- [ ] シグネチャでの分割代入？
+- [ ] デフォルト値のアプローチ
+- [ ] 必須と任意の順序
 
-## Error Handling
+## エラー処理
 
-### Exception Patterns
-- [ ] Custom exception classes?
-- [ ] Single base exception?
-- [ ] Exception hierarchy depth
-- [ ] Exception naming (`*Error`, `*Exception`)
+### 例外パターン
+- [ ] カスタム例外クラス？
+- [ ] 単一の基底例外？
+- [ ] 例外階層の深さ
+- [ ] 例外命名（`*Error`、`*Exception`）
 
-### Result/Either Patterns
-- [ ] Result type used?
-- [ ] Optional/Maybe for nullable?
-- [ ] Error codes vs error objects?
-- [ ] Error message format
+### Result/Eitherパターン
+- [ ] Result型を使用？
+- [ ] null可能にOptional/Maybe？
+- [ ] エラーコードかエラーオブジェクトか？
+- [ ] エラーメッセージのフォーマット
 
-### Recovery Patterns
-- [ ] Retry logic location
-- [ ] Fallback strategies
-- [ ] Logging approach
+### リカバリーパターン
+- [ ] リトライロジックの配置場所
+- [ ] フォールバック戦略
+- [ ] ロギングアプローチ
 
-## Testing
+## テスト
 
-### Test Organization
-- [ ] Colocated (`*.test.ts` next to source)
-- [ ] Separate directory (`__tests__/`, `tests/`)
-- [ ] Mirror structure?
+### テスト構成
+- [ ] コロケーション（ソースの横に`*.test.ts`）
+- [ ] 別ディレクトリ（`__tests__/`、`tests/`）
+- [ ] ミラー構造？
 
-### Test Naming
-- [ ] `test_*` prefix
-- [ ] `*_test` suffix
-- [ ] `*.spec.*` naming
-- [ ] Describe/it style
+### テスト命名
+- [ ] `test_*`プレフィックス
+- [ ] `*_test`サフィックス
+- [ ] `*.spec.*`命名
+- [ ] describe/itスタイル
 
-### Test Patterns
-- [ ] AAA (Arrange-Act-Assert)?
-- [ ] Given-When-Then?
-- [ ] Test fixtures approach
-- [ ] Mock/stub conventions
-- [ ] Factory functions for test data
+### テストパターン
+- [ ] AAA（Arrange-Act-Assert）？
+- [ ] Given-When-Then？
+- [ ] テストフィクスチャのアプローチ
+- [ ] モック/スタブの規約
+- [ ] テストデータ用ファクトリ関数
 
-## API/Endpoints
+## API/エンドポイント
 
-### Route Patterns
-- [ ] RESTful conventions?
-- [ ] Route file organization
-- [ ] Controller/Handler structure
-- [ ] Middleware usage
+### ルートパターン
+- [ ] RESTful規約？
+- [ ] ルートファイルの構成
+- [ ] Controller/Handler構造
+- [ ] ミドルウェアの使用
 
-### Request/Response
-- [ ] DTO classes?
-- [ ] Validation layer location
-- [ ] Response envelope format
-- [ ] Error response structure
+### リクエスト/レスポンス
+- [ ] DTOクラス？
+- [ ] バリデーションレイヤーの配置
+- [ ] レスポンスエンベロープのフォーマット
+- [ ] エラーレスポンスの構造
 
-## Configuration
+## 設定
 
-### Config Patterns
-- [ ] Environment variables
-- [ ] Config files (YAML, JSON, TOML)
-- [ ] Config class/object structure
-- [ ] Secrets handling
+### 設定パターン
+- [ ] 環境変数
+- [ ] 設定ファイル（YAML、JSON、TOML）
+- [ ] 設定クラス/オブジェクト構造
+- [ ] シークレットの扱い
 
-## Documentation
+## ドキュメント
 
-### Comment Patterns
-- [ ] JSDoc/docstring style
-- [ ] Inline comments frequency
-- [ ] TODO format
-- [ ] License headers
+### コメントパターン
+- [ ] JSDoc/docstringスタイル
+- [ ] インラインコメントの頻度
+- [ ] TODOフォーマット
+- [ ] ライセンスヘッダー
 
-### Type Documentation
-- [ ] Type annotations everywhere?
-- [ ] Strategic annotation only?
-- [ ] Return type always specified?
+### 型ドキュメント
+- [ ] 全箇所に型アノテーション？
+- [ ] 戦略的なアノテーションのみ？
+- [ ] 戻り値型は常に指定？
 
-## File Organization
+## ファイル構成
 
-### Directory Structure
-- [ ] Feature-based (by domain)
-- [ ] Layer-based (controllers/, services/, repos/)
-- [ ] Hybrid approach
+### ディレクトリ構造
+- [ ] 機能ベース（ドメイン別）
+- [ ] レイヤーベース（controllers/、services/、repos/）
+- [ ] ハイブリッドアプローチ
 
-### Module Exports
-- [ ] Barrel files (index.ts)?
-- [ ] Named exports only?
-- [ ] Default exports?
-- [ ] Re-exports pattern
+### モジュールエクスポート
+- [ ] バレルファイル（index.ts）？
+- [ ] 名前付きエクスポートのみ？
+- [ ] デフォルトエクスポート？
+- [ ] 再エクスポートパターン
 
-## Language-Specific
+## 言語固有
 
 ### TypeScript
-- [ ] Strict mode?
-- [ ] Type vs Interface preference
-- [ ] Enum vs const object
-- [ ] any usage tolerance
+- [ ] strictモード？
+- [ ] Type vs Interfaceの優先
+- [ ] Enum vs constオブジェクト
+- [ ] anyの使用許容度
 
 ### Python
-- [ ] Type hints everywhere?
-- [ ] dataclass vs regular class
-- [ ] __all__ exports
-- [ ] relative vs absolute imports
+- [ ] 全箇所に型ヒント？
+- [ ] dataclass vs 通常クラス
+- [ ] __all__エクスポート
+- [ ] 相対 vs 絶対インポート
 
 ### Go
-- [ ] Interface in consumer package?
-- [ ] Pointer vs value receivers
-- [ ] Error wrapping style
-- [ ] Package naming
+- [ ] コンシューマパッケージにインターフェース？
+- [ ] ポインタ vs 値レシーバ
+- [ ] エラーラッピングスタイル
+- [ ] パッケージ命名
 
 ### Rust
-- [ ] Result<T, E> patterns
-- [ ] Error type design
-- [ ] Module organization
-- [ ] Trait definitions location
+- [ ] Result<T, E>パターン
+- [ ] エラー型の設計
+- [ ] モジュール構成
+- [ ] トレイト定義の配置場所
+
+### Scala
+- [ ] case class vs 通常クラス
+- [ ] trait vs abstract class
+- [ ] sealed trait/enum の使用
+- [ ] implicit/given の使用パターン
+- [ ] for内包表記 vs flatMap/map
+- [ ] Either/Option/Try の使い分け
+- [ ] コンパニオンオブジェクトの構成
+- [ ] パッケージオブジェクトの使用
+- [ ] 型クラスパターンの実装方式
+- [ ] Effect型（IO、ZIO、Cats Effect）の選択

@@ -1,130 +1,130 @@
 ---
 name: learning-before-coding
-description: Enforce learning from existing implementations before writing new code. Use this skill when implementing new features, adding new classes/functions, or modifying existing code. Prevents AI from writing "textbook" code that ignores project conventions. Triggers on: new feature implementation, adding components, refactoring, code generation requests.
+description: 新しいコードを書く前に既存の実装から学ぶことを強制する。新機能の実装、クラス/関数の追加、既存コードの修正時にこのスキルを使用する。AIがプロジェクト規約を無視した「教科書的な」コードを書くことを防止する。トリガー：新機能実装、コンポーネント追加、リファクタリング、コード生成リクエスト。
 ---
 
-# Learning Before Coding
+# コーディング前の学習
 
-Analyze existing implementations before writing any new code. The existing codebase IS the documentation of project conventions.
+新しいコードを書く前に既存の実装を分析する。既存のコードベースこそがプロジェクト規約のドキュメントである。
 
-## Core Principle
+## 基本原則
 
-**Never write code without first understanding how similar code is written in this project.**
+**このプロジェクトで類似のコードがどのように書かれているかを理解せずにコードを書いてはならない。**
 
-AI tends to write "textbook correct" code that follows general best practices but ignores project-specific patterns. This skill prevents that by enforcing a mandatory analysis phase.
+AIは一般的なベストプラクティスに従った「教科書的に正しい」コードを書く傾向があるが、プロジェクト固有のパターンを無視しがちである。このスキルは必須の分析フェーズを強制することでそれを防ぐ。
 
-## Mandatory Pre-Implementation Workflow
+## 必須の実装前ワークフロー
 
-### Step 1: Identify Similar Code
+### ステップ1：類似コードの特定
 
-Before implementing anything, find existing code that is:
-- **Same layer**: If adding a repository, find other repositories
-- **Same type**: If adding a service, find other services
-- **Same domain**: If working in auth, find other auth code
-- **Same pattern**: If adding an API endpoint, find other endpoints
+何かを実装する前に、以下の条件を満たす既存のコードを見つける：
+- **同じレイヤー**：リポジトリを追加するなら、他のリポジトリを見つける
+- **同じ種類**：サービスを追加するなら、他のサービスを見つける
+- **同じドメイン**：認証周りで作業するなら、他の認証コードを見つける
+- **同じパターン**：APIエンドポイントを追加するなら、他のエンドポイントを見つける
 
-Search strategies:
+検索戦略：
 ```
-# Find similar classes/modules
+# 類似のクラス/モジュールを検索
 Glob: **/*Repository*.{ts,py,go,rs}
 Glob: **/*Service*.{ts,py,go,rs}
 Glob: **/*Controller*.{ts,py,go,rs}
 
-# Find similar patterns
+# 類似のパターンを検索
 Grep: "class.*Repository"
 Grep: "interface.*Service"
 ```
 
-### Step 2: Extract Project Patterns
+### ステップ2：プロジェクトパターンの抽出
 
-Analyze 2-3 similar implementations and document. For comprehensive checklists by code type, see [pattern-checklist.md](references/pattern-checklist.md).
+2〜3個の類似実装を分析してドキュメント化する。コードタイプ別の詳細なチェックリストについては、[pattern-checklist.md](references/pattern-checklist.md)を参照。
 
-| Aspect | What to Look For |
-|--------|------------------|
-| **Structure** | Interface + Class? Class only? Functional? |
-| **Naming** | Prefix/suffix conventions, casing style |
-| **Dependencies** | How are dependencies injected? Constructor? |
-| **Error handling** | Exceptions? Result types? Error codes? |
-| **Validation** | Where and how is input validated? |
-| **Testing** | Test file location, naming, patterns |
-| **Comments** | Docstrings? JSDoc? None? |
-| **Imports** | Absolute? Relative? Barrel files? |
+| 観点 | 確認事項 |
+|------|----------|
+| **構造** | インターフェース + クラス？クラスのみ？関数型？ |
+| **命名** | プレフィックス/サフィックス規約、ケーシングスタイル |
+| **依存関係** | 依存性はどのように注入されるか？コンストラクタ？ |
+| **エラー処理** | 例外？Result型？エラーコード？ |
+| **バリデーション** | どこでどのように入力を検証するか？ |
+| **テスト** | テストファイルの場所、命名、パターン |
+| **コメント** | Docstring？JSDoc？なし？ |
+| **インポート** | 絶対パス？相対パス？バレルファイル？ |
 
-### Step 3: Document Findings Before Coding
+### ステップ3：コーディング前に発見事項をドキュメント化
 
-Create a mental checklist:
+メンタルチェックリストを作成：
 ```
-Project Pattern Analysis:
-- [ ] Structure: [e.g., "Direct class, no interface"]
-- [ ] Naming: [e.g., "PascalCase, *Repository suffix"]
-- [ ] DI pattern: [e.g., "Constructor injection"]
-- [ ] Error handling: [e.g., "Custom exceptions"]
-- [ ] Test pattern: [e.g., "*.test.ts colocated"]
+プロジェクトパターン分析：
+- [ ] 構造: [例：「インターフェースなしの直接クラス」]
+- [ ] 命名: [例：「PascalCase、*Repositoryサフィックス」]
+- [ ] DIパターン: [例：「コンストラクタインジェクション」]
+- [ ] エラー処理: [例：「カスタム例外」]
+- [ ] テストパターン: [例：「*.test.tsを同じ場所に配置」]
 ```
 
-### Step 4: Implement Following Patterns
+### ステップ4：パターンに従って実装
 
-Only after completing Steps 1-3, write code that:
-- Matches the identified structure exactly
-- Uses the same naming conventions
-- Follows the same error handling approach
-- Places files in the same locations
+ステップ1〜3を完了した後にのみ、以下を満たすコードを書く：
+- 特定した構造に正確に一致
+- 同じ命名規約を使用
+- 同じエラー処理アプローチに従う
+- ファイルを同じ場所に配置
 
-## Anti-Patterns to Avoid
+## 避けるべきアンチパターン
 
-| Don't Do This | Do This Instead |
-|---------------|-----------------|
-| Add interface when project uses direct classes | Match existing pattern (class only) |
-| Use dependency injection framework when project uses manual DI | Use manual constructor injection |
-| Add comprehensive error handling when project uses simple throws | Match existing error style |
-| Create `src/repositories/` when project uses `src/infrastructure/` | Use existing directory structure |
-| Add JSDoc when project has no comments | Follow existing documentation style |
+| やってはいけないこと | 代わりにやるべきこと |
+|----------------------|----------------------|
+| プロジェクトが直接クラスを使用しているのにインターフェースを追加 | 既存パターンに合わせる（クラスのみ） |
+| プロジェクトが手動DIを使用しているのにDIフレームワークを使用 | 手動のコンストラクタインジェクションを使用 |
+| プロジェクトがシンプルなthrowを使用しているのに包括的なエラー処理を追加 | 既存のエラースタイルに合わせる |
+| プロジェクトが`src/infrastructure/`を使用しているのに`src/repositories/`を作成 | 既存のディレクトリ構造を使用 |
+| プロジェクトにコメントがないのにJSDocを追加 | 既存のドキュメントスタイルに従う |
 
-## Quick Reference Checklist
+## クイックリファレンスチェックリスト
 
-Before writing ANY new code:
+新しいコードを書く前に：
 
-1. **Find**: Locate 2-3 similar existing implementations
-2. **Read**: Study their structure, patterns, conventions
-3. **Extract**: Document the project-specific patterns
-4. **Match**: Ensure new code follows identified patterns exactly
-5. **Verify**: Compare new code against existing examples
+1. **検索**：2〜3個の類似する既存実装を見つける
+2. **読む**：その構造、パターン、規約を学ぶ
+3. **抽出**：プロジェクト固有のパターンをドキュメント化
+4. **一致**：新しいコードが特定したパターンに正確に従うようにする
+5. **検証**：新しいコードを既存の例と比較
 
-## Examples
+## 例
 
-### Bad: Writing Without Analysis
+### 悪い例：分析なしでコードを書く
 
 ```
-User: "Add a UserRepository"
-AI: *Immediately writes*
+ユーザー：「UserRepositoryを追加して」
+AI：*すぐに書き始める*
 interface IUserRepository { ... }
 class UserRepository implements IUserRepository { ... }
 ```
 
-### Good: Analyze First
+### 良い例：まず分析する
 
 ```
-User: "Add a UserRepository"
-AI: *First searches*
+ユーザー：「UserRepositoryを追加して」
+AI：*まず検索する*
 Glob: **/*Repository*.ts
 
-AI: *Reads existing repositories*
-Found: ProductRepository.ts, OrderRepository.ts
-Pattern: Direct class export, no interface, constructor DI
+AI：*既存のリポジトリを読む*
+発見：ProductRepository.ts, OrderRepository.ts
+パターン：インターフェースなしの直接クラスエクスポート、コンストラクタDI
 
-AI: *Then implements matching pattern*
+AI：*次にパターンに合わせて実装*
 class UserRepository {
   constructor(private db: Database) {}
   ...
 }
 ```
 
-## Integration with Development Workflow
+## 開発ワークフローとの統合
 
-This skill should be activated:
-- At the START of any implementation task
-- BEFORE writing any new class, function, or module
-- When refactoring existing code
-- When adding tests for new functionality
+このスキルは以下のタイミングで有効化すべき：
+- 実装タスクの**開始時**
+- 新しいクラス、関数、モジュールを書く**前**
+- 既存コードをリファクタリングする時
+- 新機能のテストを追加する時
 
-The analysis phase typically takes 2-5 minutes but saves hours of refactoring.
+分析フェーズは通常2〜5分かかるが、何時間ものリファクタリングを節約できる。
