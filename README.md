@@ -15,7 +15,6 @@ AIエージェント（Claude Code、Codex CLI、Gemini CLI等）向けの実践
 
 1. **AIスキル集** - Claude Code / Codex CLI向けの再利用可能なスキルパッケージ
 2. **Kiro SDD** - 仕様駆動開発ワークフローの実装
-3. **開発規約** - プロジェクト横断で使えるステアリングドキュメント
 
 ## スキル一覧
 
@@ -56,10 +55,6 @@ AIエージェント（Claude Code、Codex CLI、Gemini CLI等）向けの実践
 ### ワークフロー
 
 ```
-Phase 0 (任意): ステアリング設定
-  /kiro-steering
-  /kiro-steering-custom
-
 Phase 1: 仕様策定
   /kiro-spec-init "機能の説明"
   /kiro-spec-requirements {feature}
@@ -75,14 +70,6 @@ Phase 2: 実装
 進捗確認（いつでも）:
   /kiro-spec-status {feature}
 ```
-
-### ステアリングドキュメント
-
-`.kiro/steering/` にプロジェクト横断のポリシーを配置：
-
-- `product.md` - プロダクト概要、コア機能、ユースケース
-- `tech.md` - 技術スタック、開発標準、よく使うコマンド
-- `structure.md` - プロジェクト構造、命名規約、インポート規則
 
 ## ディレクトリ構造
 
@@ -106,7 +93,6 @@ okite-ai/
 ├── .codex/
 │   └── skills/           # Codex CLI向けスキル（シンボリックリンク）
 ├── .kiro/
-│   ├── steering/         # ステアリングドキュメント
 │   ├── specs/            # 仕様ドキュメント
 │   └── settings/         # Kiro設定・テンプレート
 ├── scripts/              # 起動スクリプト
@@ -223,7 +209,6 @@ codex
 
 - 3フェーズ承認ワークフロー: 要件→設計→タスク→実装
 - 各フェーズでの人間によるレビューを前提
-- ステアリングによるプロジェクト全体の一貫性維持
 
 ## ライセンス
 
