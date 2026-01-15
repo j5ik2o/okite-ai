@@ -127,3 +127,5 @@ description: Claude Codeスキルを公式ベストプラクティスに基づ�
 4. 日本語でレポート生成
 5. 修正を提案
 ```
+
+ultrathink
