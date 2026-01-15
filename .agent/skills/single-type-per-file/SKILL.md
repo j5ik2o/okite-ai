@@ -16,14 +16,14 @@ description: |
 
 以下を公開型として扱う:
 
-| 言語 | 公開型 |
-|------|--------|
-| Java/Kotlin | `public class`, `public interface`, `public enum` |
-| Rust | `pub struct`, `pub trait`, `pub enum` |
-| Go | 大文字始まりの `type` |
-| Python | モジュールレベルの `class` |
-| TypeScript/JavaScript | `export`された `class`, `interface`, `type`, オブジェクト |
-| Swift | `public class`, `public protocol`, `public enum` |
+| 言語 | 公開型                                               |
+|------|---------------------------------------------------|
+| Java/Kotlin/Scala | `public`な `class`, `trait`, `object`, `enum`      |
+| Rust | `pub struct`, `pub trait`, `pub enum`             |
+| Go | 大文字始まりの `type`                                    |
+| Python | モジュールレベルの `class`                                 |
+| TypeScript/JavaScript | `export`された `class`, `interface`, `type`, オブジェクト  |
+| Swift | `public class`, `public protocol`, `public enum`  |
 | C# | `public class`, `public interface`, `public enum` |
 
 ## ルール
