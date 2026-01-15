@@ -70,6 +70,26 @@ function processOrder(order: Order): void {
 }
 ```
 
+### JavaScript (neverthrow)
+
+```javascript
+import { ok, err } from 'neverthrow';
+
+function findUser(id) {
+  if (!isValidId(id)) {
+    return err({ type: 'VALIDATION_FAILED', field: 'id', reason: 'Invalid format' });
+  }
+  const user = repository.find(id);
+  return user ? ok(user) : err({ type: 'NOT_FOUND', userId: id });
+}
+
+// 回復不能エラー
+function processOrder(order) {
+  if (order === null || order === undefined)
+    throw new Error('IllegalArgument: order must not be null');
+}
+```
+
 ### Rust (標準Result + thiserror)
 
 ```rust
@@ -141,6 +161,61 @@ func processOrder(order *Order) {
 }
 ```
 
+### Go (samber/mo - Result/Either)
+
+```go
+import "github.com/samber/mo"
+
+// エラー型定義
+type NotFound struct {
+    UserID string
+}
+
+type ValidationFailed struct {
+    Field  string
+    Reason string
+}
+
+// Result型を使用した関数
+func FindUser(id string) mo.Result[User] {
+    if !isValidID(id) {
+        return mo.Err[User](ValidationFailed{Field: "id", Reason: "Invalid format"})
+    }
+    user, err := repository.Find(id)
+    if err != nil {
+        return mo.Err[User](NotFound{UserID: id})
+    }
+    return mo.Ok(user)
+}
+
+// 使用例
+result := FindUser("123")
+if result.IsOk() {
+    user := result.MustGet()
+    fmt.Printf("Found: %s\n", user.Name)
+} else {
+    fmt.Printf("Error: %v\n", result.Error())
+}
+
+// チェーン処理 (Map, FlatMap)
+result := FindUser("123").
+    Map(func(u User) User {
+        u.LastAccess = time.Now()
+        return u
+    }).
+    FlatMap(func(u User) mo.Result[Order] {
+        return FindLatestOrder(u.ID)
+    })
+
+// Either型（2つの成功パターンがある場合）
+func ParseInput(s string) mo.Either[int, string] {
+    if n, err := strconv.Atoi(s); err == nil {
+        return mo.Left[int, string](n)  // 数値として解釈
+    }
+    return mo.Right[int, string](s)     // 文字列として解釈
+}
+```
+
 ### Scala (標準Either)
 
 ```scala
@@ -189,24 +264,47 @@ void processOrder(Order order) {
 }
 ```
 
-### JavaScript (neverthrow)
+### Python (dry-python/returns)
 
-```javascript
-import { ok, err } from 'neverthrow';
+```python
+from dataclasses import dataclass
+from returns.result import Result, Success, Failure
 
-function findUser(id) {
-  if (!isValidId(id)) {
-    return err({ type: 'VALIDATION_FAILED', field: 'id', reason: 'Invalid format' });
-  }
-  const user = repository.find(id);
-  return user ? ok(user) : err({ type: 'NOT_FOUND', userId: id });
-}
+# エラー型定義
+@dataclass(frozen=True)
+class NotFound:
+    user_id: str
 
-// 回復不能エラー
-function processOrder(order) {
-  if (order === null || order === undefined)
-    throw new Error('IllegalArgument: order must not be null');
-}
+@dataclass(frozen=True)
+class ValidationFailed:
+    field: str
+    reason: str
+
+UserError = NotFound | ValidationFailed
+
+def find_user(user_id: str) -> Result[User, UserError]:
+    if not is_valid_id(user_id):
+        return Failure(ValidationFailed(field="id", reason="Invalid format"))
+    user = repository.find(user_id)
+    if user is None:
+        return Failure(NotFound(user_id=user_id))
+    return Success(user)
+
+# 使用例
+match find_user("123"):
+    case Success(user):
+        print(f"Found: {user.name}")
+    case Failure(NotFound(user_id)):
+        print(f"User not found: {user_id}")
+    case Failure(ValidationFailed(field, reason)):
+        print(f"Validation failed: {field} - {reason}")
+
+# 回復不能エラー
+def process_order(order: Order) -> None:
+    if order is None:
+        raise ValueError("order must not be None")
+    if order.status == "COMPLETED" and not order.items:
+        raise RuntimeError("completed order must have items")
 ```
 
 ---
@@ -255,4 +353,28 @@ case class NotFound(resource: String, id: String) extends DomainError
 sealed interface DomainError permits ValidationError, NotFound {}
 record ValidationError(String field, String message) implements DomainError {}
 record NotFound(String resource, String id) implements DomainError {}
+```
+
+### Union型による表現 (Python 3.10+)
+
+```python
+from dataclasses import dataclass
+
+@dataclass(frozen=True)
+class ValidationError:
+    field: str
+    message: str
+
+@dataclass(frozen=True)
+class NotFound:
+    resource: str
+    id: str
+
+@dataclass(frozen=True)
+class Conflict:
+    resource: str
+    reason: str
+
+# Union型でドメインエラーを定義
+DomainError = ValidationError | NotFound | Conflict
 ```
