@@ -1,7 +1,10 @@
 ---
 name: single-type-per-file
-description: |
-  コード生成時に「1公開型 = 1ファイル」の原則を強制する。公開型（public class, interface, trait, protocol, enum, type、JS/TSではexportされたオブジェクト）ごとに個別ファイルを作成し、1ファイルに複数の公開型を詰め込むことを禁止する。トリガー：新規ファイル作成、クラス/構造体/インターフェース追加、コード生成リクエスト時に自動適用。
+description: >-
+  コード生成時に「1公開型 = 1ファイル」の原則を強制する。
+  公開型（public class, interface, trait, protocol, enum, type、JS/TSではexportされたオブジェクト）
+  ごとに個別ファイルを作成し、1ファイルに複数の公開型を詰め込むことを禁止する。
+  トリガー：新規ファイル作成、クラス/構造体/インターフェース追加、コード生成リクエスト時に自動適用。
 ---
 
 # Single Type Per File
