@@ -164,7 +164,7 @@ git submodule add git@github.com/okite-ai/okite-ai.git references/okite-ai
 ./references/okite-ai/scripts/set-up.sh
 ```
 
-※ `set-up.sh` は プロジェクトルート直下の `.agent/.claude/.codex/.kiro` をシンボリックリンクで配置する。
+※ `set-up.sh` は プロジェクトルート直下の `.agent/`, `.claude/`, `.codex/`, `.kiro/` をシンボリックリンクで配置する。
 
 ## スキルの使い方
 
