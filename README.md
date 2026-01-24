@@ -13,12 +13,21 @@ AIエージェント（Claude Code、Codex CLI、Gemini CLI等）向けの実践
 
 このリポジトリは以下を提供する：
 
-1. **AIスキル集** - Claude Code / Codex CLI向けの再利用可能なスキルパッケージ
-2. **Kiro SDD** - 仕様駆動開発ワークフローの実装
+1. **AIスキル集** - `.agent/skills` を実体に、Claude/Codex で再利用できるスキル群
+2. **Kiro SDD** - 仕様駆動開発ワークフローの実装とテンプレート
+3. **各CLI向け設定** - `.claude/.codex/.gemini/.cursor` のコマンド・プロンプト
 
 ## スキル一覧
 
-### コード品質・設計
+### DDD / ドメインモデリング
+
+| スキル | 説明 | トリガー例 |
+|--------|------|-----------|
+| **aggregate-design** | 集約設計の原則に基づく設計・レビュー支援 | 「集約を設計したい」「Aggregateの実装」 |
+| **domain-building-blocks** | 値オブジェクト/エンティティ/集約/ドメインサービスの設計ガイド | 「値オブジェクトを作りたい」「エンティティと値オブジェクトの違い」 |
+| **domain-model-first** | ドメインモデル中心のTDD開発手順 | 「ドメインモデルから始めたい」「TDDでDDD」 |
+
+### アーキテクチャ・設計
 
 | スキル | 説明 | トリガー例 |
 |--------|------|-----------|
@@ -41,12 +50,15 @@ AIエージェント（Claude Code、Codex CLI、Gemini CLI等）向けの実践
 | **avoiding-ambiguous-suffixes** | Manager/Util/Service等の曖昧なサフィックスを検出・改善 | 「この命名で良いか」「Managerという名前を使いたい」 |
 | **learning-before-coding** | 実装前に既存コードパターンを学習することを強制 | 新機能実装、コンポーネント追加時に自動適用 |
 
-### スキル開発
+### スキル開発・運用
 
 | スキル | 説明 | トリガー例 |
 |--------|------|-----------|
-| **skill-creator** | 新規スキル作成のガイド | 「新しいスキルを作りたい」 |
+| **skill-creator** | スキル作成ガイド（Claude/Codex向け） | 「新しいスキルを作りたい」 |
 | **reviewing-skills** | スキルのベストプラクティス準拠レビュー | 「このスキルをレビューして」 |
+| **skill-installer** | Codex用スキルのインストール支援 | 「インストール可能なスキル一覧」「このスキルを入れて」 |
+
+※ Codex CLI の system スキルは `.agent/skills/.system/` に配置。
 
 ## Kiro Spec-Driven Development (SDD)
 
@@ -55,6 +67,10 @@ AIエージェント（Claude Code、Codex CLI、Gemini CLI等）向けの実践
 ### ワークフロー
 
 ```
+Phase 0: Steering（任意）
+  /kiro-steering
+  /kiro-steering-custom
+
 Phase 1: 仕様策定
   /kiro-spec-init "機能の説明"
   /kiro-spec-requirements {feature}
@@ -71,51 +87,54 @@ Phase 2: 実装
   /kiro-spec-status {feature}
 ```
 
+### クイック生成（Claude Code向け）
+
+```bash
+/kiro-spec-quick "機能の説明" [--auto]
+```
+
+※ 仕様策定フェーズを一括実行。`--auto` で承認を省略。
+
 ## ディレクトリ構造
 
 ```
 okite-ai/
+├── .agent/
+│   ├── CC-SDD.md
+│   └── skills/           # 共有スキルの実体
+│       └── .system/      # Codex用systemスキル
 ├── .claude/
-│   ├── skills/           # Claude Code向けスキル
-│   │   ├── clean-architecture/
-│   │   ├── error-handling/
-│   │   ├── less-is-more/
-│   │   ├── package-design/
-│   │   ├── refactoring-packages/
-│   │   ├── avoiding-ambiguous-suffixes/
-│   │   ├── learning-before-coding/
-│   │   ├── single-type-per-file/
-│   │   ├── skill-creator/
-│   │   └── reviewing-skills/
-│   ├── commands/kiro/    # Kiro SDDコマンド
+│   ├── skills/           # .agent/skills へのシンボリックリンク
+│   ├── commands/         # Claude Codeコマンド
+│   │   ├── create-skill.md
+│   │   └── kiro/
 │   ├── agents/kiro/      # Kiroエージェント定義
 │   └── rules/delegator/  # GPTエキスパート委譲ルール
 ├── .codex/
-│   └── skills/           # Codex CLI向けスキル（シンボリックリンク）
+│   ├── skills/           # .agent/skills へのシンボリックリンク
+│   └── prompts/          # Kiro SDDプロンプト
+├── .cursor/
+│   └── commands/kiro/    # Cursor向けKiroコマンド
+├── .gemini/
+│   └── commands/kiro/    # Gemini向けKiroコマンド
 ├── .kiro/
-│   ├── specs/            # 仕様ドキュメント
 │   └── settings/         # Kiro設定・テンプレート
-├── scripts/              # 起動スクリプト
-└── CLAUDE.md             # Claude Code用設定
+│       ├── rules/
+│       └── templates/
+├── scripts/              # 起動/セットアップスクリプト
+│   ├── run-claude.sh
+│   ├── run-codex.sh
+│   ├── run-gemini.sh
+│   ├── run-cursor.sh
+│   └── set-up.sh
+├── AGENTS.md
+├── CLAUDE.md             # Claude Code用設定
+└── GEMINI.md             # Gemini用設定
 ```
 
-## セットアップ
+※ `.kiro/specs/` はSDD実行時に生成される。
 
-### Claude Code
-
-```bash
-# プロジェクトルートに .claude/skills/ が存在すれば自動的に読み込まれる
-claude
-```
-
-### Codex CLI
-
-```bash
-# .codex/skills/ はシンボリックリンクとして配置
-codex
-```
-
-### スクリプトによる起動
+## スクリプトによる起動
 
 ```bash
 # Claude Code
@@ -130,6 +149,22 @@ codex
 # Cursor
 ./scripts/run-cursor.sh
 ```
+
+
+## セットアップ
+
+```
+# スキルを使いたいリポジトリをクローンする
+git clone git@github.com/your-github-id/your-repos.git
+# プロジェクトルートに移動する
+cd your-repos
+# okite-aiリポジトリをsubmoduleでマウントしてください
+git submodule add git@github.com/okite-ai/okite-ai.git references/okite-ai
+# セットアップスクリプトを実行します
+./references/okite-ai/scripts/set-up.sh
+```
+
+※ `set-up.sh` は プロジェクトルート直下の `.agent/.claude/.codex/.kiro` をシンボリックリンクで配置する。
 
 ## スキルの使い方
 
@@ -152,6 +187,10 @@ codex
 ### Kiro SDDコマンド
 
 ```bash
+# Steering（任意）
+/kiro-steering
+/kiro-steering-custom
+
 # 新機能の仕様策定を開始
 /kiro-spec-init "ユーザー認証機能"
 
@@ -169,6 +208,9 @@ codex
 
 # 進捗確認
 /kiro-spec-status auth
+
+# クイック生成（Claude Code向け）
+/kiro-spec-quick "ユーザー認証機能" --auto
 ```
 
 ## GPTエキスパート委譲
