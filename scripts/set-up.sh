@@ -28,6 +28,16 @@ for f in "${OKITE_ROOT}/.agent/skills"/*; do
   ln -sf "../../${OKITE_ROOT_REL}/.agent/skills/${base_name}" "${ROOT_DIR}/.agent/skills/"
   echo "  - Linked skills/${base_name}"
 done
+# okite-ai/.agent/rules -> .agent/rules
+mkdir -p "${OKITE_ROOT}/.agent/rules"
+mkdir -p "${ROOT_DIR}/.agent/rules"
+find "${ROOT_DIR}/.agent/rules" -maxdepth 1 -type l -delete
+for f in "${OKITE_ROOT}/.agent/rules"/*; do
+  [ -e "$f" ] || continue
+  base_name=$(basename "$f")
+  ln -sf "../../${OKITE_ROOT_REL}/.agent/rules/${base_name}" "${ROOT_DIR}/.agent/rules/"
+  echo "  - Linked rules/${base_name}"
+done
 echo "  Done."
 echo ""
 
@@ -50,6 +60,15 @@ echo "  - Linked commands/kiro/"
 mkdir -p "${ROOT_DIR}/.claude/agents"
 ln -sf "../../${OKITE_ROOT_REL}/.claude/agents/kiro" "${ROOT_DIR}/.claude/agents/"
 echo "  - Linked agents/kiro/"
+# .agent/rules -> .claude/rules
+mkdir -p "${ROOT_DIR}/.claude/rules"
+find "${ROOT_DIR}/.claude/rules" -maxdepth 1 -type l -delete
+for f in "${ROOT_DIR}/.agent/rules"/*; do
+  [ -e "$f" ] || continue
+  base_name=$(basename "$f")
+  ln -sf "../../.agent/rules/${base_name}" "${ROOT_DIR}/.claude/rules/"
+  echo "  - Linked rules/${base_name}"
+done
 echo "  Done."
 echo ""
 
