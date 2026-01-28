@@ -1,1 +1,1 @@
-AGENTS.md
+./COMMON.md

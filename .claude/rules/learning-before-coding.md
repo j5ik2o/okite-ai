@@ -1,0 +1,1 @@
+../../.agent/rules/learning-before-coding.md
