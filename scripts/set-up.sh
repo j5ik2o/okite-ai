@@ -19,16 +19,27 @@ echo "[1/4] Setting up .agent directory..."
 mkdir -p "${ROOT_DIR}/.agent"
 ln -sf "../${OKITE_ROOT_REL}/.agent/CC-SDD.md" "${ROOT_DIR}/.agent/"
 echo "  - Linked CC-SDD.md"
-ln -sf "../${OKITE_ROOT_REL}/.agent/skills" "${ROOT_DIR}/.agent/"
-echo "  - Linked skills/"
+mkdir -p "${OKITE_ROOT}/.agent/skills"
+mkdir -p "${ROOT_DIR}/.agent/skills"
+for f in "${OKITE_ROOT}/.agent/skills"/*; do
+  [ -e "$f" ] || continue
+  base_name=$(basename "$f")
+  ln -sf "../../${OKITE_ROOT_REL}/.agent/skills/${base_name}" "${ROOT_DIR}/.agent/skills/"
+  echo "  - Linked skills/${base_name}"
+done
 echo "  Done."
 echo ""
 
 # .claude
 echo "[2/4] Setting up .claude directory..."
 mkdir -p "${ROOT_DIR}/.claude"
-ln -sf "../.agent/skills" "${ROOT_DIR}/.claude/"
-echo "  - Linked skills/"
+mkdir -p "${ROOT_DIR}/.claude/skills"
+for f in "${ROOT_DIR}/.agent/skills"/*; do
+  [ -e "$f" ] || continue
+  base_name=$(basename "$f")
+  ln -sf "../../.agent/skills/${base_name}" "${ROOT_DIR}/.claude/skills/"
+  echo "  - Linked skills/${base_name}"
+done
 mkdir -p "${ROOT_DIR}/.claude/commands"
 ln -sf "../../${OKITE_ROOT_REL}/.claude/commands/create-skill.md" "${ROOT_DIR}/.claude/commands/"
 echo "  - Linked commands/create-skill.md"
@@ -43,8 +54,13 @@ echo ""
 # .codex
 echo "[3/4] Setting up .codex directory..."
 mkdir -p "${ROOT_DIR}/.codex"
-ln -sf "../.agent/skills" "${ROOT_DIR}/.codex/"
-echo "  - Linked skills/"
+mkdir -p "${ROOT_DIR}/.codex/skills"
+for f in "${ROOT_DIR}/.agent/skills"/*; do
+  [ -e "$f" ] || continue
+  base_name=$(basename "$f")
+  ln -sf "../../.agent/skills/${base_name}" "${ROOT_DIR}/.codex/skills/"
+  echo "  - Linked skills/${base_name}"
+done
 mkdir -p "${ROOT_DIR}/.codex/prompts"
 for f in "${OKITE_ROOT}/.codex/prompts"/kiro-*.md; do
   base_name=$(basename "$f")
