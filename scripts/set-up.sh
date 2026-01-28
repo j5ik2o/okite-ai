@@ -21,6 +21,7 @@ ln -sf "../${OKITE_ROOT_REL}/.agent/CC-SDD.md" "${ROOT_DIR}/.agent/"
 echo "  - Linked CC-SDD.md"
 mkdir -p "${OKITE_ROOT}/.agent/skills"
 mkdir -p "${ROOT_DIR}/.agent/skills"
+find "${ROOT_DIR}/.agent/skills" -maxdepth 1 -type l -delete
 for f in "${OKITE_ROOT}/.agent/skills"/*; do
   [ -e "$f" ] || continue
   base_name=$(basename "$f")
@@ -34,6 +35,7 @@ echo ""
 echo "[2/4] Setting up .claude directory..."
 mkdir -p "${ROOT_DIR}/.claude"
 mkdir -p "${ROOT_DIR}/.claude/skills"
+find "${ROOT_DIR}/.claude/skills" -maxdepth 1 -type l -delete
 for f in "${ROOT_DIR}/.agent/skills"/*; do
   [ -e "$f" ] || continue
   base_name=$(basename "$f")
@@ -55,6 +57,7 @@ echo ""
 echo "[3/4] Setting up .codex directory..."
 mkdir -p "${ROOT_DIR}/.codex"
 mkdir -p "${ROOT_DIR}/.codex/skills"
+find "${ROOT_DIR}/.codex/skills" -maxdepth 1 -type l -delete
 for f in "${ROOT_DIR}/.agent/skills"/*; do
   [ -e "$f" ] || continue
   base_name=$(basename "$f")
