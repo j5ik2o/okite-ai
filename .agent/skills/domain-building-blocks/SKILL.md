@@ -43,17 +43,17 @@ class ValidationError {
   }
 }
 
-class MoneyDepositError extends Error {
+class MoneyAddError extends Error {
   constructor(message: string) {
     super(message);
-    this.name = 'MoneyDepositError';
+    this.name = 'MoneyAddError';
   }
 }
 
-class MoneyWithdrawalError extends Error {
+class MoneySubtractError extends Error {
   constructor(message: string) {
     super(message);
-    this.name = 'MoneyWithdrawalError';
+    this.name = 'MoneySubtractError';
   }
 }
 
@@ -105,19 +105,19 @@ class Money {
     });
   }
 
-  deposit(other: Money): E.Either<MoneyDepositError, Money> {
+  add(other: Money): E.Either<MoneyAddError, Money> {
     if (this._currency !== other._currency) {
-      return E.left(new MoneyDepositError("通貨が異なる金額は加算できません"));
+      return E.left(new MoneyAddError("通貨が異なる金額は加算できません"));
     }
     return E.right(this.copy({ amount: this._amount + other._amount }));
   }
 
-  withdraw(other: Money): E.Either<MoneyWithdrawalError, Money> {
+  subtract(other: Money): E.Either<MoneySubtractError, Money> {
     if (this._currency !== other._currency) {
-      return E.left(new MoneyWithdrawalError("通貨が異なる金額は減算できません"));
+      return E.left(new MoneySubtractError("通貨が異なる金額は減算できません"));
     }
     if ((this._amount - other._amount) < 0) {
-      return E.left(new MoneyWithdrawalError("残高不足のため引き出しできません"));
+      return E.left(new MoneySubtractError("金額が負になるため減算できません"));
     }
     return E.right(this.copy({ amount: this._amount - other._amount }));
   }
@@ -232,6 +232,37 @@ class Order {
 複数のエンティティや値オブジェクトにまたがる操作はドメインサービスとして実装します：
 
 ```typescript
+// エンティティ例: 口座（入出金はエンティティの責務）
+class BankAccount {
+  private constructor(
+    private readonly _id: BankAccountId,
+    private readonly _balance: Money
+  ) {}
+
+  deposit(amount: Money): E.Either<BankAccountDepositError, BankAccount> {
+    const result = this._balance.add(amount);
+    if (E.isLeft(result)) {
+      return E.left(new BankAccountDepositError(result.left.message));
+    }
+    return E.right(this.copy({ balance: result.right }));
+  }
+
+  withdraw(amount: Money): E.Either<BankAccountWithdrawalError, BankAccount> {
+    const result = this._balance.subtract(amount);
+    if (E.isLeft(result)) {
+      return E.left(new BankAccountWithdrawalError(result.left.message));
+    }
+    return E.right(this.copy({ balance: result.right }));
+  }
+
+  private copy(props: { balance?: Money }): BankAccount {
+    return new BankAccount(
+      this._id,
+      props.balance ?? this._balance
+    );
+  }
+}
+
 // ドメインサービスの例
 // クラス名やメソッド名はユビキタス言語に対応すること
 class BankAccountTransfer {
