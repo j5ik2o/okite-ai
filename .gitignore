@@ -3,10 +3,13 @@
 /.claude/settings.local.json
 /.codex/sessions/
 /.codex/log/
+/.codex/tmp/
+/.codex/models_cache.json
 /.codex/auth.json
 /.codex/history.jsonl
 /.codex/internal_storage.json
 /.codex/version.json
 /.serena/cache/
+
 
 
