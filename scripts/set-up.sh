@@ -19,7 +19,6 @@ echo "[1/4] Setting up .agent directory..."
 mkdir -p "${ROOT_DIR}/.agent"
 ln -sf "../${OKITE_ROOT_REL}/.agent/CC-SDD.md" "${ROOT_DIR}/.agent/"
 echo "  - Linked CC-SDD.md"
-mkdir -p "${OKITE_ROOT}/.agent/skills"
 mkdir -p "${ROOT_DIR}/.agent/skills"
 find "${ROOT_DIR}/.agent/skills" -maxdepth 1 -type l -delete
 for f in "${OKITE_ROOT}/.agent/skills"/*; do
@@ -29,7 +28,6 @@ for f in "${OKITE_ROOT}/.agent/skills"/*; do
   echo "  - Linked skills/${base_name}"
 done
 # okite-ai/.agent/rules -> .agent/rules
-mkdir -p "${OKITE_ROOT}/.agent/rules"
 mkdir -p "${ROOT_DIR}/.agent/rules"
 find "${ROOT_DIR}/.agent/rules" -maxdepth 1 -type l -delete
 for f in "${OKITE_ROOT}/.agent/rules"/*; do
@@ -43,7 +41,6 @@ echo ""
 
 # .claude
 echo "[2/4] Setting up .claude directory..."
-mkdir -p "${ROOT_DIR}/.claude"
 mkdir -p "${ROOT_DIR}/.claude/skills"
 find "${ROOT_DIR}/.claude/skills" -maxdepth 1 -type l -delete
 for f in "${ROOT_DIR}/.agent/skills"/*; do
@@ -74,7 +71,6 @@ echo ""
 
 # .codex
 echo "[3/4] Setting up .codex directory..."
-mkdir -p "${ROOT_DIR}/.codex"
 mkdir -p "${ROOT_DIR}/.codex/skills"
 find "${ROOT_DIR}/.codex/skills" -maxdepth 1 -type l -delete
 for f in "${ROOT_DIR}/.agent/skills"/*; do
