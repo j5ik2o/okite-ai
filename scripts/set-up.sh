@@ -15,7 +15,7 @@ echo "ROOT_DIR=${ROOT_DIR}"
 echo ""
 
 # .agent
-echo "[1/4] Setting up .agent directory..."
+echo "[1/5] Setting up .agent directory..."
 mkdir -p "${ROOT_DIR}/.agent"
 ln -sf "../${OKITE_ROOT_REL}/.agent/CC-SDD.md" "${ROOT_DIR}/.agent/"
 echo "  - Linked CC-SDD.md"
@@ -40,7 +40,7 @@ echo "  Done."
 echo ""
 
 # .claude
-echo "[2/4] Setting up .claude directory..."
+echo "[2/5] Setting up .claude directory..."
 mkdir -p "${ROOT_DIR}/.claude/skills"
 find "${ROOT_DIR}/.claude/skills" -maxdepth 1 -type l -delete
 for f in "${ROOT_DIR}/.agent/skills"/*; do
@@ -70,7 +70,7 @@ echo "  Done."
 echo ""
 
 # .codex
-echo "[3/4] Setting up .codex directory..."
+echo "[3/5] Setting up .codex directory..."
 mkdir -p "${ROOT_DIR}/.codex/skills"
 find "${ROOT_DIR}/.codex/skills" -maxdepth 1 -type l -delete
 for f in "${ROOT_DIR}/.agent/skills"/*; do
@@ -88,8 +88,21 @@ done
 echo "  Done."
 echo ""
 
+# .gemini
+echo "[4/5] Setting up .gemini directory..."
+mkdir -p "${ROOT_DIR}/.gemini/skills"
+find "${ROOT_DIR}/.gemini/skills" -maxdepth 1 -type l -delete
+for f in "${ROOT_DIR}/.agent/skills"/*; do
+  [ -e "$f" ] || continue
+  base_name=$(basename "$f")
+  ln -sf "../../.agent/skills/${base_name}" "${ROOT_DIR}/.gemini/skills/"
+  echo "  - Linked skills/${base_name}"
+done
+echo "  Done."
+echo ""
+
 # .kiro
-echo "[4/4] Setting up .kiro directory..."
+echo "[5/5] Setting up .kiro directory..."
 mkdir -p "${ROOT_DIR}/.kiro"
 ln -sf "../${OKITE_ROOT_REL}/.kiro/settings" "${ROOT_DIR}/.kiro/"
 echo "  - Linked settings/"
