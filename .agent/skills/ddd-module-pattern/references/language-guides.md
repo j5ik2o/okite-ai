@@ -11,7 +11,6 @@ com.example.domain/
     OrderId.java
     OrderItem.java
     OrderStatus.java
-    OrderRepository.java  ← インターフェース
   customer/
     Customer.java
     CustomerId.java
@@ -24,7 +23,6 @@ com.example.domain/
 
 **ポイント**:
 - パッケージ名は小文字のドメイン用語
-- リポジトリインターフェースはドメインパッケージ内に配置
 - 実装クラスはインフラ層に配置
 
 ## Rust
@@ -36,7 +34,6 @@ domain/
     order.rs
     order_id.rs
     order_item.rs
-    order_repository.rs  ← trait定義
   customer/
     mod.rs
     customer.rs
@@ -61,7 +58,6 @@ domain/
     Order.ts
     OrderId.ts
     OrderItem.ts
-    OrderRepository.ts  ← interface
   customer/
     index.ts
     Customer.ts
@@ -86,7 +82,6 @@ domain/
     order.py
     order_id.py
     order_item.py
-    order_repository.py  ← ABC (Abstract Base Class)
   customer/
     __init__.py
     customer.py
@@ -99,7 +94,6 @@ domain/
 
 **ポイント**:
 - `__init__.py` で公開クラスをエクスポート
-- ABCでリポジトリインターフェースを定義
 - 型ヒントを活用
 
 ## Go
@@ -110,7 +104,6 @@ domain/
     order.go
     order_id.go
     order_item.go
-    repository.go  ← interface定義
   customer/
     customer.go
     customer_id.go
@@ -132,7 +125,6 @@ domain/
     Order.scala
     OrderId.scala
     OrderItem.scala
-    OrderRepository.scala  ← trait
   customer/
     Customer.scala
     CustomerId.scala
@@ -143,7 +135,6 @@ domain/
 
 **ポイント**:
 - パッケージオブジェクトで共通型をエクスポート
-- traitでリポジトリを定義
 - case classで値オブジェクトを表現
 
 ## C#
@@ -154,7 +145,6 @@ Domain/
     Order.cs
     OrderId.cs
     OrderItem.cs
-    IOrderRepository.cs
   Customer/
     Customer.cs
     CustomerId.cs
