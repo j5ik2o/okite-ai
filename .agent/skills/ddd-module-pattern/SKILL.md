@@ -45,7 +45,6 @@ domain/
     Order.java
     OrderId.java
     OrderItem.java
-    OrderRepository.java
   customer/           ← ✅ ドメイン概念
     Customer.java
     CustomerId.java
@@ -69,7 +68,6 @@ domain/
 ❌ value-objects/ (valueobjects/, vo/)
 ❌ aggregates/
 ❌ services/
-❌ repositories/
 ❌ interfaces/
 ❌ impl/
 ❌ dto/
