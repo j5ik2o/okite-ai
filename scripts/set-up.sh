@@ -54,8 +54,6 @@ ln -sf "../../${OKITE_ROOT_REL}/.claude/commands/create-skill.md" "${ROOT_DIR}/.
 echo "  - Linked commands/create-skill.md"
 ln -sf "../../${OKITE_ROOT_REL}/.claude/commands/kiro" "${ROOT_DIR}/.claude/commands/"
 echo "  - Linked commands/kiro/"
-mkdir -p "${ROOT_DIR}/.claude/agents"
-ln -sf "../../${OKITE_ROOT_REL}/.claude/agents/kiro" "${ROOT_DIR}/.claude/agents/"
 echo "  - Linked agents/kiro/"
 # .agent/rules -> .claude/rules
 mkdir -p "${ROOT_DIR}/.claude/rules"
