@@ -1,58 +1,136 @@
 ---
 description: Manage .kiro/steering/ as persistent project knowledge
-allowed-tools: Read, Task, Glob
+allowed-tools: Bash, Read, Write, Edit, MultiEdit, Glob, Grep, LS
 ---
 
 # Kiro Steering Management
 
-## Mode Detection
+<background_information>
+**Role**: Maintain `.kiro/steering/` as persistent project memory.
 
-**Perform detection before invoking Subagent**:
+**Mission**:
+- Bootstrap: Generate core steering from codebase (first-time)
+- Sync: Keep steering and codebase aligned (maintenance)
+- Preserve: User customizations are sacred, updates are additive
+
+**Success Criteria**:
+- Steering captures patterns and principles, not exhaustive lists
+- Code drift detected and reported
+- All `.kiro/steering/*.md` treated equally (core + custom)
+</background_information>
+
+<instructions>
+## Scenario Detection
 
 Check `.kiro/steering/` status:
 
-- **Bootstrap Mode**: Empty OR missing core files (product.md, tech.md, structure.md)
-- **Sync Mode**: All core files exist
+**Bootstrap Mode**: Empty OR missing core files (product.md, tech.md, structure.md)  
+**Sync Mode**: All core files exist
 
-Use Glob to check for existing steering files.
+---
 
-## Invoke Subagent
+## Bootstrap Flow
 
-Delegate steering management to steering-agent:
+1. Load templates from `.kiro/settings/templates/steering/`
+2. Analyze codebase (JIT):
+   - `glob_file_search` for source files
+   - `read_file` for README, package.json, etc.
+   - `grep` for patterns
+3. Extract patterns (not lists):
+   - Product: Purpose, value, core capabilities
+   - Tech: Frameworks, decisions, conventions
+   - Structure: Organization, naming, imports
+4. Generate steering files (follow templates)
+5. Load principles from `.kiro/settings/rules/steering-principles.md`
+6. Present summary for review
 
-Use the Task tool to invoke the Subagent with file path patterns:
+**Focus**: Patterns that guide decisions, not catalogs of files/dependencies.
 
+---
+
+## Sync Flow
+
+1. Load all existing steering (`.kiro/steering/*.md`)
+2. Analyze codebase for changes (JIT)
+3. Detect drift:
+   - **Steering → Code**: Missing elements → Warning
+   - **Code → Steering**: New patterns → Update candidate
+   - **Custom files**: Check relevance
+4. Propose updates (additive, preserve user content)
+5. Report: Updates, warnings, recommendations
+
+**Update Philosophy**: Add, don't replace. Preserve user sections.
+
+---
+
+## Granularity Principle
+
+From `.kiro/settings/rules/steering-principles.md`:
+
+> "If new code follows existing patterns, steering shouldn't need updating."
+
+Document patterns and principles, not exhaustive lists.
+
+**Bad**: List every file in directory tree  
+**Good**: Describe organization pattern with examples
+
+</instructions>
+
+## Tool guidance
+
+- `glob_file_search`: Find source/config files
+- `read_file`: Read steering, docs, configs
+- `grep`: Search patterns
+- `list_dir`: Analyze structure
+
+**JIT Strategy**: Fetch when needed, not upfront.
+
+## Output description
+
+Chat summary only (files updated directly).
+
+### Bootstrap:
 ```
-Task(
-  subagent_type="steering-agent",
-  description="Manage steering files",
-  prompt="""
-Mode: {bootstrap or sync based on detection}
+✅ Steering Created
 
-File patterns to read:
-- .kiro/steering/*.md (if sync mode)
-- .kiro/settings/templates/steering/*.md
-- .kiro/settings/rules/steering-principles.md
+## Generated:
+- product.md: [Brief description]
+- tech.md: [Key stack]
+- structure.md: [Organization]
 
-JIT Strategy: Fetch codebase files when needed, not upfront
-"""
-)
+Review and approve as Source of Truth.
 ```
 
-## Display Result
+### Sync:
+```
+✅ Steering Updated
 
-Show Subagent summary to user:
+## Changes:
+- tech.md: React 18 → 19
+- structure.md: Added API pattern
+
+## Code Drift:
+- Components not following import conventions
+
+## Recommendations:
+- Consider api-standards.md
+```
+
+## Examples
 
 ### Bootstrap
-
-- Generated steering files: product.md, tech.md, structure.md
-- Review and approve as Source of Truth
+**Input**: Empty steering, React TypeScript project  
+**Output**: 3 files with patterns - "Feature-first", "TypeScript strict", "React 19"
 
 ### Sync
+**Input**: Existing steering, new `/api` directory  
+**Output**: Updated structure.md, flagged non-compliant files, suggested api-standards.md
 
-- Updated steering files
-- Code drift warnings
-- Recommendations for custom steering
+## Safety & Fallback
+
+- **Security**: Never include keys, passwords, secrets (see principles)
+- **Uncertainty**: Report both states, ask user
+- **Preservation**: Add rather than replace when in doubt
 
 ## Notes
 
