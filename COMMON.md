@@ -1,4 +1,3 @@
-
 - 日本語でやりとりすること
 
 # AI-DLC and Spec-Driven Development
