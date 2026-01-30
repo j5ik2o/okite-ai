@@ -23,9 +23,9 @@ description: >-
 ```java
 // ❌ 集約の中でリポジトリを使ってしまう
 class Order {
-  void addRelatedOrder(OrderId relatedId, OrderRepository repo) {
+  Order withRelatedOrder(OrderId relatedId, OrderRepository repo) {
     Order related = repo.findById(relatedId);  // ← 同じ層にあるから気軽に使える
-    this.relatedOrders.add(related);
+    return this.withAddedRelatedOrder(related);
   }
 }
 ```
@@ -76,8 +76,8 @@ interface OrderRepository {
 ```java
 // ✅ 集約は他の集約をIDで参照
 class Order {
-  private CustomerId customerId;  // Customer実体ではなくID
-  private List<ProductId> productIds;
+  private final CustomerId customerId;  // Customer実体ではなくID
+  private final List<ProductId> productIds;
 }
 
 // ユースケース層でリポジトリを使って解決
