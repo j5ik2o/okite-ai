@@ -5,15 +5,28 @@ description: Creates Claude Code rules (.claude/rules/*.md) with YAML frontmatte
 
 # Creating Claude Code Rules
 
-Create modular, focused rules for `.claude/rules/` directory.
+`.claude/rules/` ディレクトリにモジュール化された、焦点を絞ったルールを作成する。
 
 ## Quick Start
 
-**First, ask the user**:
-- Rule scope: global (all files) or path-specific (certain file types)?
-- Location: `.claude/rules/` (project) or `~/.claude/rules/` (personal)?
+**まずユーザーに確認する**:
+1. **スコープ**: グローバル（全ファイル）or パス指定（特定ファイルタイプ）？
+2. **配置場所**: `.claude/rules/`（プロジェクト用）or `~/.claude/rules/`（個人用）？
+3. **カテゴリ**: コードスタイル、テスト、セキュリティ、API、その他？
+4. **対象言語/フレームワーク**（該当する場合）？
 
-Then create a `.md` file:
+**次に既存ルールを確認する**:
+```bash
+# プロジェクトのルールを確認
+ls -la .claude/rules/
+
+# 個人のルールを確認
+ls -la ~/.claude/rules/
+```
+
+重複がないことを確認してからルールを作成する。
+
+**ルールファイルを作成**:
 
 ```markdown
 ---
@@ -22,28 +35,48 @@ paths: src/**/*.ts
 
 # TypeScript Guidelines
 
-- Use strict mode
-- Prefer interfaces over type aliases for object shapes
-- Use explicit return types for exported functions
+- strict モードを使用する
+- オブジェクト形状には type より interface を優先
+- エクスポートされる関数には明示的な戻り値型を指定
 ```
 
-## Rule File Structure
+## 作成前チェック
 
-### Global Rules (No Frontmatter)
+ルールを作成する前に必ず確認：
 
-Apply to all files:
+1. **既存ルールの確認**
+   ```bash
+   ls .claude/rules/
+   ```
+   - 同じトピックのルールが存在しないか？
+   - 既存ルールに追記すべき内容ではないか？
+
+2. **CLAUDE.md との重複確認**
+   - CLAUDE.md に同様の内容がないか？
+   - プロジェクト概要 → CLAUDE.md
+   - 具体的なコーディング規約 → rules/
+
+3. **スコープの適切性**
+   - グローバルルールにすべきか、パス指定すべきか？
+   - 既存のパス指定ルールと競合しないか？
+
+## ルールファイル構造
+
+### グローバルルール（Frontmatter なし）
+
+全ファイルに適用：
 
 ```markdown
 # Code Style
 
-- Use 2-space indentation
-- Prefer const over let
-- No unused variables
+- 2スペースインデントを使用
+- let より const を優先
+- 未使用変数を残さない
 ```
 
-### Path-Specific Rules (With Frontmatter)
+### パス指定ルール（Frontmatter あり）
 
-Apply only when Claude works with matching files:
+Claude が一致するファイルを扱う時のみ適用：
 
 ```markdown
 ---
@@ -52,53 +85,53 @@ paths: src/api/**/*.ts
 
 # API Development Rules
 
-- All endpoints must include input validation
-- Use standard error response format
-- Include OpenAPI documentation comments
+- 全エンドポイントに入力バリデーションを含める
+- 標準エラーレスポンス形式を使用
+- OpenAPI ドキュメントコメントを含める
 ```
 
 ## YAML Frontmatter
 
-### `paths` Field
+### `paths` フィールド
 
-Single pattern:
+単一パターン：
 ```yaml
 paths: src/**/*.ts
 ```
 
-Multiple patterns with brace expansion:
+ブレース展開による複数パターン：
 ```yaml
 paths: src/**/*.{ts,tsx}
 ```
 
-Comma-separated patterns:
+カンマ区切りパターン：
 ```yaml
 paths: {src,lib}/**/*.ts, tests/**/*.test.ts
 ```
 
-### Glob Patterns Reference
+### Glob パターンリファレンス
 
-| Pattern | Matches |
+| パターン | マッチ対象 |
 |---------|---------|
-| `**/*.ts` | All TypeScript files anywhere |
-| `src/**/*` | All files under `src/` |
-| `*.md` | Markdown files in project root only |
-| `src/components/*.tsx` | React components in specific directory |
-| `**/*.{ts,tsx}` | TypeScript and TSX files |
-| `{src,lib}/**/*.ts` | TypeScript in `src/` or `lib/` |
+| `**/*.ts` | 任意の場所の全 TypeScript ファイル |
+| `src/**/*` | `src/` 配下の全ファイル |
+| `*.md` | プロジェクトルート直下の Markdown ファイルのみ |
+| `src/components/*.tsx` | 特定ディレクトリ内の React コンポーネント |
+| `**/*.{ts,tsx}` | TypeScript と TSX ファイル |
+| `{src,lib}/**/*.ts` | `src/` または `lib/` 内の TypeScript |
 
-## Directory Organization
+## ディレクトリ構成
 
-### Basic Structure
+### 基本構成
 
 ```
 .claude/rules/
-├── code-style.md      # General coding standards
-├── testing.md         # Testing conventions
-└── security.md        # Security requirements
+├── code-style.md      # 一般的なコーディング規約
+├── testing.md         # テスト規約
+└── security.md        # セキュリティ要件
 ```
 
-### With Subdirectories
+### サブディレクトリあり
 
 ```
 .claude/rules/
@@ -111,94 +144,78 @@ paths: {src,lib}/**/*.ts, tests/**/*.test.ts
 └── general.md
 ```
 
-All `.md` files are discovered recursively.
+全 `.md` ファイルは再帰的に検出される。
 
-### Symlinks for Shared Rules
+### シンボリックリンクによる共有ルール
 
 ```bash
-# Symlink shared rules directory
+# 共有ルールディレクトリをシンボリックリンク
 ln -s ~/shared-claude-rules .claude/rules/shared
 
-# Symlink individual files
+# 個別ファイルをシンボリックリンク
 ln -s ~/company-standards/security.md .claude/rules/security.md
 ```
 
-## Best Practices
+## ベストプラクティス
 
-### DO
+### MUST（必須）
 
-**Keep rules focused** (one topic per file):
-```markdown
-# ✓ Good - testing.md
-# Testing Conventions
+- **1トピック1ファイル**で焦点を絞る
+- **説明的なファイル名**を使用（`api-validation.md`、`rules1.md` ではない）
+- **具体的に**記述する（「適切にフォーマット」ではなく「2スペースインデント」）
+- **既存ルールを確認**してから新規作成
 
-- Use vitest for unit tests
-- Place tests in __tests__ directory
-- Name test files: *.test.ts
-```
+### ALLOWED（許可）
 
-**Use descriptive filenames**:
-- `api-validation.md` not `rules1.md`
-- `react-components.md` not `frontend.md`
+- サブディレクトリによる整理
+- シンボリックリンクによる共有ルールの参照
+- 複数の paths パターンの指定
 
-**Be specific**:
-```markdown
-# ✓ Good
-- Use 2-space indentation
-- Prefer `interface` over `type` for objects
+### MUST NOT（禁止）
 
-# ✗ Bad
-- Format code properly
-- Use good naming
-```
+- **全部入りファイル**の作成
+  ```markdown
+  # ✗ Bad - rules.md に全部入れる
+  # All Rules
+  ## Coding
+  ## Testing
+  ## Deployment
+  ## Security
+  ```
 
-**Use path scoping appropriately**:
-```yaml
-# ✓ Good - applies to specific files
-paths: src/api/**/*.ts
+- **CLAUDE.md との重複**
+  - CLAUDE.md: プロジェクト概要、共通コマンド、アーキテクチャ
+  - Rules: 特定のコーディングガイドライン
 
-# ✗ Bad - too broad for API-specific rules
-# (no paths = applies to everything)
-```
+- **時間依存の情報**
+  ```markdown
+  # ✗ Bad
+  - 2025年1月現在、React 19 の機能を使用
+  ```
 
-### DON'T
+- **曖昧な記述**
+  ```markdown
+  # ✗ Bad
+  - 適切にフォーマットする
+  - 良い命名を使う
+  ```
 
-**Don't create catch-all files**:
-```markdown
-# ✗ Bad - rules.md containing everything
-# All Rules
-## Coding
-## Testing
-## Deployment
-## Security
-```
+## 一般的なルールカテゴリ
 
-**Don't duplicate CLAUDE.md content**:
-- CLAUDE.md: Project overview, common commands, architecture
-- Rules: Specific guidelines for code/files
+詳細な例は [examples.md](references/examples.md) を参照。
 
-**Don't use time-sensitive info**:
-```markdown
-# ✗ Bad
-- As of January 2025, use React 19 features
-```
-
-## Common Rule Categories
-
-For detailed examples, see [examples.md](references/examples.md).
-
-### Code Style
+### コードスタイル
 
 ```markdown
 # Code Style
 
-- Use ESLint/Prettier configuration
-- No console.log in production code
-- Prefer named exports
-- Use absolute imports with @/ prefix
+- ESLint/Prettier 設定を使用
+- 本番コードに console.log を残さない
+- 名前付きエクスポートを優先
+- @/ プレフィックスで絶対インポートを使用
 ```
 
-### Testing
+### テスト
 
 ```markdown
 ---
@@ -207,13 +224,13 @@ paths: **/*.test.{ts,tsx}
 
 # Testing Standards
 
-- Arrange-Act-Assert pattern
-- Mock external dependencies
-- Test edge cases explicitly
-- Aim for 80%+ coverage on new code
+- Arrange-Act-Assert パターン
+- 外部依存関係をモック
+- エッジケースを明示的にテスト
+- 新規コードは 80%+ カバレッジを目指す
 ```
 
-### API Development
+### API 開発
 
 ```markdown
 ---
@@ -222,21 +239,21 @@ paths: src/api/**/*.ts
 
 # API Guidelines
 
-- Validate all inputs with zod
-- Return consistent error format: { error: string, code: string }
-- Log all 5xx errors
-- Include request ID in responses
+- zod で全入力をバリデーション
+- 一貫したエラーフォーマットを返す: { error: string, code: string }
+- 全 5xx エラーをログ
+- レスポンスにリクエスト ID を含める
 ```
 
-### Security
+### セキュリティ
 
 ```markdown
 # Security Requirements
 
-- Never log sensitive data (passwords, tokens, PII)
-- Sanitize user inputs before database queries
-- Use parameterized queries only
-- Validate file uploads: type, size, content
+- 機密データ（パスワード、トークン、PII）をログに残さない
+- データベースクエリ前にユーザー入力をサニタイズ
+- パラメータ化クエリのみを使用
+- ファイルアップロードを検証: タイプ、サイズ、内容
 ```
 
 ### React/Frontend
@@ -248,34 +265,38 @@ paths: src/components/**/*.tsx
 
 # React Component Guidelines
 
-- Prefer functional components with hooks
-- Extract complex logic to custom hooks
-- Use React.memo for expensive renders
-- Props interface named: ComponentNameProps
+- 関数コンポーネント + hooks を優先
+- 複雑なロジックはカスタム hooks に抽出
+- コストの高いレンダリングには React.memo を使用
+- Props インターフェース名: ComponentNameProps
 ```
 
 ## Rules vs CLAUDE.md
 
-**CLAUDE.md**: High-level project info, build commands, architecture patterns
+| 項目 | CLAUDE.md | Rules |
+|------|-----------|-------|
+| 用途 | プロジェクト概要 | 具体的なコーディング規約 |
+| スコープ | 全体 | 条件付き（パス指定可） |
+| 内容 | ビルドコマンド、アーキテクチャ | ファイルタイプ別ガイドライン |
+| 構成 | 単一ファイル | モジュール化された複数ファイル |
 
-**Rules (`.claude/rules/*.md`)**: Specific coding guidelines, often conditional on file types
+**Rules を使う場合**:
+- ガイドラインが特定のファイルタイプやパスに適用される
+- 単一トピックに焦点を当てた内容
+- チームがモジュール化された整理を望む
 
-Use rules when:
-- Guidelines apply to specific file types or paths
-- Content is focused on single topic (testing, security, etc.)
-- Team wants modular, organized guidelines
+**CLAUDE.md を使う場合**:
+- 一般的なプロジェクト情報が全ファイルに適用される
+- ビルド/テスト/lint コマンドが頻繁に必要
+- アーキテクチャ概要が必要
 
-Use CLAUDE.md when:
-- General project information applies to all files
-- Build/test/lint commands needed frequently
-- Architectural overview needed
+## 最終チェックリスト
 
-## Checklist
-
-Before creating a rule:
-- [ ] Identified clear, focused topic
-- [ ] Chose appropriate scope (global or path-specific)
-- [ ] Used descriptive filename
-- [ ] Kept content specific and actionable
-- [ ] Avoided duplicating CLAUDE.md content
-- [ ] Tested glob patterns if using path scoping
+ルール作成前：
+- [ ] 既存ルールを確認した（重複なし）
+- [ ] CLAUDE.md との重複を確認した
+- [ ] 明確で焦点を絞ったトピックを特定した
+- [ ] 適切なスコープを選択した（グローバル or パス指定）
+- [ ] 説明的なファイル名を使用した
+- [ ] 内容を具体的かつ実行可能にした
+- [ ] パス指定の場合、glob パターンをテストした
