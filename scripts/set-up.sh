@@ -27,7 +27,7 @@ echo "ROOT_DIR=${ROOT_DIR}"
 echo ""
 
 # .agent
-echo "[1/5] Setting up .agent directory..."
+echo "[1/6] Setting up .agent directory..."
 if [[ "$SELF_MODE" == "true" ]]; then
   echo "  - Self mode: .agent already exists, skipping"
 else
@@ -56,7 +56,7 @@ echo "  Done."
 echo ""
 
 # .claude
-echo "[2/5] Setting up .claude directory..."
+echo "[2/6] Setting up .claude directory..."
 # 既存のシンボリックリンクを削除してディレクトリを作成
 if [[ -L "${ROOT_DIR}/.claude/skills" ]]; then
   rm "${ROOT_DIR}/.claude/skills"
@@ -95,7 +95,7 @@ echo "  Done."
 echo ""
 
 # .codex
-echo "[3/5] Setting up .codex directory..."
+echo "[3/6] Setting up .codex directory..."
 if [[ -L "${ROOT_DIR}/.codex/skills" ]]; then
   rm "${ROOT_DIR}/.codex/skills"
 fi
@@ -121,7 +121,7 @@ echo "  Done."
 echo ""
 
 # .gemini
-echo "[4/5] Setting up .gemini directory..."
+echo "[4/6] Setting up .gemini directory..."
 if [[ -L "${ROOT_DIR}/.gemini/skills" ]]; then
   rm "${ROOT_DIR}/.gemini/skills"
 fi
@@ -136,8 +136,24 @@ done
 echo "  Done."
 echo ""
 
+# .cursor
+echo "[5/6] Setting up .cursor directory..."
+if [[ -L "${ROOT_DIR}/.cursor/skills" ]]; then
+  rm "${ROOT_DIR}/.cursor/skills"
+fi
+mkdir -p "${ROOT_DIR}/.cursor/skills"
+find "${ROOT_DIR}/.cursor/skills" -maxdepth 1 -type l -delete
+for f in "${ROOT_DIR}/.agent/skills"/*; do
+  [ -e "$f" ] || continue
+  base_name=$(basename "$f")
+  ln -sf "../../.agent/skills/${base_name}" "${ROOT_DIR}/.cursor/skills/"
+  echo "  - Linked skills/${base_name}"
+done
+echo "  Done."
+echo ""
+
 # .kiro
-echo "[5/5] Setting up .kiro directory..."
+echo "[6/6] Setting up .kiro directory..."
 if [[ "$SELF_MODE" == "true" ]]; then
   echo "  - Self mode: .kiro already exists, skipping"
 else
