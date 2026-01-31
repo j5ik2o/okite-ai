@@ -149,6 +149,18 @@ for f in "${ROOT_DIR}/.agent/skills"/*; do
   ln -sf "../../.agent/skills/${base_name}" "${ROOT_DIR}/.cursor/skills/"
   echo "  - Linked skills/${base_name}"
 done
+# .agent/rules -> .cursor/rules
+if [[ -L "${ROOT_DIR}/.cursor/rules" ]]; then
+  rm "${ROOT_DIR}/.cursor/rules"
+fi
+mkdir -p "${ROOT_DIR}/.cursor/rules"
+find "${ROOT_DIR}/.cursor/rules" -maxdepth 1 -type l -delete
+for f in "${ROOT_DIR}/.agent/rules"/*; do
+  [ -e "$f" ] || continue
+  base_name=$(basename "$f")
+  ln -sf "../../.agent/rules/${base_name}" "${ROOT_DIR}/.cursor/rules/"
+  echo "  - Linked rules/${base_name}"
+done
 echo "  Done."
 echo ""
 
