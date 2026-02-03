@@ -26,6 +26,8 @@ AIエージェント（Claude Code、Codex CLI、Gemini CLI等）向けの実践
 | **aggregate-design** | 集約設計の原則に基づく設計・レビュー支援 | 「集約を設計したい」「Aggregateの実装」 |
 | **domain-building-blocks** | 値オブジェクト/エンティティ/集約/ドメインサービスの設計ガイド | 「値オブジェクトを作りたい」「エンティティと値オブジェクトの違い」 |
 | **domain-model-first** | ドメインモデル中心のTDD開発手順 | 「ドメインモデルから始めたい」「TDDでDDD」 |
+| **ddd-module-pattern** | DDDモジュールパターンに基づくドメイン層パッケージング | 「ドメイン層のパッケージ構造」「entities/フォルダをやめたい」 |
+| **repository-placement** | リポジトリインターフェースの配置場所ガイド | 「リポジトリをどこに置く」「ドメイン層にリポジトリ」 |
 
 ### アーキテクチャ・設計
 
@@ -33,8 +35,7 @@ AIエージェント（Claude Code、Codex CLI、Gemini CLI等）向けの実践
 |--------|------|-----------|
 | **clean-architecture** | クリーンアーキテクチャの4層構造に基づく設計・レビュー支援 | 「クリーンアーキテクチャで」「クリーンアーキテクチャのレビュー」 |
 | **error-handling** | 回復可能性を基準にしたエラーハンドリング設計。Either/Result型の活用 | 「エラー処理を改善して」「Result型を使いたい」 |
-| **less-is-more** | YAGNI/KISSに基づく過剰設計防止 | 「シンプルにして」「過剰設計では？」「YAGNI」 |
-| **single-type-per-file** | 1公開型=1ファイルの原則を強制 | 新規ファイル作成時に自動適用 |
+| **parse-dont-validate** | チェック結果を型で保持するParse, Don't Validate原則 | 「バリデーションを改善して」「型で保証したい」 |
 
 ### パッケージ・モジュール設計
 
@@ -43,12 +44,13 @@ AIエージェント（Claude Code、Codex CLI、Gemini CLI等）向けの実践
 | **package-design** | MECE分割による明確なパッケージ構造設計 | 「パッケージ構造を見直したい」「モジュールの依存関係が複雑」 |
 | **refactoring-packages** | 既存コードの構造分析とリファクタリング実行 | 「循環依存を解消して」「このモジュールを分割して」 |
 
-### 命名・コーディング規約
+### OOP設計原則
 
 | スキル | 説明 | トリガー例 |
 |--------|------|-----------|
-| **avoiding-ambiguous-suffixes** | Manager/Util/Service等の曖昧なサフィックスを検出・改善 | 「この命名で良いか」「Managerという名前を使いたい」 |
-| **learning-before-coding** | 実装前に既存コードパターンを学習することを強制 | 新機能実装、コンポーネント追加時に自動適用 |
+| **tell-dont-ask** | オブジェクトに問い合わせず命じるTell, Don't Ask原則 | 「getterを減らしたい」「Feature Envyを直して」 |
+| **first-class-collection** | コレクションをラップする専用クラスの設計 | 「コレクションをラップしたい」「List<Order>をOrdersクラスに」 |
+| **breach-encapsulation-naming** | カプセル化を破るgetterの命名規約 | 「永続化用のgetter」「getterを作りたいが濫用を防ぎたい」 |
 
 ### スキル開発・運用
 
@@ -56,9 +58,22 @@ AIエージェント（Claude Code、Codex CLI、Gemini CLI等）向けの実践
 |--------|------|-----------|
 | **skill-creator** | スキル作成ガイド（Claude/Codex向け） | 「新しいスキルを作りたい」 |
 | **reviewing-skills** | スキルのベストプラクティス準拠レビュー | 「このスキルをレビューして」 |
-| **skill-installer** | Codex用スキルのインストール支援 | 「インストール可能なスキル一覧」「このスキルを入れて」 |
+| **creating-rules** | Claude Codeルール（.claude/rules/）の作成ガイド | 「ルールファイルを作りたい」「パス指定ルール」 |
+| **custom-linter-creator** | AIエージェント向けカスタムlintルール作成 | 「リンタールールを作成」「このパターンを強制」 |
 
-※ Codex CLI の system スキルは `.agent/skills/.system/` に配置。
+※ Codex CLI の system スキルは `.agent/skills/.system/` に配置（skill-creator, skill-installer）。
+
+## 共有ルール
+
+`.agent/rules/` に配置された、全プロジェクトで適用されるコーディングルール：
+
+| ルール | 説明 |
+|--------|------|
+| **prefer-immutability** | Rust以外の言語で不変データ操作を優先 |
+| **learning-before-coding** | 実装前に既存コードパターンを学習 |
+| **single-type-per-file** | 1公開型=1ファイルの原則 |
+| **avoiding-ambiguous-suffixes** | Manager/Util等の曖昧なサフィックスを回避 |
+| **less-is-more** | YAGNI/KISSに基づく過剰設計防止 |
 
 ## Kiro Spec-Driven Development (SDD)
 
@@ -101,10 +116,12 @@ Phase 2: 実装
 okite-ai/
 ├── .agent/
 │   ├── CC-SDD.md
-│   └── skills/           # 共有スキルの実体
-│       └── .system/      # Codex用systemスキル
+│   ├── skills/           # 共有スキルの実体
+│   │   └── .system/      # Codex用systemスキル
+│   └── rules/            # 共有ルールの実体
 ├── .claude/
 │   ├── skills/           # .agent/skills へのシンボリックリンク
+│   ├── rules/            # .agent/rules へのシンボリックリンク
 │   ├── commands/         # Claude Codeコマンド
 │   │   ├── create-skill.md
 │   │   └── kiro/
@@ -114,9 +131,10 @@ okite-ai/
 │   ├── skills/           # .agent/skills へのシンボリックリンク
 │   └── prompts/          # Kiro SDDプロンプト
 ├── .cursor/
-│   └── commands/kiro/    # Cursor向けKiroコマンド
+│   ├── skills/           # .agent/skills へのシンボリックリンク
+│   └── rules/            # .agent/rules へのシンボリックリンク
 ├── .gemini/
-│   └── commands/kiro/    # Gemini向けKiroコマンド
+│   └── skills/           # .agent/skills へのシンボリックリンク
 ├── .kiro/
 │   └── settings/         # Kiro設定・テンプレート
 │       ├── rules/
@@ -129,6 +147,7 @@ okite-ai/
 │   └── set-up.sh
 ├── AGENTS.md
 ├── CLAUDE.md             # Claude Code用設定
+├── COMMON.md             # 共通設定
 └── GEMINI.md             # Gemini用設定
 ```
 
@@ -153,7 +172,7 @@ okite-ai/
 
 ## セットアップ
 
-```
+```bash
 # スキルを使いたいリポジトリをクローンする
 git clone git@github.com/your-github-id/your-repos.git
 # プロジェクトルートに移動する
@@ -165,6 +184,24 @@ git submodule add git@github.com/okite-ai/okite-ai.git references/okite-ai
 ```
 
 ※ `set-up.sh` は プロジェクトルート直下の `.agent/`, `.claude/`, `.codex/`, `.gemini/`, `.cursor/`, `.kiro/` をシンボリックリンクで配置する。
+
+### スキル/ルールの除外
+
+特定のスキルやルールを除外したい場合は、プロジェクトルートに `.okite_ignore` ファイルを作成する：
+
+```
+# .okite_ignore
+
+# スキルを除外
+skills/clean-architecture
+skills/tell-dont-ask
+
+# ルールを除外
+rules/prefer-immutability
+
+# プレフィックスなしで両方を除外
+less-is-more
+```
 
 ## スキルの使い方
 
@@ -179,9 +216,14 @@ git submodule add git@github.com/okite-ai/okite-ai.git references/okite-ai
 # clean-architectureスキルが自動起動
 ユーザー: 「クリーンアーキテクチャのレビューをお願い」
 
-# learning-before-codingスキルが自動起動
-ユーザー: 「UserRepositoryを追加して」
-→ AIが既存のリポジトリパターンを分析してから実装
+# tell-dont-askスキルが自動起動
+ユーザー: 「getterを減らしてカプセル化を改善して」
+
+# parse-dont-validateスキルが自動起動
+ユーザー: 「バリデーション結果を型で保証したい」
+
+# first-class-collectionスキルが自動起動
+ユーザー: 「List<Order>をOrdersクラスにラップしたい」
 ```
 
 ### Kiro SDDコマンド
@@ -230,6 +272,11 @@ git submodule add git@github.com/okite-ai/okite-ai.git references/okite-ai
 スキルは以下の言語に対応：
 
 - **error-handling**: Go, Rust, Scala, Java, TypeScript, JavaScript, Python
+- **tell-dont-ask**: Java, Kotlin, Scala, TypeScript, Python, Ruby, Go, Rust
+- **first-class-collection**: Java, Kotlin, Scala, TypeScript, Python, Ruby, Go, Rust
+- **breach-encapsulation-naming**: Java, Kotlin, Scala, TypeScript, Python, Go, Rust
+- **parse-dont-validate**: Rust, Haskell, TypeScript, Scala, Java, Go, Python
+- **custom-linter-creator**: Rust (dylint), TypeScript/JavaScript (ESLint), Python (pylint), Go (golangci-lint)
 - **package-design**: Rust（主）、汎用原則は全言語
 - **その他**: 言語非依存の設計原則
 
@@ -246,6 +293,24 @@ git submodule add git@github.com/okite-ai/okite-ai.git references/okite-ai
 - 新しいコードを書く前に既存の実装パターンを分析
 - プロジェクト固有の規約を尊重
 - 「教科書的に正しい」より「プロジェクトに適合した」コード
+
+### Tell, Don't Ask
+
+- オブジェクトの状態を問い合わせて外部で判断するのではなく、オブジェクトに直接命じる
+- カプセル化を強化し、責任をデータを持つオブジェクトに集約
+- getterの濫用を防ぎ、Feature Envyを排除
+
+### Parse, Don't Validate
+
+- チェック結果を捨てずに型で保持する
+- バリデーション関数（void/bool返却）をパース関数（型付き値返却）に変換
+- 型システムで不変式を強制し、shotgun parsingを防止
+
+### Prefer Immutability
+
+- Rust以外の言語では不変データ操作を優先
+- ミューテーションによる予期せぬ副作用を防止
+- 参照を共有するオブジェクトの変更を避ける
 
 ### Spec-Driven Development
 
