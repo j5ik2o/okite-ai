@@ -3,6 +3,7 @@ model_reasoning_effort = "xhigh"
 hide_agent_reasoning = true
 network_access = true
 web_search = "live"
+personality = "pragmatic"
 
 [features]
 rmcp_client=true

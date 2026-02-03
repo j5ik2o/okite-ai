@@ -19,11 +19,72 @@ else
   OKITE_ROOT_REL=${OKITE_ROOT#${ROOT_DIR}/}
 fi
 
+OKITE_IGNORE_FILE="${ROOT_DIR}/.okite_ignore"
+IGNORE_SKILLS=()
+IGNORE_RULES=()
+
+trim_whitespace() {
+  local s="$1"
+  s="${s#"${s%%[![:space:]]*}"}"
+  s="${s%"${s##*[![:space:]]}"}"
+  printf '%s' "$s"
+}
+
+load_okite_ignore() {
+  local file="$1"
+  local line
+  while IFS= read -r line || [[ -n "$line" ]]; do
+    line="${line%%#*}"
+    line="$(trim_whitespace "$line")"
+    [[ -z "$line" ]] && continue
+    case "$line" in
+      skills/*)
+        IGNORE_SKILLS+=("${line#skills/}")
+        ;;
+      rules/*)
+        IGNORE_RULES+=("${line#rules/}")
+        ;;
+      *)
+        IGNORE_SKILLS+=("$line")
+        IGNORE_RULES+=("$line")
+        ;;
+    esac
+  done < "$file"
+}
+
+matches_ignore() {
+  local name="$1"
+  shift
+  local pattern
+  for pattern in "$@"; do
+    [[ -z "$pattern" ]] && continue
+    if [[ "$name" == $pattern ]]; then
+      return 0
+    fi
+  done
+  return 1
+}
+
+is_skill_ignored() {
+  matches_ignore "$1" "${IGNORE_SKILLS[@]}"
+}
+
+is_rule_ignored() {
+  matches_ignore "$1" "${IGNORE_RULES[@]}"
+}
+
+if [[ -f "$OKITE_IGNORE_FILE" ]]; then
+  load_okite_ignore "$OKITE_IGNORE_FILE"
+fi
+
 echo "======================================"
 echo "okite-ai setup"
 echo "======================================"
 echo "OKITE_ROOT=${OKITE_ROOT}"
 echo "ROOT_DIR=${ROOT_DIR}"
+if [[ -f "$OKITE_IGNORE_FILE" ]]; then
+  echo "OKITE_IGNORE=${OKITE_IGNORE_FILE}"
+fi
 echo ""
 
 # .agent
@@ -39,6 +100,10 @@ else
   for f in "${OKITE_ROOT}/.agent/skills"/*; do
     [ -e "$f" ] || continue
     base_name=$(basename "$f")
+    if is_skill_ignored "$base_name"; then
+      echo "  - Skipped skills/${base_name} (ignored)"
+      continue
+    fi
     ln -sf "../../${OKITE_ROOT_REL}/.agent/skills/${base_name}" "${ROOT_DIR}/.agent/skills/"
     echo "  - Linked skills/${base_name}"
   done
@@ -48,6 +113,10 @@ else
   for f in "${OKITE_ROOT}/.agent/rules"/*; do
     [ -e "$f" ] || continue
     base_name=$(basename "$f")
+    if is_rule_ignored "$base_name"; then
+      echo "  - Skipped rules/${base_name} (ignored)"
+      continue
+    fi
     ln -sf "../../${OKITE_ROOT_REL}/.agent/rules/${base_name}" "${ROOT_DIR}/.agent/rules/"
     echo "  - Linked rules/${base_name}"
   done
@@ -66,6 +135,10 @@ find "${ROOT_DIR}/.claude/skills" -maxdepth 1 -type l -delete
 for f in "${ROOT_DIR}/.agent/skills"/*; do
   [ -e "$f" ] || continue
   base_name=$(basename "$f")
+  if is_skill_ignored "$base_name"; then
+    echo "  - Skipped skills/${base_name} (ignored)"
+    continue
+  fi
   ln -sf "../../.agent/skills/${base_name}" "${ROOT_DIR}/.claude/skills/"
   echo "  - Linked skills/${base_name}"
 done
@@ -88,6 +161,10 @@ find "${ROOT_DIR}/.claude/rules" -maxdepth 1 -type l -delete
 for f in "${ROOT_DIR}/.agent/rules"/*; do
   [ -e "$f" ] || continue
   base_name=$(basename "$f")
+  if is_rule_ignored "$base_name"; then
+    echo "  - Skipped rules/${base_name} (ignored)"
+    continue
+  fi
   ln -sf "../../.agent/rules/${base_name}" "${ROOT_DIR}/.claude/rules/"
   echo "  - Linked rules/${base_name}"
 done
@@ -104,6 +181,10 @@ find "${ROOT_DIR}/.codex/skills" -maxdepth 1 -type l -delete
 for f in "${ROOT_DIR}/.agent/skills"/*; do
   [ -e "$f" ] || continue
   base_name=$(basename "$f")
+  if is_skill_ignored "$base_name"; then
+    echo "  - Skipped skills/${base_name} (ignored)"
+    continue
+  fi
   ln -sf "../../.agent/skills/${base_name}" "${ROOT_DIR}/.codex/skills/"
   echo "  - Linked skills/${base_name}"
 done
@@ -130,6 +211,10 @@ find "${ROOT_DIR}/.gemini/skills" -maxdepth 1 -type l -delete
 for f in "${ROOT_DIR}/.agent/skills"/*; do
   [ -e "$f" ] || continue
   base_name=$(basename "$f")
+  if is_skill_ignored "$base_name"; then
+    echo "  - Skipped skills/${base_name} (ignored)"
+    continue
+  fi
   ln -sf "../../.agent/skills/${base_name}" "${ROOT_DIR}/.gemini/skills/"
   echo "  - Linked skills/${base_name}"
 done
@@ -146,6 +231,10 @@ find "${ROOT_DIR}/.cursor/skills" -maxdepth 1 -type l -delete
 for f in "${ROOT_DIR}/.agent/skills"/*; do
   [ -e "$f" ] || continue
   base_name=$(basename "$f")
+  if is_skill_ignored "$base_name"; then
+    echo "  - Skipped skills/${base_name} (ignored)"
+    continue
+  fi
   ln -sf "../../.agent/skills/${base_name}" "${ROOT_DIR}/.cursor/skills/"
   echo "  - Linked skills/${base_name}"
 done
@@ -158,6 +247,10 @@ find "${ROOT_DIR}/.cursor/rules" -maxdepth 1 -type l -delete
 for f in "${ROOT_DIR}/.agent/rules"/*; do
   [ -e "$f" ] || continue
   base_name=$(basename "$f")
+  if is_rule_ignored "$base_name"; then
+    echo "  - Skipped rules/${base_name} (ignored)"
+    continue
+  fi
   ln -sf "../../.agent/rules/${base_name}" "${ROOT_DIR}/.cursor/rules/"
   echo "  - Linked rules/${base_name}"
 done
