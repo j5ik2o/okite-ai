@@ -1,6 +1,6 @@
 # okite-ai
 
-AIエージェント（Claude Code、Codex CLI、Gemini CLI, Cursor等）向けの実践的なスキルセットとSpec-Driven Development（SDD）ワークフローを提供するリポジトリ。
+AIエージェント（Claude Code、Codex CLI、Gemini CLI、Cursor等）向けの実践的なスキルセットとSpec-Driven Development（SDD）ワークフローを提供するリポジトリ。
 
 ## ネーミングの由来
 
