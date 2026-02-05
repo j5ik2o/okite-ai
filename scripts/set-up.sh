@@ -151,6 +151,8 @@ else
   ln -sf "../../${OKITE_ROOT_REL}/.claude/commands/kiro" "${ROOT_DIR}/.claude/commands/"
   echo "  - Linked commands/kiro/"
   echo "  - Linked agents/kiro/"
+  ln -sf "../${OKITE_ROOT_REL}/.claude/settings.json" "${ROOT_DIR}/.claude/"
+  echo "  - Linked settings.json"
 fi
 # .agent/rules -> .claude/rules
 if [[ -L "${ROOT_DIR}/.claude/rules" ]]; then
@@ -197,6 +199,8 @@ else
     ln -sf "../../${OKITE_ROOT_REL}/.codex/prompts/${base_name}" "${ROOT_DIR}/.codex/prompts/"
     echo "  - Linked prompts/${base_name}"
   done
+  ln -sf "../${OKITE_ROOT_REL}/.codex/config.toml" "${ROOT_DIR}/.codex/"
+  echo "  - Linked config.toml"
 fi
 echo "  Done."
 echo ""
@@ -218,6 +222,12 @@ for f in "${ROOT_DIR}/.agent/skills"/*; do
   ln -sf "../../.agent/skills/${base_name}" "${ROOT_DIR}/.gemini/skills/"
   echo "  - Linked skills/${base_name}"
 done
+if [[ "$SELF_MODE" == "true" ]]; then
+  echo "  - Self mode: settings already exist, skipping"
+else
+  ln -sf "../${OKITE_ROOT_REL}/.gemini/settings.json" "${ROOT_DIR}/.gemini/"
+  echo "  - Linked settings.json"
+fi
 echo "  Done."
 echo ""
 
