@@ -6,9 +6,13 @@ web_search = "live"
 personality = "pragmatic"
 
 [features]
-rmcp_client=true
-skills=true
+rmcp_client = true
+skills = true
 unified_exec = true
+apps = true
+shell_snapshot = true
+collab = true
+steer = true
 
 [mcp_servers.serena]
 command = "uvx"
