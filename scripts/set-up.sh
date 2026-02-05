@@ -23,6 +23,19 @@ OKITE_IGNORE_FILE="${ROOT_DIR}/.okite_ignore"
 IGNORE_SKILLS=()
 IGNORE_RULES=()
 
+resolve_path() {
+  local path="$1"
+  if command -v python3 >/dev/null 2>&1; then
+    python3 - <<'PY' "$path"
+import os
+import sys
+print(os.path.realpath(sys.argv[1]))
+PY
+  else
+    realpath "$path"
+  fi
+}
+
 trim_whitespace() {
   local s="$1"
   s="${s#"${s%%[![:space:]]*}"}"
@@ -73,9 +86,52 @@ is_rule_ignored() {
   matches_ignore "$1" "${IGNORE_RULES[@]}"
 }
 
+link_target_abs() {
+  local link="$1"
+  local target
+  target=$(readlink "$link") || return 1
+  if [[ "$target" != /* ]]; then
+    target="$(dirname "$link")/$target"
+  fi
+  resolve_path "$target"
+}
+
+is_okite_managed_link() {
+  local link="$1"
+  local target_abs
+  target_abs=$(link_target_abs "$link") || return 1
+  case "$target_abs" in
+    "${OKITE_ROOT_ABS}"|"${OKITE_ROOT_ABS}/"*)
+      return 0
+      ;;
+    *)
+      return 1
+      ;;
+  esac
+}
+
+remove_okite_symlink_path() {
+  local path="$1"
+  if [[ -L "$path" ]] && is_okite_managed_link "$path"; then
+    rm "$path"
+  fi
+}
+
+delete_okite_links_in_dir() {
+  local dir="$1"
+  local link
+  while IFS= read -r -d '' link; do
+    if is_okite_managed_link "$link"; then
+      rm "$link"
+    fi
+  done < <(find "$dir" -maxdepth 1 -type l -print0)
+}
+
 if [[ -f "$OKITE_IGNORE_FILE" ]]; then
   load_okite_ignore "$OKITE_IGNORE_FILE"
 fi
+
+OKITE_ROOT_ABS=$(resolve_path "$OKITE_ROOT")
 
 echo "======================================"
 echo "okite-ai setup"
@@ -96,7 +152,7 @@ else
   ln -sf "../${OKITE_ROOT_REL}/.agent/CC-SDD.md" "${ROOT_DIR}/.agent/"
   echo "  - Linked CC-SDD.md"
   mkdir -p "${ROOT_DIR}/.agent/skills"
-  find "${ROOT_DIR}/.agent/skills" -maxdepth 1 -type l -delete
+  delete_okite_links_in_dir "${ROOT_DIR}/.agent/skills"
   for f in "${OKITE_ROOT}/.agent/skills"/*; do
     [ -e "$f" ] || continue
     base_name=$(basename "$f")
@@ -109,7 +165,7 @@ else
   done
   # okite-ai/.agent/rules -> .agent/rules
   mkdir -p "${ROOT_DIR}/.agent/rules"
-  find "${ROOT_DIR}/.agent/rules" -maxdepth 1 -type l -delete
+  delete_okite_links_in_dir "${ROOT_DIR}/.agent/rules"
   for f in "${OKITE_ROOT}/.agent/rules"/*; do
     [ -e "$f" ] || continue
     base_name=$(basename "$f")
@@ -127,11 +183,9 @@ echo ""
 # .claude
 echo "[2/7] Setting up .claude directory..."
 # 既存のシンボリックリンクを削除してディレクトリを作成
-if [[ -L "${ROOT_DIR}/.claude/skills" ]]; then
-  rm "${ROOT_DIR}/.claude/skills"
-fi
+remove_okite_symlink_path "${ROOT_DIR}/.claude/skills"
 mkdir -p "${ROOT_DIR}/.claude/skills"
-find "${ROOT_DIR}/.claude/skills" -maxdepth 1 -type l -delete
+delete_okite_links_in_dir "${ROOT_DIR}/.claude/skills"
 for f in "${ROOT_DIR}/.agent/skills"/*; do
   [ -e "$f" ] || continue
   base_name=$(basename "$f")
@@ -155,11 +209,9 @@ else
   echo "  - Linked settings.json"
 fi
 # .agent/rules -> .claude/rules
-if [[ -L "${ROOT_DIR}/.claude/rules" ]]; then
-  rm "${ROOT_DIR}/.claude/rules"
-fi
+remove_okite_symlink_path "${ROOT_DIR}/.claude/rules"
 mkdir -p "${ROOT_DIR}/.claude/rules"
-find "${ROOT_DIR}/.claude/rules" -maxdepth 1 -type l -delete
+delete_okite_links_in_dir "${ROOT_DIR}/.claude/rules"
 for f in "${ROOT_DIR}/.agent/rules"/*; do
   [ -e "$f" ] || continue
   base_name=$(basename "$f")
@@ -175,11 +227,9 @@ echo ""
 
 # .codex
 echo "[3/7] Setting up .codex directory..."
-if [[ -L "${ROOT_DIR}/.codex/skills" ]]; then
-  rm "${ROOT_DIR}/.codex/skills"
-fi
+remove_okite_symlink_path "${ROOT_DIR}/.codex/skills"
 mkdir -p "${ROOT_DIR}/.codex/skills"
-find "${ROOT_DIR}/.codex/skills" -maxdepth 1 -type l -delete
+delete_okite_links_in_dir "${ROOT_DIR}/.codex/skills"
 for f in "${ROOT_DIR}/.agent/skills"/*; do
   [ -e "$f" ] || continue
   base_name=$(basename "$f")
@@ -207,11 +257,9 @@ echo ""
 
 # .gemini
 echo "[4/7] Setting up .gemini directory..."
-if [[ -L "${ROOT_DIR}/.gemini/skills" ]]; then
-  rm "${ROOT_DIR}/.gemini/skills"
-fi
+remove_okite_symlink_path "${ROOT_DIR}/.gemini/skills"
 mkdir -p "${ROOT_DIR}/.gemini/skills"
-find "${ROOT_DIR}/.gemini/skills" -maxdepth 1 -type l -delete
+delete_okite_links_in_dir "${ROOT_DIR}/.gemini/skills"
 for f in "${ROOT_DIR}/.agent/skills"/*; do
   [ -e "$f" ] || continue
   base_name=$(basename "$f")
@@ -233,11 +281,9 @@ echo ""
 
 # .cursor
 echo "[5/7] Setting up .cursor directory..."
-if [[ -L "${ROOT_DIR}/.cursor/skills" ]]; then
-  rm "${ROOT_DIR}/.cursor/skills"
-fi
+remove_okite_symlink_path "${ROOT_DIR}/.cursor/skills"
 mkdir -p "${ROOT_DIR}/.cursor/skills"
-find "${ROOT_DIR}/.cursor/skills" -maxdepth 1 -type l -delete
+delete_okite_links_in_dir "${ROOT_DIR}/.cursor/skills"
 for f in "${ROOT_DIR}/.agent/skills"/*; do
   [ -e "$f" ] || continue
   base_name=$(basename "$f")
@@ -249,11 +295,9 @@ for f in "${ROOT_DIR}/.agent/skills"/*; do
   echo "  - Linked skills/${base_name}"
 done
 # .agent/rules -> .cursor/rules
-if [[ -L "${ROOT_DIR}/.cursor/rules" ]]; then
-  rm "${ROOT_DIR}/.cursor/rules"
-fi
+remove_okite_symlink_path "${ROOT_DIR}/.cursor/rules"
 mkdir -p "${ROOT_DIR}/.cursor/rules"
-find "${ROOT_DIR}/.cursor/rules" -maxdepth 1 -type l -delete
+delete_okite_links_in_dir "${ROOT_DIR}/.cursor/rules"
 for f in "${ROOT_DIR}/.agent/rules"/*; do
   [ -e "$f" ] || continue
   base_name=$(basename "$f")
@@ -269,11 +313,9 @@ echo ""
 
 # .opencode
 echo "[6/7] Setting up .opencode directory..."
-if [[ -L "${ROOT_DIR}/.opencode/skills" ]]; then
-  rm "${ROOT_DIR}/.opencode/skills"
-fi
+remove_okite_symlink_path "${ROOT_DIR}/.opencode/skills"
 mkdir -p "${ROOT_DIR}/.opencode/skills"
-find "${ROOT_DIR}/.opencode/skills" -maxdepth 1 -type l -delete
+delete_okite_links_in_dir "${ROOT_DIR}/.opencode/skills"
 for f in "${ROOT_DIR}/.agent/skills"/*; do
   [ -e "$f" ] || continue
   base_name=$(basename "$f")
