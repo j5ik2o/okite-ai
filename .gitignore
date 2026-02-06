@@ -4,11 +4,9 @@
 /.codex/sessions/
 /.codex/log/
 /.codex/tmp/
-/.codex/models_cache.json
-/.codex/auth.json
-/.codex/history.jsonl
-/.codex/internal_storage.json
-/.codex/version.json
+/.codex/shell_snapshots/*.sh
+/.codex/*.json
+/.codex/*.jsonl
 /.serena/cache/
 
 
