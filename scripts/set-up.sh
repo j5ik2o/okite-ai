@@ -144,7 +144,7 @@ fi
 echo ""
 
 # .agent
-echo "[1/7] Setting up .agent directory..."
+echo "[1/8] Setting up .agent directory..."
 if [[ "$SELF_MODE" == "true" ]]; then
   echo "  - Self mode: .agent already exists, skipping"
 else
@@ -181,7 +181,7 @@ echo "  Done."
 echo ""
 
 # .claude
-echo "[2/7] Setting up .claude directory..."
+echo "[2/8] Setting up .claude directory..."
 # 既存のシンボリックリンクを削除してディレクトリを作成
 remove_okite_symlink_path "${ROOT_DIR}/.claude/skills"
 mkdir -p "${ROOT_DIR}/.claude/skills"
@@ -226,7 +226,7 @@ echo "  Done."
 echo ""
 
 # .codex
-echo "[3/7] Setting up .codex directory..."
+echo "[3/8] Setting up .codex directory..."
 remove_okite_symlink_path "${ROOT_DIR}/.codex/skills"
 mkdir -p "${ROOT_DIR}/.codex/skills"
 delete_okite_links_in_dir "${ROOT_DIR}/.codex/skills"
@@ -256,7 +256,7 @@ echo "  Done."
 echo ""
 
 # .gemini
-echo "[4/7] Setting up .gemini directory..."
+echo "[4/8] Setting up .gemini directory..."
 remove_okite_symlink_path "${ROOT_DIR}/.gemini/skills"
 mkdir -p "${ROOT_DIR}/.gemini/skills"
 delete_okite_links_in_dir "${ROOT_DIR}/.gemini/skills"
@@ -280,7 +280,7 @@ echo "  Done."
 echo ""
 
 # .cursor
-echo "[5/7] Setting up .cursor directory..."
+echo "[5/8] Setting up .cursor directory..."
 remove_okite_symlink_path "${ROOT_DIR}/.cursor/skills"
 mkdir -p "${ROOT_DIR}/.cursor/skills"
 delete_okite_links_in_dir "${ROOT_DIR}/.cursor/skills"
@@ -312,7 +312,7 @@ echo "  Done."
 echo ""
 
 # .opencode
-echo "[6/7] Setting up .opencode directory..."
+echo "[6/8] Setting up .opencode directory..."
 remove_okite_symlink_path "${ROOT_DIR}/.opencode/skills"
 mkdir -p "${ROOT_DIR}/.opencode/skills"
 delete_okite_links_in_dir "${ROOT_DIR}/.opencode/skills"
@@ -330,13 +330,32 @@ echo "  Done."
 echo ""
 
 # .kiro
-echo "[7/7] Setting up .kiro directory..."
+echo "[7/8] Setting up .kiro directory..."
 if [[ "$SELF_MODE" == "true" ]]; then
   echo "  - Self mode: .kiro already exists, skipping"
 else
   mkdir -p "${ROOT_DIR}/.kiro"
   ln -sf "../${OKITE_ROOT_REL}/.kiro/settings" "${ROOT_DIR}/.kiro/"
   echo "  - Linked settings/"
+fi
+echo "  Done."
+echo ""
+
+# scripts
+echo "[8/8] Setting up scripts directory..."
+if [[ "$SELF_MODE" == "true" ]]; then
+  echo "  - Self mode: scripts already exist, skipping"
+else
+  mkdir -p "${ROOT_DIR}/scripts"
+  delete_okite_links_in_dir "${ROOT_DIR}/scripts"
+  for f in "${OKITE_ROOT}/scripts"/run-*.sh; do
+    [ -e "$f" ] || continue
+    base_name=$(basename "$f")
+    ln -sf "../${OKITE_ROOT_REL}/scripts/${base_name}" "${ROOT_DIR}/scripts/"
+    echo "  - Linked ${base_name}"
+  done
+  ln -sf "../${OKITE_ROOT_REL}/scripts/generate-agents-md.sh" "${ROOT_DIR}/scripts/"
+  echo "  - Linked generate-agents-md.sh"
 fi
 echo "  Done."
 echo ""
