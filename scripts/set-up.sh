@@ -127,6 +127,173 @@ delete_okite_links_in_dir() {
   done < <(find "$dir" -maxdepth 1 -type l -print0)
 }
 
+# ======================================
+# ヘルパー関数
+# ======================================
+
+# .agent/skills -> target_dir/skills へのシンボリックリンクを作成
+link_agent_skills_to() {
+  local target_dir="$1"
+  remove_okite_symlink_path "${target_dir}/skills"
+  mkdir -p "${target_dir}/skills"
+  delete_okite_links_in_dir "${target_dir}/skills"
+  for f in "${ROOT_DIR}/.agent/skills"/*; do
+    [ -e "$f" ] || continue
+    local base_name
+    base_name=$(basename "$f")
+    if is_skill_ignored "$base_name"; then
+      echo "  - Skipped skills/${base_name} (ignored)"
+      continue
+    fi
+    ln -sf "../../.agent/skills/${base_name}" "${target_dir}/skills/"
+    echo "  - Linked skills/${base_name}"
+  done
+}
+
+# .agent/rules -> target_dir/rules へのシンボリックリンクを作成
+link_agent_rules_to() {
+  local target_dir="$1"
+  remove_okite_symlink_path "${target_dir}/rules"
+  mkdir -p "${target_dir}/rules"
+  delete_okite_links_in_dir "${target_dir}/rules"
+  for f in "${ROOT_DIR}/.agent/rules"/*; do
+    [ -e "$f" ] || continue
+    local base_name
+    base_name=$(basename "$f")
+    if is_rule_ignored "$base_name"; then
+      echo "  - Skipped rules/${base_name} (ignored)"
+      continue
+    fi
+    ln -sf "../../.agent/rules/${base_name}" "${target_dir}/rules/"
+    echo "  - Linked rules/${base_name}"
+  done
+}
+
+# ======================================
+# セットアップ関数
+# ======================================
+
+setup_agent() {
+  if [[ "$SELF_MODE" == "true" ]]; then
+    echo "  - Self mode: .agent already exists, skipping"
+    return
+  fi
+  mkdir -p "${ROOT_DIR}/.agent"
+  ln -sf "../${OKITE_ROOT_REL}/.agent/CC-SDD.md" "${ROOT_DIR}/.agent/"
+  echo "  - Linked CC-SDD.md"
+  mkdir -p "${ROOT_DIR}/.agent/skills"
+  delete_okite_links_in_dir "${ROOT_DIR}/.agent/skills"
+  for f in "${OKITE_ROOT}/.agent/skills"/*; do
+    [ -e "$f" ] || continue
+    local base_name
+    base_name=$(basename "$f")
+    if is_skill_ignored "$base_name"; then
+      echo "  - Skipped skills/${base_name} (ignored)"
+      continue
+    fi
+    ln -sf "../../${OKITE_ROOT_REL}/.agent/skills/${base_name}" "${ROOT_DIR}/.agent/skills/"
+    echo "  - Linked skills/${base_name}"
+  done
+  mkdir -p "${ROOT_DIR}/.agent/rules"
+  delete_okite_links_in_dir "${ROOT_DIR}/.agent/rules"
+  for f in "${OKITE_ROOT}/.agent/rules"/*; do
+    [ -e "$f" ] || continue
+    local base_name
+    base_name=$(basename "$f")
+    if is_rule_ignored "$base_name"; then
+      echo "  - Skipped rules/${base_name} (ignored)"
+      continue
+    fi
+    ln -sf "../../${OKITE_ROOT_REL}/.agent/rules/${base_name}" "${ROOT_DIR}/.agent/rules/"
+    echo "  - Linked rules/${base_name}"
+  done
+}
+
+setup_claude() {
+  link_agent_skills_to "${ROOT_DIR}/.claude"
+  if [[ "$SELF_MODE" == "true" ]]; then
+    echo "  - Self mode: commands already exist, skipping"
+  else
+    mkdir -p "${ROOT_DIR}/.claude/commands"
+    ln -sf "../../${OKITE_ROOT_REL}/.claude/commands/create-skill.md" "${ROOT_DIR}/.claude/commands/"
+    echo "  - Linked commands/create-skill.md"
+    ln -sf "../../${OKITE_ROOT_REL}/.claude/commands/kiro" "${ROOT_DIR}/.claude/commands/"
+    echo "  - Linked commands/kiro/"
+    echo "  - Linked agents/kiro/"
+    ln -sf "../${OKITE_ROOT_REL}/.claude/settings.json" "${ROOT_DIR}/.claude/"
+    echo "  - Linked settings.json"
+  fi
+  link_agent_rules_to "${ROOT_DIR}/.claude"
+}
+
+setup_codex() {
+  link_agent_skills_to "${ROOT_DIR}/.codex"
+  if [[ "$SELF_MODE" == "true" ]]; then
+    echo "  - Self mode: prompts already exist, skipping"
+  else
+    mkdir -p "${ROOT_DIR}/.codex/prompts"
+    for f in "${OKITE_ROOT}/.codex/prompts"/kiro-*.md; do
+      local base_name
+      base_name=$(basename "$f")
+      ln -sf "../../${OKITE_ROOT_REL}/.codex/prompts/${base_name}" "${ROOT_DIR}/.codex/prompts/"
+      echo "  - Linked prompts/${base_name}"
+    done
+    ln -sf "../${OKITE_ROOT_REL}/.codex/config.toml" "${ROOT_DIR}/.codex/"
+    echo "  - Linked config.toml"
+  fi
+}
+
+setup_gemini() {
+  link_agent_skills_to "${ROOT_DIR}/.gemini"
+  if [[ "$SELF_MODE" == "true" ]]; then
+    echo "  - Self mode: settings already exist, skipping"
+  else
+    ln -sf "../${OKITE_ROOT_REL}/.gemini/settings.json" "${ROOT_DIR}/.gemini/"
+    echo "  - Linked settings.json"
+  fi
+}
+
+setup_cursor() {
+  link_agent_skills_to "${ROOT_DIR}/.cursor"
+  link_agent_rules_to "${ROOT_DIR}/.cursor"
+}
+
+setup_opencode() {
+  link_agent_skills_to "${ROOT_DIR}/.opencode"
+}
+
+setup_kiro() {
+  if [[ "$SELF_MODE" == "true" ]]; then
+    echo "  - Self mode: .kiro already exists, skipping"
+    return
+  fi
+  mkdir -p "${ROOT_DIR}/.kiro"
+  ln -sf "../${OKITE_ROOT_REL}/.kiro/settings" "${ROOT_DIR}/.kiro/"
+  echo "  - Linked settings/"
+}
+
+setup_scripts() {
+  if [[ "$SELF_MODE" == "true" ]]; then
+    echo "  - Self mode: scripts already exist, skipping"
+    return
+  fi
+  mkdir -p "${ROOT_DIR}/scripts"
+  delete_okite_links_in_dir "${ROOT_DIR}/scripts"
+  for f in "${OKITE_ROOT}/scripts"/run-*.sh; do
+    [ -e "$f" ] || continue
+    local base_name
+    base_name=$(basename "$f")
+    ln -sf "../${OKITE_ROOT_REL}/scripts/${base_name}" "${ROOT_DIR}/scripts/"
+    echo "  - Linked ${base_name}"
+  done
+  ln -sf "../${OKITE_ROOT_REL}/scripts/generate-agents-md.sh" "${ROOT_DIR}/scripts/"
+  echo "  - Linked generate-agents-md.sh"
+}
+
+# ======================================
+# メイン処理
+# ======================================
+
 if [[ -f "$OKITE_IGNORE_FILE" ]]; then
   load_okite_ignore "$OKITE_IGNORE_FILE"
 fi
@@ -143,222 +310,26 @@ if [[ -f "$OKITE_IGNORE_FILE" ]]; then
 fi
 echo ""
 
-# .agent
-echo "[1/8] Setting up .agent directory..."
-if [[ "$SELF_MODE" == "true" ]]; then
-  echo "  - Self mode: .agent already exists, skipping"
-else
-  mkdir -p "${ROOT_DIR}/.agent"
-  ln -sf "../${OKITE_ROOT_REL}/.agent/CC-SDD.md" "${ROOT_DIR}/.agent/"
-  echo "  - Linked CC-SDD.md"
-  mkdir -p "${ROOT_DIR}/.agent/skills"
-  delete_okite_links_in_dir "${ROOT_DIR}/.agent/skills"
-  for f in "${OKITE_ROOT}/.agent/skills"/*; do
-    [ -e "$f" ] || continue
-    base_name=$(basename "$f")
-    if is_skill_ignored "$base_name"; then
-      echo "  - Skipped skills/${base_name} (ignored)"
-      continue
-    fi
-    ln -sf "../../${OKITE_ROOT_REL}/.agent/skills/${base_name}" "${ROOT_DIR}/.agent/skills/"
-    echo "  - Linked skills/${base_name}"
-  done
-  # okite-ai/.agent/rules -> .agent/rules
-  mkdir -p "${ROOT_DIR}/.agent/rules"
-  delete_okite_links_in_dir "${ROOT_DIR}/.agent/rules"
-  for f in "${OKITE_ROOT}/.agent/rules"/*; do
-    [ -e "$f" ] || continue
-    base_name=$(basename "$f")
-    if is_rule_ignored "$base_name"; then
-      echo "  - Skipped rules/${base_name} (ignored)"
-      continue
-    fi
-    ln -sf "../../${OKITE_ROOT_REL}/.agent/rules/${base_name}" "${ROOT_DIR}/.agent/rules/"
-    echo "  - Linked rules/${base_name}"
-  done
-fi
-echo "  Done."
-echo ""
+STEPS=(
+  "setup_agent:.agent"
+  "setup_claude:.claude"
+  "setup_codex:.codex"
+  "setup_gemini:.gemini"
+  "setup_cursor:.cursor"
+  "setup_opencode:.opencode"
+  "setup_kiro:.kiro"
+  "setup_scripts:scripts"
+)
+TOTAL=${#STEPS[@]}
 
-# .claude
-echo "[2/8] Setting up .claude directory..."
-# 既存のシンボリックリンクを削除してディレクトリを作成
-remove_okite_symlink_path "${ROOT_DIR}/.claude/skills"
-mkdir -p "${ROOT_DIR}/.claude/skills"
-delete_okite_links_in_dir "${ROOT_DIR}/.claude/skills"
-for f in "${ROOT_DIR}/.agent/skills"/*; do
-  [ -e "$f" ] || continue
-  base_name=$(basename "$f")
-  if is_skill_ignored "$base_name"; then
-    echo "  - Skipped skills/${base_name} (ignored)"
-    continue
-  fi
-  ln -sf "../../.agent/skills/${base_name}" "${ROOT_DIR}/.claude/skills/"
-  echo "  - Linked skills/${base_name}"
+for i in "${!STEPS[@]}"; do
+  func="${STEPS[$i]%%:*}"
+  label="${STEPS[$i]##*:}"
+  echo "[$((i + 1))/${TOTAL}] Setting up ${label} directory..."
+  "$func"
+  echo "  Done."
+  echo ""
 done
-if [[ "$SELF_MODE" == "true" ]]; then
-  echo "  - Self mode: commands already exist, skipping"
-else
-  mkdir -p "${ROOT_DIR}/.claude/commands"
-  ln -sf "../../${OKITE_ROOT_REL}/.claude/commands/create-skill.md" "${ROOT_DIR}/.claude/commands/"
-  echo "  - Linked commands/create-skill.md"
-  ln -sf "../../${OKITE_ROOT_REL}/.claude/commands/kiro" "${ROOT_DIR}/.claude/commands/"
-  echo "  - Linked commands/kiro/"
-  echo "  - Linked agents/kiro/"
-  ln -sf "../${OKITE_ROOT_REL}/.claude/settings.json" "${ROOT_DIR}/.claude/"
-  echo "  - Linked settings.json"
-fi
-# .agent/rules -> .claude/rules
-remove_okite_symlink_path "${ROOT_DIR}/.claude/rules"
-mkdir -p "${ROOT_DIR}/.claude/rules"
-delete_okite_links_in_dir "${ROOT_DIR}/.claude/rules"
-for f in "${ROOT_DIR}/.agent/rules"/*; do
-  [ -e "$f" ] || continue
-  base_name=$(basename "$f")
-  if is_rule_ignored "$base_name"; then
-    echo "  - Skipped rules/${base_name} (ignored)"
-    continue
-  fi
-  ln -sf "../../.agent/rules/${base_name}" "${ROOT_DIR}/.claude/rules/"
-  echo "  - Linked rules/${base_name}"
-done
-echo "  Done."
-echo ""
-
-# .codex
-echo "[3/8] Setting up .codex directory..."
-remove_okite_symlink_path "${ROOT_DIR}/.codex/skills"
-mkdir -p "${ROOT_DIR}/.codex/skills"
-delete_okite_links_in_dir "${ROOT_DIR}/.codex/skills"
-for f in "${ROOT_DIR}/.agent/skills"/*; do
-  [ -e "$f" ] || continue
-  base_name=$(basename "$f")
-  if is_skill_ignored "$base_name"; then
-    echo "  - Skipped skills/${base_name} (ignored)"
-    continue
-  fi
-  ln -sf "../../.agent/skills/${base_name}" "${ROOT_DIR}/.codex/skills/"
-  echo "  - Linked skills/${base_name}"
-done
-if [[ "$SELF_MODE" == "true" ]]; then
-  echo "  - Self mode: prompts already exist, skipping"
-else
-  mkdir -p "${ROOT_DIR}/.codex/prompts"
-  for f in "${OKITE_ROOT}/.codex/prompts"/kiro-*.md; do
-    base_name=$(basename "$f")
-    ln -sf "../../${OKITE_ROOT_REL}/.codex/prompts/${base_name}" "${ROOT_DIR}/.codex/prompts/"
-    echo "  - Linked prompts/${base_name}"
-  done
-  ln -sf "../${OKITE_ROOT_REL}/.codex/config.toml" "${ROOT_DIR}/.codex/"
-  echo "  - Linked config.toml"
-fi
-echo "  Done."
-echo ""
-
-# .gemini
-echo "[4/8] Setting up .gemini directory..."
-remove_okite_symlink_path "${ROOT_DIR}/.gemini/skills"
-mkdir -p "${ROOT_DIR}/.gemini/skills"
-delete_okite_links_in_dir "${ROOT_DIR}/.gemini/skills"
-for f in "${ROOT_DIR}/.agent/skills"/*; do
-  [ -e "$f" ] || continue
-  base_name=$(basename "$f")
-  if is_skill_ignored "$base_name"; then
-    echo "  - Skipped skills/${base_name} (ignored)"
-    continue
-  fi
-  ln -sf "../../.agent/skills/${base_name}" "${ROOT_DIR}/.gemini/skills/"
-  echo "  - Linked skills/${base_name}"
-done
-if [[ "$SELF_MODE" == "true" ]]; then
-  echo "  - Self mode: settings already exist, skipping"
-else
-  ln -sf "../${OKITE_ROOT_REL}/.gemini/settings.json" "${ROOT_DIR}/.gemini/"
-  echo "  - Linked settings.json"
-fi
-echo "  Done."
-echo ""
-
-# .cursor
-echo "[5/8] Setting up .cursor directory..."
-remove_okite_symlink_path "${ROOT_DIR}/.cursor/skills"
-mkdir -p "${ROOT_DIR}/.cursor/skills"
-delete_okite_links_in_dir "${ROOT_DIR}/.cursor/skills"
-for f in "${ROOT_DIR}/.agent/skills"/*; do
-  [ -e "$f" ] || continue
-  base_name=$(basename "$f")
-  if is_skill_ignored "$base_name"; then
-    echo "  - Skipped skills/${base_name} (ignored)"
-    continue
-  fi
-  ln -sf "../../.agent/skills/${base_name}" "${ROOT_DIR}/.cursor/skills/"
-  echo "  - Linked skills/${base_name}"
-done
-# .agent/rules -> .cursor/rules
-remove_okite_symlink_path "${ROOT_DIR}/.cursor/rules"
-mkdir -p "${ROOT_DIR}/.cursor/rules"
-delete_okite_links_in_dir "${ROOT_DIR}/.cursor/rules"
-for f in "${ROOT_DIR}/.agent/rules"/*; do
-  [ -e "$f" ] || continue
-  base_name=$(basename "$f")
-  if is_rule_ignored "$base_name"; then
-    echo "  - Skipped rules/${base_name} (ignored)"
-    continue
-  fi
-  ln -sf "../../.agent/rules/${base_name}" "${ROOT_DIR}/.cursor/rules/"
-  echo "  - Linked rules/${base_name}"
-done
-echo "  Done."
-echo ""
-
-# .opencode
-echo "[6/8] Setting up .opencode directory..."
-remove_okite_symlink_path "${ROOT_DIR}/.opencode/skills"
-mkdir -p "${ROOT_DIR}/.opencode/skills"
-delete_okite_links_in_dir "${ROOT_DIR}/.opencode/skills"
-for f in "${ROOT_DIR}/.agent/skills"/*; do
-  [ -e "$f" ] || continue
-  base_name=$(basename "$f")
-  if is_skill_ignored "$base_name"; then
-    echo "  - Skipped skills/${base_name} (ignored)"
-    continue
-  fi
-  ln -sf "../../.agent/skills/${base_name}" "${ROOT_DIR}/.opencode/skills/"
-  echo "  - Linked skills/${base_name}"
-done
-echo "  Done."
-echo ""
-
-# .kiro
-echo "[7/8] Setting up .kiro directory..."
-if [[ "$SELF_MODE" == "true" ]]; then
-  echo "  - Self mode: .kiro already exists, skipping"
-else
-  mkdir -p "${ROOT_DIR}/.kiro"
-  ln -sf "../${OKITE_ROOT_REL}/.kiro/settings" "${ROOT_DIR}/.kiro/"
-  echo "  - Linked settings/"
-fi
-echo "  Done."
-echo ""
-
-# scripts
-echo "[8/8] Setting up scripts directory..."
-if [[ "$SELF_MODE" == "true" ]]; then
-  echo "  - Self mode: scripts already exist, skipping"
-else
-  mkdir -p "${ROOT_DIR}/scripts"
-  delete_okite_links_in_dir "${ROOT_DIR}/scripts"
-  for f in "${OKITE_ROOT}/scripts"/run-*.sh; do
-    [ -e "$f" ] || continue
-    base_name=$(basename "$f")
-    ln -sf "../${OKITE_ROOT_REL}/scripts/${base_name}" "${ROOT_DIR}/scripts/"
-    echo "  - Linked ${base_name}"
-  done
-  ln -sf "../${OKITE_ROOT_REL}/scripts/generate-agents-md.sh" "${ROOT_DIR}/scripts/"
-  echo "  - Linked generate-agents-md.sh"
-fi
-echo "  Done."
-echo ""
 
 echo "======================================"
 echo "Setup completed successfully!"
