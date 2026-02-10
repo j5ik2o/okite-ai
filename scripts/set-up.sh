@@ -26,7 +26,7 @@ IGNORE_RULES=()
 resolve_path() {
   local path="$1"
   if command -v python3 >/dev/null 2>&1; then
-    python3 - <<'PY' "$path"
+    python3 - "$path" <<'PY'
 import os
 import sys
 print(os.path.realpath(sys.argv[1]))
@@ -51,18 +51,18 @@ load_okite_ignore() {
     line="$(trim_whitespace "$line")"
     [[ -z "$line" ]] && continue
     case "$line" in
-      skills/*)
-        IGNORE_SKILLS+=("${line#skills/}")
-        ;;
-      rules/*)
-        IGNORE_RULES+=("${line#rules/}")
-        ;;
-      *)
-        IGNORE_SKILLS+=("$line")
-        IGNORE_RULES+=("$line")
-        ;;
+    skills/*)
+      IGNORE_SKILLS+=("${line#skills/}")
+      ;;
+    rules/*)
+      IGNORE_RULES+=("${line#rules/}")
+      ;;
+    *)
+      IGNORE_SKILLS+=("$line")
+      IGNORE_RULES+=("$line")
+      ;;
     esac
-  done < "$file"
+  done <"$file"
 }
 
 matches_ignore() {
@@ -101,12 +101,12 @@ is_okite_managed_link() {
   local target_abs
   target_abs=$(link_target_abs "$link") || return 1
   case "$target_abs" in
-    "${OKITE_ROOT_ABS}"|"${OKITE_ROOT_ABS}/"*)
-      return 0
-      ;;
-    *)
-      return 1
-      ;;
+  "${OKITE_ROOT_ABS}" | "${OKITE_ROOT_ABS}/"*)
+    return 0
+    ;;
+  *)
+    return 1
+    ;;
   esac
 }
 
@@ -272,6 +272,23 @@ setup_kiro() {
   echo "  - Linked settings/"
 }
 
+setup_common_md() {
+  if [[ "$SELF_MODE" == "true" ]]; then
+    echo "  - Self mode: COMMON.md setup skipping"
+    return
+  fi
+  if [[ ! -f "${ROOT_DIR}/COMMON.md" ]]; then
+    echo "- 日本語でやりとりしてください" >"${ROOT_DIR}/COMMON.md"
+    echo "  - Created COMMON.md"
+  else
+    echo "  - COMMON.md already exists, skipping"
+  fi
+  ln -sf "COMMON.md" "${ROOT_DIR}/CLAUDE.md"
+  echo "  - Linked CLAUDE.md -> COMMON.md"
+  ln -sf "COMMON.md" "${ROOT_DIR}/GEMINI.md"
+  echo "  - Linked GEMINI.md -> COMMON.md"
+}
+
 setup_scripts() {
   if [[ "$SELF_MODE" == "true" ]]; then
     echo "  - Self mode: scripts already exist, skipping"
@@ -311,6 +328,7 @@ fi
 echo ""
 
 STEPS=(
+  "setup_common_md:COMMON.md"
   "setup_agent:.agent"
   "setup_claude:.claude"
   "setup_codex:.codex"
@@ -330,6 +348,11 @@ for i in "${!STEPS[@]}"; do
   echo "  Done."
   echo ""
 done
+
+echo "======================================"
+echo "Generating AGENTS.md..."
+echo "======================================"
+bash "${OKITE_SCRIPT_DIR}/generate-agents-md.sh"
 
 echo "======================================"
 echo "Setup completed successfully!"
