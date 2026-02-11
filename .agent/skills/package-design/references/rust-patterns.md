@@ -198,6 +198,24 @@ impl From<UserError> for crate::Error {
 ユースケース層はビジネスロジックを記述する層ではない。オケーケストレーションの責務。
 インフラ層はドメイントレイトを実装する（不安定・具体）。
 
+## メトリクス計測
+
+Rust エコシステムでパッケージメトリクスを計測する方法:
+
+| 目的 | ツール/手法 | 備考 |
+| --- | --- | --- |
+| モジュール間依存グラフ | `cargo-depgraph`, `cargo-modules` | 循環検出に使える |
+| サイクロマティック複雑度 | `cargo-geiger`（unsafe計測）、外部ツール | 複雑度観測の補助 |
+| Ca/Ce の近似 | `cargo-modules` + 手動集計 | use 文の方向を数える |
+| 循環依存検出 | Dylint カスタム lint、`cargo-modules --tree` | プロジェクト固有 lint で自動化可能 |
+| アーキテクチャテスト | Dylint（`module-wiring-lint` 等） | 依存方向のルールを機械的に強制 |
+
+**実務の進め方**:
+1. `cargo-modules` でモジュール依存グラフを可視化する
+2. 循環がないことを確認する（ADP）
+3. 安定側（domain, core）が不安定側（infrastructure, adapter）に依存していないことを確認する（SDP）
+4. Dylint 等で依存ルールを CI に組み込む
+
 ## よく使うモジュールパターン
 
 ### Types モジュール
