@@ -27,22 +27,29 @@ mkdir -p "${RULES_DIR}"
 cp "${COMMON_MD}" "${OUTPUT_FILE}"
 
 # Append rules
-if ls "${RULES_DIR}"/*.md 1>/dev/null 2>&1; then
-  echo "" >> "${OUTPUT_FILE}"
-  echo "# Rules" >> "${OUTPUT_FILE}"
-  echo "" >> "${OUTPUT_FILE}"
+append_rules() {
+  local dir="$1"
+  local label="$2"
+  if ls "${dir}"/*.md 1>/dev/null 2>&1; then
+    echo "" >> "${OUTPUT_FILE}"
+    echo "# ${label}" >> "${OUTPUT_FILE}"
+    echo "" >> "${OUTPUT_FILE}"
 
-  for rule_file in "${RULES_DIR}"/*.md; do
-    [ -e "$rule_file" ] || continue
-    rule_name=$(basename "$rule_file" .md)
-    echo "  - Appending rule: ${rule_name}"
-    echo "" >> "${OUTPUT_FILE}"
-    cat "$rule_file" >> "${OUTPUT_FILE}"
-    echo "" >> "${OUTPUT_FILE}"
-  done
-else
-  echo "  No rules found in ${RULES_DIR}"
-fi
+    for rule_file in "${dir}"/*.md; do
+      [ -e "$rule_file" ] || continue
+      rule_name=$(basename "$rule_file" .md)
+      echo "  - Appending rule: ${rule_name}"
+      echo "" >> "${OUTPUT_FILE}"
+      cat "$rule_file" >> "${OUTPUT_FILE}"
+      echo "" >> "${OUTPUT_FILE}"
+    done
+  else
+    echo "  No rules found in ${dir}"
+  fi
+}
+
+append_rules "${RULES_DIR}" "Rules"
+append_rules "${RULES_DIR}/rust" "Rust Rules"
 
 echo ""
 echo "Generated: ${OUTPUT_FILE}"
