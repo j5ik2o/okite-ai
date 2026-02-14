@@ -18,3 +18,6 @@ steer = true
 command = "uvx"
 args = ["--from", "git+https://github.com/oraios/serena", "serena", "start-mcp-server", "--context", "codex", "--project", ".", "--enable-web-dashboard", "false"]
 startup_timeout_sec = 30.0
+
+[tui]
+status_line = ["current-dir", "git-branch"]
