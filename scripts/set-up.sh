@@ -169,6 +169,29 @@ link_agent_rules_to() {
   done
 }
 
+link_if_missing() {
+  local src="$1"
+  local dest="$2"
+  local label="$3"
+  if [[ -L "$dest" || -e "$dest" ]]; then
+    echo "  - Skipped ${label} (already exists)"
+    return
+  fi
+  ln -s "$src" "$dest"
+  echo "  - Linked ${label}"
+}
+
+link_if_source_exists_and_missing() {
+  local src="$1"
+  local dest="$2"
+  local label="$3"
+  if [[ ! -e "$src" ]]; then
+    echo "  - Skipped ${label} (template missing)"
+    return
+  fi
+  link_if_missing "$src" "$dest" "$label"
+}
+
 # ======================================
 # セットアップ関数
 # ======================================
@@ -220,8 +243,7 @@ setup_claude() {
     ln -sf "../../${OKITE_ROOT_REL}/.claude/commands/kiro" "${ROOT_DIR}/.claude/commands/"
     echo "  - Linked commands/kiro/"
     echo "  - Linked agents/kiro/"
-    ln -sf "../${OKITE_ROOT_REL}/.claude/settings.json" "${ROOT_DIR}/.claude/"
-    echo "  - Linked settings.json"
+    link_if_missing "../${OKITE_ROOT_REL}/.claude/settings.json" "${ROOT_DIR}/.claude/settings.json" "settings.json"
   fi
   link_agent_rules_to "${ROOT_DIR}/.claude"
 }
@@ -238,8 +260,7 @@ setup_codex() {
       ln -sf "../../${OKITE_ROOT_REL}/.codex/prompts/${base_name}" "${ROOT_DIR}/.codex/prompts/"
       echo "  - Linked prompts/${base_name}"
     done
-    ln -sf "../${OKITE_ROOT_REL}/.codex/config.toml" "${ROOT_DIR}/.codex/"
-    echo "  - Linked config.toml"
+    link_if_missing "../${OKITE_ROOT_REL}/.codex/config.toml" "${ROOT_DIR}/.codex/config.toml" "config.toml"
   fi
 }
 
@@ -248,18 +269,35 @@ setup_gemini() {
   if [[ "$SELF_MODE" == "true" ]]; then
     echo "  - Self mode: settings already exist, skipping"
   else
-    ln -sf "../${OKITE_ROOT_REL}/.gemini/settings.json" "${ROOT_DIR}/.gemini/"
-    echo "  - Linked settings.json"
+    link_if_missing "../${OKITE_ROOT_REL}/.gemini/settings.json" "${ROOT_DIR}/.gemini/settings.json" "settings.json"
   fi
+}
+
+setup_mcp() {
+  if [[ "$SELF_MODE" == "true" ]]; then
+    echo "  - Self mode: mcp config already exists, skipping"
+    return
+  fi
+  link_if_missing "../${OKITE_ROOT_REL}/.mcp.json" "${ROOT_DIR}/.mcp.json" ".mcp.json"
 }
 
 setup_cursor() {
   link_agent_skills_to "${ROOT_DIR}/.cursor"
   link_agent_rules_to "${ROOT_DIR}/.cursor"
+  if [[ "$SELF_MODE" == "true" ]]; then
+    echo "  - Self mode: settings already exist, skipping"
+  else
+    link_if_source_exists_and_missing "../${OKITE_ROOT_REL}/.cursor/settings.json" "${ROOT_DIR}/.cursor/settings.json" "settings.json"
+  fi
 }
 
 setup_opencode() {
   link_agent_skills_to "${ROOT_DIR}/.opencode"
+  if [[ "$SELF_MODE" == "true" ]]; then
+    echo "  - Self mode: settings already exist, skipping"
+  else
+    link_if_source_exists_and_missing "../${OKITE_ROOT_REL}/.opencode/settings.json" "${ROOT_DIR}/.opencode/settings.json" "settings.json"
+  fi
 }
 
 setup_kiro() {
@@ -330,6 +368,7 @@ echo ""
 STEPS=(
   "setup_common_md:COMMON.md"
   "setup_agent:.agent"
+  "setup_mcp:.mcp.json"
   "setup_claude:.claude"
   "setup_codex:.codex"
   "setup_gemini:.gemini"
