@@ -1,4 +1,4 @@
-model = "gpt-5.3-codex-spark"
+model = "gpt-5.3-codex"
 model_reasoning_effort = "xhigh"
 hide_agent_reasoning = true
 network_access = true
