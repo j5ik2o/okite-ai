@@ -109,14 +109,15 @@ if (addr != null) {
 return user.getAddress().format();  // NullAddressは"住所未登録"を返す
 ```
 
-## 関連原則
+## 関連原則・スキル
 
-| 原則 | 関係 |
+| 原則 / スキル | 関係 |
 |------|------|
-| デメテルの法則 | 連鎖呼び出しを避ける（`a.getB().getC()` → `a.doC()`） |
+| law-of-demeter | 連鎖呼び出しを避ける（`a.getB().getC()` → `a.doC()`） |
 | Feature Envy | 他クラスのデータに執着 → 責任を移動 |
 | 単一責任原則 | データと処理を同じ場所に |
 | カプセル化 | 内部状態を隠蔽し振る舞いを公開 |
+| breach-encapsulation-naming | getter命名でカプセル化破壊を明示 |
 
 ## 適用指針
 
