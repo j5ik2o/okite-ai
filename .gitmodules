@@ -1,0 +1,3 @@
+[submodule "references/takt"]
+	path = references/takt
+	url = git@github.com:nrslib/takt.git
