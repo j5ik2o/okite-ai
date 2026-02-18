@@ -3,7 +3,7 @@ name: takt-piece
 description: >
   TAKTピース（ワークフローYAML）の作成・カスタマイズスキル。Faceted Prompting
   （Persona/Policy/Instruction/Knowledge/Output Contract）に基づくファセット群の
-  生成を含む。references/taktにあるtaktのソースコード・ドキュメント・ビルトインピース群を
+  生成を含む。${OKITE_ROOT}/references/taktにあるtaktのソースコード・ドキュメント・ビルトインピース群を
   参照資料として活用する。ユーザーの要件をヒアリングし、movement構成、ルール設計、
   ファセットファイル生成を一括で行う。
   トリガー：「ピースを作りたい」「ワークフローを定義」「taktのピースを作成」
@@ -16,19 +16,21 @@ TAKTピース（ワークフローYAML）とその関連ファセットファイ
 
 ## 参照資料
 
-taktのコードベースとドキュメントは `references/takt/` にある。必要に応じて以下を参照する。
+taktのコードベースとドキュメントは `${OKITE_ROOT}/references/takt/` にある。必要に応じて以下を参照する。
+
+> **`${OKITE_ROOT}` の解決**: okite-ai リポジトリのルートパス。okite-ai 直下では空文字、親プロジェクトのサブモジュールとして利用時は `.gitmodules` で確認（通常 `references/okite-ai`）。
 
 | 資料 | パス | 用途 |
 |------|------|------|
-| YAMLスキーマ | `references/takt/builtins/skill/references/yaml-schema.md` | ピースYAMLの構造定義 |
-| エンジン仕様 | `references/takt/builtins/skill/references/engine.md` | プロンプト構築・ルール評価の詳細 |
-| Faceted Prompting | `references/takt/docs/faceted-prompting.ja.md` | 5ファセット設計の理論 |
-| ビルトインピース | `references/takt/builtins/ja/pieces/` | 実例（default.yaml, expert.yaml等） |
-| スタイルガイド | `references/takt/builtins/ja/STYLE_GUIDE.md` | ファセット記述規約 |
-| ペルソナガイド | `references/takt/builtins/ja/PERSONA_STYLE_GUIDE.md` | ペルソナ記述規約 |
-| ビルトインファセット | `references/takt/builtins/ja/{personas,policies,instructions,knowledge,output-contracts}/` | 既存ファセット例 |
+| YAMLスキーマ | `${OKITE_ROOT}/references/takt/builtins/skill/references/yaml-schema.md` | ピースYAMLの構造定義 |
+| エンジン仕様 | `${OKITE_ROOT}/references/takt/builtins/skill/references/engine.md` | プロンプト構築・ルール評価の詳細 |
+| Faceted Prompting | `${OKITE_ROOT}/references/takt/docs/faceted-prompting.ja.md` | 5ファセット設計の理論 |
+| ビルトインピース | `${OKITE_ROOT}/references/takt/builtins/ja/pieces/` | 実例（default.yaml, expert.yaml等） |
+| スタイルガイド | `${OKITE_ROOT}/references/takt/builtins/ja/STYLE_GUIDE.md` | ファセット記述規約 |
+| ペルソナガイド | `${OKITE_ROOT}/references/takt/builtins/ja/PERSONA_STYLE_GUIDE.md` | ペルソナ記述規約 |
+| ビルトインファセット | `${OKITE_ROOT}/references/takt/builtins/ja/{personas,policies,instructions,knowledge,output-contracts}/` | 既存ファセット例 |
 
-**重要**: ピース作成前に `references/takt/builtins/ja/pieces/default.yaml` を読み、プロジェクトのパターンを把握する。
+**重要**: ピース作成前に `${OKITE_ROOT}/references/takt/builtins/ja/pieces/default.yaml` を読み、プロジェクトのパターンを把握する。
 
 ## ワークフロー
 
@@ -44,7 +46,7 @@ taktのコードベースとドキュメントは `references/takt/` にある�
 
 ### Step 2: ビルトイン参照
 
-ビルトインピース（`references/takt/builtins/ja/pieces/`）から類似パターンを探す。
+ビルトインピース（`${OKITE_ROOT}/references/takt/builtins/ja/pieces/`）から類似パターンを探す。
 
 | ビルトイン | 構成 | 用途 |
 |-----------|------|------|
@@ -239,7 +241,7 @@ movements:
 ```
 ````
 
-詳細なスタイル規約は `references/takt/builtins/ja/STYLE_GUIDE.md` を参照。
+詳細なスタイル規約は `${OKITE_ROOT}/references/takt/builtins/ja/STYLE_GUIDE.md` を参照。
 
 ### Step 5: Loop Monitor（任意）
 

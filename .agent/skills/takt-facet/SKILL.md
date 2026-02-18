@@ -3,7 +3,7 @@ name: takt-facet
 description: >
   TAKTファセット（Persona/Policy/Instruction/Knowledge/Output Contract）の
   個別作成・編集スキル。各ファセットのスタイルガイドに準拠した単体ファイルを生成する。
-  references/taktにあるスタイルガイド・ビルトインファセット群を参照資料として活用し、
+  ${OKITE_ROOT}/references/taktにあるスタイルガイド・ビルトインファセット群を参照資料として活用し、
   ファセット種別の判断、テンプレート選択、品質チェックを行う。
   トリガー：「ペルソナを作りたい」「ポリシーを追加」「インストラクションを書く」
   「ナレッジを定義」「出力契約を作成」「ファセットを編集」「takt facet」
@@ -16,18 +16,20 @@ TAKTの5種類のファセットファイルを個別に作成・編集する。
 
 ## 参照資料
 
-ファセット作成時は `references/takt/builtins/ja/` の資料を参照する。
+ファセット作成時は `${OKITE_ROOT}/references/takt/builtins/ja/` の資料を参照する。
+
+> **`${OKITE_ROOT}` の解決**: okite-ai リポジトリのルートパス。okite-ai 直下では空文字、親プロジェクトのサブモジュールとして利用時は `.gitmodules` で確認（通常 `references/okite-ai`）。
 
 | 資料 | パス | 用途 |
 |------|------|------|
-| スタイルガイド総合 | `references/takt/builtins/ja/STYLE_GUIDE.md` | 各ファセットの位置づけ |
-| ペルソナガイド | `references/takt/builtins/ja/PERSONA_STYLE_GUIDE.md` | ペルソナ記述規約 |
-| ポリシーガイド | `references/takt/builtins/ja/POLICY_STYLE_GUIDE.md` | ポリシー記述規約 |
-| インストラクションガイド | `references/takt/builtins/ja/INSTRUCTION_STYLE_GUIDE.md` | インストラクション記述規約 |
-| 出力契約ガイド | `references/takt/builtins/ja/OUTPUT_CONTRACT_STYLE_GUIDE.md` | 出力契約記述規約 |
-| Faceted Prompting | `references/takt/docs/faceted-prompting.ja.md` | 5ファセット設計の理論 |
-| テンプレート | `references/takt/builtins/ja/templates/` | 各ファセットのテンプレート |
-| ビルトインファセット | `references/takt/builtins/ja/{personas,policies,instructions,knowledge,output-contracts}/` | 既存ファセット例 |
+| スタイルガイド総合 | `${OKITE_ROOT}/references/takt/builtins/ja/STYLE_GUIDE.md` | 各ファセットの位置づけ |
+| ペルソナガイド | `${OKITE_ROOT}/references/takt/builtins/ja/PERSONA_STYLE_GUIDE.md` | ペルソナ記述規約 |
+| ポリシーガイド | `${OKITE_ROOT}/references/takt/builtins/ja/POLICY_STYLE_GUIDE.md` | ポリシー記述規約 |
+| インストラクションガイド | `${OKITE_ROOT}/references/takt/builtins/ja/INSTRUCTION_STYLE_GUIDE.md` | インストラクション記述規約 |
+| 出力契約ガイド | `${OKITE_ROOT}/references/takt/builtins/ja/OUTPUT_CONTRACT_STYLE_GUIDE.md` | 出力契約記述規約 |
+| Faceted Prompting | `${OKITE_ROOT}/references/takt/docs/faceted-prompting.ja.md` | 5ファセット設計の理論 |
+| テンプレート | `${OKITE_ROOT}/references/takt/builtins/ja/templates/` | 各ファセットのテンプレート |
+| ビルトインファセット | `${OKITE_ROOT}/references/takt/builtins/ja/{personas,policies,instructions,knowledge,output-contracts}/` | 既存ファセット例 |
 
 **重要**: ファセット作成前に該当するスタイルガイドを必ず読む。
 

@@ -3,7 +3,7 @@ name: takt-analyze
 description: >
   既存のTAKTピースとファセットを分析し、改善提案を行うスキル。ピースYAMLの構造検証、
   ファセット間の整合性チェック、スタイルガイド準拠の確認、未使用ファセットの検出、
-  ルール設計の最適化提案を実施する。references/taktのスタイルガイド・エンジン仕様を
+  ルール設計の最適化提案を実施する。${OKITE_ROOT}/references/taktのスタイルガイド・エンジン仕様を
   基準として分析する。
   トリガー：「ピースを分析」「taktの設定を確認」「ファセットの品質チェック」
   「ピースのレビュー」「takt analyze」「ワークフローの改善提案」
@@ -16,13 +16,15 @@ description: >
 
 ## 参照資料
 
+> **`${OKITE_ROOT}` の解決**: okite-ai リポジトリのルートパス。okite-ai 直下では空文字、親プロジェクトのサブモジュールとして利用時は `.gitmodules` で確認（通常 `references/okite-ai`）。
+
 | 資料 | パス | 用途 |
 |------|------|------|
-| YAMLスキーマ | `references/takt/builtins/skill/references/yaml-schema.md` | ピース構造の検証基準 |
-| エンジン仕様 | `references/takt/builtins/skill/references/engine.md` | ルール評価・実行仕様 |
-| スタイルガイド群 | `references/takt/builtins/ja/*_STYLE_GUIDE.md` | ファセット品質基準 |
-| ビルトインピース | `references/takt/builtins/ja/pieces/` | 構造パターンの参照 |
-| ビルトインファセット | `references/takt/builtins/ja/{personas,policies,instructions,knowledge,output-contracts}/` | ファセット品質の参照 |
+| YAMLスキーマ | `${OKITE_ROOT}/references/takt/builtins/skill/references/yaml-schema.md` | ピース構造の検証基準 |
+| エンジン仕様 | `${OKITE_ROOT}/references/takt/builtins/skill/references/engine.md` | ルール評価・実行仕様 |
+| スタイルガイド群 | `${OKITE_ROOT}/references/takt/builtins/ja/*_STYLE_GUIDE.md` | ファセット品質基準 |
+| ビルトインピース | `${OKITE_ROOT}/references/takt/builtins/ja/pieces/` | 構造パターンの参照 |
+| ビルトインファセット | `${OKITE_ROOT}/references/takt/builtins/ja/{personas,policies,instructions,knowledge,output-contracts}/` | ファセット品質の参照 |
 
 ## 分析カテゴリ
 
