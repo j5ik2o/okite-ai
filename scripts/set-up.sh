@@ -391,7 +391,7 @@ done
 echo "======================================"
 echo "Generating AGENTS.md..."
 echo "======================================"
-bash "${OKITE_SCRIPT_DIR}/generate-agents-md.sh"
+bash "${OKITE_SCRIPT_DIR}/generate-agents-md.sh" "${ROOT_DIR}"
 
 echo "======================================"
 echo "Setup completed successfully!"

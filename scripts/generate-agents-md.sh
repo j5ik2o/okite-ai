@@ -5,9 +5,12 @@ set -e
 SCRIPT_DIR=$(cd "$(dirname "$0")" && pwd)
 OKITE_ROOT=$(cd "${SCRIPT_DIR}/.." && pwd)
 
-COMMON_MD="${OKITE_ROOT}/COMMON.md"
-RULES_DIR="${OKITE_ROOT}/.agent/rules"
-OUTPUT_FILE="${OKITE_ROOT}/AGENTS.md"
+# 第1引数でプロジェクトルートを指定可能（未指定時はOKITE_ROOT）
+TARGET_ROOT="${1:-${OKITE_ROOT}}"
+
+COMMON_MD="${TARGET_ROOT}/COMMON.md"
+RULES_DIR="${TARGET_ROOT}/.agent/rules"
+OUTPUT_FILE="${TARGET_ROOT}/AGENTS.md"
 
 echo "Generating AGENTS.md..."
 echo "  COMMON_MD: ${COMMON_MD}"
