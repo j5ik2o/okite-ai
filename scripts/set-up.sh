@@ -278,7 +278,7 @@ setup_mcp() {
     echo "  - Self mode: mcp config already exists, skipping"
     return
   fi
-  link_if_missing "../${OKITE_ROOT_REL}/.mcp.json" "${ROOT_DIR}/.mcp.json" ".mcp.json"
+  link_if_missing "${OKITE_ROOT_REL}/.mcp.json" "${ROOT_DIR}/.mcp.json" ".mcp.json"
 }
 
 setup_cursor() {
