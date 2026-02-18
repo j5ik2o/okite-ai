@@ -1,0 +1,45 @@
+name: sdd-validate-design
+description: SDD（オプション）- 技術設計の品質レビューとGO/NO-GO判定
+piece_config:
+  provider_options:
+    codex:
+      network_access: true
+    opencode:
+      network_access: true
+max_movements: 10
+initial_movement: validate-design
+
+policies:
+  sdd-design-review: ../policies/sdd-design-review.md
+
+instructions:
+  validate-design: ../instructions/validate-design.md
+
+report_formats:
+  sdd-design-review: ../output-contracts/sdd-design-review.md
+
+movements:
+  - name: validate-design
+    edit: false
+    persona: architecture-reviewer
+    policy: sdd-design-review
+    knowledge: architecture
+    allowed_tools:
+      - Read
+      - Glob
+      - Grep
+    instruction: validate-design
+    output_contracts:
+      report:
+        - name: design-review.md
+          format: sdd-design-review
+    rules:
+      - condition: GO（設計品質十分）
+        next: COMPLETE
+      - condition: NO-GO（重大な問題あり）
+        next: ABORT
+        appendix: |
+          重大な問題:
+          - {問題の要約}
+      - condition: 設計が見つからない
+        next: ABORT

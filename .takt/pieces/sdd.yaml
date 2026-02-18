@@ -1,0 +1,468 @@
+name: sdd
+description: Spec-Driven Development（フルオート）- 要件→設計→タスク→実装→検証を自動遷移で実行する
+piece_config:
+  provider_options:
+    codex:
+      network_access: true
+    opencode:
+      network_access: true
+max_movements: 50
+initial_movement: generate-requirements
+
+# --- カスタムファセット セクションマップ ---
+personas:
+  requirements-analyst: ../personas/requirements-analyst.md
+
+policies:
+  ears-format: ../policies/ears-format.md
+  sdd-design: ../policies/sdd-design.md
+  sdd-gap-analysis: ../policies/sdd-gap-analysis.md
+  sdd-design-review: ../policies/sdd-design-review.md
+  sdd-tasks: ../policies/sdd-tasks.md
+
+instructions:
+  generate-requirements: ../instructions/generate-requirements.md
+  validate-gap: ../instructions/validate-gap.md
+  generate-design: ../instructions/generate-design.md
+  validate-design: ../instructions/validate-design.md
+  generate-tasks: ../instructions/generate-tasks.md
+  validate-impl: ../instructions/validate-impl.md
+
+knowledge:
+  design-discovery: ../knowledge/design-discovery.md
+
+report_formats:
+  sdd-requirements: ../output-contracts/sdd-requirements.md
+  sdd-gap-analysis: ../output-contracts/sdd-gap-analysis.md
+  sdd-design: ../output-contracts/sdd-design.md
+  sdd-research: ../output-contracts/sdd-research.md
+  sdd-design-review: ../output-contracts/sdd-design-review.md
+  sdd-tasks: ../output-contracts/sdd-tasks.md
+  sdd-impl-validation: ../output-contracts/sdd-impl-validation.md
+
+# --- ループ監視 ---
+loop_monitors:
+  - cycle:
+      - ai_review
+      - ai_fix
+    threshold: 3
+    judge:
+      persona: supervisor
+      instruction_template: |
+        ai_review と ai_fix のループが {cycle_count} 回繰り返されました。
+
+        **参照するレポート:**
+        - AIレビュー結果: {report:04-ai-review.md}
+
+        **判断基準:**
+        - 各サイクルで新しい問題が発見・修正されているか
+        - 同じ指摘が繰り返されていないか
+      rules:
+        - condition: 健全（進捗あり）
+          next: ai_review
+        - condition: 非生産的（改善なし）
+          next: reviewers
+
+  - cycle:
+      - reviewers
+      - fix
+    threshold: 3
+    judge:
+      persona: supervisor
+      instruction_template: |
+        レビュー・修正サイクルが {cycle_count} 回繰り返されました。
+
+        **参照するレポート:**
+        - アーキテクチャレビュー: {report:05-architect-review.md}
+        - QAレビュー: {report:06-qa-review.md}
+
+        **判断基準:**
+        - 各サイクルで新しい問題が発見・修正されているか
+        - 同じ指摘が繰り返されていないか
+      rules:
+        - condition: 健全（進捗あり）
+          next: fix
+        - condition: 非生産的（改善なし）
+          next: supervise
+
+# --- Movement定義 ---
+movements:
+  # ===== Phase 1: 要件生成 =====
+  - name: generate-requirements
+    edit: true
+    persona: requirements-analyst
+    policy: ears-format
+    allowed_tools:
+      - Read
+      - Glob
+      - Grep
+      - Write
+      - Bash
+      - WebSearch
+      - WebFetch
+    required_permission_mode: edit
+    instruction: generate-requirements
+    output_contracts:
+      report:
+        - name: requirements.md
+          format: sdd-requirements
+    rules:
+      - condition: 要件が明確で完全
+        next: validate-gap
+      - condition: 情報不足、要件が不明確
+        next: ABORT
+        appendix: |
+          確認事項:
+          - {不明点1}
+          - {不明点2}
+
+  # ===== Phase 1.5: ギャップ分析 =====
+  - name: validate-gap
+    edit: true
+    persona: planner
+    policy: sdd-gap-analysis
+    knowledge: architecture
+    allowed_tools:
+      - Read
+      - Glob
+      - Grep
+      - Write
+      - Bash
+      - WebSearch
+      - WebFetch
+    required_permission_mode: edit
+    instruction: validate-gap
+    output_contracts:
+      report:
+        - name: gap-analysis.md
+          format: sdd-gap-analysis
+    rules:
+      - condition: 分析完了、推奨事項あり
+        next: generate-design
+      - condition: 要件が見つからない
+        next: ABORT
+
+  # ===== Phase 2: 設計生成 =====
+  - name: generate-design
+    edit: true
+    persona: planner
+    policy: sdd-design
+    knowledge:
+      - architecture
+      - design-discovery
+    allowed_tools:
+      - Read
+      - Glob
+      - Grep
+      - Write
+      - Bash
+      - WebSearch
+      - WebFetch
+    required_permission_mode: edit
+    instruction: generate-design
+    output_contracts:
+      report:
+        - name: design.md
+          format: sdd-design
+        - name: research.md
+          format: sdd-research
+    rules:
+      - condition: 設計完了、発見記録あり
+        next: validate-design
+      - condition: 要件が見つからない、設計不可
+        next: ABORT
+
+  # ===== Phase 2.5: 設計レビュー =====
+  - name: validate-design
+    edit: false
+    persona: architecture-reviewer
+    policy: sdd-design-review
+    knowledge: architecture
+    allowed_tools:
+      - Read
+      - Glob
+      - Grep
+    instruction: validate-design
+    output_contracts:
+      report:
+        - name: design-review.md
+          format: sdd-design-review
+    rules:
+      - condition: GO（設計品質十分）
+        next: generate-tasks
+      - condition: NO-GO（重大な問題あり）
+        next: generate-design
+
+  # ===== Phase 3: タスク生成 =====
+  - name: generate-tasks
+    edit: true
+    persona: planner
+    policy: sdd-tasks
+    knowledge: architecture
+    allowed_tools:
+      - Read
+      - Glob
+      - Grep
+      - Write
+      - Bash
+    required_permission_mode: edit
+    instruction: generate-tasks
+    output_contracts:
+      report:
+        - name: tasks.md
+          format: sdd-tasks
+    rules:
+      - condition: タスク分解完了、全要件カバー
+        next: plan
+      - condition: 要件または設計が見つからない
+        next: ABORT
+
+  # ===== Phase 4: 実装 =====
+  - name: plan
+    edit: false
+    persona: planner
+    knowledge: architecture
+    allowed_tools:
+      - Read
+      - Glob
+      - Grep
+      - Bash
+      - WebSearch
+      - WebFetch
+    instruction: plan
+    output_contracts:
+      report:
+        - name: 00-plan.md
+          format: plan
+    rules:
+      - condition: 要件が明確で実装可能
+        next: implement
+      - condition: 要件が不明確、情報不足
+        next: ABORT
+
+  - name: implement
+    edit: true
+    persona: coder
+    policy:
+      - coding
+      - testing
+    session: refresh
+    knowledge:
+      - backend
+      - architecture
+    allowed_tools:
+      - Read
+      - Glob
+      - Grep
+      - Edit
+      - Write
+      - Bash
+      - WebSearch
+      - WebFetch
+    required_permission_mode: edit
+    instruction: implement
+    output_contracts:
+      report:
+        - name: coder-scope.md
+          format: coder-scope
+        - name: coder-decisions.md
+          format: coder-decisions
+    rules:
+      - condition: 実装完了
+        next: ai_review
+      - condition: 実装未着手（レポートのみ）
+        next: ai_review
+      - condition: 判断できない、情報不足
+        next: ai_review
+
+  - name: ai_review
+    edit: false
+    persona: ai-antipattern-reviewer
+    policy:
+      - review
+      - ai-antipattern
+    allowed_tools:
+      - Read
+      - Glob
+      - Grep
+      - WebSearch
+      - WebFetch
+    instruction: ai-review
+    output_contracts:
+      report:
+        - name: 04-ai-review.md
+          format: ai-review
+    rules:
+      - condition: AI特有の問題なし
+        next: reviewers
+      - condition: AI特有の問題あり
+        next: ai_fix
+
+  - name: ai_fix
+    edit: true
+    persona: coder
+    policy:
+      - coding
+      - testing
+    session: refresh
+    knowledge:
+      - backend
+      - architecture
+    allowed_tools:
+      - Read
+      - Glob
+      - Grep
+      - Edit
+      - Write
+      - Bash
+      - WebSearch
+      - WebFetch
+    required_permission_mode: edit
+    pass_previous_response: false
+    instruction: ai-fix
+    rules:
+      - condition: AI問題の修正完了
+        next: ai_review
+      - condition: 修正不要（指摘対象ファイル/仕様の確認済み）
+        next: ai_no_fix
+      - condition: 判断できない、情報不足
+        next: ai_no_fix
+
+  - name: ai_no_fix
+    edit: false
+    persona: architecture-reviewer
+    policy: review
+    allowed_tools:
+      - Read
+      - Glob
+      - Grep
+    instruction: arbitrate
+    rules:
+      - condition: ai_reviewの指摘が妥当（修正すべき）
+        next: ai_fix
+      - condition: ai_fixの判断が妥当（修正不要）
+        next: reviewers
+
+  # ===== Phase 5: レビュー =====
+  - name: reviewers
+    parallel:
+      - name: arch-review
+        edit: false
+        persona: architecture-reviewer
+        policy: review
+        knowledge:
+          - architecture
+          - backend
+        allowed_tools:
+          - Read
+          - Glob
+          - Grep
+          - WebSearch
+          - WebFetch
+        instruction: review-arch
+        output_contracts:
+          report:
+            - name: 05-architect-review.md
+              format: architecture-review
+        rules:
+          - condition: approved
+          - condition: needs_fix
+
+      - name: qa-review
+        edit: false
+        persona: qa-reviewer
+        policy:
+          - review
+          - qa
+        allowed_tools:
+          - Read
+          - Glob
+          - Grep
+          - WebSearch
+          - WebFetch
+        instruction: review-qa
+        output_contracts:
+          report:
+            - name: 06-qa-review.md
+              format: qa-review
+        rules:
+          - condition: approved
+          - condition: needs_fix
+
+      - name: impl-validation
+        edit: false
+        persona: supervisor
+        policy: review
+        allowed_tools:
+          - Read
+          - Glob
+          - Grep
+          - Bash
+        instruction: validate-impl
+        output_contracts:
+          report:
+            - name: 07-impl-validation.md
+              format: sdd-impl-validation
+        rules:
+          - condition: 検証合格
+          - condition: 検証不合格
+
+    rules:
+      - condition: all("approved", "approved", "検証合格")
+        next: supervise
+      - condition: any("needs_fix", "検証不合格")
+        next: fix
+
+  - name: fix
+    edit: true
+    persona: coder
+    policy:
+      - coding
+      - testing
+    knowledge:
+      - backend
+      - architecture
+    allowed_tools:
+      - Read
+      - Glob
+      - Grep
+      - Edit
+      - Write
+      - Bash
+      - WebSearch
+      - WebFetch
+    required_permission_mode: edit
+    pass_previous_response: false
+    instruction: fix
+    rules:
+      - condition: 修正完了
+        next: reviewers
+      - condition: 判断できない、情報不足
+        next: plan
+
+  # ===== 最終検証 =====
+  - name: supervise
+    edit: false
+    persona: supervisor
+    policy: review
+    allowed_tools:
+      - Read
+      - Glob
+      - Grep
+      - Bash
+      - WebSearch
+      - WebFetch
+    pass_previous_response: false
+    instruction: supervise
+    output_contracts:
+      report:
+        - name: supervisor-validation.md
+          format: supervisor-validation
+        - name: summary.md
+          format: summary
+          use_judge: false
+    rules:
+      - condition: すべて問題なし
+        next: COMPLETE
+      - condition: 要求未達成、テスト失敗、ビルドエラー
+        next: plan
