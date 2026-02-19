@@ -1,22 +1,50 @@
 name: sdd-validate-design
-description: SDD（オプション）- 技術設計の品質レビューとGO/NO-GO判定
+description: SDD（オプション）- 技術設計の品質レビューとGO/NO-GO判定。NO-GO時は自動修正→再検証ループ
 piece_config:
   provider_options:
     codex:
       network_access: true
     opencode:
       network_access: true
-max_movements: 10
+max_movements: 15
 initial_movement: validate-design
 
 policies:
   sdd-design-review: ../policies/sdd-design-review.md
+  sdd-design: ../policies/sdd-design.md
 
 instructions:
   validate-design: ../instructions/validate-design.md
+  fix-design: ../instructions/fix-design.md
+
+knowledge:
+  design-discovery: ../knowledge/design-discovery.md
 
 report_formats:
   sdd-design-review: ../output-contracts/sdd-design-review.md
+  sdd-design: ../output-contracts/sdd-design.md
+
+loop_monitors:
+  - cycle:
+      - validate-design
+      - fix-design
+    threshold: 3
+    judge:
+      persona: supervisor
+      instruction_template: |
+        設計レビュー・修正サイクルが {cycle_count} 回繰り返されました。
+
+        **参照するレポート:**
+        - 設計レビュー: {report:design-review.md}
+
+        **判断基準:**
+        - 各サイクルで新しい問題が発見・修正されているか
+        - 同じ指摘が繰り返されていないか
+      rules:
+        - condition: 健全（進捗あり）
+          next: fix-design
+        - condition: 非生産的（改善なし）
+          next: ABORT
 
 movements:
   - name: validate-design
@@ -37,9 +65,37 @@ movements:
       - condition: GO（設計品質十分）
         next: COMPLETE
       - condition: NO-GO（重大な問題あり）
-        next: ABORT
-        appendix: |
-          重大な問題:
-          - {問題の要約}
+        next: fix-design
       - condition: 設計が見つからない
         next: ABORT
+
+  - name: fix-design
+    edit: true
+    persona: planner
+    policy: sdd-design
+    knowledge:
+      - architecture
+      - design-discovery
+    allowed_tools:
+      - Read
+      - Glob
+      - Grep
+      - Write
+      - Bash
+      - WebSearch
+      - WebFetch
+    required_permission_mode: edit
+    pass_previous_response: false
+    instruction: fix-design
+    output_contracts:
+      report:
+        - name: design.md
+          format: sdd-design
+    rules:
+      - condition: 修正完了
+        next: validate-design
+      - condition: 修正不可（根本的な設計変更が必要）
+        next: ABORT
+        appendix: |
+          修正不可の理由:
+          - {理由}

@@ -1,5 +1,5 @@
 name: sdd-validate-impl
-description: SDD Phase 5 - 実装が要件・設計・タスクに合致しているかを検証する
+description: SDD Phase 5 - 実装が要件・設計・タスクに合致しているかを検証する。不合格時は自動修正→再検証ループ
 piece_config:
   provider_options:
     codex:
@@ -11,9 +11,34 @@ initial_movement: validate
 
 instructions:
   validate-impl: ../instructions/validate-impl.md
+  fix-impl: ../instructions/fix-impl.md
 
 report_formats:
   sdd-impl-validation: ../output-contracts/sdd-impl-validation.md
+
+loop_monitors:
+  - cycle:
+      - validate
+      - fix-impl
+    threshold: 3
+    judge:
+      persona: supervisor
+      instruction_template: |
+        検証・修正サイクルが {cycle_count} 回繰り返されました。
+
+        **参照するレポート:**
+        - アーキテクチャレビュー: {report:05-architect-review.md}
+        - QAレビュー: {report:06-qa-review.md}
+        - 実装検証: {report:07-impl-validation.md}
+
+        **判断基準:**
+        - 各サイクルで新しい問題が発見・修正されているか
+        - 同じ指摘が繰り返されていないか
+      rules:
+        - condition: 健全（進捗あり）
+          next: fix-impl
+        - condition: 非生産的（改善なし）
+          next: ABORT
 
 movements:
   - name: validate
@@ -83,9 +108,9 @@ movements:
       - condition: all("approved", "approved", "検証合格")
         next: COMPLETE
       - condition: any("needs_fix", "検証不合格")
-        next: fix
+        next: fix-impl
 
-  - name: fix
+  - name: fix-impl
     edit: true
     persona: coder
     policy:
@@ -105,33 +130,9 @@ movements:
       - WebFetch
     required_permission_mode: edit
     pass_previous_response: false
-    instruction: fix
+    instruction: fix-impl
     rules:
       - condition: 修正完了
         next: validate
       - condition: 判断できない、情報不足
         next: ABORT
-
-loop_monitors:
-  - cycle:
-      - validate
-      - fix
-    threshold: 3
-    judge:
-      persona: supervisor
-      instruction_template: |
-        検証・修正サイクルが {cycle_count} 回繰り返されました。
-
-        **参照するレポート:**
-        - アーキテクチャレビュー: {report:05-architect-review.md}
-        - QAレビュー: {report:06-qa-review.md}
-        - 実装検証: {report:07-impl-validation.md}
-
-        **判断基準:**
-        - 各サイクルで新しい問題が発見・修正されているか
-        - 同じ指摘が繰り返されていないか
-      rules:
-        - condition: 健全（進捗あり）
-          next: fix
-        - condition: 非生産的（改善なし）
-          next: ABORT
