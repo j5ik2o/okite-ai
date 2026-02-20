@@ -169,6 +169,24 @@ link_agent_rules_to() {
   done
 }
 
+# .agent/commands -> target_dir/dest_subdir へのシンボリックリンクを作成
+# Usage: link_agent_commands_to <target_dir> <dest_subdir>
+#   例: link_agent_commands_to ".claude" "commands"  -> .claude/commands/
+#   例: link_agent_commands_to ".codex"  "prompts"   -> .codex/prompts/
+link_agent_commands_to() {
+  local target_dir="$1"
+  local dest_subdir="$2"
+  mkdir -p "${target_dir}/${dest_subdir}"
+  delete_okite_links_in_dir "${target_dir}/${dest_subdir}"
+  for f in "${ROOT_DIR}/.agent/commands"/*.md; do
+    [ -e "$f" ] || continue
+    local base_name
+    base_name=$(basename "$f")
+    ln -sf "../../.agent/commands/${base_name}" "${target_dir}/${dest_subdir}/"
+    echo "  - Linked ${dest_subdir}/${base_name}"
+  done
+}
+
 link_if_missing() {
   local src="$1"
   local dest="$2"
@@ -217,6 +235,15 @@ setup_agent() {
     ln -sf "../../${OKITE_ROOT_REL}/.agent/skills/${base_name}" "${ROOT_DIR}/.agent/skills/"
     echo "  - Linked skills/${base_name}"
   done
+  mkdir -p "${ROOT_DIR}/.agent/commands"
+  delete_okite_links_in_dir "${ROOT_DIR}/.agent/commands"
+  for f in "${OKITE_ROOT}/.agent/commands"/*.md; do
+    [ -e "$f" ] || continue
+    local base_name
+    base_name=$(basename "$f")
+    ln -sf "../../${OKITE_ROOT_REL}/.agent/commands/${base_name}" "${ROOT_DIR}/.agent/commands/"
+    echo "  - Linked commands/${base_name}"
+  done
   mkdir -p "${ROOT_DIR}/.agent/rules"
   delete_okite_links_in_dir "${ROOT_DIR}/.agent/rules"
   for f in "${OKITE_ROOT}/.agent/rules"/*; do
@@ -234,6 +261,7 @@ setup_agent() {
 
 setup_claude() {
   link_agent_skills_to "${ROOT_DIR}/.claude"
+  link_agent_commands_to "${ROOT_DIR}/.claude" "commands"
   if [[ "$SELF_MODE" == "true" ]]; then
     echo "  - Self mode: commands already exist, skipping"
   else
@@ -250,6 +278,7 @@ setup_claude() {
 
 setup_codex() {
   link_agent_skills_to "${ROOT_DIR}/.codex"
+  link_agent_commands_to "${ROOT_DIR}/.codex" "prompts"
   if [[ "$SELF_MODE" == "true" ]]; then
     echo "  - Self mode: prompts already exist, skipping"
   else
