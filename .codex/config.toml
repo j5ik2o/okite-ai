@@ -16,7 +16,7 @@ steer = true
 
 [mcp_servers.serena]
 command = "uvx"
-args = ["--from", "git+https://github.com/oraios/serena", "serena", "start-mcp-server", "--context", "codex", "--project", ".", "--enable-web-dashboard", "false"]
+args = ["--from", "git+https://github.com/oraios/serena", "serena", "start-mcp-server", "--context", "ide-assistant", "--project", ".", "--enable-web-dashboard", "false"]
 startup_timeout_sec = 30.0
 
 [tui]
