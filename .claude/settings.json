@@ -2,10 +2,10 @@
   "env": {
     "CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS": "1"
   },
-  "teammateMode": "in-process",
+  "enableAllProjectMcpServers": true,
   "enabledPlugins": {
     "code-simplifier@claude-plugins-official": true,
     "claude-delegator@jarrodwatts-claude-delegator": true
   },
-  "enableAllProjectMcpServers": true
+  "teammateMode": "in-process"
 }
