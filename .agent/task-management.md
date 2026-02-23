@@ -1,8 +1,9 @@
-# Task Management
+# タスク管理
 
-1. **Plan First**: Write plan to `tasks/todo.md` with checkable items
-2. **Verify Plan**: Check in before starting implementation
-3. **Track Progress**: Mark items complete as you go
-4. **Explain Changes**: High-level summary at each step
-5. **Document Results**: Add review section to `tasks/todo.md`
-6. **Capture Lessons**: Update `tasks/lessons.md` after corrections
+1. 計画を最優先に: チェックリスト形式の計画を tasks/todo.md に作成する。
+1. 計画の承認: 実装を開始する前に、方針に間違いがないか確認する。
+1. 進捗の追跡: 作業の進捗に合わせて、項目を順次完了としてマークする。
+1. 変更の説明: 各ステップにおいて、ハイレベルな変更概要を説明する。
+1. 結果の記録: tasks/todo.md にレビューセクションを追加し、結果をまとめる。
+1. 教訓の抽出: 修正対応後は必ず tasks/lessons.md を更新する。
+

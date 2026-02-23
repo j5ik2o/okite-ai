@@ -1,43 +1,32 @@
-# Workflow Orchestration
+# ワークフロー・オーケストレーション
 
-## 1. Plan Mode Default
-
-* Enter plan mode for ANY non-trivial task (3+ steps or architectural decisions)
-* If something goes sideways, STOP and re-plan immediately – don't keep pushing
-* Use plan mode for verification steps, not just building
-* Write detailed specs upfront to reduce ambiguity
-
-## 2. Subagent Strategy
-
-* Use subagents liberally to keep main context window clean
-* Offload research, exploration, and parallel analysis to subagents
-* For complex problems, throw more compute at it via subagents
-* One task per subagent for focused execution
-
-## 3. Self-Improvement Loop
-
-* After ANY correction from the user: update `tasks/lessons.md` with the pattern
-* Write rules for yourself that prevent the same mistake
-* Ruthlessly iterate on these lessons until mistake rate drops
-* Review lessons at session start for relevant project
-
-## 4. Verification Before Done
-
-* Never mark a task complete without proving it works
-* Diff behavior between main and your changes when relevant
-* Ask yourself: "Would a staff engineer approve this?"
-* Run tests, check logs, demonstrate correctness
-
-## 5. Demand Elegance (Balanced)
-
-* For non-trivial changes: pause and ask "is there a more elegant way?"
-* If a fix feels hacky: "Knowing everything I know now, implement the elegant solution"
-* Skip this for simple, obvious fixes – don't over-engineer
-* Challenge your own work before presenting it
-
-## 6. Autonomous Bug Fixing
-
-* When given a bug report: just fix it. Don't ask for hand-holding
-* Point at logs, errors, failing tests – then resolve them
-* Zero context switching required from the user
-* Go fix failing CI tests without being told how
+1. 計画ノードのデフォルト化 (Plan Node Default)
+- 些細なタスク（3ステップ以上、または設計判断を伴うもの）以外は、必ず計画モード（Plan Mode）から開始すること。
+- 予期せぬ事態が発生した場合は、強引に進めず即座に作業を中断し、計画を練り直すこと。
+- 構築だけでなく、検証ステップにおいても計画モードを活用すること。
+- 曖昧さを排除するため、事前に詳細な仕様を策定すること。
+2. サブエージェント戦略
+- メインのコンテキストウィンドウをクリーンに保つため、積極的にサブエージェントを活用すること。
+- 調査、探索、並列解析などはサブエージェントにオフロードすること。
+- 複雑な問題に対しては、サブエージェントを通じて計算リソースを惜しみなく投入すること。
+- 実行の集中度を高めるため、1エージェントにつき1タスクを割り当てること。
+3. 自己改善ループ
+- ユーザーから修正指示を受けた際は、いかなる内容であってもそのパターンを tasks/lessons.md に記録すること。
+- 同じミスを繰り返さないよう、自分自身に対する「ガードレール（規則）」を記述すること。
+- ミス率が低下するまで、これらの教訓を徹底的に反復・改善すること。
+- セッション開始時には、当該プロジェクトに関連する教訓を必ず再確認すること。
+4. 完了前の徹底検証
+- 動作を完全に証明できるまで、タスクを「完了」と見なさないこと。
+- 必要に応じて、変更前後の挙動の差異（Diff）を確認すること。
+- 常に「これはスタッフエンジニアが承認できる品質か？」を自問すること。
+- テストの実行、ログの確認を行い、正当性をデモンストレーションすること。
+5. エレガンスの追求（バランス重視）
+- 重要な変更を加える際は、一度立ち止まり「より洗練された手法はないか？」を検討すること。
+- 対症療法的な修正（ハック）だと感じた場合は、「現在の知見をすべて動員し、本来あるべきエレガントな解決策」を実装すること。
+- ただし、単純かつ明白な修正については、過剰なエンジニアリングを避けるためこのプロセスを省略すること。
+- 成果物を提示する前に、まず自分自身の成果に疑いの目を向けること。
+6. 自律的なバグ修正
+- バグ報告を受けた際は、手取り足取りの指示を待たずに自力で修正すること。
+- ログ、エラー、失敗したテストを特定し、それらを直接解決すること。
+- ユーザーにコンテキストの再説明を求めない（コンテキストスイッチを発生させない）こと。
+- CIテストの失敗などは、指示を待たずに自ら修正にあたること。
