@@ -127,6 +127,13 @@ delete_okite_links_in_dir() {
   done < <(find "$dir" -maxdepth 1 -type l -print0)
 }
 
+prepare_link_destination() {
+  local path="$1"
+  if [[ -L "$path" || -e "$path" ]]; then
+    rm -rf "$path"
+  fi
+}
+
 # ======================================
 # ヘルパー関数
 # ======================================
@@ -145,7 +152,10 @@ link_agent_skills_to() {
       echo "  - Skipped skills/${base_name} (ignored)"
       continue
     fi
-    ln -sf "../../.agent/skills/${base_name}" "${target_dir}/skills/"
+    local link_path
+    link_path="${target_dir}/skills/${base_name}"
+    prepare_link_destination "$link_path"
+    ln -s "../../.agent/skills/${base_name}" "$link_path"
     echo "  - Linked skills/${base_name}"
   done
 }
@@ -164,7 +174,10 @@ link_agent_rules_to() {
       echo "  - Skipped rules/${base_name} (ignored)"
       continue
     fi
-    ln -sf "../../.agent/rules/${base_name}" "${target_dir}/rules/"
+    local link_path
+    link_path="${target_dir}/rules/${base_name}"
+    prepare_link_destination "$link_path"
+    ln -s "../../.agent/rules/${base_name}" "$link_path"
     echo "  - Linked rules/${base_name}"
   done
 }
@@ -182,7 +195,10 @@ link_agent_commands_to() {
     [ -e "$f" ] || continue
     local base_name
     base_name=$(basename "$f")
-    ln -sf "../../.agent/commands/${base_name}" "${target_dir}/${dest_subdir}/"
+    local link_path
+    link_path="${target_dir}/${dest_subdir}/${base_name}"
+    prepare_link_destination "$link_path"
+    ln -s "../../.agent/commands/${base_name}" "$link_path"
     echo "  - Linked ${dest_subdir}/${base_name}"
   done
 }
@@ -220,8 +236,15 @@ setup_agent() {
     return
   fi
   mkdir -p "${ROOT_DIR}/.agent"
-  ln -sf "../${OKITE_ROOT_REL}/.agent/CC-SDD.md" "${ROOT_DIR}/.agent/"
+  prepare_link_destination "${ROOT_DIR}/.agent/CC-SDD.md"
+  ln -s "../${OKITE_ROOT_REL}/.agent/CC-SDD.md" "${ROOT_DIR}/.agent/CC-SDD.md"
   echo "  - Linked CC-SDD.md"
+  prepare_link_destination "${ROOT_DIR}/.agent/CC_SDD-AGENTS.md"
+  ln -s "CC-SDD.md" "${ROOT_DIR}/.agent/CC_SDD-AGENTS.md"
+  echo "  - Linked CC_SDD-AGENTS.md"
+  prepare_link_destination "${ROOT_DIR}/.agent/CC_SDD-CLAUDE.md"
+  ln -s "CC-SDD.md" "${ROOT_DIR}/.agent/CC_SDD-CLAUDE.md"
+  echo "  - Linked CC_SDD-CLAUDE.md"
   mkdir -p "${ROOT_DIR}/.agent/skills"
   delete_okite_links_in_dir "${ROOT_DIR}/.agent/skills"
   for f in "${OKITE_ROOT}/.agent/skills"/*; do
@@ -232,7 +255,10 @@ setup_agent() {
       echo "  - Skipped skills/${base_name} (ignored)"
       continue
     fi
-    ln -sf "../../${OKITE_ROOT_REL}/.agent/skills/${base_name}" "${ROOT_DIR}/.agent/skills/"
+    local link_path
+    link_path="${ROOT_DIR}/.agent/skills/${base_name}"
+    prepare_link_destination "$link_path"
+    ln -s "../../${OKITE_ROOT_REL}/.agent/skills/${base_name}" "$link_path"
     echo "  - Linked skills/${base_name}"
   done
   mkdir -p "${ROOT_DIR}/.agent/commands"
@@ -241,7 +267,10 @@ setup_agent() {
     [ -e "$f" ] || continue
     local base_name
     base_name=$(basename "$f")
-    ln -sf "../../${OKITE_ROOT_REL}/.agent/commands/${base_name}" "${ROOT_DIR}/.agent/commands/"
+    local link_path
+    link_path="${ROOT_DIR}/.agent/commands/${base_name}"
+    prepare_link_destination "$link_path"
+    ln -s "../../${OKITE_ROOT_REL}/.agent/commands/${base_name}" "$link_path"
     echo "  - Linked commands/${base_name}"
   done
   mkdir -p "${ROOT_DIR}/.agent/rules"
@@ -254,7 +283,10 @@ setup_agent() {
       echo "  - Skipped rules/${base_name} (ignored)"
       continue
     fi
-    ln -sf "../../${OKITE_ROOT_REL}/.agent/rules/${base_name}" "${ROOT_DIR}/.agent/rules/"
+    local link_path
+    link_path="${ROOT_DIR}/.agent/rules/${base_name}"
+    prepare_link_destination "$link_path"
+    ln -s "../../${OKITE_ROOT_REL}/.agent/rules/${base_name}" "$link_path"
     echo "  - Linked rules/${base_name}"
   done
 }
@@ -266,9 +298,11 @@ setup_claude() {
     echo "  - Self mode: commands already exist, skipping"
   else
     mkdir -p "${ROOT_DIR}/.claude/commands"
-    ln -sf "../../${OKITE_ROOT_REL}/.claude/commands/create-skill.md" "${ROOT_DIR}/.claude/commands/"
+    prepare_link_destination "${ROOT_DIR}/.claude/commands/create-skill.md"
+    ln -s "../../${OKITE_ROOT_REL}/.claude/commands/create-skill.md" "${ROOT_DIR}/.claude/commands/create-skill.md"
     echo "  - Linked commands/create-skill.md"
-    ln -sf "../../${OKITE_ROOT_REL}/.claude/commands/kiro" "${ROOT_DIR}/.claude/commands/"
+    prepare_link_destination "${ROOT_DIR}/.claude/commands/kiro"
+    ln -s "../../${OKITE_ROOT_REL}/.claude/commands/kiro" "${ROOT_DIR}/.claude/commands/kiro"
     echo "  - Linked commands/kiro/"
     echo "  - Linked agents/kiro/"
     link_if_missing "../${OKITE_ROOT_REL}/.claude/settings.json" "${ROOT_DIR}/.claude/settings.json" "settings.json"
@@ -286,10 +320,25 @@ setup_codex() {
     for f in "${OKITE_ROOT}/.codex/prompts"/kiro-*.md; do
       local base_name
       base_name=$(basename "$f")
-      ln -sf "../../${OKITE_ROOT_REL}/.codex/prompts/${base_name}" "${ROOT_DIR}/.codex/prompts/"
+      local link_path
+      link_path="${ROOT_DIR}/.codex/prompts/${base_name}"
+      prepare_link_destination "$link_path"
+      ln -s "../../${OKITE_ROOT_REL}/.codex/prompts/${base_name}" "$link_path"
       echo "  - Linked prompts/${base_name}"
     done
-    link_if_missing "../${OKITE_ROOT_REL}/.codex/config.toml" "${ROOT_DIR}/.codex/config.toml" "config.toml"
+    prepare_link_destination "${ROOT_DIR}/.codex/config.toml"
+    ln -s "../${OKITE_ROOT_REL}/.codex/config.toml" "${ROOT_DIR}/.codex/config.toml"
+    echo "  - Linked config.toml"
+    mkdir -p "${ROOT_DIR}/.codex/skills"
+    prepare_link_destination "${ROOT_DIR}/.codex/skills/.system"
+    ln -s "../../${OKITE_ROOT_REL}/.codex/skills/.system" "${ROOT_DIR}/.codex/skills/.system"
+    echo "  - Linked skills/.system"
+    prepare_link_destination "${ROOT_DIR}/.codex/.personality_migration"
+    ln -s "../${OKITE_ROOT_REL}/.codex/.personality_migration" "${ROOT_DIR}/.codex/.personality_migration"
+    echo "  - Linked .personality_migration"
+    prepare_link_destination "${ROOT_DIR}/.codex/AGENTS.md"
+    ln -s "../AGENTS.md" "${ROOT_DIR}/.codex/AGENTS.md"
+    echo "  - Linked AGENTS.md"
   fi
 }
 
