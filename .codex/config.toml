@@ -11,13 +11,11 @@ skills = true
 unified_exec = true
 apps = true
 shell_snapshot = true
-collab = true
 steer = true
 
 [mcp_servers.serena]
 command = "uvx"
-args = ["--from", "git+https://github.com/oraios/serena", "serena", "start-mcp-server", "--context", "ide-assistant", "--project", ".", "--enable-web-dashboard", "false"]
-startup_timeout_sec = 30.0
+args = ["--from", "git+https://github.com/oraios/serena", "serena", "start-mcp-server", "--context", "codex", "--project", ".", "--enable-web-dashboard", "false"]
 
 [tui]
 status_line = ["current-dir", "git-branch"]
