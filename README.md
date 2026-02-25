@@ -26,7 +26,10 @@ AIエージェント（Claude Code、Codex CLI、Gemini CLI、Cursor等）向け
 | **aggregate-design** | 集約設計の原則に基づく設計・レビュー支援 | 「集約を設計したい」「Aggregateの実装」 |
 | **domain-building-blocks** | 値オブジェクト/エンティティ/集約/ドメインサービスの設計ガイド | 「値オブジェクトを作りたい」「エンティティと値オブジェクトの違い」 |
 | **domain-model-first** | ドメインモデル中心のTDD開発手順 | 「ドメインモデルから始めたい」「TDDでDDD」 |
+| **domain-model-extractor** | 既存コードからドメインモデル（集約・VO等）を擬似コード付きで提案 | 「既存コードからドメインモデルを抽出」「DDDに移行したい」 |
+| **domain-primitives-and-always-valid** | Domain PrimitivesとAlways-Valid原則に基づく型安全な設計 | 「ドメインプリミティブを作りたい」「Always-Validなモデル」 |
 | **ddd-module-pattern** | DDDモジュールパターンに基づくドメイン層パッケージング | 「ドメイン層のパッケージ構造」「entities/フォルダをやめたい」 |
+| **repository-design** | リポジトリ設計ルールとアンチパターン（CQS、命名、型制約） | 「リポジトリの設計をレビュー」「リポジトリのアンチパターン」 |
 | **repository-placement** | リポジトリインターフェースの配置場所ガイド | 「リポジトリをどこに置く」「ドメイン層にリポジトリ」 |
 
 ### アーキテクチャ・設計
@@ -36,6 +39,7 @@ AIエージェント（Claude Code、Codex CLI、Gemini CLI、Cursor等）向け
 | **clean-architecture** | クリーンアーキテクチャの4層構造に基づく設計・レビュー支援 | 「クリーンアーキテクチャで」「クリーンアーキテクチャのレビュー」 |
 | **error-handling** | 回復可能性を基準にしたエラーハンドリング設計。Either/Result型の活用 | 「エラー処理を改善して」「Result型を使いたい」 |
 | **parse-dont-validate** | チェック結果を型で保持するParse, Don't Validate原則 | 「バリデーションを改善して」「型で保証したい」 |
+| **backward-compat-governance** | 後方互換性を「契約と撤去計画」として管理するガバナンス支援 | 「後方互換性を保ちたい」「非推奨APIをどうする」 |
 
 ### パッケージ・モジュール設計
 
@@ -49,8 +53,10 @@ AIエージェント（Claude Code、Codex CLI、Gemini CLI、Cursor等）向け
 | スキル | 説明 | トリガー例 |
 |--------|------|-----------|
 | **tell-dont-ask** | オブジェクトに問い合わせず命じるTell, Don't Ask原則 | 「getterを減らしたい」「Feature Envyを直して」 |
+| **law-of-demeter** | デメテルの法則に基づく連鎖呼び出し（Train Wreck）の検出・改善 | 「連鎖呼び出しを減らしたい」「デメテルの法則」 |
 | **first-class-collection** | コレクションをラップする専用クラスの設計 | 「コレクションをラップしたい」「List<Order>をOrdersクラスに」 |
 | **breach-encapsulation-naming** | カプセル化を破るgetterの命名規約 | 「永続化用のgetter」「getterを作りたいが濫用を防ぎたい」 |
+| **intent-based-dedup** | 意図ベースの重複判定。字面でなく目的の同一性でDRYを判断 | 「重複コードを共通化したい」「この2つをまとめるべき？」 |
 
 ### スキル開発・運用
 
@@ -60,6 +66,7 @@ AIエージェント（Claude Code、Codex CLI、Gemini CLI、Cursor等）向け
 | **reviewing-skills** | スキルのベストプラクティス準拠レビュー | 「このスキルをレビューして」 |
 | **creating-rules** | Claude Codeルール（.claude/rules/）の作成ガイド | 「ルールファイルを作りたい」「パス指定ルール」 |
 | **custom-linter-creator** | AIエージェント向けカスタムlintルール作成 | 「リンタールールを作成」「このパターンを強制」 |
+| **migrate-skill-to-agent** | スキルを`.agent/skills/`へ移動しシンボリックリンクを作成 | 「スキルを.agentに移動」「スキルをマイグレート」 |
 
 ※ Codex CLI の system スキルは `.agent/skills/.system/` に配置（skill-creator, skill-installer）。
 
@@ -74,6 +81,7 @@ AIエージェント（Claude Code、Codex CLI、Gemini CLI、Cursor等）向け
 | **single-type-per-file** | 1公開型=1ファイルの原則 |
 | **avoiding-ambiguous-suffixes** | Manager/Util等の曖昧なサフィックスを回避 |
 | **less-is-more** | YAGNI/KISSに基づく過剰設計防止 |
+| **explain-skill-selection** | スキル使用時に選択理由を明示 |
 
 ## Kiro Spec-Driven Development (SDD)
 
@@ -118,40 +126,43 @@ okite-ai/
 │   ├── CC-SDD.md
 │   ├── skills/           # 共有スキルの実体
 │   │   └── .system/      # Codex用systemスキル
-│   └── rules/            # 共有ルールの実体
+│   ├── rules/            # 共有ルールの実体
+│   └── commands/         # 共有コマンドの実体
 ├── .claude/
 │   ├── skills/           # .agent/skills へのシンボリックリンク
 │   ├── rules/            # .agent/rules へのシンボリックリンク
 │   ├── commands/         # Claude Codeコマンド
 │   │   ├── create-skill.md
+│   │   ├── git-commit.md # .agent/commands へのシンボリックリンク
 │   │   └── kiro/
-│   ├── agents/kiro/      # Kiroエージェント定義
 │   └── rules/delegator/  # GPTエキスパート委譲ルール
 ├── .codex/
 │   ├── skills/           # .agent/skills へのシンボリックリンク
 │   └── prompts/          # Kiro SDDプロンプト
 ├── .cursor/
 │   ├── skills/           # .agent/skills へのシンボリックリンク
-│   └── rules/            # .agent/rules へのシンボリックリンク
+│   ├── rules/            # .agent/rules へのシンボリックリンク
+│   └── commands/
 ├── .gemini/
-│   └── skills/           # .agent/skills へのシンボリックリンク
+│   ├── skills/           # .agent/skills へのシンボリックリンク
+│   └── commands/
 ├── .kiro/
-│   └── settings/         # Kiro設定・テンプレート
-│       ├── rules/
-│       └── templates/
+│   ├── settings/         # Kiro設定・テンプレート
+│   │   ├── rules/
+│   │   └── templates/
+│   └── specs/            # SDD実行時に生成
 ├── scripts/              # 起動/セットアップスクリプト
+│   ├── configure.sh      # セットアップスクリプト
 │   ├── run-claude.sh
 │   ├── run-codex.sh
 │   ├── run-gemini.sh
 │   ├── run-cursor.sh
-│   └── set-up.sh
+│   └── run-opencode.sh
 ├── AGENTS.md
 ├── CLAUDE.md             # Claude Code用設定
 ├── COMMON.md             # 共通設定
 └── GEMINI.md             # Gemini用設定
 ```
-
-※ `.kiro/specs/` はSDD実行時に生成される。
 
 ## スクリプトによる起動
 
@@ -167,6 +178,9 @@ okite-ai/
 
 # Cursor
 ./scripts/run-cursor.sh
+
+# OpenCode
+./scripts/run-opencode.sh
 ```
 
 
@@ -183,7 +197,7 @@ git submodule add git@github.com/okite-ai/okite-ai.git references/okite-ai
 ./references/okite-ai/scripts/configure.sh
 ```
 
-※ `set-up.sh` は プロジェクトルート直下の `.agent/`, `.claude/`, `.codex/`, `.gemini/`, `.cursor/`, `.kiro/` をシンボリックリンクで配置する。
+※ `configure.sh` は プロジェクトルート直下の `.agent/`, `.claude/`, `.codex/`, `.gemini/`, `.cursor/`, `.kiro/` をシンボリックリンクで配置する。
 
 ### スキル/ルールの除外
 
@@ -224,6 +238,15 @@ less-is-more
 
 # first-class-collectionスキルが自動起動
 ユーザー: 「List<Order>をOrdersクラスにラップしたい」
+
+# repository-designスキルが自動起動
+ユーザー: 「リポジトリがDTOを返しているのを直して」
+
+# law-of-demeterスキルが自動起動
+ユーザー: 「連鎖呼び出しが多いので結合度を下げたい」
+
+# domain-primitives-and-always-validスキルが自動起動
+ユーザー: 「プリミティブ型をラップしてAlways-Validにしたい」
 ```
 
 ### Kiro SDDコマンド
@@ -273,11 +296,14 @@ less-is-more
 
 - **error-handling**: Go, Rust, Scala, Java, TypeScript, JavaScript, Python
 - **tell-dont-ask**: Java, Kotlin, Scala, TypeScript, Python, Ruby, Go, Rust
+- **law-of-demeter**: Java, Kotlin, Scala, TypeScript, Python, Ruby, Go, Rust
 - **first-class-collection**: Java, Kotlin, Scala, TypeScript, Python, Ruby, Go, Rust
 - **breach-encapsulation-naming**: Java, Kotlin, Scala, TypeScript, Python, Go, Rust
 - **parse-dont-validate**: Rust, Haskell, TypeScript, Scala, Java, Go, Python
+- **domain-primitives-and-always-valid**: Rust, TypeScript, Java（他言語にも応用可能）
 - **custom-linter-creator**: Rust (dylint), TypeScript/JavaScript (ESLint), Python (pylint), Go (golangci-lint)
 - **package-design**: Rust（主）、汎用原則は全言語
+- **repository-design, intent-based-dedup, backward-compat-governance, domain-model-extractor**: 言語非依存
 - **その他**: 言語非依存の設計原則
 
 ## 設計思想
