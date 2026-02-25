@@ -252,7 +252,9 @@ public class JpaUserRepository implements UserRepository {
 
 ## 参考文献
 
-- かとじゅん「ドメインオブジェクトのためのGetter/Setter」(2018) - https://blog.j5ik2o.me/entry/2018/08/14/134125 - 本スキルの原典。カプセル化の歴史的劣化とbreachEncapsulationOf命名規約の提案
+- かとじゅん「ドメインオブジェクトのためのGetter/Setter」(2018)
+    - https://blog.j5ik2o.me/entry/2018/08/14/134125
+    - 本スキルの原典。カプセル化の歴史的劣化とbreachEncapsulationOf命名規約の提案
 
 ## 詳細ガイドライン
 
