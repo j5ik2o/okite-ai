@@ -279,17 +279,35 @@ impl Money {
 
 ## 議論のための用語整理
 
-チームで議論する際、以下の用語を区別すると生産的になる。
+チームで議論する際、**パターン（設計概念）と実装技法を混同しない**ことが重要である。
 
-| 用語 | 定義（本スキルでの用法） |
-|------|--------------------------|
-| Value Object（PofEAA） | 値で等価判定されるオブジェクト。不変が推奨 |
-| Value Object（DDD） | PofEAA VOの特性を継承し、さらにドメイン不変条件と振る舞いを持つ値（PofEAA VOのextends） |
-| Domain Primitive | プリミティブ型をラップし、構築時検証・不変性・自己完結性を備えた最小単位の型 |
-| Branded Type / Newtype | 型レベルで区別するが、ランタイムの検証は持たない軽量ラッパー |
+### パターン（何であるか）
 
-**推奨**: 「Value Objectにすべき」ではなく、「この値にはドメイン不変条件があるからDomain Primitiveにすべき」
-「取り違えリスクがあるからNewtype/Branded Typeで区別すべき」のように、具体的な理由と手段を述べる。
+| パターン | 出典 | 定義 | 関係 |
+|----------|------|------|------|
+| Value Object（PofEAA） | Fowler | 値で等価判定されるオブジェクト。不変が推奨 | 基底 |
+| Value Object（DDD） | Evans | PofEAA VOを継承し、ドメイン不変条件と振る舞いを追加 | PofEAA VOのextends |
+| Domain Primitive | Johnsson et al. | 構築時検証・不変性・自己完結性を備えたドメイン固有の最小単位の型 | Secure by Design由来 |
+
+### 実装技法（どう作るか）
+
+| 技法 | 特性 | 例 |
+|------|------|-----|
+| Branded Type / Newtype | 型レベルで区別するが、ランタイム検証なし | Rust: `struct UserId(String)` |
+| Smart Constructor | 構築時に不変条件を検証。無効な値を作れない | `Email::new(s) -> Result<Email, Error>` |
+| 振る舞い付きドメイン型 | 不変条件 + ドメイン操作をカプセル化 | `Money::add(&self, other) -> Result<Money, Error>` |
+
+### パターンと実装技法の対応
+
+| パターン | 典型的な実装技法 |
+|----------|-----------------|
+| PofEAA VO | いずれの技法でも実現可能（値の等価性を実装すればよい） |
+| DDD VO | Smart Constructor または 振る舞い付きドメイン型 |
+| Domain Primitive | Smart Constructor（最小単位なので振る舞いは少ないことが多い） |
+
+**推奨**: 「Value Objectにすべき」のようにパターン名だけで語らず、
+「この値にはドメイン不変条件があるからSmart Constructorで保護すべき」
+「取り違えリスクがあるからNewtypeで型を区別すべき」のように、**理由と実装技法をセットで**述べる。
 
 ## 参考文献
 
