@@ -180,7 +180,7 @@ cd your-repos
 # okite-aiリポジトリをsubmoduleでマウントしてください
 git submodule add git@github.com/okite-ai/okite-ai.git references/okite-ai
 # セットアップスクリプトを実行します
-./references/okite-ai/scripts/set-up.sh
+./references/okite-ai/scripts/configure.sh
 ```
 
 ※ `set-up.sh` は プロジェクトルート直下の `.agent/`, `.claude/`, `.codex/`, `.gemini/`, `.cursor/`, `.kiro/` をシンボリックリンクで配置する。
