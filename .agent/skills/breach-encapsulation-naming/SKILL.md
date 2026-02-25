@@ -250,6 +250,10 @@ public class JpaUserRepository implements UserRepository {
 | first-class-collection | コレクションのカプセル化にも同じ原則を適用 |
 | domain-building-blocks | 値オブジェクト設計との整合性 |
 
+## 参考文献
+
+- かとじゅん「ドメインオブジェクトのためのGetter/Setter」(2018) - https://blog.j5ik2o.me/entry/2018/08/14/134125 - 本スキルの原典。カプセル化の歴史的劣化とbreachEncapsulationOf命名規約の提案
+
 ## 詳細ガイドライン
 
 言語別の詳細な実装パターンは [references/patterns.md](references/patterns.md) を参照。
