@@ -18,22 +18,6 @@ AIエージェント（Claude Code / Codex CLI / Gemini CLI / Cursor Agent な�
 - Bash（macOS / Linux）
 - 利用するCLIのいずれか: `claude` / `codex` / `gemini` / `cursor-agent` / `opencode`
 
-### Install
-
-```sh
-git clone git@github.com:j5ik2o/okite-ai.git
-cd okite-ai
-./scripts/configure.sh --self
-```
-
-### Run
-
-```sh
-./scripts/run-codex.sh
-# または
-./scripts/run-claude.sh
-```
-
 ## Usage
 
 ### 他プロジェクトへ導入する
@@ -49,6 +33,14 @@ git submodule add git@github.com:okite-ai/okite-ai.git references/okite-ai
 # .okite_ignore
 skills/clean-architecture
 rules/prefer-immutability
+```
+
+### AIエージェントの起動
+
+```sh
+./scripts/run-codex.sh
+# または
+./scripts/run-claude.sh
 ```
 
 ### スキルを使う
