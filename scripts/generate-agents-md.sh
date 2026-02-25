@@ -34,6 +34,7 @@ append_rules() {
   local dir="$1"
   local label="$2"
   if ls "${dir}"/*.md 1>/dev/null 2>&1; then
+    # shellcheck disable=SC2129
     echo "" >> "${OUTPUT_FILE}"
     echo "# ${label}" >> "${OUTPUT_FILE}"
     echo "" >> "${OUTPUT_FILE}"
@@ -42,6 +43,7 @@ append_rules() {
       [ -e "$rule_file" ] || continue
       rule_name=$(basename "$rule_file" .md)
       echo "  - Appending rule: ${rule_name}"
+      # shellcheck disable=SC2129
       echo "" >> "${OUTPUT_FILE}"
       cat "$rule_file" >> "${OUTPUT_FILE}"
       echo "" >> "${OUTPUT_FILE}"
