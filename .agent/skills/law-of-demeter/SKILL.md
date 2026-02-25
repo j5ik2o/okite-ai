@@ -79,18 +79,18 @@ obj はどこから来たか？
 
 ```java
 // ❌ 違反: 友人(order)の友人(customer)の友人(address)に話しかけている
-String city = order.getCustomer().getAddress().getCity();
+City city = order.getCustomer().getAddress().getCity();
 
 // ✅ 修正: 各レベルに委譲メソッドを追加
-String city = order.getShippingCity();
+City city = order.getShippingCity();
 
 // Order
-public String getShippingCity() {
+public City getShippingCity() {
     return customer.getShippingCity();
 }
 
 // Customer
-public String getShippingCity() {
+public City getShippingCity() {
     return address.getCity();
 }
 ```
@@ -99,10 +99,10 @@ public String getShippingCity() {
 
 ```java
 // ❌ 違反: 内部構造を露出した名前
-order.getCustomer().getEmail()
+Email email = order.getCustomer().getEmail();
 
 // ✅ 修正: 目的を表すメソッドを提供
-order.getNotificationEmail()
+Email email = order.getNotificationEmail();
 ```
 
 ### 3. パラメータとして渡す
@@ -110,8 +110,8 @@ order.getNotificationEmail()
 ```java
 // ❌ 違反: 遠いオブジェクトを取得して使用
 void processOrder(Order order) {
-    PaymentGateway gw = order.getCustomer().getPaymentGateway();
-    gw.charge(order.getTotal());
+    PaymentGateway gateway = order.getCustomer().getPaymentGateway();
+    gateway.charge(order.getTotal());
 }
 
 // ✅ 修正: 必要なオブジェクトを引数で受け取る
@@ -129,11 +129,11 @@ if (order.getCustomer().getAddress().getCountry().equals("JP")) {
 }
 
 // ✅ 修正: 判定ロジックをオブジェクトに持たせる
-order.applyApplicableTax();
+Order orderUpdated = order.applyApplicableTax();
 
 // Order
-public void applyApplicableTax() {
-    customer.applyTaxFor(this);
+public Order applyApplicableTax() {
+    return customer.applyTaxFor(this);
 }
 ```
 
@@ -155,7 +155,7 @@ User user = User.builder()
 
 ```java
 // ✅ 許可: DTOは振る舞いを持たない単なるデータ構造
-String city = addressDto.getCity();
+City city = addressDto.getCity();
 int zip = addressDto.getZipCode();
 ```
 
@@ -189,10 +189,10 @@ result = text.strip().lower().replace(" ", "_")
 ```java
 // 過剰: すべてのフィールドに委譲メソッドを作成
 class Order {
-    String getCustomerName() { return customer.getName(); }
-    String getCustomerEmail() { return customer.getEmail(); }
-    String getCustomerPhone() { return customer.getPhone(); }
-    String getCustomerCity() { return customer.getAddress().getCity(); }
+    Name getCustomerName() { return customer.getName(); }
+    Email getCustomerEmail() { return customer.getEmail(); }
+    Phone getCustomerPhone() { return customer.getPhone(); }
+    City getCustomerCity() { return customer.getAddress().getCity(); }
     // ... 延々と続く
 }
 ```
