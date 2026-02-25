@@ -19,22 +19,22 @@
 
 ```java
 // ❌ 違反: 配送先住所を取得するために3段の連鎖
-public String getShippingLabel(Order order) {
+public Label getShippingLabel(Order order) {
     return order.getCustomer().getAddress().format();
 }
 
 // ✅ 修正: 目的に応じた委譲メソッド
-public String getShippingLabel(Order order) {
+public Label getShippingLabel(Order order) {
     return order.formatShippingAddress();
 }
 
 // Order
-public String formatShippingAddress() {
+public Address formatShippingAddress() {
     return customer.formatShippingAddress();
 }
 
 // Customer
-public String formatShippingAddress() {
+public Address formatShippingAddress() {
     return address.format();
 }
 ```
@@ -88,25 +88,25 @@ public void sendReceipt(Order order, EmailSender sender) {
 
 ```typescript
 // ❌ 違反
-function getDisplayName(comment: Comment): string {
+function getDisplayName(comment: Comment): Name {
   return comment.getAuthor().getProfile().getDisplayName();
 }
 
 // ✅ 修正
-function getDisplayName(comment: Comment): string {
+function getDisplayName(comment: Comment): Name {
   return comment.getAuthorDisplayName();
 }
 
 // Comment
 class Comment {
-  getAuthorDisplayName(): string {
+  getAuthorDisplayName(): Name {
     return this.author.getDisplayName();
   }
 }
 
 // Author
 class Author {
-  getDisplayName(): string {
+  getDisplayName(): Name {
     return this.profile.displayName;
   }
 }
@@ -128,7 +128,7 @@ function renderOrderSummary(order: Order) {
 
 // Order
 class Order {
-  calculateDiscountedTotal(): number {
+  calculateDiscountedTotal(): Total {
     const rate = this.customer.getDiscountRate();
     return this.total * (1 - rate);
   }
@@ -146,7 +146,7 @@ const city = user?.getCity();
 
 // User
 class User {
-  getCity(): string | undefined {
+  getCity(): City | undefined {
     return this.address?.city;
   }
 }
@@ -169,12 +169,12 @@ def get_manager_email(employee):
 
 # Employee
 class Employee:
-    def get_manager_email(self) -> str:
+    def get_manager_email(self) -> Email:
         return self._department.get_manager_email()
 
 # Department
 class Department:
-    def get_manager_email(self) -> str:
+    def get_manager_email(self) -> Email:
         return self._manager.email
 ```
 
@@ -190,19 +190,19 @@ tax_rate = order.applicable_tax_rate
 # Order
 class Order:
     @property
-    def applicable_tax_rate(self) -> float:
+    def applicable_tax_rate(self) -> TaxRate:
         return self._customer.tax_rate
 
 # Customer
 class Customer:
     @property
-    def tax_rate(self) -> float:
+    def tax_rate(self) -> TaxRate:
         return self._address.tax_rate
 
 # Address
 class Address:
     @property
-    def tax_rate(self) -> float:
+    def tax_rate(self) -> TaxRate:
         return self._country.tax_rate
 ```
 
@@ -258,22 +258,22 @@ end
 
 ```go
 // ❌ 違反
-func GetShippingCity(order *Order) string {
+func GetShippingCity(order *Order) City {
     return order.Customer.Address.City
 }
 
 // ✅ 修正
-func GetShippingCity(order *Order) string {
+func GetShippingCity(order *Order) City {
     return order.ShippingCity()
 }
 
 // Order
-func (o *Order) ShippingCity() string {
+func (o *Order) ShippingCity() City {
     return o.customer.ShippingCity()
 }
 
 // Customer
-func (c *Customer) ShippingCity() string {
+func (c *Customer) ShippingCity() City {
     return c.address.City
 }
 ```
@@ -289,14 +289,14 @@ func NotifyCustomer(order *Order) error {
 
 // ✅ 修正: 必要な振る舞いだけをインターフェースで定義
 type Notifiable interface {
-    NotificationEmail() string
+    NotificationEmail() Email
 }
 
 func NotifyCustomer(target Notifiable) error {
     return sendEmail(target.NotificationEmail(), "Order shipped")
 }
 
-func (o *Order) NotificationEmail() string {
+func (o *Order) NotificationEmail() Email {
     return o.customer.NotificationEmail()
 }
 ```
@@ -309,25 +309,25 @@ func (o *Order) NotificationEmail() string {
 
 ```rust
 // ❌ 違反
-fn get_shipping_city(order: &Order) -> &str {
+fn get_shipping_city(order: &Order) -> &City {
     &order.customer().address().city()
 }
 
 // ✅ 修正
-fn get_shipping_city(order: &Order) -> &str {
+fn get_shipping_city(order: &Order) -> &City {
     order.shipping_city()
 }
 
 // Order
 impl Order {
-    pub fn shipping_city(&self) -> &str {
+    pub fn shipping_city(&self) -> &City {
         self.customer.shipping_city()
     }
 }
 
 // Customer
 impl Customer {
-    pub fn shipping_city(&self) -> &str {
+    pub fn shipping_city(&self) -> &City {
         self.address.city()
     }
 }
@@ -337,27 +337,27 @@ impl Customer {
 
 ```rust
 // ❌ 違反: 具象型の内部構造に依存
-fn calculate_tax(order: &Order) -> f64 {
+fn calculate_tax(order: &Order) -> Tax {
     let rate = order.customer().address().country().tax_rate();
     order.total() * rate
 }
 
 // ✅ 修正: トレイトで必要な振る舞いだけ要求
 trait Taxable {
-    fn tax_rate(&self) -> f64;
-    fn taxable_amount(&self) -> f64;
+    fn tax_rate(&self) -> TaxRate;
+    fn taxable_amount(&self) -> Amount;
 
-    fn calculate_tax(&self) -> f64 {
+    fn calculate_tax(&self) -> Tax {
         self.taxable_amount() * self.tax_rate()
     }
 }
 
 impl Taxable for Order {
-    fn tax_rate(&self) -> f64 {
+    fn tax_rate(&self) -> TaxRate {
         self.customer.tax_rate()
     }
 
-    fn taxable_amount(&self) -> f64 {
+    fn taxable_amount(&self) -> Amount {
         self.total
     }
 }
@@ -371,21 +371,21 @@ impl Taxable for Order {
 
 ```scala
 // ❌ 違反
-def shippingCity(order: Order): String =
+def shippingCity(order: Order): City =
   order.customer.address.city
 
 // ✅ 修正
-def shippingCity(order: Order): String =
+def shippingCity(order: Order): City =
   order.shippingCity
 
 // Order
 case class Order(customer: Customer) {
-  def shippingCity: String = customer.shippingCity
+  def shippingCity: City = customer.shippingCity
 }
 
 // Customer
 case class Customer(address: Address) {
-  def shippingCity: String = address.city
+  def shippingCity: City = address.city
 }
 ```
 
@@ -394,11 +394,11 @@ case class Customer(address: Address) {
 ```scala
 // ✅ 型クラスで必要な振る舞いだけを抽象化
 trait HasShippingInfo[A] {
-  extension (a: A) def shippingCity: String
+  extension (a: A) def shippingCity: City
 }
 
 given HasShippingInfo[Order] with {
-  extension (o: Order) def shippingCity: String =
+  extension (o: Order) def shippingCity: City =
     o.customer.shippingCity
 }
 ```
