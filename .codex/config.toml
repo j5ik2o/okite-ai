@@ -9,7 +9,7 @@ personality = "pragmatic"
 rmcp_client = true
 skills = true
 unified_exec = true
-apps = true
+apps = false
 shell_snapshot = true
 steer = true
 
