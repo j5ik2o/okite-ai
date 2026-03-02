@@ -239,12 +239,6 @@ setup_agent() {
   prepare_link_destination "${ROOT_DIR}/.agent/CC-SDD.md"
   ln -s "../${OKITE_ROOT_REL}/.agent/CC-SDD.md" "${ROOT_DIR}/.agent/CC-SDD.md"
   echo "  - Linked CC-SDD.md"
-  prepare_link_destination "${ROOT_DIR}/.agent/CC_SDD-AGENTS.md"
-  ln -s "CC-SDD.md" "${ROOT_DIR}/.agent/CC_SDD-AGENTS.md"
-  echo "  - Linked CC_SDD-AGENTS.md"
-  prepare_link_destination "${ROOT_DIR}/.agent/CC_SDD-CLAUDE.md"
-  ln -s "CC-SDD.md" "${ROOT_DIR}/.agent/CC_SDD-CLAUDE.md"
-  echo "  - Linked CC_SDD-CLAUDE.md"
   mkdir -p "${ROOT_DIR}/.agent/skills"
   delete_okite_links_in_dir "${ROOT_DIR}/.agent/skills"
   for f in "${OKITE_ROOT}/.agent/skills"/*; do
@@ -340,6 +334,25 @@ setup_codex() {
     ln -s "../AGENTS.md" "${ROOT_DIR}/.codex/AGENTS.md"
     echo "  - Linked AGENTS.md"
   fi
+}
+
+setup_codex_identities() {
+  local identity
+  for identity in personal corporate; do
+    local id_dir="${ROOT_DIR}/.codex-${identity}"
+    mkdir -p "${id_dir}"
+    # 共有設定への symlink
+    prepare_link_destination "${id_dir}/config.toml"
+    ln -s "../.codex/config.toml" "${id_dir}/config.toml"
+    echo "  - Linked .codex-${identity}/config.toml"
+    prepare_link_destination "${id_dir}/skills"
+    ln -s "../.codex/skills" "${id_dir}/skills"
+    echo "  - Linked .codex-${identity}/skills"
+    prepare_link_destination "${id_dir}/prompts"
+    ln -s "../.codex/prompts" "${id_dir}/prompts"
+    echo "  - Linked .codex-${identity}/prompts"
+  done
+  echo "  - NOTE: Run 'CODEX_HOME=.codex-personal codex login' and 'CODEX_HOME=.codex-corporate codex login' to set up authentication"
 }
 
 setup_gemini() {
@@ -449,6 +462,7 @@ STEPS=(
   "setup_mcp:.mcp.json"
   "setup_claude:.claude"
   "setup_codex:.codex"
+  "setup_codex_identities:.codex-personal/.codex-corporate"
   "setup_gemini:.gemini"
   "setup_cursor:.cursor"
   "setup_opencode:.opencode"
@@ -474,3 +488,54 @@ bash "${OKITE_SCRIPT_DIR}/generate-agents-md.sh" "${ROOT_DIR}"
 echo "======================================"
 echo "Setup completed successfully!"
 echo "======================================"
+echo ""
+echo "======================================"
+echo "Recommended .gitignore entries:"
+echo "======================================"
+cat <<'GITIGNORE'
+# Claude Code
+/.claude/settings.local.json
+
+# Codex CLI
+/.codex/sessions/
+/.codex/log/
+/.codex/tmp/
+/.codex/shell_snapshots/*.sh
+/.codex/*.json
+/.codex/*.jsonl
+
+# Codex CLI (personal)
+/.codex-personal/*.json
+/.codex-personal/*.jsonl
+/.codex-personal/sessions/
+/.codex-personal/cache/
+/.codex-personal/log
+/.codex-personal/tmp/
+/.codex-personal/shell_snapshots/
+/.codex-personal/*.sqlite
+
+# Codex CLI (corporate)
+/.codex-corporate/*.json
+/.codex-corporate/*.jsonl
+/.codex-corporate/sessions/
+/.codex-corporate/cache/
+/.codex-corporate/log
+/.codex-corporate/tmp/
+/.codex-corporate/shell_snapshots/
+/.codex-corporate/*.sqlite
+
+# Cursor
+/.cursor/settings.local.json
+
+# Gemini
+/.gemini/settings.local.json
+
+# OpenCode
+/.opencode/settings.local.json
+
+# Kiro
+/.kiro/specs/
+
+# Serena
+/.serena/cache/
+GITIGNORE

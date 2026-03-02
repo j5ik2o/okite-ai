@@ -22,7 +22,7 @@
       "command": "codex",
       "args": ["-m", "gpt-5.3-codex", "mcp-server"],
       "env": {
-        "CODEX_HOME": ".codex"
+        "CODEX_HOME": ".codex-personal"
       }
     }
   }
