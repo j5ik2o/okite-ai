@@ -7,5 +7,9 @@
     "code-simplifier@claude-plugins-official": true,
     "claude-delegator@jarrodwatts-claude-delegator": true
   },
-  "teammateMode": "in-process"
+  "teammateMode": "in-process",
+  "statusLine": {
+    "type": "command",
+    "command": "~/.claude/statusline.sh"
+  }
 }
