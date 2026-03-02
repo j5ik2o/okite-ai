@@ -2,4 +2,4 @@
 
 export CLAUDE_IDENTITY="corporate"
 source "$HOME/.config/claude-code/env-corporate"
-claude "$@"
+claude --dangerously-skip-permissions "$@"
