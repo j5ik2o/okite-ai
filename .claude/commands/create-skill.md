@@ -10,7 +10,7 @@ argument-hint: "[スキル名] [スキルの説明]"
 ## スコープ
 
 **重要**: スキルはプロジェクトスコープ（`.claude/skills/`）に作成します。グローバルスコープ（`~/.claude/skills/`）には作成しません。
-`.agents/skills/`が存在しても`.claude/skills/`に作成します。
+`skills/`が存在しても`.claude/skills/`に作成します。
 
 ```
 出力先: {プロジェクトルート}/.claude/skills/{スキル名}/
@@ -261,7 +261,7 @@ reviewing-skillsから指摘された問題を自動修正する際：
 スコープ: プロジェクト (.claude/skills/)
 
 作成されたファイル:
-- .agents/skills/[スキル名]/SKILL.md
+- skills/[スキル名]/SKILL.md
 - [その他のファイル]
 
 レビュー結果:
