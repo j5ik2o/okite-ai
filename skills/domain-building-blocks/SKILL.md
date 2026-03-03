@@ -310,3 +310,10 @@ function bankAccountTransfer(
   return E.right([newFromResult.right, newToResult.right]);
 }
 ```
+
+## 関連スキル（併読推奨）
+このスキルを使用する際は、以下のスキルも併せて参照すること：
+- `aggregate-design`: ビルディングブロックを束ねる集約の設計ルール
+- `domain-model-first`: テストファーストでビルディングブロックを実装する開発手順
+- `parse-dont-validate`: 値オブジェクトを型レベルで設計するパターン
+- `domain-primitives-and-always-valid`: ドメインプリミティブとスマートコンストラクタの設計

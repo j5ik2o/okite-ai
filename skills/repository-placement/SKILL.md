@@ -152,3 +152,9 @@ interface-adapters/  (または adapters/, infra/)
 
 - Martin, Robert C. "Clean Architecture" (2017)
 - Vernon, Vaughn. "Implementing Domain-Driven Design" (2013)
+
+## 関連スキル（併読推奨）
+このスキルを使用する際は、以下のスキルも併せて参照すること：
+- `clean-architecture`: リポジトリ配置の基盤となる4層アーキテクチャ
+- `aggregate-design`: リポジトリが対応する集約の設計ルール
+- `repository-design`: リポジトリの命名・CQS・メソッド設計

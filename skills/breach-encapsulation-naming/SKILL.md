@@ -259,3 +259,9 @@ public class JpaUserRepository implements UserRepository {
 ## 詳細ガイドライン
 
 言語別の詳細な実装パターンは [references/patterns.md](references/patterns.md) を参照。
+
+## 関連スキル（併読推奨）
+このスキルを使用する際は、以下のスキルも併せて参照すること：
+- `tell-dont-ask`: getterを避けるべき理由の基盤原則
+- `law-of-demeter`: getter連鎖が違反する構造面の原則
+- `first-class-collection`: コレクションのカプセル化パターン

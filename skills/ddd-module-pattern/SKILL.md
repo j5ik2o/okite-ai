@@ -159,3 +159,9 @@ infrastructure/
 
 - Evans, Eric. "Domain-Driven Design" (2003), Chapter 5: Modules
 - Vernon, Vaughn. "Implementing Domain-Driven Design" (2013), Chapter 9: Modules
+
+## 関連スキル（併読推奨）
+このスキルを使用する際は、以下のスキルも併せて参照すること：
+- `package-design`: モジュール設計の基盤となるパッケージ設計原則
+- `clean-architecture`: ドメインモジュールを配置する層構造
+- `domain-building-blocks`: モジュール内に配置するビルディングブロックの設計

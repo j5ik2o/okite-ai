@@ -378,3 +378,9 @@ impl OrderRepository {
 - Alexis King "Parse, don't validate" - Always-Valid原則の理論的背景
 - Scott Wlaschin "Domain Modeling Made Functional" - 型駆動設計の実践
 - Einar Landre "Prefer Domain-Specific Types to Primitive Types" in "97 Things Every Programmer Should Know" - コンパイラにバグを見つけさせる
+
+## 関連スキル（併読推奨）
+このスキルを使用する際は、以下のスキルも併せて参照すること：
+- `parse-dont-validate`: 型レベルで不変式を保証する設計哲学
+- `when-to-wrap-primitives`: プリミティブ型をラップすべきかの判断基準
+- `domain-building-blocks`: ドメインプリミティブが構成する値オブジェクトの設計

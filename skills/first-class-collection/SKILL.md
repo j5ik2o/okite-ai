@@ -258,3 +258,9 @@ func (o Orders) Pending() Orders {
 ## 詳細ガイドライン
 
 言語別の詳細パターン、イテレータ実装、テスト方法は [references/patterns.md](references/patterns.md) を参照。
+
+## 関連スキル（併読推奨）
+このスキルを使用する際は、以下のスキルも併せて参照すること：
+- `tell-dont-ask`: コレクションに命じるパターンの基盤原則
+- `law-of-demeter`: コレクション内部への直接アクセスを防ぐ原則
+- `intent-based-dedup`: 同じ構造のコレクションでも意図が異なれば共通化しない判断

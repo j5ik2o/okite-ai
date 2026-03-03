@@ -528,3 +528,9 @@ probe.expectMessage(CreateSucceeded(id))
 - かとじゅん「Apache Pekko(もしくはAkka)で実現するCQRS/Event Sourcingシステム設計の完全開発ガイド」 - https://tech-book.precena.co.jp/entry/pekko-cqrs-es-guide
 - リファレンス実装: https://github.com/j5ik2o/pekko-cqrs-es-example
 - pekko-persistence-effector: https://github.com/j5ik2o/pekko-persistence-effector
+
+## 関連スキル（併読推奨）
+このスキルを使用する際は、以下のスキルも併せて参照すること：
+- `cqrs-tradeoffs`: CQRS/ES採用判断のトレードオフ分析
+- `cqrs-to-event-sourcing`: CQRSからイベントソーシングへの必然性
+- `aggregate-design`: ドメインモデルとしての集約設計ルール

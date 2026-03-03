@@ -111,3 +111,9 @@ auth/
 - [ ] cargo test
 - [ ] cargo clippy
 ```
+
+## 関連スキル（併読推奨）
+このスキルを使用する際は、以下のスキルも併せて参照すること：
+- `package-design`: リファクタリングの目標となるパッケージ設計原則
+- `ddd-module-pattern`: DDD文脈でのリファクタリング目標構造
+- `intent-based-dedup`: リファクタリング時の重複コード共通化判断

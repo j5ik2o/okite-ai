@@ -147,3 +147,9 @@ return user.getAddress().format();  // NullAddressは"住所未登録"を返す
 ## 詳細ガイドライン
 
 言語別の実装パターン、リファクタリング手順の詳細は [references/patterns.md](references/patterns.md) を参照。
+
+## 関連スキル（併読推奨）
+このスキルを使用する際は、以下のスキルも併せて参照すること：
+- `law-of-demeter`: 構造面の補完原則（直接の友人とのみ会話する）
+- `first-class-collection`: コレクションへのTell, Don't Ask適用パターン
+- `breach-encapsulation-naming`: カプセル化を破る必要がある場合の命名規約

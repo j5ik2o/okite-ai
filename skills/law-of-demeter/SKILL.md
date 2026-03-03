@@ -229,3 +229,9 @@ class Order {
 ## 詳細ガイドライン
 
 言語別の実装パターン、リファクタリング手順の詳細は [references/patterns.md](references/patterns.md) を参照。
+
+## 関連スキル（併読推奨）
+このスキルを使用する際は、以下のスキルも併せて参照すること：
+- `tell-dont-ask`: 振る舞い面の補完原則（状態を問い合わせず命じる）
+- `first-class-collection`: コレクションへのデメテルの法則適用パターン
+- `breach-encapsulation-naming`: 連鎖呼び出しが避けられない場合の命名規約

@@ -316,3 +316,9 @@ impl Money {
 - Eric Evans "Domain-Driven Design" - DDD版Value Objectの定義
 - J. B. Rainsberger "Demystifying the Dependency Inversion Principle" - Primitive Obsessionへの言及
 - ThoughtWorks "Object Calisthenics" - 「Wrap All Primitives」ルールの出典（練習用であり本番ルールではない）
+
+## 関連スキル（併読推奨）
+このスキルを使用する際は、以下のスキルも併せて参照すること：
+- `domain-primitives-and-always-valid`: ラップする判断後の具体的な設計パターン
+- `parse-dont-validate`: ラップ時に適用するparseパターン
+- `domain-building-blocks`: ラップされたプリミティブが属する値オブジェクトの設計

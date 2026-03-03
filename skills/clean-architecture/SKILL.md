@@ -76,3 +76,9 @@ description: >-
 ## 詳細リファレンス
 
 各層の詳細な責務と配置すべきコンポーネントの一覧は [references/layer-responsibilities.md](references/layer-responsibilities.md) を参照。
+
+## 関連スキル（併読推奨）
+このスキルを使用する際は、以下のスキルも併せて参照すること：
+- `repository-placement`: クリーンアーキテクチャにおけるリポジトリインターフェースの配置
+- `package-design`: 各層内のパッケージ設計原則
+- `ddd-module-pattern`: ドメイン層内のモジュール構成

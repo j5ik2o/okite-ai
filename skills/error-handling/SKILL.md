@@ -85,3 +85,9 @@ default: throw new Error(`unreachable: ${status}`);
 ## 詳細ガイドライン
 
 全言語の実装パターン、エラー型設計の詳細は [references/guidelines.md](references/guidelines.md) を参照。
+
+## 関連スキル（併読推奨）
+このスキルを使用する際は、以下のスキルも併せて参照すること：
+- `error-classification`: エラーの分類（Error, Defect, Fault, Failure）に基づく処理方式の選択
+- `domain-building-blocks`: ドメイン操作におけるResult/Eitherの適用
+- `repository-design`: リポジトリのエラー処理パターン（同期・非同期）

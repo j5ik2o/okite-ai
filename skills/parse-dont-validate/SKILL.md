@@ -146,3 +146,9 @@ mod email {
 ## 詳細ガイドライン
 
 言語別の実装パターン、型設計の詳細は [references/patterns.md](references/patterns.md) を参照。
+
+## 関連スキル（併読推奨）
+このスキルを使用する際は、以下のスキルも併せて参照すること：
+- `domain-primitives-and-always-valid`: スマートコンストラクタによるドメインプリミティブの設計
+- `when-to-wrap-primitives`: プリミティブ型をラップすべきかの判断基準
+- `domain-building-blocks`: 値オブジェクトの設計（parseパターンの適用先）
