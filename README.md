@@ -50,33 +50,6 @@ skills/clean-architecture
 rules/prefer-immutability
 ```
 
-### AIエージェントの起動
-
-```sh
-./scripts/run-codex.sh
-# または
-./scripts/run-claude.sh
-```
-
-### スキルを使う
-
-エージェントとの対話中に、スキル名またはトリガー文を入力します。
-
-```txt
-$repository-design
-リポジトリ設計をレビューして
-```
-
-### Kiro SDDを使う（例）
-
-```txt
-/kiro-spec-init "ユーザー認証機能"
-/kiro-spec-requirements auth
-/kiro-spec-design auth -y
-/kiro-spec-tasks auth
-/kiro-spec-impl auth
-```
-
 ## Documentation
 
 - ドキュメント索引: [docs/README.md](docs/README.md)
