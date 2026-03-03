@@ -1,49 +1,26 @@
 .idea/
 
-# Claude Code
-/.claude/settings.local.json
+/.claude/
+/.codex*/
+/.cursor/
+/.gemini/
+/.opencode/
 
-# Codex CLI
-/.codex/sessions/
-/.codex/log/
-/.codex/tmp/
-/.codex/shell_snapshots/*.sh
-/.codex/*.json
-/.codex/*.jsonl
+/.agents/
+!/.agents/skills/code-review
+!/.agents/skills/gh-issue-organizer
+!/.agents/skills/creating-fraktor-modules
+!/.agents/skills/designing-fraktor-shared-types
+!/.agents/skills/find-skills
+!/.agents/skills/pekko-gap-analysis
+!/.agents/skills/takt-analyze
+!/.agents/skills/takt-facet
+!/.agents/skills/takt-optimize
+!/.agents/skills/takt-piece
+!/.agents/skills/takt-task
 
-# Codex CLI (personal)
-/.codex-personal/*.json
-/.codex-personal/*.jsonl
-/.codex-personal/sessions/
-/.codex-personal/cache/
-/.codex-personal/log
-/.codex-personal/tmp/
-/.codex-personal/shell_snapshots/
-/.codex-personal/*.sqlite
 
-# Codex CLI (corporate)
-/.codex-corporate/*.json
-/.codex-corporate/*.jsonl
-/.codex-corporate/sessions/
-/.codex-corporate/cache/
-/.codex-corporate/log
-/.codex-corporate/tmp/
-/.codex-corporate/shell_snapshots/
-/.codex-corporate/*.sqlite
-
-# Cursor
-/.cursor/settings.local.json
-
-# Gemini
-/.gemini/settings.local.json
-
-# OpenCode
-/.opencode/settings.local.json
-
-# Kiro
 /.kiro/specs/
-
-# Serena
 /.serena/cache/
 
 
