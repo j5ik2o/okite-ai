@@ -192,6 +192,42 @@ val leftUser = user.leave()  // 集約のメソッド
 userRepository.store(leftUser)
 ```
 
+### リポジトリから別のリポジトリを呼び出す
+
+リポジトリの実装内で別のリポジトリを呼び出してはならない。集約間の調整はユースケース層（アプリケーションサービス）の責務である。
+
+**理由**:
+- **集約境界の違反**: リポジトリは1つの集約に対して1つ。別のリポジトリへの依存は集約境界が正しく設計されていない兆候
+- **責務の混在**: リポジトリの責務は「集約の永続化と復元」であり、他の集約の取得はその責務に含まれない
+- **隠れた結合**: 集約間の依存がインフラ層に埋もれ、発見・変更が困難になる
+- **テスト困難性**: リポジトリのテストに別のリポジトリのモックが必要になる
+
+```kotlin
+// NG: リポジトリが別のリポジトリに依存
+class OrderRepositoryImpl(
+    private val productRepository: ProductRepository
+) : OrderRepository {
+    override fun store(order: Order) {
+        val product = productRepository.findById(order.productId)
+        // ...
+    }
+}
+
+// OK: ユースケース層で調整
+class PlaceOrderUseCase(
+    private val orderRepository: OrderRepository,
+    private val productRepository: ProductRepository,
+) {
+    fun execute(command: PlaceOrderCommand) {
+        val product = productRepository.findById(command.productId)
+        val order = Order.create(product.id, command.quantity)
+        orderRepository.store(order)
+    }
+}
+```
+
+**検出基準**: リポジトリのコンストラクタまたはメソッド内で別のリポジトリを参照している。
+
 ### storeの引数・戻り値の違反
 
 ```kotlin
