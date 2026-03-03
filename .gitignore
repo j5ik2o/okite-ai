@@ -6,6 +6,11 @@
 /.gemini/
 /.opencode/
 
+!/.claude/settings.json
+!/.codex/config.toml
+!/.gemini/settings.json
+!/.opencode/opencode.json
+
 /.kiro/specs/
 /.serena/cache/
 
