@@ -1,5 +1,10 @@
 # okite-ai
 
+「okite-ai」には二つの意味が込められている：
+
+- **AIのための掟** - AIエージェントが従うべきベストプラクティスと規約
+- **目を覚ませAI!** - AIの能力を最大限に引き出すための起動フレーズ
+
 AIエージェント（Claude Code / Codex CLI / Gemini CLI / Cursor Agent など）向けに、再利用可能な **skills** と **rules**、および Spec-Driven Development（SDD）ワークフローを提供するリポジトリです。
 
 ## Highlights
