@@ -22,17 +22,17 @@ fi
 # Link source directories and prefix (1-hop symlinks)
 if [[ "$SELF_MODE" == "true" ]]; then
   SKILLS_SOURCE="${ROOT_DIR}/skills"
-  RULES_SOURCE="${ROOT_DIR}/rules"
+  RULES_SOURCE="${ROOT_DIR}/.agents/rules"
   COMMANDS_SOURCE="${ROOT_DIR}/.agents/commands"
   SKILLS_LINK_PREFIX="../../skills"
-  RULES_LINK_PREFIX="../../rules"
+  RULES_LINK_PREFIX="../../.agents/rules"
   COMMANDS_LINK_PREFIX="../../.agents/commands"
 else
   SKILLS_SOURCE="${OKITE_ROOT}/skills"
-  RULES_SOURCE="${OKITE_ROOT}/rules"
+  RULES_SOURCE="${OKITE_ROOT}/.agents/rules"
   COMMANDS_SOURCE="${OKITE_ROOT}/.agents/commands"
   SKILLS_LINK_PREFIX="../../${OKITE_ROOT_REL}/skills"
-  RULES_LINK_PREFIX="../../${OKITE_ROOT_REL}/rules"
+  RULES_LINK_PREFIX="../../${OKITE_ROOT_REL}/.agents/rules"
   COMMANDS_LINK_PREFIX="../../${OKITE_ROOT_REL}/.agents/commands"
 fi
 
@@ -286,7 +286,7 @@ setup_agent() {
   done
   mkdir -p "${ROOT_DIR}/.agents/rules"
   delete_okite_links_in_dir "${ROOT_DIR}/.agents/rules"
-  for f in "${OKITE_ROOT}/rules"/*; do
+  for f in "${OKITE_ROOT}/.agents/rules"/*; do
     [ -e "$f" ] || continue
     local base_name
     base_name=$(basename "$f")
@@ -297,7 +297,7 @@ setup_agent() {
     local link_path
     link_path="${ROOT_DIR}/.agents/rules/${base_name}"
     prepare_link_destination "$link_path"
-    ln -s "../../${OKITE_ROOT_REL}/rules/${base_name}" "$link_path"
+    ln -s "../../${OKITE_ROOT_REL}/.agents/rules/${base_name}" "$link_path"
     echo "  - Linked rules/${base_name}"
   done
 }
@@ -358,10 +358,15 @@ setup_codex_identities() {
   for identity in personal corporate; do
     local id_dir="${ROOT_DIR}/.codex-${identity}"
     mkdir -p "${id_dir}"
-    # 共有設定への symlink
+    # 直接リンク（多段リンク回避）
     prepare_link_destination "${id_dir}/config.toml"
-    ln -s "../.codex/config.toml" "${id_dir}/config.toml"
+    if [[ "$SELF_MODE" == "true" ]]; then
+      ln -s "../.codex/config.toml" "${id_dir}/config.toml"
+    else
+      ln -s "../${OKITE_ROOT_REL}/.codex/config.toml" "${id_dir}/config.toml"
+    fi
     echo "  - Linked .codex-${identity}/config.toml"
+    # skills/prompts はディレクトリごとリンク（.codex/ と同じ実体を共有）
     prepare_link_destination "${id_dir}/skills"
     ln -s "../.codex/skills" "${id_dir}/skills"
     echo "  - Linked .codex-${identity}/skills"
