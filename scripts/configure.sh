@@ -138,13 +138,13 @@ prepare_link_destination() {
 # ヘルパー関数
 # ======================================
 
-# .agent/skills -> target_dir/skills へのシンボリックリンクを作成
+# .agents/skills -> target_dir/skills へのシンボリックリンクを作成
 link_agent_skills_to() {
   local target_dir="$1"
   remove_okite_symlink_path "${target_dir}/skills"
   mkdir -p "${target_dir}/skills"
   delete_okite_links_in_dir "${target_dir}/skills"
-  for f in "${ROOT_DIR}/.agent/skills"/*; do
+  for f in "${ROOT_DIR}/.agents/skills"/*; do
     [ -e "$f" ] || continue
     local base_name
     base_name=$(basename "$f")
@@ -155,18 +155,18 @@ link_agent_skills_to() {
     local link_path
     link_path="${target_dir}/skills/${base_name}"
     prepare_link_destination "$link_path"
-    ln -s "../../.agent/skills/${base_name}" "$link_path"
+    ln -s "../../.agents/skills/${base_name}" "$link_path"
     echo "  - Linked skills/${base_name}"
   done
 }
 
-# .agent/rules -> target_dir/rules へのシンボリックリンクを作成
+# .agents/rules -> target_dir/rules へのシンボリックリンクを作成
 link_agent_rules_to() {
   local target_dir="$1"
   remove_okite_symlink_path "${target_dir}/rules"
   mkdir -p "${target_dir}/rules"
   delete_okite_links_in_dir "${target_dir}/rules"
-  for f in "${ROOT_DIR}/.agent/rules"/*; do
+  for f in "${ROOT_DIR}/.agents/rules"/*; do
     [ -e "$f" ] || continue
     local base_name
     base_name=$(basename "$f")
@@ -177,12 +177,12 @@ link_agent_rules_to() {
     local link_path
     link_path="${target_dir}/rules/${base_name}"
     prepare_link_destination "$link_path"
-    ln -s "../../.agent/rules/${base_name}" "$link_path"
+    ln -s "../../.agents/rules/${base_name}" "$link_path"
     echo "  - Linked rules/${base_name}"
   done
 }
 
-# .agent/commands -> target_dir/dest_subdir へのシンボリックリンクを作成
+# .agents/commands -> target_dir/dest_subdir へのシンボリックリンクを作成
 # Usage: link_agent_commands_to <target_dir> <dest_subdir>
 #   例: link_agent_commands_to ".claude" "commands"  -> .claude/commands/
 #   例: link_agent_commands_to ".codex"  "prompts"   -> .codex/prompts/
@@ -191,14 +191,14 @@ link_agent_commands_to() {
   local dest_subdir="$2"
   mkdir -p "${target_dir}/${dest_subdir}"
   delete_okite_links_in_dir "${target_dir}/${dest_subdir}"
-  for f in "${ROOT_DIR}/.agent/commands"/*.md; do
+  for f in "${ROOT_DIR}/.agents/commands"/*.md; do
     [ -e "$f" ] || continue
     local base_name
     base_name=$(basename "$f")
     local link_path
     link_path="${target_dir}/${dest_subdir}/${base_name}"
     prepare_link_destination "$link_path"
-    ln -s "../../.agent/commands/${base_name}" "$link_path"
+    ln -s "../../.agents/commands/${base_name}" "$link_path"
     echo "  - Linked ${dest_subdir}/${base_name}"
   done
 }
@@ -232,16 +232,16 @@ link_if_source_exists_and_missing() {
 
 setup_agent() {
   if [[ "$SELF_MODE" == "true" ]]; then
-    echo "  - Self mode: .agent already exists, skipping"
+    echo "  - Self mode: .agents already exists, skipping"
     return
   fi
-  mkdir -p "${ROOT_DIR}/.agent"
-  prepare_link_destination "${ROOT_DIR}/.agent/CC-SDD.md"
-  ln -s "../${OKITE_ROOT_REL}/.agent/CC-SDD.md" "${ROOT_DIR}/.agent/CC-SDD.md"
+  mkdir -p "${ROOT_DIR}/.agents"
+  prepare_link_destination "${ROOT_DIR}/.agents/CC-SDD.md"
+  ln -s "../${OKITE_ROOT_REL}/.agents/CC-SDD.md" "${ROOT_DIR}/.agents/CC-SDD.md"
   echo "  - Linked CC-SDD.md"
-  mkdir -p "${ROOT_DIR}/.agent/skills"
-  delete_okite_links_in_dir "${ROOT_DIR}/.agent/skills"
-  for f in "${OKITE_ROOT}/.agent/skills"/*; do
+  mkdir -p "${ROOT_DIR}/.agents/skills"
+  delete_okite_links_in_dir "${ROOT_DIR}/.agents/skills"
+  for f in "${OKITE_ROOT}/.agents/skills"/*; do
     [ -e "$f" ] || continue
     local base_name
     base_name=$(basename "$f")
@@ -250,26 +250,26 @@ setup_agent() {
       continue
     fi
     local link_path
-    link_path="${ROOT_DIR}/.agent/skills/${base_name}"
+    link_path="${ROOT_DIR}/.agents/skills/${base_name}"
     prepare_link_destination "$link_path"
-    ln -s "../../${OKITE_ROOT_REL}/.agent/skills/${base_name}" "$link_path"
+    ln -s "../../${OKITE_ROOT_REL}/.agents/skills/${base_name}" "$link_path"
     echo "  - Linked skills/${base_name}"
   done
-  mkdir -p "${ROOT_DIR}/.agent/commands"
-  delete_okite_links_in_dir "${ROOT_DIR}/.agent/commands"
-  for f in "${OKITE_ROOT}/.agent/commands"/*.md; do
+  mkdir -p "${ROOT_DIR}/.agents/commands"
+  delete_okite_links_in_dir "${ROOT_DIR}/.agents/commands"
+  for f in "${OKITE_ROOT}/.agents/commands"/*.md; do
     [ -e "$f" ] || continue
     local base_name
     base_name=$(basename "$f")
     local link_path
-    link_path="${ROOT_DIR}/.agent/commands/${base_name}"
+    link_path="${ROOT_DIR}/.agents/commands/${base_name}"
     prepare_link_destination "$link_path"
-    ln -s "../../${OKITE_ROOT_REL}/.agent/commands/${base_name}" "$link_path"
+    ln -s "../../${OKITE_ROOT_REL}/.agents/commands/${base_name}" "$link_path"
     echo "  - Linked commands/${base_name}"
   done
-  mkdir -p "${ROOT_DIR}/.agent/rules"
-  delete_okite_links_in_dir "${ROOT_DIR}/.agent/rules"
-  for f in "${OKITE_ROOT}/.agent/rules"/*; do
+  mkdir -p "${ROOT_DIR}/.agents/rules"
+  delete_okite_links_in_dir "${ROOT_DIR}/.agents/rules"
+  for f in "${OKITE_ROOT}/.agents/rules"/*; do
     [ -e "$f" ] || continue
     local base_name
     base_name=$(basename "$f")
@@ -278,9 +278,9 @@ setup_agent() {
       continue
     fi
     local link_path
-    link_path="${ROOT_DIR}/.agent/rules/${base_name}"
+    link_path="${ROOT_DIR}/.agents/rules/${base_name}"
     prepare_link_destination "$link_path"
-    ln -s "../../${OKITE_ROOT_REL}/.agent/rules/${base_name}" "$link_path"
+    ln -s "../../${OKITE_ROOT_REL}/.agents/rules/${base_name}" "$link_path"
     echo "  - Linked rules/${base_name}"
   done
 }
@@ -458,7 +458,7 @@ echo ""
 
 STEPS=(
   "setup_common_md:COMMON.md"
-  "setup_agent:.agent"
+  "setup_agent:.agents"
   "setup_mcp:.mcp.json"
   "setup_claude:.claude"
   "setup_codex:.codex"

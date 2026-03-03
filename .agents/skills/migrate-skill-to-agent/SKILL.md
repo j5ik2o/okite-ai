@@ -1,17 +1,17 @@
 ---
 name: migrate-skill-to-agent
 description: >-
-  スキルディレクトリを `.claude/skills/{name}` から `.agent/skills/{name}` へ移動し、
+  スキルディレクトリを `.claude/skills/{name}` から `.agents/skills/{name}` へ移動し、
   `.claude/skills/{name}` と `.codex/skills/{name}` の両方からシンボリックリンクを作成するマイグレーションスキル。
-  スキルの実体を `.agent/skills/` に一元化し、Claude Code と Codex CLI の両方から
+  スキルの実体を `.agents/skills/` に一元化し、Claude Code と Codex CLI の両方から
   参照可能にするディレクトリ構成を実現する。引数としてスキル名が必須。
-  トリガー：「スキルを .agent に移動」「スキルをマイグレート」「シンボリックリンクを作成」
+  トリガー：「スキルを .agents に移動」「スキルをマイグレート」「シンボリックリンクを作成」
   「migrate skill」「スキルの配置を統一」といったスキル配置変更リクエストで起動。
 ---
 
 # Migrate Skill To Agent
 
-`.claude/skills/{name}` にあるスキルを `.agent/skills/{name}` へ移動し、
+`.claude/skills/{name}` にあるスキルを `.agents/skills/{name}` へ移動し、
 `.claude/skills/` と `.codex/skills/` の両方からシンボリックリンクを張る。
 
 ## 使い方
@@ -28,7 +28,7 @@ bash scripts/migrate.sh <skill-name> [project-root]
 ## 実行前の確認事項
 
 - `.claude/skills/{name}` が実ディレクトリとして存在すること（シンボリックリンクでないこと）
-- `.agent/skills/{name}` がまだ存在しないこと
+- `.agents/skills/{name}` がまだ存在しないこと
 
 ## 実行結果
 
@@ -37,9 +37,9 @@ bash scripts/migrate.sh <skill-name> [project-root]
   .claude/skills/{name}/  (実ディレクトリ)
 
 移動後:
-  .agent/skills/{name}/               (実体)
-  .claude/skills/{name} -> ../../.agent/skills/{name}  (シンボリックリンク)
-  .codex/skills/{name}  -> ../../.agent/skills/{name}  (シンボリックリンク)
+  .agents/skills/{name}/               (実体)
+  .claude/skills/{name} -> ../../.agents/skills/{name}  (シンボリックリンク)
+  .codex/skills/{name}  -> ../../.agents/skills/{name}  (シンボリックリンク)
 ```
 
 ## ワークフロー
@@ -51,7 +51,7 @@ bash scripts/migrate.sh <skill-name> [project-root]
 
 ## 実行例
 
-ユーザー: 「intent-based-dedup を .agent に移動して」
+ユーザー: 「intent-based-dedup を .agents に移動して」
 
 ```bash
 bash /path/to/migrate-skill-to-agent/scripts/migrate.sh intent-based-dedup /path/to/project

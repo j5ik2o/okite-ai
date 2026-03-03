@@ -2,16 +2,16 @@
 set -euo pipefail
 
 # Usage: migrate.sh <skill-name> [project-root]
-# Moves a skill from .claude/skills/<name> to .agent/skills/<name>
+# Moves a skill from .claude/skills/<name> to .agents/skills/<name>
 # and creates symlinks from .claude/skills/ and .codex/skills/
 
 SKILL_NAME="${1:?Usage: migrate.sh <skill-name> [project-root]}"
 PROJECT_ROOT="${2:-.}"
 
-AGENT_DIR="${PROJECT_ROOT}/.agent/skills/${SKILL_NAME}"
+AGENT_DIR="${PROJECT_ROOT}/.agents/skills/${SKILL_NAME}"
 CLAUDE_DIR="${PROJECT_ROOT}/.claude/skills/${SKILL_NAME}"
 CODEX_DIR="${PROJECT_ROOT}/.codex/skills/${SKILL_NAME}"
-RELATIVE_LINK="../../.agent/skills/${SKILL_NAME}"
+RELATIVE_LINK="../../.agents/skills/${SKILL_NAME}"
 
 # Validation
 if [ ! -d "${CLAUDE_DIR}" ]; then
@@ -30,10 +30,10 @@ if [ -d "${AGENT_DIR}" ]; then
 fi
 
 # Ensure parent directories exist
-mkdir -p "${PROJECT_ROOT}/.agent/skills"
+mkdir -p "${PROJECT_ROOT}/.agents/skills"
 mkdir -p "${PROJECT_ROOT}/.codex/skills"
 
-# Move to .agent/skills/
+# Move to .agents/skills/
 mv "${CLAUDE_DIR}" "${AGENT_DIR}"
 echo "Moved: ${CLAUDE_DIR} -> ${AGENT_DIR}"
 
@@ -49,4 +49,4 @@ ln -s "${RELATIVE_LINK}" "${CODEX_DIR}"
 echo "Linked: ${CODEX_DIR} -> ${RELATIVE_LINK}"
 
 echo ""
-echo "Done: ${SKILL_NAME} migrated to .agent/skills/"
+echo "Done: ${SKILL_NAME} migrated to .agents/skills/"

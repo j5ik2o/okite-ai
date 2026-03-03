@@ -1,11 +1,11 @@
 # okite-ai
 
 AIエージェント（Claude Code / Codex CLI / Gemini CLI / Cursor Agent など）向けに、再利用可能な `skills` と `rules`、および Spec-Driven Development（SDD）ワークフローを提供するリポジトリです。
-`.agent/` を実体にして、各CLI側ディレクトリをシンボリックリンクで同期します。
+`.agents/` を実体にして、各CLI側ディレクトリをシンボリックリンクで同期します。
 
 ## Highlights
 
-- `.agent/skills` / `.agent/rules` / `.agent/commands` を単一ソースで管理
+- `.agents/skills` / `.agents/rules` / `.agents/commands` を単一ソースで管理
 - `scripts/configure.sh` で `.claude` `.codex` `.gemini` `.cursor` `.opencode` `.kiro` を一括セットアップ
 - Kiro SDD コマンド群（仕様策定→設計→タスク→実装）を利用可能
 - CLIごとの起動スクリプトを同梱（`run-claude.sh` など）
@@ -66,10 +66,10 @@ $repository-design
 
 - ドキュメント索引: [docs/README.md](docs/README.md)
 - 共通エージェント設定: [AGENTS.md](AGENTS.md)
-- SDDガイド: [.agent/CC-SDD.md](.agent/CC-SDD.md)
+- SDDガイド: [.agents/CC-SDD.md](.agents/CC-SDD.md)
 - スキル一覧: [docs/skills.md](docs/skills.md)
-- スキル実体: [.agent/skills](.agent/skills)
-- 共有ルール: [.agent/rules](.agent/rules)
+- スキル実体: [.agents/skills](.agents/skills)
+- 共有ルール: [.agents/rules](.agents/rules)
 
 ## Getting help
 

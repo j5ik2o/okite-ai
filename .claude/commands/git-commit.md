@@ -1,1 +1,1 @@
-../../.agent/commands/git-commit.md
+../../.agents/commands/git-commit.md

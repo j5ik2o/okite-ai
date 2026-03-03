@@ -9,7 +9,7 @@ OKITE_ROOT=$(cd "${SCRIPT_DIR}/.." && pwd)
 TARGET_ROOT="${1:-${OKITE_ROOT}}"
 
 COMMON_MD="${TARGET_ROOT}/COMMON.md"
-RULES_DIR="${TARGET_ROOT}/.agent/rules"
+RULES_DIR="${TARGET_ROOT}/.agents/rules"
 OUTPUT_FILE="${TARGET_ROOT}/AGENTS.md"
 
 echo "Generating AGENTS.md..."
