@@ -19,21 +19,21 @@ AIにとって「正しさ」は相対的なものであり、基準を与えな
 
 これらは教条的に適用するものではなく、プロジェクトの文脈に応じて判断し使い分けるものである。その判断の引き出しとなる設計知識を、AIが活用できる形で整備したのがこのリポジトリである。スキルをそのまま使うのではなく、各プロジェクトの文脈に応じてカスタマイズ・最適化して使うことを推奨する。
 
-## Highlights
+## 特徴
 
 - `skills/` / `rules/` を単一ソースで管理し、各CLI向けディレクトリへシンボリックリンクで同期
 - `npx skills add` で個別スキルをインストール可能
 - `scripts/configure.sh` で `.claude` `.codex` `.gemini` `.cursor` `.opencode` を一括セットアップ
 
-## Quickstart
+## クイックスタート
 
-### Requirements
+### 必要条件
 
 - Node.js（`npx` 利用時）
 - Git / Bash（submodule 方式利用時）
 - 利用するCLIのいずれか: `claude` / `codex` / `gemini` / `cursor-agent` / `opencode`
 
-## Usage
+## 使い方
 
 ### npx skills add で個別インストール（推奨）
 
@@ -153,7 +153,7 @@ skills/clean-architecture
 rules/prefer-immutability
 ```
 
-## Documentation
+## ドキュメント
 
 - ドキュメント索引: [docs/README.md](docs/README.md)
 - 共通エージェント設定: [AGENTS.md](AGENTS.md)
@@ -162,18 +162,18 @@ rules/prefer-immutability
 - スキル実体: [skills/](skills)
 - 共有ルール: [rules/](rules)
 
-## Getting help
+## ヘルプ
 
 - バグ報告・質問: [Issues](https://github.com/j5ik2o/okite-ai/issues)
 
-## Contributing
+## コントリビュート
 
 Issue / Pull Request を歓迎します。大きな変更は、先に Issue で方針を共有してください。
 
-## Maintainers
+## メンテナー
 
 - [@j5ik2o](https://github.com/j5ik2o)
 
-## License
+## ライセンス
 
 MIT License. See [MIT-LICENSE.md](MIT-LICENSE.md).
