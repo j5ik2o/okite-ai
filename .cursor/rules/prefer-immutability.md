@@ -1,1 +1,1 @@
-../../rules/prefer-immutability.md
+../../.agents/rules/prefer-immutability.md

@@ -1,1 +1,1 @@
-../../rules/less-is-more.md
+../../.agents/rules/less-is-more.md
