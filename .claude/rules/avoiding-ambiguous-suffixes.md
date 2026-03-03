@@ -1,1 +1,1 @@
-../../.agents/rules/avoiding-ambiguous-suffixes.md
+../../rules/avoiding-ambiguous-suffixes.md

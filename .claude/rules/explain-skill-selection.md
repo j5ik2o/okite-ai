@@ -1,1 +1,1 @@
-../../.agents/rules/explain-skill-selection.md
+../../rules/explain-skill-selection.md
