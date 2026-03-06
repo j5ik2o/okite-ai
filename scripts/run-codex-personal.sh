@@ -18,5 +18,7 @@ done
 if $use_happy; then
   exec happy codex "${args[@]}"
 else
-  exec codex --dangerously-bypass-approvals-and-sandbox -c "projects.\"$(pwd)\".trust_level=\"trusted\"" "${args[@]}"
+  exec codex --dangerously-bypass-approvals-and-sandbox \
+    -c "projects.\"${REPO_ROOT}\".trust_level=\"trusted\"" \
+    "${args[@]}"
 fi
