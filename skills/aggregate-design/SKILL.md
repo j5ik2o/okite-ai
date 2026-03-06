@@ -61,91 +61,22 @@ DDDにおける集約(Aggregate)設計の原則。
 | **事後条件 (Postcondition)** | メソッド実行後に満たされる条件 | 実装側 |
 | **不変条件 (Invariant)** | 常に満たすべき条件 | 実装側 |
 
-```scala
-// Scalaでの DbC 例
-class Car private (
-  val id: CarId,
-  val tires: List[Tire],
-  val engine: Engine
-) {
-  // 不変条件（常に満たす）
-  require(tires.size == 4, "タイヤは4本必要")
-  require(engine != null, "エンジンは必須")
-
-  def replaceTire(position: Int, newTire: Tire): Car = {
-    // 事前条件
-    require(position >= 0 && position < 4, "タイヤ位置は0-3")
-    require(newTire != null, "新しいタイヤは必須")
-
-    val updated = new Car(
-      id,
-      tires.updated(position, newTire),
-      engine
-    )
-    // 事後条件（暗黙的：不変条件が満たされる）
-    updated
-  } ensuring { result =>
-    result.tires.size == 4  // 事後条件
-  }
-}
-```
+詳細な言語別実装パターンは [references/typescript.md](references/typescript.md)、[references/scala.md](references/scala.md)、[references/rust.md](references/rust.md)、[references/python.md](references/python.md) を参照。
 
 ## 基本原則
 
 ### 1. 不変性(Immutability)推奨
 
 現代においては不変(Immutable)を推奨する。特に理由がなければ不変。
-状態更新時はスプレッド構文（`...this.props`）で既存値を引き継ぎ、変更するフィールドだけを上書きする。
+状態更新時は既存値を引き継ぎ、変更するフィールドだけを上書きする。
 これにより、フィールド追加時の修正漏れを防ぎ、更新意図が明確になる。
 
-```typescript
-// Good: スプレッド構文による不変な集約
-type OrderProps = {
-  readonly id: OrderId;
-  readonly items: readonly OrderItem[];
-  readonly status: OrderStatus;
-};
-
-class Order {
-  private constructor(private readonly props: OrderProps) {}
-
-  static create(id: OrderId, items: OrderItem[]): Order {
-    return new Order({ id, items, status: OrderStatus.DRAFT });
-  }
-
-  addItem(item: OrderItem): Order {
-    return new Order({
-      ...this.props,
-      items: [...this.props.items, item],
-    });
-  }
-
-  confirm(): Order {
-    return new Order({
-      ...this.props,
-      status: OrderStatus.CONFIRMED,
-    });
-  }
-
-  get id(): OrderId { return this.props.id; }
-  get items(): readonly OrderItem[] { return this.props.items; }
-  get status(): OrderStatus { return this.props.status; }
-}
-
-// Bad: フィールド全列挙（フィールド追加時に全メソッドの修正が必要）
-class Order {
-  addItem(item: OrderItem): Order {
-    return new Order(this.id, [...this.items, item], this.status);
-  }
-}
-
-// Bad: 可変な集約
-class Order {
-  private items: OrderItem[] = [];
-  constructor(readonly id: OrderId) {}
-  addItem(item: OrderItem): void { this.items.push(item); }
-}
-```
+| 言語 | 不変更新パターン |
+|------|----------------|
+| TypeScript | Props型 + `...this.props` スプレッド構文 |
+| Scala | case class + `copy()` |
+| Rust | struct + `..self` 構造体更新構文 |
+| Python | `dataclass(frozen=True)` + `replace()` |
 
 ### 2. 強い整合性境界
 
@@ -155,95 +86,23 @@ class Order {
 
 集約内部に別の集約の参照を保持しない。他の集約と関連を持つ場合はIDで間接参照する。
 
-```typescript
-// Good: IDによる間接参照
-class Order {
-  constructor(
-    readonly id: OrderId,
-    readonly customerId: CustomerId  // IDのみ保持
-  ) {}
-}
-
-// Bad: 直接参照
-class Order {
-  constructor(
-    readonly id: OrderId,
-    readonly customer: Customer  // 他の集約を直接参照
-  ) {}
-}
-```
-
 ### 4. 完全コンストラクタ
 
 基本コンストラクタですべての状態を初期化する。オーバーロードする場合も必ず基本コンストラクタを利用する補助コンストラクタとして設計する。
-
-```typescript
-class Order {
-  private constructor(
-    readonly id: OrderId,
-    readonly items: readonly OrderItem[],
-    readonly status: OrderStatus,
-    readonly createdAt: Date
-  ) {}
-
-  // ファクトリメソッドは基本コンストラクタを利用
-  static create(id: OrderId, items: OrderItem[]): Order {
-    return new Order(id, items, OrderStatus.DRAFT, new Date());
-  }
-}
-```
 
 ### 5. 防御的コピー
 
 可変オブジェクトを保持する場合、外部に返す際は必ずコピーを返すか不変オブジェクトに変換する。
 
-```typescript
-class Order {
-  private readonly _items: OrderItem[];
-
-  constructor(items: OrderItem[]) {
-    this._items = [...items];  // 入力をコピー
-  }
-
-  get items(): readonly OrderItem[] {
-    return [...this._items];  // コピーを返す
-  }
-}
-```
-
 ### 6. 不変条件の維持
 
 どのような操作をされても不正な状態に陥ってはならない。不変な集約では基本コンストラクタで保護する。
-
-```typescript
-class Order {
-  private constructor(
-    readonly id: OrderId,
-    readonly items: readonly OrderItem[]
-  ) {
-    if (items.length === 0) {
-      throw new Error("注文には最低1つの商品が必要");
-    }
-    if (!items.every(item => item.quantity > 0)) {
-      throw new Error("数量は正の数");
-    }
-  }
-}
-```
 
 ## 構造原則
 
 ### 7. 集約ルート経由のアクセス
 
 集約内部のエンティティや値オブジェクトへの直接アクセスは、必ず集約ルートを経由する。
-
-```typescript
-// Good: 集約ルート経由
-order.updateItemQuantity(itemId, newQuantity);
-
-// Bad: 内部オブジェクトを直接操作
-order.items.find(item => item.id === itemId)?.updateQuantity(newQuantity);
-```
 
 ### 8. 1トランザクション = 1集約
 
@@ -259,52 +118,9 @@ order.items.find(item => item.id === itemId)?.updateQuantity(newQuantity);
 
 集約の状態変更時にドメインイベントを発行し、他の集約や外部システムはそれを購読して反応する。
 
-```typescript
-type OrderProps = {
-  readonly id: OrderId;
-  readonly status: OrderStatus;
-  readonly domainEvents: readonly DomainEvent[];
-  // ...other fields
-};
-
-class Order {
-  private constructor(private readonly props: OrderProps) {}
-
-  get domainEvents(): readonly DomainEvent[] {
-    return this.props.domainEvents;
-  }
-
-  confirm(): Order {
-    return new Order({
-      ...this.props,
-      status: OrderStatus.CONFIRMED,
-      domainEvents: [
-        ...this.props.domainEvents,
-        new OrderConfirmed(this.props.id, new Date()),
-      ],
-    });
-  }
-
-  clearEvents(): Order {
-    return new Order({ ...this.props, domainEvents: [] });
-  }
-}
-```
-
 ### 11. 楽観的ロック（要件がある場合のみ）
 
 並行更新の衝突検出が必要な場合にのみ、バージョン番号を持たせる。要件がなければ不要。
-
-```typescript
-// 楽観的ロックが必要な場合のみ
-class Order {
-  constructor(
-    readonly id: OrderId,
-    readonly version: number,  // 並行制御用（要件がある場合のみ）
-    // ...
-  ) {}
-}
-```
 
 ### 12. 永続化の無知
 
