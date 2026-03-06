@@ -1,0 +1,22 @@
+[
+  {"query": "ECサイトで注文(Order)集約をTypeScriptで設計したいんだけど、商品明細とか配送先とか支払い方法を含めて、Customerは別集約にしたい。Evans RulesとVernon Rulesに沿った設計をお願い。", "should_trigger": true},
+  {"query": "この Order クラスなんだけど、publicフィールドだらけで items.push() で直接変更してるし、Customer オブジェクトを直接参照してる。DDDの集約設計の観点からレビューして改善案を出してほしい。", "should_trigger": true},
+  {"query": "ブログシステムでPostとCommentを同じ集約にするか別の集約にするか迷ってる。コメントは1記事あたり最大100件で、いいね機能もある。集約の境界をどう決めるべき？", "should_trigger": true},
+  {"query": "うちのScalaプロジェクトで予約(Reservation)の集約を作りたい。部屋(Room)は別の集約で、予約には複数の日程(ReservationDate)が含まれる。不変条件として「同じ部屋の予約は日程が重複してはならない」がある。", "should_trigger": true},
+  {"query": "Kotlinで書いた在庫管理の Inventory 集約があるんだけど、StockItem を直接 mutableListOf で管理してて、外から inventory.items.add() できちゃう。これDDD的にまずいよね？直して。", "should_trigger": true},
+  {"query": "いまRustでCQRS/ESのプロジェクトやってるんだけど、BankAccount集約の状態遷移で、Opened → Active → Suspended → Closed のライフサイクルをどう表現すべき？集約のコマンドメソッドの設計パターンを教えて。", "should_trigger": true},
+  {"query": "ShoppingCartとCartItemって同じ集約にすべき？CartItemは最大50個まで。カートの合計金額はCartItemの合計と常に一致してる必要がある（真の不変条件）。", "should_trigger": true},
+  {"query": "Java (Spring Boot) で User 集約を実装してるんだけど、Addressを値オブジェクトにするのと、UserProfile をローカルエンティティにするのと、Role を別集約にするのと、それぞれの判断基準を知りたい。aggregate boundary の決め方。", "should_trigger": true},
+  {"query": "このTypeScriptのOrder集約、confirm()メソッドが void を返してて内部状態を直接変更してる。不変にしてスプレッド構文で新しいインスタンスを返すようにリファクタリングしたい。", "should_trigger": true},
+  {"query": "集約間の整合性って結果整合性でいいの？例えば注文確定したら在庫を減らす必要があるけど、OrderとInventoryは別集約。ドメインイベントでつなぐべき？Sagaパターンを使うべき？", "should_trigger": true},
+  {"query": "ReactでTodoアプリを作りたい。コンポーネント設計とstate管理のベストプラクティスを教えて。Zustandとjotaiどっちがいい？", "should_trigger": false},
+  {"query": "PostgreSQLでインデックスの貼り方がよくわからない。users テーブルの email カラムにユニークインデックスを追加したいんだけど、マイグレーションファイルの書き方を教えて。", "should_trigger": false},
+  {"query": "GitHub Actionsでci/cdパイプラインを構築したい。mainブランチへのpush時にテストを実行して、通ったらDockerイメージをビルドしてECRにプッシュする流れ。", "should_trigger": false},
+  {"query": "TypeScriptのエラーハンドリングで Result型（Either型）を使いたい。neverthrowとfp-tsどちらがおすすめ？プロジェクトの規模は中程度。", "should_trigger": false},
+  {"query": "Kotlinのcoroutineでバックプレッシャー制御ってどうやるの？Flowのbuffer()とconflate()の違いを教えて。大量のイベントを処理するシステムで使いたい。", "should_trigger": false},
+  {"query": "REST APIの設計で、ユーザー一覧取得のエンドポイントにページネーションを実装したい。カーソルベースとオフセットベースのどちらがいいか、パフォーマンスの観点から比較して。", "should_trigger": false},
+  {"query": "DDDのユビキタス言語って具体的にどうやって作るの？ドメインエキスパートとの会話からどうやって用語集を作って共有すればいい？Event Stormingとかやったほうがいい？", "should_trigger": false},
+  {"query": "クリーンアーキテクチャのレイヤー構成を教えて。ドメイン層、ユースケース層、インフラ層、それぞれに何を置くべき？依存関係の方向はどうあるべき？", "should_trigger": false},
+  {"query": "Dockerfileを最適化したい。マルチステージビルドでNode.jsアプリのイメージサイズを小さくする方法。現在1.2GBもあって重い。", "should_trigger": false},
+  {"query": "GraphQLのスキーマ設計で、User型にpostsフィールドを持たせるべきか、別のクエリにすべきか。N+1問題が気になる。DataLoaderの使い方も知りたい。", "should_trigger": false}
+]
