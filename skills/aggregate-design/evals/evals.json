@@ -17,7 +17,7 @@
     },
     {
       "id": 2,
-      "prompt": "以下のTypeScriptコードをDDDの集約設計の観点からレビューしてください。（問題のあるOrderクラス）",
+      "prompt": "以下のTypeScriptコードをDDDの集約設計の観点からレビューしてください。\n\n```typescript\nclass Order {\n  public id: string;\n  public customer: Customer;\n  public items: OrderItem[] = [];\n  public status: string;\n  public totalAmount: number = 0;\n\n  constructor(id: string, customer: Customer) {\n    this.id = id;\n    this.customer = customer;\n    this.status = 'draft';\n  }\n\n  addItem(item: OrderItem): void {\n    this.items.push(item);\n    this.totalAmount += item.price * item.quantity;\n  }\n\n  removeItem(itemId: string): void {\n    const index = this.items.findIndex(i => i.id === itemId);\n    if (index >= 0) {\n      const item = this.items[index];\n      this.totalAmount -= item.price * item.quantity;\n      this.items.splice(index, 1);\n    }\n  }\n\n  confirm(): void {\n    this.status = 'confirmed';\n  }\n}\n```",
       "expected_output": "Customer直接参照、可変性、不変条件なし、publicフィールド、ドメインイベントなし等の問題を指摘し、改善コードを提示",
       "files": [],
       "assertions": [
