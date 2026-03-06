@@ -1,9 +1,19 @@
 ---
 name: aggregate-design
 description: |
-  DDDの集約(Aggregate)設計ルールに基づいてコードレビューや設計支援を行う。集約の新規設計、既存集約のレビュー、
-  リファクタリング時に使用する。トリガー：「集約を設計したい」「集約のレビュー」
-  「Aggregateの実装」「集約の境界を決めたい」「DDDで実装したい」等の集約設計関連リクエストで起動。
+  DDDの集約(Aggregate)設計ルールに基づくコードレビュー・設計支援・リファクタリングを行う。
+  Evans Rules、Vernon's 4 Rules、Design by Contractに基づき、集約の境界定義、不変条件の検証、
+  不変(Immutable)設計、ID参照、結果整合性、ドメインイベント連携を包括的にガイドする。
+  以下のいずれかに該当する場合は必ずこのスキルを使用すること：
+  - 集約(Aggregate)の新規設計・実装・リファクタリング（どの言語でも）
+  - 既存の集約やエンティティクラスのDDD観点でのコードレビュー
+  - 集約の境界決定（「AとBは同じ集約にすべきか？」「この集約は大きすぎるか？」）
+  - 集約内の不変条件・整合性境界の設計
+  - 集約間の連携方式の判断（ドメインイベント、結果整合性、Sagaパターン）
+  - 可変(Mutable)な集約コードを不変(Immutable)設計にリファクタリングする
+  - publicフィールド、直接参照、push/appendなどカプセル化違反の検出・修正
+  キーワード例：集約、Aggregate、aggregate boundary、集約ルート、AggregateRoot、
+  エンティティ設計、DDD実装、Vernon Rules、Evans Rules、集約の分割、真の不変条件
 ---
 
 # 集約設計ガイド
@@ -85,16 +95,45 @@ class Car private (
 ### 1. 不変性(Immutability)推奨
 
 現代においては不変(Immutable)を推奨する。特に理由がなければ不変。
+状態更新時はスプレッド構文（`...this.props`）で既存値を引き継ぎ、変更するフィールドだけを上書きする。
+これにより、フィールド追加時の修正漏れを防ぎ、更新意図が明確になる。
 
 ```typescript
-// Good: 不変な集約
-class Order {
-  private constructor(
-    readonly id: OrderId,
-    readonly items: readonly OrderItem[],
-    readonly status: OrderStatus
-  ) {}
+// Good: スプレッド構文による不変な集約
+type OrderProps = {
+  readonly id: OrderId;
+  readonly items: readonly OrderItem[];
+  readonly status: OrderStatus;
+};
 
+class Order {
+  private constructor(private readonly props: OrderProps) {}
+
+  static create(id: OrderId, items: OrderItem[]): Order {
+    return new Order({ id, items, status: OrderStatus.DRAFT });
+  }
+
+  addItem(item: OrderItem): Order {
+    return new Order({
+      ...this.props,
+      items: [...this.props.items, item],
+    });
+  }
+
+  confirm(): Order {
+    return new Order({
+      ...this.props,
+      status: OrderStatus.CONFIRMED,
+    });
+  }
+
+  get id(): OrderId { return this.props.id; }
+  get items(): readonly OrderItem[] { return this.props.items; }
+  get status(): OrderStatus { return this.props.status; }
+}
+
+// Bad: フィールド全列挙（フィールド追加時に全メソッドの修正が必要）
+class Order {
   addItem(item: OrderItem): Order {
     return new Order(this.id, [...this.items, item], this.status);
   }
@@ -221,17 +260,33 @@ order.items.find(item => item.id === itemId)?.updateQuantity(newQuantity);
 集約の状態変更時にドメインイベントを発行し、他の集約や外部システムはそれを購読して反応する。
 
 ```typescript
+type OrderProps = {
+  readonly id: OrderId;
+  readonly status: OrderStatus;
+  readonly domainEvents: readonly DomainEvent[];
+  // ...other fields
+};
+
 class Order {
-  private readonly _events: DomainEvent[] = [];
+  private constructor(private readonly props: OrderProps) {}
 
   get domainEvents(): readonly DomainEvent[] {
-    return [...this._events];
+    return this.props.domainEvents;
   }
 
   confirm(): Order {
-    const confirmed = new Order(/* ...props, status: OrderStatus.CONFIRMED */);
-    confirmed._events.push(new OrderConfirmed(this.id, new Date()));
-    return confirmed;
+    return new Order({
+      ...this.props,
+      status: OrderStatus.CONFIRMED,
+      domainEvents: [
+        ...this.props.domainEvents,
+        new OrderConfirmed(this.props.id, new Date()),
+      ],
+    });
+  }
+
+  clearEvents(): Order {
+    return new Order({ ...this.props, domainEvents: [] });
   }
 }
 ```
