@@ -1,5 +1,5 @@
-model = "gpt-5.3-codex"
-model_reasoning_effort = "xhigh"
+model = "gpt-5.4"
+model_reasoning_effort = "medium"
 hide_agent_reasoning = true
 network_access = true
 web_search = "live"
@@ -9,9 +9,11 @@ personality = "pragmatic"
 rmcp_client = true
 skills = true
 unified_exec = true
-apps = false
 shell_snapshot = true
 steer = true
+js_repl = true
+multi_agent = true
+prevent_idle_sleep = true
 
 [mcp_servers.serena]
 command = "uvx"
