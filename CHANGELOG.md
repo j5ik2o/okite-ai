@@ -1,4 +1,20 @@
-## 0.1.0 (2026-03-03)
+## [0.2.0](https://github.com/j5ik2o/okite-ai/compare/v0.1.0...v0.2.0) (2026-03-09)
+
+
+### Features
+
+* **config:** update Codex model to gpt-5.4 and enhance feature set ([469d289](https://github.com/j5ik2o/okite-ai/commit/469d2899f14e0f99bacfb6cba7b36791e379668d))
+* **scripts:** add script to create symlinks for Codex auth files ([615933d](https://github.com/j5ik2o/okite-ai/commit/615933dbd055360d506db8df70b68143f686bab8))
+* **scripts:** add trust level configuration to Codex scripts ([0ea424a](https://github.com/j5ik2o/okite-ai/commit/0ea424a62c43db495d5091122ce47612c212fd6b))
+* **settings:** add configuration for Codex MCP server ([21bbadd](https://github.com/j5ik2o/okite-ai/commit/21bbaddd2535c47ee6b805f614e5db892678d7bc))
+
+
+### Bug Fixes
+
+* **scripts:** use REPO_ROOT instead of pwd for trust level configuration ([00ac9ef](https://github.com/j5ik2o/okite-ai/commit/00ac9ef4c56aba25eb9a857bb5a65bba2afa9123))
+* **setup-codex-auth:** correct repository root path calculation ([cc71921](https://github.com/j5ik2o/okite-ai/commit/cc7192122c00f12d9f20369e85113004ec438cc9))
+
+## [0.1.0](https://github.com/j5ik2o/okite-ai/compare/37a80a0dfb1081035fa1dbe9153500cd1738ccf0...v0.1.0) (2026-03-03)
 
 
 ### Features
