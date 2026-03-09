@@ -1,9 +1,19 @@
 ---
 name: aggregate-design
 description: |
-  DDDの集約(Aggregate)設計ルールに基づいてコードレビューや設計支援を行う。集約の新規設計、既存集約のレビュー、
-  リファクタリング時に使用する。トリガー：「集約を設計したい」「集約のレビュー」
-  「Aggregateの実装」「集約の境界を決めたい」「DDDで実装したい」等の集約設計関連リクエストで起動。
+  DDDの集約(Aggregate)設計ルールに基づくコードレビュー・設計支援・リファクタリングを行う。
+  Evans Rules、Vernon's 4 Rules、Design by Contractに基づき、集約の境界定義、不変条件の検証、
+  不変(Immutable)設計、ID参照、結果整合性、ドメインイベント連携を包括的にガイドする。
+  以下のいずれかに該当する場合は必ずこのスキルを使用すること：
+  - 集約(Aggregate)の新規設計・実装・リファクタリング（どの言語でも）
+  - 既存の集約やエンティティクラスのDDD観点でのコードレビュー
+  - 集約の境界決定（「AとBは同じ集約にすべきか？」「この集約は大きすぎるか？」）
+  - 集約内の不変条件・整合性境界の設計
+  - 集約間の連携方式の判断（ドメインイベント、結果整合性、Sagaパターン）
+  - 可変(Mutable)な集約コードを不変(Immutable)設計にリファクタリングする
+  - publicフィールド、直接参照、push/appendなどカプセル化違反の検出・修正
+  キーワード例：集約、Aggregate、aggregate boundary、集約ルート、AggregateRoot、
+  エンティティ設計、DDD実装、Vernon Rules、Evans Rules、集約の分割、真の不変条件
 ---
 
 # 集約設計ガイド
@@ -51,62 +61,22 @@ DDDにおける集約(Aggregate)設計の原則。
 | **事後条件 (Postcondition)** | メソッド実行後に満たされる条件 | 実装側 |
 | **不変条件 (Invariant)** | 常に満たすべき条件 | 実装側 |
 
-```scala
-// Scalaでの DbC 例
-class Car private (
-  val id: CarId,
-  val tires: List[Tire],
-  val engine: Engine
-) {
-  // 不変条件（常に満たす）
-  require(tires.size == 4, "タイヤは4本必要")
-  require(engine != null, "エンジンは必須")
-
-  def replaceTire(position: Int, newTire: Tire): Car = {
-    // 事前条件
-    require(position >= 0 && position < 4, "タイヤ位置は0-3")
-    require(newTire != null, "新しいタイヤは必須")
-
-    val updated = new Car(
-      id,
-      tires.updated(position, newTire),
-      engine
-    )
-    // 事後条件（暗黙的：不変条件が満たされる）
-    updated
-  } ensuring { result =>
-    result.tires.size == 4  // 事後条件
-  }
-}
-```
+詳細な言語別実装パターンは [references/typescript.md](references/typescript.md)、[references/scala.md](references/scala.md)、[references/rust.md](references/rust.md)、[references/python.md](references/python.md) を参照。
 
 ## 基本原則
 
 ### 1. 不変性(Immutability)推奨
 
 現代においては不変(Immutable)を推奨する。特に理由がなければ不変。
+状態更新時は既存値を引き継ぎ、変更するフィールドだけを上書きする。
+これにより、フィールド追加時の修正漏れを防ぎ、更新意図が明確になる。
 
-```typescript
-// Good: 不変な集約
-class Order {
-  private constructor(
-    readonly id: OrderId,
-    readonly items: readonly OrderItem[],
-    readonly status: OrderStatus
-  ) {}
-
-  addItem(item: OrderItem): Order {
-    return new Order(this.id, [...this.items, item], this.status);
-  }
-}
-
-// Bad: 可変な集約
-class Order {
-  private items: OrderItem[] = [];
-  constructor(readonly id: OrderId) {}
-  addItem(item: OrderItem): void { this.items.push(item); }
-}
-```
+| 言語 | 不変更新パターン |
+|------|----------------|
+| TypeScript | Props型 + `...this.props` スプレッド構文 |
+| Scala | case class + `copy()` |
+| Rust | struct + `..self` 構造体更新構文 |
+| Python | `dataclass(frozen=True)` + `replace()` |
 
 ### 2. 強い整合性境界
 
@@ -116,95 +86,23 @@ class Order {
 
 集約内部に別の集約の参照を保持しない。他の集約と関連を持つ場合はIDで間接参照する。
 
-```typescript
-// Good: IDによる間接参照
-class Order {
-  constructor(
-    readonly id: OrderId,
-    readonly customerId: CustomerId  // IDのみ保持
-  ) {}
-}
-
-// Bad: 直接参照
-class Order {
-  constructor(
-    readonly id: OrderId,
-    readonly customer: Customer  // 他の集約を直接参照
-  ) {}
-}
-```
-
 ### 4. 完全コンストラクタ
 
 基本コンストラクタですべての状態を初期化する。オーバーロードする場合も必ず基本コンストラクタを利用する補助コンストラクタとして設計する。
-
-```typescript
-class Order {
-  private constructor(
-    readonly id: OrderId,
-    readonly items: readonly OrderItem[],
-    readonly status: OrderStatus,
-    readonly createdAt: Date
-  ) {}
-
-  // ファクトリメソッドは基本コンストラクタを利用
-  static create(id: OrderId, items: OrderItem[]): Order {
-    return new Order(id, items, OrderStatus.DRAFT, new Date());
-  }
-}
-```
 
 ### 5. 防御的コピー
 
 可変オブジェクトを保持する場合、外部に返す際は必ずコピーを返すか不変オブジェクトに変換する。
 
-```typescript
-class Order {
-  private readonly _items: OrderItem[];
-
-  constructor(items: OrderItem[]) {
-    this._items = [...items];  // 入力をコピー
-  }
-
-  get items(): readonly OrderItem[] {
-    return [...this._items];  // コピーを返す
-  }
-}
-```
-
 ### 6. 不変条件の維持
 
 どのような操作をされても不正な状態に陥ってはならない。不変な集約では基本コンストラクタで保護する。
-
-```typescript
-class Order {
-  private constructor(
-    readonly id: OrderId,
-    readonly items: readonly OrderItem[]
-  ) {
-    if (items.length === 0) {
-      throw new Error("注文には最低1つの商品が必要");
-    }
-    if (!items.every(item => item.quantity > 0)) {
-      throw new Error("数量は正の数");
-    }
-  }
-}
-```
 
 ## 構造原則
 
 ### 7. 集約ルート経由のアクセス
 
 集約内部のエンティティや値オブジェクトへの直接アクセスは、必ず集約ルートを経由する。
-
-```typescript
-// Good: 集約ルート経由
-order.updateItemQuantity(itemId, newQuantity);
-
-// Bad: 内部オブジェクトを直接操作
-order.items.find(item => item.id === itemId)?.updateQuantity(newQuantity);
-```
 
 ### 8. 1トランザクション = 1集約
 
@@ -220,36 +118,9 @@ order.items.find(item => item.id === itemId)?.updateQuantity(newQuantity);
 
 集約の状態変更時にドメインイベントを発行し、他の集約や外部システムはそれを購読して反応する。
 
-```typescript
-class Order {
-  private readonly _events: DomainEvent[] = [];
-
-  get domainEvents(): readonly DomainEvent[] {
-    return [...this._events];
-  }
-
-  confirm(): Order {
-    const confirmed = new Order(/* ...props, status: OrderStatus.CONFIRMED */);
-    confirmed._events.push(new OrderConfirmed(this.id, new Date()));
-    return confirmed;
-  }
-}
-```
-
 ### 11. 楽観的ロック（要件がある場合のみ）
 
 並行更新の衝突検出が必要な場合にのみ、バージョン番号を持たせる。要件がなければ不要。
-
-```typescript
-// 楽観的ロックが必要な場合のみ
-class Order {
-  constructor(
-    readonly id: OrderId,
-    readonly version: number,  // 並行制御用（要件がある場合のみ）
-    // ...
-  ) {}
-}
-```
 
 ### 12. 永続化の無知
 
