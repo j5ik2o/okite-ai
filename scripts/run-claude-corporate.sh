@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 export CLAUDE_IDENTITY="corporate"
-source "$HOME/.config/claude-code/env-corporate"
+export CLAUDE_CONFIG_DIR="${HOME}/.claude-${CLAUDE_IDENTITY}"
 
 # --happy オプションを検出して Happy Coder モードで起動
 use_happy=false
