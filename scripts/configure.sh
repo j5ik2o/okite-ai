@@ -338,8 +338,8 @@ setup_codex() {
       echo "  - Linked prompts/${base_name}"
     done
     prepare_link_destination "${ROOT_DIR}/.codex/config.toml"
-    ln -s "../${OKITE_ROOT_REL}/.codex/config.toml" "${ROOT_DIR}/.codex/config.toml"
-    echo "  - Linked config.toml"
+    cp "${OKITE_ROOT}/.codex/config.toml" "${ROOT_DIR}/.codex/config.toml"
+    echo "  - Copied config.toml"
     mkdir -p "${ROOT_DIR}/.codex/skills"
     prepare_link_destination "${ROOT_DIR}/.codex/skills/.system"
     ln -s "../../${OKITE_ROOT_REL}/.codex/skills/.system" "${ROOT_DIR}/.codex/skills/.system"
