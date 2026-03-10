@@ -15,7 +15,9 @@
         "--enable-web-dashboard",
         "false"
       ],
-      "env": {}
+      "env": {
+        "HOME": ".serena-home"
+      }
     },
     "codex": {
       "type": "stdio",
