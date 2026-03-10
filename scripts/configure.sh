@@ -357,15 +357,16 @@ setup_codex_identities() {
   local identity
   for identity in personal corporate; do
     local id_dir="${ROOT_DIR}/.codex-${identity}"
+    local config_source
     mkdir -p "${id_dir}"
-    # 直接リンク（多段リンク回避）
     prepare_link_destination "${id_dir}/config.toml"
     if [[ "$SELF_MODE" == "true" ]]; then
-      ln -s "../.codex/config.toml" "${id_dir}/config.toml"
+      config_source="${ROOT_DIR}/.codex/config.toml"
     else
-      ln -s "../${OKITE_ROOT_REL}/.codex/config.toml" "${id_dir}/config.toml"
+      config_source="${OKITE_ROOT}/.codex/config.toml"
     fi
-    echo "  - Linked .codex-${identity}/config.toml"
+    cp "${config_source}" "${id_dir}/config.toml"
+    echo "  - Copied .codex-${identity}/config.toml"
     # skills/prompts はディレクトリごとリンク（.codex/ と同じ実体を共有）
     prepare_link_destination "${id_dir}/skills"
     ln -s "../.codex/skills" "${id_dir}/skills"
