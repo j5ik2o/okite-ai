@@ -21,5 +21,9 @@
         "CODEX_HOME": ".codex"
       }
     }
+  },
+  "attribution": {
+    "commit": "",
+    "pr": ""
   }
 }
