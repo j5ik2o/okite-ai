@@ -1,0 +1,6 @@
+# .codex/agents/worker.toml
+sandbox_mode = "workspace-write"
+developer_instructions = """
+Make the smallest defensible fix.
+Keep unrelated files untouched.
+"""
