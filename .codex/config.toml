@@ -12,11 +12,10 @@ developer_instructions = """
 [features]
 multi_agent = true
 rmcp_client = true
-skills = true
 unified_exec = true
 shell_snapshot = true
 steer = true
-js_repl = true
+js_repl = false
 prevent_idle_sleep = true
 
 [agents]
@@ -39,6 +38,9 @@ config_file = "agents/worker.toml"
 [mcp_servers.serena]
 command = "uvx"
 args = ["--from", "git+https://github.com/oraios/serena", "serena", "start-mcp-server", "--context", "codex", "--project", ".", "--enable-web-dashboard", "false"]
+
+[mcp_servers.serena.env]
+HOME = ".serena-home"
 
 [tui]
 status_line = ["current-dir", "git-branch"]
