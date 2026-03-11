@@ -19,9 +19,27 @@ steer = true
 js_repl = true
 prevent_idle_sleep = true
 
+[agents]
+max_threads = 4
+max_depth = 1
+
+[agents.explorer]
+description = "Read-only codebase explorer for gathering evidence."
+config_file = "agents/explorer.toml"
+
+[agents.reviewer]
+description = "PR reviewer focused on correctness, security, and missing tests."
+config_file = "agents/reviewer.toml"
+
+[agents.worker]
+description = "Implementation-focused agent for small targeted fixes."
+config_file = "agents/worker.toml"
+
+
 [mcp_servers.serena]
 command = "uvx"
 args = ["--from", "git+https://github.com/oraios/serena", "serena", "start-mcp-server", "--context", "codex", "--project", ".", "--enable-web-dashboard", "false"]
 
 [tui]
 status_line = ["current-dir", "git-branch"]
+
