@@ -4,15 +4,19 @@ hide_agent_reasoning = true
 network_access = true
 web_search = "live"
 personality = "pragmatic"
+developer_instructions = """
+実装を開始する場合、Planモードで提示した計画内容を、mdファイルへ書き出すこと。
+計画が存在しない場合はこの指示は無視して構わない。
+"""
 
 [features]
+multi_agent = true
 rmcp_client = true
 skills = true
 unified_exec = true
 shell_snapshot = true
 steer = true
 js_repl = true
-multi_agent = true
 prevent_idle_sleep = true
 
 [mcp_servers.serena]
