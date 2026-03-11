@@ -322,7 +322,6 @@ setup_claude() {
 }
 
 setup_codex() {
-  link_agent_skills_to "${ROOT_DIR}/.codex"
   link_agent_commands_to "${ROOT_DIR}/.codex" "prompts"
   if [[ "$SELF_MODE" == "true" ]]; then
     echo "  - Self mode: prompts already exist, skipping"
@@ -340,10 +339,9 @@ setup_codex() {
     prepare_link_destination "${ROOT_DIR}/.codex/config.toml"
     cp "${OKITE_ROOT}/.codex/config.toml" "${ROOT_DIR}/.codex/config.toml"
     echo "  - Copied config.toml"
-    mkdir -p "${ROOT_DIR}/.codex/skills"
-    prepare_link_destination "${ROOT_DIR}/.codex/skills/.system"
-    ln -s "../../${OKITE_ROOT_REL}/.codex/skills/.system" "${ROOT_DIR}/.codex/skills/.system"
-    echo "  - Linked skills/.system"
+    prepare_link_destination "${ROOT_DIR}/.codex/agents"
+    ln -s "../${OKITE_ROOT_REL}/.codex/agents" "${ROOT_DIR}/.codex/agents"
+    echo "  - Linked agents"
     prepare_link_destination "${ROOT_DIR}/.codex/.personality_migration"
     ln -s "../${OKITE_ROOT_REL}/.codex/.personality_migration" "${ROOT_DIR}/.codex/.personality_migration"
     echo "  - Linked .personality_migration"
@@ -367,19 +365,18 @@ setup_codex_identities() {
     fi
     cp "${config_source}" "${id_dir}/config.toml"
     echo "  - Copied .codex-${identity}/config.toml"
-    # skills/prompts はディレクトリごとリンク（.codex/ と同じ実体を共有）
-    prepare_link_destination "${id_dir}/skills"
-    ln -s "../.codex/skills" "${id_dir}/skills"
-    echo "  - Linked .codex-${identity}/skills"
+    # prompts/agents はディレクトリごとリンク（.codex/ と同じ実体を共有）
     prepare_link_destination "${id_dir}/prompts"
     ln -s "../.codex/prompts" "${id_dir}/prompts"
     echo "  - Linked .codex-${identity}/prompts"
+    prepare_link_destination "${id_dir}/agents"
+    ln -s "../.codex/agents" "${id_dir}/agents"
+    echo "  - Linked .codex-${identity}/agents"
   done
   echo "  - NOTE: Run 'CODEX_HOME=.codex-personal codex login' and 'CODEX_HOME=.codex-corporate codex login' to set up authentication"
 }
 
 setup_gemini() {
-  link_agent_skills_to "${ROOT_DIR}/.gemini"
   if [[ "$SELF_MODE" == "true" ]]; then
     echo "  - Self mode: settings already exist, skipping"
   else
@@ -396,7 +393,6 @@ setup_mcp() {
 }
 
 setup_cursor() {
-  link_agent_skills_to "${ROOT_DIR}/.cursor"
   link_agent_rules_to "${ROOT_DIR}/.cursor"
   if [[ "$SELF_MODE" == "true" ]]; then
     echo "  - Self mode: settings already exist, skipping"
@@ -406,7 +402,6 @@ setup_cursor() {
 }
 
 setup_opencode() {
-  link_agent_skills_to "${ROOT_DIR}/.opencode"
   if [[ "$SELF_MODE" == "true" ]]; then
     echo "  - Self mode: settings already exist, skipping"
   else
