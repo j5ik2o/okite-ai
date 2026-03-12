@@ -355,6 +355,9 @@ setup_claude() {
     link_named_directory "../../${OKITE_ROOT_REL}/.claude/commands/kiro" "${ROOT_DIR}/.claude/commands/kiro" "commands/kiro/"
     link_named_directory "../../${OKITE_ROOT_REL}/.claude/commands/opsx" "${ROOT_DIR}/.claude/commands/opsx" "commands/opsx/"
     link_if_missing "../${OKITE_ROOT_REL}/.claude/settings.json" "${ROOT_DIR}/.claude/settings.json" "settings.json"
+    prepare_link_destination "${ROOT_DIR}/.claude/statusline.sh"
+    ln -s "../${OKITE_ROOT_REL}/.claude/statusline.sh" "${ROOT_DIR}/.claude/statusline.sh"
+    echo "  - Linked statusline.sh"
   fi
   link_agent_rules_to "${ROOT_DIR}/.claude"
 }
