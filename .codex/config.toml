@@ -34,13 +34,9 @@ config_file = "agents/reviewer.toml"
 description = "Implementation-focused agent for small targeted fixes."
 config_file = "agents/worker.toml"
 
-
 [mcp_servers.serena]
-command = "uvx"
-args = ["--from", "git+https://github.com/oraios/serena", "serena", "start-mcp-server", "--context", "codex", "--project", ".", "--enable-web-dashboard", "false"]
-
-[mcp_servers.serena.env]
-HOME = ".serena-home"
+command = "zsh"
+args = ["-lc", "export HOME=\"$PWD/.serena-home\"; mkdir -p \"$HOME\"; exec uvx --from git+https://github.com/oraios/serena serena start-mcp-server --context codex --project . --enable-web-dashboard false"]
 
 [tui]
 status_line = ["current-dir", "git-branch"]
