@@ -380,6 +380,7 @@ setup_gemini() {
   if [[ "$SELF_MODE" == "true" ]]; then
     echo "  - Self mode: settings already exist, skipping"
   else
+    mkdir -p "${ROOT_DIR}/.gemini"
     link_if_missing "../${OKITE_ROOT_REL}/.gemini/settings.json" "${ROOT_DIR}/.gemini/settings.json" "settings.json"
   fi
 }
@@ -405,6 +406,7 @@ setup_opencode() {
   if [[ "$SELF_MODE" == "true" ]]; then
     echo "  - Self mode: settings already exist, skipping"
   else
+    mkdir -p "${ROOT_DIR}/.opencode"
     link_if_source_exists_and_missing "../${OKITE_ROOT_REL}/.opencode/settings.json" "${ROOT_DIR}/.opencode/settings.json" "settings.json"
   fi
 }
