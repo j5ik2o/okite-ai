@@ -243,6 +243,33 @@ link_if_source_exists_and_missing() {
   link_if_missing "$src" "$dest" "$label"
 }
 
+link_named_directory() {
+  local src="$1"
+  local dest="$2"
+  local label="$3"
+  prepare_link_destination "$dest"
+  ln -s "$src" "$dest"
+  echo "  - Linked ${label}"
+}
+
+link_matching_files() {
+  local source_dir="$1"
+  local pattern="$2"
+  local dest_dir="$3"
+  local label_prefix="$4"
+  local f
+  for f in "${source_dir}"/${pattern}; do
+    [ -e "$f" ] || continue
+    local base_name
+    base_name=$(basename "$f")
+    local link_path
+    link_path="${dest_dir}/${base_name}"
+    prepare_link_destination "$link_path"
+    ln -s "../../${OKITE_ROOT_REL}/${source_dir#${OKITE_ROOT}/}/${base_name}" "$link_path"
+    echo "  - Linked ${label_prefix}/${base_name}"
+  done
+}
+
 # ======================================
 # セットアップ関数
 # ======================================
@@ -312,10 +339,8 @@ setup_claude() {
     prepare_link_destination "${ROOT_DIR}/.claude/commands/create-skill.md"
     ln -s "../../${OKITE_ROOT_REL}/.claude/commands/create-skill.md" "${ROOT_DIR}/.claude/commands/create-skill.md"
     echo "  - Linked commands/create-skill.md"
-    prepare_link_destination "${ROOT_DIR}/.claude/commands/kiro"
-    ln -s "../../${OKITE_ROOT_REL}/.claude/commands/kiro" "${ROOT_DIR}/.claude/commands/kiro"
-    echo "  - Linked commands/kiro/"
-    echo "  - Linked agents/kiro/"
+    link_named_directory "../../${OKITE_ROOT_REL}/.claude/commands/kiro" "${ROOT_DIR}/.claude/commands/kiro" "commands/kiro/"
+    link_named_directory "../../${OKITE_ROOT_REL}/.claude/commands/opsx" "${ROOT_DIR}/.claude/commands/opsx" "commands/opsx/"
     link_if_missing "../${OKITE_ROOT_REL}/.claude/settings.json" "${ROOT_DIR}/.claude/settings.json" "settings.json"
   fi
   link_agent_rules_to "${ROOT_DIR}/.claude"
@@ -328,15 +353,8 @@ setup_codex() {
     echo "  - Self mode: prompts already exist, skipping"
   else
     mkdir -p "${ROOT_DIR}/.codex/prompts"
-    for f in "${OKITE_ROOT}/.codex/prompts"/kiro-*.md; do
-      local base_name
-      base_name=$(basename "$f")
-      local link_path
-      link_path="${ROOT_DIR}/.codex/prompts/${base_name}"
-      prepare_link_destination "$link_path"
-      ln -s "../../${OKITE_ROOT_REL}/.codex/prompts/${base_name}" "$link_path"
-      echo "  - Linked prompts/${base_name}"
-    done
+    link_matching_files "${OKITE_ROOT}/.codex/prompts" "kiro-*.md" "${ROOT_DIR}/.codex/prompts" "prompts"
+    link_matching_files "${OKITE_ROOT}/.codex/prompts" "opsx-*.md" "${ROOT_DIR}/.codex/prompts" "prompts"
     prepare_link_destination "${ROOT_DIR}/.codex/config.toml"
     cp "${OKITE_ROOT}/.codex/config.toml" "${ROOT_DIR}/.codex/config.toml"
     echo "  - Copied config.toml"
