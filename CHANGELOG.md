@@ -1,3 +1,24 @@
+## [0.3.0](https://github.com/j5ik2o/okite-ai/compare/v0.2.0...v0.3.0) (2026-03-16)
+
+
+### Features
+
+* add AI code quality and architecture review frameworks ([cf762ea](https://github.com/j5ik2o/okite-ai/commit/cf762eaff505a35550d69e0cd5d8f4042d0a7b05))
+* add custom HOME environment variable for serena configuration ([535749b](https://github.com/j5ik2o/okite-ai/commit/535749bbbccdeb2bd46083a8f91b32563f8fca82))
+* **aggregate-design:** add Rust, Scala, and TypeScript references for aggregate design patterns ([c9bb520](https://github.com/j5ik2o/okite-ai/commit/c9bb520e5c5d5442d0013972731ce2fc7751287b))
+* **config:** add agent-specific configuration files for Codex ([e3dbe93](https://github.com/j5ik2o/okite-ai/commit/e3dbe93ad7cf4e901473cca629b97781fc0f0644))
+* **config:** add attribution section to CLAUDE settings JSON ([c428a9d](https://github.com/j5ik2o/okite-ai/commit/c428a9dc19bf1cac5335d7dc86ba1e80d93e6394))
+* **config:** add developer instructions and multi-agent support toggle ([484cd31](https://github.com/j5ik2o/okite-ai/commit/484cd311789caa3c3ecb8265cfc6a33d43590c0e))
+* **config:** add multi-agent configurations to Codex ([d2668c1](https://github.com/j5ik2o/okite-ai/commit/d2668c15d92caf975e3a1cd390f244ebcf8cf634))
+* **config:** add read-only memory patterns and line ending options to Serena project config ([4c228c7](https://github.com/j5ik2o/okite-ai/commit/4c228c7367853edea555b6a4f408224cd6a0bd78))
+* **configure:** ensure `.gemini` and `.opencode` directories are created during setup ([df7c849](https://github.com/j5ik2o/okite-ai/commit/df7c8498078e466293b1cb64277608f0bc695542))
+* **scripts:** replace symlink with file copy for codex config and simplify trust level setup ([6089151](https://github.com/j5ik2o/okite-ai/commit/608915162e85072cdba562f987b4d840bc2d0a39))
+
+
+### Bug Fixes
+
+* **scripts:** replace symlink with file copy for codex config ([a4142d0](https://github.com/j5ik2o/okite-ai/commit/a4142d06f4d8c4b7b5b5c42a73b1ba985a88ea17))
+
 ## [0.2.0](https://github.com/j5ik2o/okite-ai/compare/v0.1.0...v0.2.0) (2026-03-09)
 
 
