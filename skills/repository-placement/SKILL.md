@@ -123,17 +123,21 @@ usecases/  (または application/, interactor/)
   order/
     OrderRepository.java      ← インターフェース定義
 
-interface-adapters/  (または adapters/, infra/)
+interface-adapters/
   repositories/
     JpaOrderRepository.java   ← 実装
 ```
+
+`adapters/` のような略記は使わない。`interface-adapters/` に統一する。
+`infra/` や `infrastructure/` もこの文脈では使わない。Port and Adapter / Clean Architecture の前提では、
+Infrastructure は横断的関心事に限定し、Repository 実装は Interface Adapters に置く。
 
 ## DDDとの関係
 
 **DDDの伝統的解釈**では、リポジトリはドメインの一部（集約のライフサイクル管理）とされる。
 
-**しかし実践上は**、ドメイン層に置くと結合が生まれやすい。クリーンアーキテクチャの規約では、
-リポジトリインターフェースはユースケース層の出力ポートとして扱う。
+**しかし Port and Adapter / Clean Architecture の運用では**、Repository はユースケース層の出力ポートであり、
+その実装は Interface Adapters に属する。Domain に契約を置くと、依存方向と層責務が曖昧になりやすい。
 
 | アプローチ | メリット | デメリット |
 |-----------|---------|-----------|
@@ -145,6 +149,7 @@ interface-adapters/  (または adapters/, infra/)
 ## レビューチェックリスト
 
 1. **配置確認**: リポジトリインターフェースがユースケース層にあるか？
+   - `infra/` / `infrastructure/` に Repository 実装を置いていないか？
 2. **結合確認**: ドメインモデル（エンティティ/集約）がリポジトリをimportしていないか？
 3. **ID参照確認**: 集約が他の集約を実体ではなくIDで参照しているか？
 
