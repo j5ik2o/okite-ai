@@ -220,6 +220,19 @@ link_agent_commands_to() {
   done
 }
 
+cleanup_codex_skills_dir() {
+  local target_dir="$1"
+  local skills_dir="${target_dir}/skills"
+  remove_okite_symlink_path "$skills_dir"
+  if [[ -d "$skills_dir" ]]; then
+    delete_okite_links_in_dir "$skills_dir"
+    if [[ -z "$(find "$skills_dir" -mindepth 1 -maxdepth 1 -print -quit)" ]]; then
+      rmdir "$skills_dir"
+      echo "  - Removed empty skills/"
+    fi
+  fi
+}
+
 link_if_missing() {
   local src="$1"
   local dest="$2"
@@ -347,6 +360,9 @@ setup_claude() {
 }
 
 setup_codex() {
+  # Project skills are sourced from .agents/skills. Codex keeps only system skills
+  # under .codex/skills, so legacy okite-managed links are cleaned up here.
+  cleanup_codex_skills_dir "${ROOT_DIR}/.codex"
   link_agent_commands_to "${ROOT_DIR}/.codex" "prompts"
   if [[ "$SELF_MODE" == "true" ]]; then
     echo "  - Self mode: prompts already exist, skipping"
@@ -374,6 +390,7 @@ setup_codex_identities() {
   for identity in personal corporate; do
     local id_dir="${ROOT_DIR}/.codex-${identity}"
     local config_source
+    cleanup_codex_skills_dir "${id_dir}"
     mkdir -p "${id_dir}"
     prepare_link_destination "${id_dir}/config.toml"
     if [[ "$SELF_MODE" == "true" ]]; then
