@@ -360,9 +360,6 @@ setup_claude() {
 }
 
 setup_codex() {
-  # Project skills are sourced from .agents/skills. Codex keeps only system skills
-  # under .codex/skills, so legacy okite-managed links are cleaned up here.
-  cleanup_codex_skills_dir "${ROOT_DIR}/.codex"
   link_agent_commands_to "${ROOT_DIR}/.codex" "prompts"
   if [[ "$SELF_MODE" == "true" ]]; then
     echo "  - Self mode: prompts already exist, skipping"
@@ -390,7 +387,6 @@ setup_codex_identities() {
   for identity in personal corporate; do
     local id_dir="${ROOT_DIR}/.codex-${identity}"
     local config_source
-    cleanup_codex_skills_dir "${id_dir}"
     mkdir -p "${id_dir}"
     prepare_link_destination "${id_dir}/config.toml"
     if [[ "$SELF_MODE" == "true" ]]; then
