@@ -367,9 +367,13 @@ setup_codex() {
     mkdir -p "${ROOT_DIR}/.codex/prompts"
     link_matching_files "${OKITE_ROOT}/.codex/prompts" "kiro-*.md" "${ROOT_DIR}/.codex/prompts" "prompts"
     link_matching_files "${OKITE_ROOT}/.codex/prompts" "opsx-*.md" "${ROOT_DIR}/.codex/prompts" "prompts"
-    prepare_link_destination "${ROOT_DIR}/.codex/config.toml"
-    cp "${OKITE_ROOT}/.codex/config.toml" "${ROOT_DIR}/.codex/config.toml"
-    echo "  - Copied config.toml"
+    if [[ ! -f "${ROOT_DIR}/.codex/config.toml" ]]; then
+      prepare_link_destination "${ROOT_DIR}/.codex/config.toml"
+      cp "${OKITE_ROOT}/.codex/config.toml" "${ROOT_DIR}/.codex/config.toml"
+      echo "  - Copied config.toml"
+    else
+      echo "  - Skipped config.toml (already exists)"
+    fi
     prepare_link_destination "${ROOT_DIR}/.codex/agents"
     ln -s "../${OKITE_ROOT_REL}/.codex/agents" "${ROOT_DIR}/.codex/agents"
     echo "  - Linked agents"
@@ -388,14 +392,18 @@ setup_codex_identities() {
     local id_dir="${ROOT_DIR}/.codex-${identity}"
     local config_source
     mkdir -p "${id_dir}"
-    prepare_link_destination "${id_dir}/config.toml"
-    if [[ "$SELF_MODE" == "true" ]]; then
-      config_source="${ROOT_DIR}/.codex/config.toml"
+    if [[ ! -f "${id_dir}/config.toml" ]]; then
+      prepare_link_destination "${id_dir}/config.toml"
+      if [[ "$SELF_MODE" == "true" ]]; then
+        config_source="${ROOT_DIR}/.codex/config.toml"
+      else
+        config_source="${OKITE_ROOT}/.codex/config.toml"
+      fi
+      cp "${config_source}" "${id_dir}/config.toml"
+      echo "  - Copied .codex-${identity}/config.toml"
     else
-      config_source="${OKITE_ROOT}/.codex/config.toml"
+      echo "  - Skipped .codex-${identity}/config.toml (already exists)"
     fi
-    cp "${config_source}" "${id_dir}/config.toml"
-    echo "  - Copied .codex-${identity}/config.toml"
     # prompts/agents はディレクトリごとリンク（.codex/ と同じ実体を共有）
     prepare_link_destination "${id_dir}/prompts"
     ln -s "../.codex/prompts" "${id_dir}/prompts"
