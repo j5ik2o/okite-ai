@@ -74,7 +74,22 @@ gh api repos/{owner}/{repo}/pulls/<number>/comments --jq '.[] | {user: .user.log
 gh pr view <number> --json closingIssuesReferences --jq '.closingIssuesReferences[] | {number, title}'
 ```
 
-#### 1c. 早期終了判定（ループモード）
+#### 1c. CI待ちの前に直せる既知問題の先回り修正
+
+CI が `PENDING` でも、以下の条件を満たす具体的な指摘が既に見えているなら待たずに修正を開始する：
+
+- 再現条件がコードから即座に確認できる
+- 修正範囲が局所的で、副作用が読める
+- silent failure、定数不整合、`chunk_size == 0` のような境界値バグ、`Result` 握りつぶしなど高信頼の欠陥である
+
+典型例：
+
+- bot コメントで行番号つきに示された `chunk_size == 0` バグ
+- `Result` / `IO` エラーの握りつぶし
+- 定数とテストの不整合
+- コメント上「Addressed」と書かれていても、現行ブランチで未反映な差分
+
+#### 1d. 早期終了判定（ループモード）
 
 以下の条件をすべて満たす場合は何もせず即終了する：
 
@@ -82,9 +97,11 @@ gh pr view <number> --json closingIssuesReferences --jq '.closingIssuesReference
 - 未対応のレビューコメントがない
 - リンクされた Issue がすべてクローズ済み
 
-CI が実行中（PENDING）の場合も即終了 — 次のループ周回で結果を確認する。
+ただし、直前の 1c に該当する高信頼の既知問題がある場合、CI が実行中（PENDING）でも即終了してはならない。先にその問題を潰し、関連チェックだけローカルで確認してから次の周回へ進む。
 
-#### 1d. 状況サマリー（対話モードのみ）
+CI が実行中（PENDING）で、かつ 1c に該当する既知問題もない場合は即終了し、次のループ周回で結果を確認する。
+
+#### 1e. 状況サマリー（対話モードのみ）
 
 対話モードでは状況サマリーを表示し、対応方針の確認を取る。
 
