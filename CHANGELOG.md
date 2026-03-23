@@ -1,3 +1,16 @@
+## [0.4.0](https://github.com/j5ik2o/okite-ai/compare/v0.3.0...v0.4.0) (2026-03-23)
+
+
+### Features
+
+* **config:** add Codex MCP server configuration to CLAUDE settings ([b909ad7](https://github.com/j5ik2o/okite-ai/commit/b909ad79e7aa34861214b498e5d2c898135f74f6))
+* **config:** enable multi-agent support and add agent-specific configurations ([7954826](https://github.com/j5ik2o/okite-ai/commit/795482674a02a3d6e4f8f2305fd2051a6c7ccca9))
+* **configure:** clean up legacy skill links in Codex directories ([058ffdf](https://github.com/j5ik2o/okite-ai/commit/058ffdf20343a555d4bfd9df8a3d040eb5955103))
+* **configure:** skip copying config if destination already exists ([853479f](https://github.com/j5ik2o/okite-ai/commit/853479ffbb068869451e1196f42cd1f588d3c9da))
+* **docs:** add guidelines for handling ignored return values in Rust ([3fa48ff](https://github.com/j5ik2o/okite-ai/commit/3fa48ffd72f380a3bca283bfd04a40bdcd58fdf3))
+* **skills:** add Codex audit skill for independent review and validation tasks ([d79a30f](https://github.com/j5ik2o/okite-ai/commit/d79a30f0ea5c21480c73a4923ab1784220e5b9c2))
+* **skills:** add PR Green skill to automate CI fix and issue resolution tasks ([f6e0369](https://github.com/j5ik2o/okite-ai/commit/f6e0369f384c5c20f7bbf7f35ce53e3dd282396e))
+
 ## [0.3.0](https://github.com/j5ik2o/okite-ai/compare/v0.2.0...v0.3.0) (2026-03-16)
 
 
