@@ -3,6 +3,9 @@
 SCRIPT_DIR=$(cd "$(dirname "$0")" && pwd)
 REPO_ROOT=$(cd "${SCRIPT_DIR}/.." && pwd)
 
+# 親プロセスから継承した OAuth トークンを除去し、このスクリプトの認証設定を優先させる
+unset CLAUDE_CODE_OAUTH_TOKEN
+
 . $HOME/.config/glm/env
 
 export ANTHROPIC_AUTH_TOKEN=${GLM_API_KEY}
