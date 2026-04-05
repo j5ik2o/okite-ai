@@ -407,10 +407,21 @@ setup_codex_identities() {
     else
       echo "  - Skipped .codex-${identity}/config.toml (already exists)"
     fi
-    # prompts/agents はディレクトリごとリンク（.codex/ と同じ実体を共有）
+    # prompts は実ディレクトリにして、共通 prompt だけを個別リンクする。
+    # これにより .codex-{identity}/prompts 配下へ project-specific prompt を追加できる。
     prepare_link_destination "${id_dir}/prompts"
-    ln -s "../.codex/prompts" "${id_dir}/prompts"
-    echo "  - Linked .codex-${identity}/prompts"
+    mkdir -p "${id_dir}/prompts"
+    local prompt
+    for prompt in "${ROOT_DIR}/.codex/prompts"/*.md; do
+      [ -e "${prompt}" ] || continue
+      local base_name
+      base_name=$(basename "${prompt}")
+      local link_path
+      link_path="${id_dir}/prompts/${base_name}"
+      prepare_link_destination "${link_path}"
+      ln -s "../../.codex/prompts/${base_name}" "${link_path}"
+      echo "  - Linked .codex-${identity}/prompts/${base_name}"
+    done
     prepare_link_destination "${id_dir}/agents"
     ln -s "../.codex/agents" "${id_dir}/agents"
     echo "  - Linked .codex-${identity}/agents"
