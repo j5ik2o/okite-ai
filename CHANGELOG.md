@@ -1,3 +1,11 @@
+## [0.5.0](https://github.com/j5ik2o/okite-ai/compare/v0.4.0...v0.5.0) (2026-04-06)
+
+
+### Features
+
+* **configure:** link individual prompts for project-specific customization ([25329b0](https://github.com/j5ik2o/okite-ai/commit/25329b00a602241ce5de7c34a26889b14c8fd3ac))
+* **scripts:** unset inherited OAuth token to prioritize local authentication settings ([3da329d](https://github.com/j5ik2o/okite-ai/commit/3da329d856fa976156da9163e11a8dbde53b2a43))
+
 ## [0.4.0](https://github.com/j5ik2o/okite-ai/compare/v0.3.0...v0.4.0) (2026-03-23)
 
 
