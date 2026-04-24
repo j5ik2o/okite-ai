@@ -39,7 +39,7 @@ for arg in "$@"; do
 done
 
 if $use_happy; then
-  exec happy codex "${args[@]}"
+  exec mise exec -- happy codex "${args[@]}"
 else
-  exec codex --dangerously-bypass-approvals-and-sandbox "${args[@]}"
+  exec mise exec -- codex --dangerously-bypass-approvals-and-sandbox "${args[@]}"
 fi
